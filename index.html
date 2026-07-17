@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Kosakata Bahasa Jepang</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            max-width: 800px;
+            margin: auto;
+            color: #333;
+        }
+        .header-controls {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 15px 0;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        button:hover { background-color: #0056b3; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        
+        button.btn-pause { background-color: #ffc107; color: black; }
+        button.btn-pause:hover { background-color: #e0a800; }
+        
+        button.btn-stop { background-color: #dc3545; }
+        button.btn-stop:hover { background-color: #c82333; }
+        
+        .list-item {
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 15px;
+        }
+        .kosakata-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: inline-block;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .sentence-row {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .play-btn {
+            background: none;
+            color: #007BFF;
+            padding: 0;
+            margin-right: 10px;
+            font-size: 1.2em;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .play-btn:hover { background: #e9ecef; color: #0056b3; }
+        
+        /* Highlight untuk kalimat yang sedang dibaca */
+        .highlight {
+            background-color: #fff3cd; 
+            border-left: 4px solid #ffc107;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-controls">
+        <button id="btn-play-all">▶ Play Dari Awal</button>
+        <button id="btn-pause" class="btn-pause" disabled>⏸ Pause</button>
+        <button id="btn-stop" class="btn-stop" disabled>⏹ Stop</button>
+        <label style="margin-left: 10px; font-size: 0.9em; cursor: pointer;">
+            <input type="checkbox" id="chk-indonesia" checked> 
+            Bacakan Bahasa Indonesia
+        </label>
+    </div>
+
+    <div id="list-container"></div>
+
+    <script>
+        // Data Kosakata (Silakan timpa dengan JSON lengkap Anda yang berjumlah 47)
+        const dataKosakata = [
+  {
+    "kosakata": ["jp", "行く"],
+    "arti": ["id", "pergi"],
+    "kamus": {"jp": "私は東京へ行く。", "id": "Saya pergi ke Tokyo."},
+    "ます": {"jp": "毎日学校に行きます。", "id": "Setiap hari pergi ke sekolah."},
+    "て": {"jp": "コンビニに行って、パンを買います。", "id": "Pergi ke minimarket lalu membeli roti."},
+    "た": {"jp": "去年、日本に行った。", "id": "Tahun lalu pergi ke Jepang."},
+    "ない": {"jp": "今日はどこへも行かない。", "id": "Hari ini tidak pergi ke mana pun."}
+  },
+  {
+    "kosakata": ["jp", "来る"],
+    "arti": ["id", "datang"],
+    "kamus": {"jp": "友達が家に来る。", "id": "Teman datang ke rumah."},
+    "ます": {"jp": "明日、先生が来ます。", "id": "Besok guru akan datang."},
+    "て": {"jp": "ここに来て、座ってください。", "id": "Datanglah ke sini dan silakan duduk."},
+    "た": {"jp": "彼がやっと来た。", "id": "Dia akhirnya datang."},
+    "ない": {"jp": "バスがなかなか来ない。", "id": "Busnya tidak kunjung datang."}
+  },
+  {
+    "kosakata": ["jp", "帰る"],
+    "arti": ["id", "pulang"],
+    "kamus": {"jp": "もうすぐ家に帰る。", "id": "Sebentar lagi pulang ke rumah."},
+    "ます": {"jp": "午後5時に帰ります。", "id": "Pulang jam 5 sore."},
+    "て": {"jp": "早く帰って、寝ます。", "id": "Pulang cepat lalu tidur."},
+    "た": {"jp": "彼はもう家に帰った。", "id": "Dia sudah pulang ke rumah."},
+    "ない": {"jp": "今日は家に帰らない。", "id": "Hari ini tidak pulang ke rumah."}
+  },
+  {
+    "kosakata": ["jp", "食べる"],
+    "arti": ["id", "makan"],
+    "kamus": {"jp": "朝ご飯を食べる。", "id": "Makan sarapan."},
+    "ます": {"jp": "毎日ラーメンを食べます。", "id": "Setiap hari makan ramen."},
+    "て": {"jp": "ケーキを食べて、お茶を飲む。", "id": "Makan kue lalu minum teh."},
+    "た": {"jp": "もう昼ご飯を食べた。", "id": "Sudah makan siang."},
+    "ない": {"jp": "肉は食べない。", "id": "Tidak makan daging."}
+  },
+  {
+    "kosakata": ["jp", "飲む"],
+    "arti": ["id", "minum"],
+    "kamus": {"jp": "水を飲む。", "id": "Minum air."},
+    "ます": {"jp": "毎朝コーヒーを飲みます。", "id": "Setiap pagi minum kopi."},
+    "て": {"jp": "薬を飲んで、休んでください。", "id": "Minum obat lalu silakan istirahat."},
+    "た": {"jp": "お酒をたくさん飲んだ。", "id": "Sudah minum banyak alkohol."},
+    "ない": {"jp": "ジュースは飲まない。", "id": "Tidak minum jus."}
+  },
+  {
+    "kosakata": ["jp", "見る"],
+    "arti": ["id", "melihat / menonton"],
+    "kamus": {"jp": "映画を見る。", "id": "Menonton film."},
+    "ます": {"jp": "毎日テレビを見ます。", "id": "Setiap hari menonton TV."},
+    "て": {"jp": "YouTubeを見て、日本語を勉強する。", "id": "Menonton YouTube lalu belajar bahasa Jepang."},
+    "た": {"jp": "そのアニメはもう見た。", "id": "Sudah menonton anime itu."},
+    "ない": {"jp": "最近テレビを見ない。", "id": "Akhir-akhir ini tidak menonton TV."}
+  },
+  {
+    "kosakata": ["jp", "聞く"],
+    "arti": ["id", "mendengar / bertanya"],
+    "kamus": {"jp": "音楽を聞く。", "id": "Mendengarkan musik."},
+    "ます": {"jp": "先生に話を聞きます。", "id": "Mendengarkan cerita dari guru."},
+    "て": {"jp": "ラジオを聞いて、リラックスする。", "id": "Mendengarkan radio lalu bersantai."},
+    "た": {"jp": "そのニュースを聞いた。", "id": "Sudah mendengar berita itu."},
+    "ない": {"jp": "人の話を聞かない。", "id": "Tidak mendengarkan perkataan orang."}
+  },
+  {
+    "kosakata": ["jp", "話す"],
+    "arti": ["id", "berbicara"],
+    "kamus": {"jp": "日本語で話す。", "id": "Berbicara dengan bahasa Jepang."},
+    "ます": {"jp": "友達と話します。", "id": "Berbicara dengan teman."},
+    "て": {"jp": "ゆっくり話してください。", "id": "Tolong bicaralah perlahan."},
+    "た": {"jp": "昨日、母と話した。", "id": "Kemarin sudah berbicara dengan ibu."},
+    "ない": {"jp": "英語は話さない。", "id": "Tidak berbicara bahasa Inggris."}
+  },
+  {
+    "kosakata": ["jp", "読む"],
+    "arti": ["id", "membaca"],
+    "kamus": {"jp": "本を読む。", "id": "Membaca buku."},
+    "ます": {"jp": "毎晩小説を読みます。", "id": "Setiap malam membaca novel."},
+    "て": {"jp": "新聞を読んで、ニュースを知る。", "id": "Membaca koran lalu mengetahui berita."},
+    "た": {"jp": "この漫画はもう読んだ。", "id": "Sudah membaca manga ini."},
+    "ない": {"jp": "雑誌は読まない。", "id": "Tidak membaca majalah."}
+  },
+  {
+    "kosakata": ["jp", "書く"],
+    "arti": ["id", "menulis"],
+    "kamus": {"jp": "日記を書く。", "id": "Menulis buku harian."},
+    "ます": {"jp": "漢字を書きます。", "id": "Menulis kanji."},
+    "て": {"jp": "手紙を書いて、送ります。", "id": "Menulis surat lalu mengirimkannya."},
+    "た": {"jp": "レポートをもう書いた。", "id": "Sudah menulis laporan."},
+    "ない": {"jp": "ペンで書かない。", "id": "Tidak menulis dengan pulpen."}
+  },
+  {
+    "kosakata": ["jp", "買う"],
+    "arti": ["id", "membeli"],
+    "kamus": {"jp": "新しい服を買う。", "id": "Membeli baju baru."},
+    "ます": {"jp": "スーパーで野菜を買います。", "id": "Membeli sayur di supermarket."},
+    "て": {"jp": "スマホを買って、うれしい。", "id": "Senang karena membeli ponsel baru."},
+    "た": {"jp": "昨日、靴を買った。", "id": "Kemarin membeli sepatu."},
+    "ない": {"jp": "高い物は買わない。", "id": "Tidak membeli barang mahal."}
+  },
+  {
+    "kosakata": ["jp", "売る"],
+    "arti": ["id", "menjual"],
+    "kamus": {"jp": "車を売る。", "id": "Menjual mobil."},
+    "ます": {"jp": "古い本を売ります。", "id": "Menjual buku lama."},
+    "て": {"jp": "メルカリで売って、お金にする。", "id": "Menjual di Mercari lalu dijadikan uang."},
+    "た": {"jp": "家を売った。", "id": "Sudah menjual rumah."},
+    "ない": {"jp": "大切な物は売らない。", "id": "Tidak menjual barang berharga."}
+  },
+  {
+    "kosakata": ["jp", "作る"],
+    "arti": ["id", "membuat"],
+    "kamus": {"jp": "晩ご飯を作る。", "id": "Membuat makan malam."},
+    "ます": {"jp": "ケーキを作ります。", "id": "Membuat kue."},
+    "て": {"jp": "人形を作って、妹にあげる。", "id": "Membuat boneka lalu memberikannya ke adik perempuan."},
+    "た": {"jp": "お弁当を作った。", "id": "Sudah membuat bento."},
+    "ない": {"jp": "料理は作らない。", "id": "Tidak membuat masakan."}
+  },
+  {
+    "kosakata": ["jp", "使う"],
+    "arti": ["id", "menggunakan"],
+    "kamus": {"jp": "パソコンを使う。", "id": "Menggunakan komputer."},
+    "ます": {"jp": "毎日辞書を使います。", "id": "Setiap hari menggunakan kamus."},
+    "て": {"jp": "辞書を使って、調べる。", "id": "Menggunakan kamus lalu memeriksa."},
+    "た": {"jp": "お金を全部使った。", "id": "Sudah menggunakan semua uang."},
+    "ない": {"jp": "この部屋は使わない。", "id": "Tidak menggunakan ruangan ini."}
+  },
+  {
+    "kosakata": ["jp", "掃除する"],
+    "arti": ["id", "membersihkan"],
+    "kamus": {"jp": "部屋を掃除する。", "id": "Membersihkan kamar."},
+    "ます": {"jp": "週末に家を掃除します。", "id": "Membersihkan rumah di akhir pekan."},
+    "て": {"jp": "トイレを掃除して、きれいにする。", "id": "Membersihkan toilet lalu membuatnya bersih."},
+    "た": {"jp": "朝、庭を掃除した。", "id": "Pagi hari sudah membersihkan halaman."},
+    "ない": {"jp": "今日は掃除しない。", "id": "Hari ini tidak membersihkan."}
+  },
+  {
+    "kosakata": ["jp", "勉強する"],
+    "arti": ["id", "belajar"],
+    "kamus": {"jp": "日本語を勉強する。", "id": "Belajar bahasa Jepang."},
+    "ます": {"jp": "図書館で勉強します。", "id": "Belajar di perpustakaan."},
+    "て": {"jp": "毎日勉強して、試験に合格する。", "id": "Belajar setiap hari lalu lulus ujian."},
+    "た": {"jp": "昨日、3時間勉強した。", "id": "Kemarin sudah belajar selama 3 jam."},
+    "ない": {"jp": "今日は勉強しない。", "id": "Hari ini tidak belajar."}
+  },
+  {
+    "kosakata": ["jp", "働く"],
+    "arti": ["id", "bekerja"],
+    "kamus": {"jp": "会社で働く。", "id": "Bekerja di perusahaan."},
+    "ます": {"jp": "銀行で働きます。", "id": "Bekerja di bank."},
+    "て": {"jp": "朝から晩まで働いて、疲れた。", "id": "Bekerja dari pagi sampai malam lalu lelah."},
+    "た": {"jp": "工場で3年間働いた。", "id": "Pernah bekerja di pabrik selama 3 tahun."},
+    "ない": {"jp": "日曜日は働かない。", "id": "Hari Minggu tidak bekerja."}
+  },
+  {
+    "kosakata": ["jp", "休む"],
+    "arti": ["id", "beristirahat / libur"],
+    "kamus": {"jp": "少し休む。", "id": "Beristirahat sebentar."},
+    "ます": {"jp": "今日は学校を休みます。", "id": "Hari ini libur sekolah."},
+    "て": {"jp": "ベッドで休んでください。", "id": "Silakan beristirahat di kasur."},
+    "た": {"jp": "昨日、会社を休んだ。", "id": "Kemarin libur kerja."},
+    "ない": {"jp": "彼は全然休まない。", "id": "Dia sama sekali tidak beristirahat."}
+  },
+  {
+    "kosakata": ["jp", "寝る"],
+    "arti": ["id", "tidur"],
+    "kamus": {"jp": "早く寝る。", "id": "Tidur cepat."},
+    "ます": {"jp": "11時に寝ます。", "id": "Tidur jam 11."},
+    "て": {"jp": "お風呂に入って、寝る。", "id": "Masuk bak mandi lalu tidur."},
+    "た": {"jp": "たくさん寝た。", "id": "Sudah tidur banyak."},
+    "ない": {"jp": "まだ寝ない。", "id": "Belum tidur."}
+  },
+  {
+    "kosakata": ["jp", "起きる"],
+    "arti": ["id", "bangun"],
+    "kamus": {"jp": "朝早く起きる。", "id": "Bangun pagi-pagi."},
+    "ます": {"jp": "毎朝6時に起きます。", "id": "Setiap pagi bangun jam 6."},
+    "て": {"jp": "起きて、顔を洗う。", "id": "Bangun lalu mencuci muka."},
+    "た": {"jp": "今日は遅く起きた。", "id": "Hari ini bangun terlambat."},
+    "ない": {"jp": "まだ起きない。", "id": "Belum bangun."}
+  },
+  {
+    "kosakata": ["jp", "座る"],
+    "arti": ["id", "duduk"],
+    "kamus": {"jp": "椅子に座る。", "id": "Duduk di kursi."},
+    "ます": {"jp": "ここに座ります。", "id": "Duduk di sini."},
+    "て": {"jp": "椅子に座って、待つ。", "id": "Duduk di kursi lalu menunggu."},
+    "た": {"jp": "ソファに座った。", "id": "Sudah duduk di sofa."},
+    "ない": {"jp": "床には座らない。", "id": "Tidak duduk di lantai."}
+  },
+  {
+    "kosakata": ["jp", "入る"],
+    "arti": ["id", "masuk"],
+    "kamus": {"jp": "部屋に入る。", "id": "Masuk ke kamar."},
+    "ます": {"jp": "お店に入ります。", "id": "Masuk ke toko."},
+    "て": {"jp": "お風呂に入って、温まる。", "id": "Masuk bak mandi lalu menghangatkan diri."},
+    "た": {"jp": "大学に入った。", "id": "Sudah masuk universitas."},
+    "ない": {"jp": "この部屋には入らない。", "id": "Tidak masuk ke ruangan ini."}
+  },
+  {
+    "kosakata": ["jp", "出る"],
+    "arti": ["id", "keluar"],
+    "kamus": {"jp": "家を出る。", "id": "Keluar rumah."},
+    "ます": {"jp": "8時に家を出ます。", "id": "Keluar rumah jam 8."},
+    "て": {"jp": "部屋を出て、トイレに行く。", "id": "Keluar kamar lalu pergi ke toilet."},
+    "た": {"jp": "彼はもう出た。", "id": "Dia sudah keluar."},
+    "ない": {"jp": "今日は外に出ない。", "id": "Hari ini tidak keluar ke luar rumah."}
+  },
+  {
+    "kosakata": ["jp", "開ける"],
+    "arti": ["id", "membuka"],
+    "kamus": {"jp": "ドアを開ける。", "id": "Membuka pintu."},
+    "ます": {"jp": "窓を開けます。", "id": "Membuka jendela."},
+    "て": {"jp": "箱を開けて、中を見る。", "id": "Membuka kotak lalu melihat isinya."},
+    "た": {"jp": "鍵を開けた。", "id": "Sudah membuka kunci."},
+    "ない": {"jp": "本を開けない。", "id": "Tidak membuka buku."}
+  },
+  {
+    "kosakata": ["jp", "閉める"],
+    "arti": ["id", "menutup"],
+    "kamus": {"jp": "窓を閉める。", "id": "Menutup jendela."},
+    "ます": {"jp": "ドアを閉めます。", "id": "Menutup pintu."},
+    "て": {"jp": "カーテンを閉めて、寝る。", "id": "Menutup gorden lalu tidur."},
+    "た": {"jp": "お店を閉めた。", "id": "Sudah menutup toko."},
+    "ない": {"jp": "鍵を閉めない。", "id": "Tidak mengunci / menutup kunci."}
+  },
+  {
+    "kosakata": ["jp", "始める"],
+    "arti": ["id", "memulai"],
+    "kamus": {"jp": "勉強を始める。", "id": "Memulai belajar."},
+    "ます": {"jp": "会議を始めます。", "id": "Memulai rapat."},
+    "て": {"jp": "テキストを始めてください。", "id": "Silakan mulai tesnya."},
+    "た": {"jp": "ゲームを始めた。", "id": "Sudah memulai game."},
+    "ない": {"jp": "まだ始めない。", "id": "Belum memulai."}
+  },
+  {
+    "kosakata": ["jp", "終わる"],
+    "arti": ["id", "berakhir / selesai"],
+    "kamus": {"jp": "授業が終わる。", "id": "Pelajaran berakhir."},
+    "ます": {"jp": "仕事が終わります。", "id": "Pekerjaan selesai."},
+    "て": {"jp": "宿題が終わって、遊びに行く。", "id": "Tugas selesai lalu pergi bermain."},
+    "た": {"jp": "映画が終わった。", "id": "Filmnya sudah selesai."},
+    "ない": {"jp": "仕事がなかなか終わらない。", "id": "Pekerjaan tidak kunjung selesai."}
+  },
+  {
+    "kosakata": ["jp", "待つ"],
+    "arti": ["id", "menunggu"],
+    "kamus": {"jp": "友達を待つ。", "id": "Menunggu teman."},
+    "ます": {"jp": "駅で待ちます。", "id": "Menunggu di stasiun."},
+    "て": {"jp": "ちょっと待ってください。", "id": "Tolong tunggu sebentar."},
+    "た": {"jp": "1時間待った。", "id": "Sudah menunggu selama 1 jam."},
+    "ない": {"jp": "もう待たない。", "id": "Sudah tidak mau menunggu lagi."}
+  },
+  {
+    "kosakata": ["jp", "会う"],
+    "arti": ["id", "bertemu"],
+    "kamus": {"jp": "友達に会う。", "id": "Bertemu teman."},
+    "ます": {"jp": "先生に会います。", "id": "Bertemu guru."},
+    "て": {"jp": "彼に会って、話す。", "id": "Bertemu dia lalu berbicara."},
+    "た": {"jp": "昨日、彼女に会った。", "id": "Kemarin bertemu pacar."},
+    "ない": {"jp": "最近誰にも会わない。", "id": "Akhir-akhir ini tidak bertemu siapa pun."}
+  },
+  {
+    "kosakata": ["jp", "送る"],
+    "arti": ["id", "mengirim"],
+    "kamus": {"jp": "荷物を送る。", "id": "Mengirim barang."},
+    "ます": {"jp": "メールを送ります。", "id": "Mengirim email."},
+    "て": {"jp": "手紙を送って、連絡する。", "id": "Mengirim surat lalu menghubungi."},
+    "た": {"jp": "プレゼントを送った。", "id": "Sudah mengirim hadiah."},
+    "ない": {"jp": "写真は送らない。", "id": "Tidak mengirim foto."}
+  },
+  {
+    "kosakata": ["jp", "もらう"],
+    "arti": ["id", "menerima"],
+    "kamus": {"jp": "プレゼントをもらう。", "id": "Menerima hadiah."},
+    "ます": {"jp": "給料をもらいます。", "id": "Menerima gaji."},
+    "て": {"jp": "お金をもらって、買い物に行く。", "id": "Menerima uang lalu pergi belanja."},
+    "た": {"jp": "お土産をもらった。", "id": "Sudah menerima oleh-oleh."},
+    "ない": {"jp": "何もない。", "id": "Tidak menerima apa pun."}
+  },
+  {
+    "kosakata": ["jp", "あげる"],
+    "arti": ["id", "memberi"],
+    "kamus": {"jp": "犬にエサをあげる。", "id": "Memberi makan anjing."},
+    "ます": {"jp": "友達に本をあげます。", "id": "Memberi buku kepada teman."},
+    "て": {"jp": "花をあげて、喜ばせる。", "id": "Memberi bunga lalu membuatnya senang."},
+    "た": {"jp": "お金をあげた。", "id": "Sudah memberi uang."},
+    "ない": {"jp": "何もあげない。", "id": "Tidak memberi apa pun."}
+  },
+  {
+    "kosakata": ["jp", "借りる"],
+    "arti": ["id", "meminjam"],
+    "kamus": {"jp": "図書館で本を借りる。", "id": "Meminjam buku di perpustakaan."},
+    "ます": {"jp": "お金を借ります。", "id": "Meminjam uang."},
+    "て": {"jp": "傘を借りて、帰る。", "id": "Meminjam payung lalu pulang."},
+    "た": {"jp": "自転車を借りた。", "id": "Sudah meminjam sepeda."},
+    "ない": {"jp": "誰からもお金は借りない。", "id": "Tidak meminjam uang dari siapa pun."}
+  },
+  {
+    "kosakata": ["jp", "貸す"],
+    "arti": ["id", "meminjamkan"],
+    "kamus": {"jp": "ペンを貸す。", "id": "Meminjamkan pulpen."},
+    "ます": {"jp": "友達に自転車を貸します。", "id": "Meminjamkan sepeda kepada teman."},
+    "て": {"jp": "傘を貸してください。", "id": "Tolong pinjamkan payung."},
+    "た": {"jp": "彼にお金を貸した。", "id": "Sudah meminjamkan uang kepadanya."},
+    "ない": {"jp": "誰にも本は貸さない。", "id": "Tidak meminjamkan buku kepada siapa pun."}
+  },
+  {
+    "kosakata": ["jp", "教える"],
+    "arti": ["id", "mengajar / memberitahu"],
+    "kamus": {"jp": "英語を教える。", "id": "Mengajar bahasa Inggris."},
+    "ます": {"jp": "電話番号を教えます。", "id": "Memberitahu nomor telepon."},
+    "て": {"jp": "駅への道を教えてください。", "id": "Tolong beritahu jalan ke stasiun."},
+    "た": {"jp": "先生が日本語を教えてくれた。", "id": "Guru sudah mengajari saya bahasa Jepang."},
+    "ない": {"jp": "秘密だから教えない。", "id": "Karena rahasia, tidak akan diberitahu."}
+  },
+  {
+    "kosakata": ["jp", "習う"],
+    "arti": ["id", "belajar (dari seseorang)"],
+    "kamus": {"jp": "ピアノを習う。", "id": "Belajar piano."},
+    "ます": {"jp": "先生に日本語を習います。", "id": "Belajar bahasa Jepang dari guru."},
+    "て": {"jp": "ギターを習って、弾けるようになった。", "id": "Belajar gitar lalu menjadi bisa memainkannya."},
+    "た": {"jp": "子供のとき、水泳を習った。", "id": "Saat kecil, pernah belajar berenang."},
+    "ない": {"jp": "ダンスは習わない。", "id": "Tidak belajar dansa."}
+  },
+  {
+    "kosakata": ["jp", "乗る"],
+    "arti": ["id", "naik (kendaraan)"],
+    "kamus": {"jp": "電車に乗る。", "id": "Naik kereta."},
+    "ます": {"jp": "毎日バスに乗ります。", "id": "Setiap hari naik bus."},
+    "て": {"jp": "タクシーに乗って、駅へ行く。", "id": "Naik taksi lalu pergi ke stasiun."},
+    "た": {"jp": "新幹線に乗った。", "id": "Sudah naik Shinkansen."},
+    "ない": {"jp": "自転車には乗らない。", "id": "Tidak naik sepeda."}
+  },
+  {
+    "kosakata": ["jp", "降りる"],
+    "arti": ["id", "turun (kendaraan)"],
+    "kamus": {"jp": "電車を降りる。", "id": "Turun dari kereta."},
+    "ます": {"jp": "次の駅で降ります。", "id": "Turun di stasiun berikutnya."},
+    "て": {"jp": "バスを降りて、歩く。", "id": "Turun dari bus lalu berjalan kaki."},
+    "た": {"jp": "さっきタクシーを降りた。", "id": "Tadi baru saja turun dari taksi."},
+    "ない": {"jp": "まだ降りない。", "id": "Belum turun."}
+  },
+  {
+    "kosakata": ["jp", "歩く"],
+    "arti": ["id", "berjalan kaki"],
+    "kamus": {"jp": "公園を歩く。", "id": "Berjalan kaki di taman."},
+    "ます": {"jp": "駅まで歩きます。", "id": "Berjalan kaki sampai stasiun."},
+    "て": {"jp": "歩いて、学校に行く。", "id": "Berjalan kaki lalu pergi ke sekolah."},
+    "た": {"jp": "今日はたくさん歩いた。", "id": "Hari ini sudah berjalan kaki banyak."},
+    "ない": {"jp": "今日は歩かない。", "id": "Hari ini tidak berjalan kaki."}
+  },
+  {
+    "kosakata": ["jp", "走る"],
+    "arti": ["id", "berlari"],
+    "kamus": {"jp": "毎朝走る。", "id": "Setiap pagi berlari."},
+    "ます": {"jp": "公園で走ります。", "id": "Berlari di taman."},
+    "て": {"jp": "走って、駅へ行く。", "id": "Berlari lalu pergi ke stasiun."},
+    "た": {"jp": "マラソンを走った。", "id": "Sudah berlari maraton."},
+    "ない": {"jp": "今日は走らない。", "id": "Hari ini tidak berlari."}
+  },
+  {
+    "kosakata": ["jp", "泳ぐ"],
+    "arti": ["id", "berenang"],
+    "kamus": {"jp": "プールで泳ぐ。", "id": "Berenang di kolam renang."},
+    "ます": {"jp": "海で泳ぎます。", "id": "Berenang di laut."},
+    "て": {"jp": "泳いで、疲れた。", "id": "Berenang lalu lelah."},
+    "た": {"jp": "昨日、たくさん泳いだ。", "id": "Kemarin sudah berenang banyak."},
+    "ない": {"jp": "私は泳がない。", "id": "Saya tidak berenang."}
+  },
+  {
+    "kosakata": ["jp", "手伝う"],
+    "arti": ["id", "membantu"],
+    "kamus": {"jp": "母を手伝う。", "id": "Membantu ibu."},
+    "ます": {"jp": "仕事を手伝います。", "id": "Membantu pekerjaan."},
+    "て": {"jp": "宿題を手伝ってください。", "id": "Tolong bantu tugas/PR saya."},
+    "た": {"jp": "昨日、引越しを手伝った。", "id": "Kemarin membantu pindahan rumah."},
+    "ない": {"jp": "彼は手伝わない。", "id": "Dia tidak membantu."}
+  },
+  {
+    "kosakata": ["jp", "置く"],
+    "arti": ["id", "meletakkan"],
+    "kamus": {"jp": "本を机に置く。", "id": "Meletakkan buku di meja."},
+    "ます": {"jp": "ここに荷物を置きます。", "id": "Meletakkan barang di sini."},
+    "て": {"jp": "カバンを置いて、座る。", "id": "Meletakkan tas lalu duduk."},
+    "た": {"jp": "鍵をどこに置いた？", "id": "Meletakkan kunci di mana?"},
+    "ない": {"jp": "そこには置かない。", "id": "Tidak meletakkan di sana."}
+  },
+  {
+    "kosakata": ["jp", "着る"],
+    "arti": ["id", "memakai (baju/atasan)"],
+    "kamus": {"jp": "シャツを着る。", "id": "Memakai kemeja."},
+    "ます": {"jp": "コートを着ます。", "id": "Memakai mantel."},
+    "て": {"jp": "ジャケットを着て、出かける。", "id": "Memakai jaket lalu pergi keluar."},
+    "た": {"jp": "新しい服を着た。", "id": "Sudah memakai baju baru."},
+    "ない": {"jp": "今日は上着を着ない。", "id": "Hari ini tidak memakai luaran/jaket."}
+  },
+  {
+    "kosakata": ["jp", "脱ぐ"],
+    "arti": ["id", "melepas (pakaian/sepatu)"],
+    "kamus": {"jp": "靴を脱ぐ。", "id": "Melepas sepatu."},
+    "ます": {"jp": "ここで服を脱ぎます。", "id": "Melepas baju di sini."},
+    "て": {"jp": "コートを脱いで、部屋に入る。", "id": "Melepas mantel lalu masuk ke kamar."},
+    "た": {"jp": "帽子を脱いだ。", "id": "Sudah melepas topi."},
+    "ない": {"jp": "靴は脱がない。", "id": "Tidak melepas sepatu."}
+  },
+  {
+    "kosakata": ["jp", "結婚する"],
+    "arti": ["id", "menikah"],
+    "kamus": {"jp": "彼女と結婚する。", "id": "Menikah dengan pacar perempuan."},
+    "ます": {"jp": "来年結婚します。", "id": "Tahun depan akan menikah."},
+    "て": {"jp": "結婚して、幸せです。", "id": "Menikah lalu bahagia."},
+    "た": {"jp": "去年結婚した。", "id": "Tahun lalu sudah menikah."},
+    "ない": {"jp": "彼は結婚しない。", "id": "Dia tidak menikah."}
+  },
+  {
+    "kosakata": ["jp", "料理する"],
+    "arti": ["id", "memasak"],
+    "kamus": {"jp": "台所で料理する。", "id": "Memasak di dapur."},
+    "ます": {"jp": "毎日料理します。", "id": "Setiap hari memasak."},
+    "て": {"jp": "料理して、家族に食べさせる。", "id": "Memasak lalu memberi makan keluarga."},
+    "た": {"jp": "昨日、日本料理をした。", "id": "Kemarin memasak masakan Jepang."},
+    "ない": {"jp": "忙しいから料理しない。", "id": "Karena sibuk, tidak memasak."}
+  }
+];
+
+        const partsList = ['title', 'kamus', 'ます', 'て', 'た', 'ない'];
+        const container = document.getElementById('list-container');
+
+        // State Machine (Status Aplikasi)
+        let isPlaying = false;
+        let isPaused = false;
+        let currentWordIndex = 0; // Melacak indeks kata (0 sampai 46)
+        let currentPartIndex = 0; // Melacak bagian kalimat (0: title, 1: kamus, 2: masu, dst)
+        let playSessionId = 0;    // Mencegah konflik jika tombol play ditekan berkali-kali cepat
+
+        // Render HTML
+        function renderData() {
+            dataKosakata.forEach((item, wIndex) => {
+                const divItem = document.createElement('div');
+                divItem.className = 'list-item';
+
+                // Judul
+                let htmlContent = `
+                    <div class="kosakata-title" id="item-${wIndex}-0">
+                        <button class="play-btn" onclick="playFromHere(${wIndex}, 0)" title="Mulai dari sini">🔊</button>
+                        ${item.kosakata[1]} - ${item.arti[1]}
+                    </div>
+                `;
+
+                // Kalimat
+                for (let pIndex = 1; pIndex < partsList.length; pIndex++) {
+                    const b = partsList[pIndex];
+                    htmlContent += `
+                        <div class="sentence-row" id="item-${wIndex}-${pIndex}">
+                            <button class="play-btn" onclick="playFromHere(${wIndex}, ${pIndex})" title="Mulai dari sini">🔊</button>
+                            <strong>${b.toUpperCase()}:</strong> ${item[b].jp} <br>
+                            <span style="margin-left: 35px; color: #555;">${item[b].id}</span>
+                        </div>
+                    `;
+                }
+
+                divItem.innerHTML = htmlContent;
+                container.appendChild(divItem);
+            });
+        }
+
+        // Kontrol Antarmuka (UI)
+        function updateUI() {
+            const btnPlayAll = document.getElementById('btn-play-all');
+            const btnPause = document.getElementById('btn-pause');
+            const btnStop = document.getElementById('btn-stop');
+
+            if (isPlaying) {
+                btnPlayAll.innerText = '🔄 Restart';
+                btnStop.disabled = false;
+                btnPause.disabled = false;
+                
+                if (isPaused) {
+                    btnPause.innerText = '▶ Resume';
+                    btnPause.style.backgroundColor = '#28a745'; // Hijau saat siap resume
+                    btnPause.style.color = 'white';
+                } else {
+                    btnPause.innerText = '⏸ Pause';
+                    btnPause.style.backgroundColor = '#ffc107'; // Kuning saat bisa di-pause
+                    btnPause.style.color = 'black';
+                }
+            } else {
+                btnPlayAll.innerText = '▶ Play Dari Awal';
+                btnPause.disabled = true;
+                btnPause.innerText = '⏸ Pause';
+                btnPause.style.backgroundColor = '';
+                btnStop.disabled = true;
+            }
+        }
+
+        // Fungsi dasar text-to-speech
+        function speak(text, lang, elementId) {
+            return new Promise((resolve) => {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = lang;
+                utterance.rate = 0.9;
+                
+                const el = document.getElementById(elementId);
+                
+                utterance.onstart = () => {
+                    if (el) {
+                        el.classList.add('highlight');
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                };
+
+                utterance.onend = () => {
+                    if (el) el.classList.remove('highlight');
+                    resolve();
+                };
+
+                utterance.onerror = () => {
+                    if (el) el.classList.remove('highlight');
+                    resolve();
+                };
+
+                window.speechSynthesis.speak(utterance);
+            });
+        }
+
+        // Engine Utama: Loop yang membaca kata per kata ke bawah
+        async function runPlayLoop() {
+            playSessionId++;
+            const currentSession = playSessionId; // Mengunci sesi agar tidak tumpang tindih
+            
+            isPlaying = true;
+            isPaused = false;
+            updateUI();
+
+            while (isPlaying && currentWordIndex < dataKosakata.length) {
+                if (playSessionId !== currentSession) return; // Hentikan jika sesi ganti
+
+                const item = dataKosakata[currentWordIndex];
+
+                while (isPlaying && currentPartIndex < partsList.length) {
+                    if (playSessionId !== currentSession) return;
+
+                    // Tunggu di sini jika sedang di-pause
+                    while (isPaused) {
+                        await new Promise(r => setTimeout(r, 100));
+                    }
+                    if (!isPlaying || playSessionId !== currentSession) return;
+
+                    const part = partsList[currentPartIndex];
+                    const elementId = `item-${currentWordIndex}-${currentPartIndex}`;
+                    const bacaId = document.getElementById('chk-indonesia').checked;
+                    
+                    let textJp, textId;
+                    if (part === 'title') {
+                        textJp = item.kosakata[1];
+                        textId = item.arti[1];
+                    } else {
+                        textJp = item[part].jp;
+                        textId = item[part].id;
+                    }
+
+                    // 1. Baca Bahasa Jepang
+                    await speak(textJp, 'ja-JP', elementId);
+                    
+                    if (playSessionId !== currentSession) return;
+                    while (isPaused) { await new Promise(r => setTimeout(r, 100)); } // Cek pause lagi
+                    if (!isPlaying || playSessionId !== currentSession) return;
+
+                    // 2. Baca Bahasa Indonesia (jika diceklis)
+                    if (bacaId) {
+                        await speak(textId, 'id-ID', elementId);
+                    }
+
+                    // Pindah ke baris selanjutnya
+                    if (isPlaying && !isPaused && playSessionId === currentSession) {
+                        currentPartIndex++;
+                    }
+                }
+
+                // Pindah ke kosakata selanjutnya jika semua kalimat di kata ini sudah dibaca
+                if (isPlaying && currentPartIndex >= partsList.length) {
+                    currentWordIndex++;
+                    currentPartIndex = 0; // Reset ke judul (0)
+                }
+            }
+
+            // Jika loop selesai secara alami sampai kata terakhir
+            if (playSessionId === currentSession && currentWordIndex >= dataKosakata.length) {
+                stopAll();
+            }
+        }
+
+        // Aksi Tombol: Play dari baris tertentu
+        function playFromHere(wIndex, pIndex) {
+            window.speechSynthesis.cancel();
+            
+            // Hapus semua highlight yang tersisa
+            document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
+            
+            currentWordIndex = wIndex;
+            currentPartIndex = pIndex;
+            
+            // Sedikit jeda agar browser sempat mereset Audio Engine-nya
+            setTimeout(() => {
+                runPlayLoop();
+            }, 50);
+        }
+
+        // Aksi Tombol: Play All / Restart
+        document.getElementById('btn-play-all').addEventListener('click', () => {
+            currentWordIndex = 0;
+            currentPartIndex = 0;
+            window.speechSynthesis.cancel();
+            setTimeout(() => runPlayLoop(), 50);
+        });
+
+        // Aksi Tombol: Pause / Resume
+        document.getElementById('btn-pause').addEventListener('click', () => {
+            if (!isPlaying) return;
+            
+            if (isPaused) {
+                isPaused = false;
+                window.speechSynthesis.resume(); // Lanjutkan suara API browser
+            } else {
+                isPaused = true;
+                window.speechSynthesis.pause(); // Hentikan sementara suara API browser
+            }
+            updateUI();
+        });
+
+        // Aksi Tombol: Stop
+        function stopAll() {
+            isPlaying = false;
+            isPaused = false;
+            playSessionId++; // Matikan semua antrean
+            window.speechSynthesis.cancel(); // Matikan audio
+            
+            // Bersihkan styling highlight
+            document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
+            updateUI();
+        }
+        document.getElementById('btn-stop').addEventListener('click', stopAll);
+
+        // Render data saat halaman dimuat
+        renderData();
+
+    </script>
+</body>
+</html>
