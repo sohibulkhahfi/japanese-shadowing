@@ -109,7 +109,7 @@
     "ます": {"jp": "毎朝七時に会社へ行きます。", "id": "Setiap pagi saya pergi ke kantor pukul tujuh.", "form": "行きます"},
     "て": {"jp": "郵便局へ行って、荷物を出しました。", "id": "Saya pergi ke kantor pos lalu mengirim paket.", "form": "行って"},
     "た": {"jp": "先週、友達と京都へ行った。", "id": "Minggu lalu saya pergi ke Kyoto bersama teman.", "form": "行った"},
-    "ない": {"jp": "雨だから今日は出かけない。", "id": "Karena hujan, hari ini saya tidak pergi keluar.", "form": "行かない"}
+    "ない": {"jp": "雨だから今日は公園へ行かけない。", "id": "Karena hujan, hari ini saya tidak pergi ke taman.", "form": "行かない"}
   },
   {
     "kosakata": ["jp", "来る","くる"],
@@ -905,13 +905,24 @@
                     const elementId = `item-${currentWordIndex}-${currentPartIndex}`;
                     const bacaId = document.getElementById('chk-indonesia').checked;
                     
-                    let textJp, textId;
+                    let textJp, textId, textForm;
                     if (part === 'title') {
                         textJp = item.kosakata[1];
                         textId = item.arti[1];
+                        textForm = null; // Title tidak memiliki form
                     } else {
+                        textForm = item[part].form;
                         textJp = item[part].jp;
                         textId = item[part].id;
+                    }
+
+                    if (textForm) {
+                     await speak(textForm, 'ja-JP', elementId);
+    
+                    // Cek status sesi & pause sebelum lanjut ke kalimat (agar tombol stop/pause tetap responsif)
+                    if (playSessionId !== currentSession) return;
+                    while (isPaused) { await new Promise(r => setTimeout(r, 100)); }
+                    if (!isPlaying || playSessionId !== currentSession) return;
                     }
 
                     // 1. Baca Bahasa Jepang
