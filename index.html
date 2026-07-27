@@ -84,6 +84,59 @@
             background-color: #fff3cd; 
             border-left: 4px solid #ffc107;
         }
+
+        /* Styling Modal Quiz */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 200; 
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover, .close-btn:focus { color: black; }
+        
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            color: #333;
+            border: 1px solid #ddd;
+            font-size: 1.1em;
+        }
+        .quiz-option:hover:not(:disabled) { background-color: #e2e6ea; }
+        .quiz-option.correct { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .quiz-option.wrong { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        
+        #quiz-question-box {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        .q-jp { font-weight: bold; font-size: 1.2em; margin-bottom: 5px; }
+        .q-id { color: #555; }
     </style>
 </head>
 <body>
@@ -92,6 +145,8 @@
         <button id="btn-play-all">▶ Play Dari Awal</button>
         <button id="btn-pause" class="btn-pause" disabled>⏸ Pause</button>
         <button id="btn-stop" class="btn-stop" disabled>⏹ Stop</button>
+        <!-- Tombol yang sebelumnya hilang ada di sini: -->
+        <button id="btn-open-quiz" style="background-color: #28a745;">🧠 Mulai Quiz</button>
         <label style="margin-left: 10px; font-size: 0.9em; cursor: pointer;">
             <input type="checkbox" id="chk-indonesia" checked> 
             Bacakan Bahasa Indonesia
@@ -99,6 +154,45 @@
     </div>
 
     <div id="list-container"></div>
+
+    <!-- Modal Quiz -->
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeQuiz()">&times;</span>
+            
+            <!-- Layar Setup Quiz -->
+            <div id="quiz-setup">
+                <h2>Pilih Jumlah Soal</h2>
+                <p>Silakan pilih berapa banyak soal yang ingin dikerjakan:</p>
+                <button onclick="startQuiz(10)">10 Soal</button>
+                <button onclick="startQuiz(20)">20 Soal</button>
+                <button onclick="startQuiz(30)">30 Soal</button>
+            </div>
+
+            <!-- Layar Aktif Quiz -->
+            <div id="quiz-active" style="display: none;">
+                <h3 id="quiz-progress" style="margin-top: 0; color: #666;">Soal 1 / 10</h3>
+                <div id="quiz-question-box">
+                    <div class="q-jp" id="quiz-text-jp"></div>
+                    <div class="q-id" id="quiz-text-id"></div>
+                    <!-- TAMBAHAN: Tombol Suara Soal -->
+                    <button onclick="speakQuestion()" style="background-color: #17a2b8; padding: 6px 12px; font-size: 1.1em; flex-shrink: 0;" title="Dengarkan Soal">🔊</button></div>
+                <div id="quiz-options-container"></div>
+                <div style="margin-top: 20px; text-align: right;">
+                    <button id="btn-next-question" style="display: none;" onclick="nextQuestion()">Selanjutnya ➔</button>
+                </div>
+            </div>
+
+            <!-- Layar Hasil Quiz -->
+            <div id="quiz-result" style="display: none; text-align: center;">
+                <h2>Quiz Selesai! 🎉</h2>
+                <h1 id="quiz-score" style="font-size: 3em; color: #28a745;"></h1>
+                <p id="quiz-feedback"></p>
+                <button onclick="closeQuiz()">Tutup</button>
+                <button onclick="document.getElementById('quiz-result').style.display='none'; document.getElementById('quiz-setup').style.display='block';">Main Lagi</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         const dataKosakata = [
@@ -844,6 +938,10 @@
         const partsList = ['title', 'kamus', 'ます', 'て', 'た', 'ない'];
         const container = document.getElementById('list-container');
 
+        // ==============================
+        // BAGIAN 1: RENDER LIST & AUDIO TTS
+        // ==============================
+
         // State Machine (Status Aplikasi)
         let isPlaying = false;
         let isPaused = false;
@@ -1069,6 +1167,168 @@
             updateUI();
         }
         document.getElementById('btn-stop').addEventListener('click', stopAll);
+
+        // ==============================
+        // BAGIAN 2: LOGIKA QUIZ
+        // ==============================
+        let quizQuestions = [];
+        let currentQIndex = 0;
+        let score = 0;
+
+        // Buka modal quiz
+        document.getElementById('btn-open-quiz').addEventListener('click', () => {
+            stopAll(); // Hentikan audio jika sedang jalan
+            document.getElementById('quiz-modal').style.display = 'block';
+            document.getElementById('quiz-setup').style.display = 'block';
+            document.getElementById('quiz-active').style.display = 'none';
+            document.getElementById('quiz-result').style.display = 'none';
+        });
+
+        // Tutup modal & matikan suara
+        function closeQuiz() {
+            window.speechSynthesis.cancel();
+            document.getElementById('quiz-modal').style.display = 'none';
+        }
+
+        // Fungsi membacakan soal Jepang utuh saat tombol 🔊 diklik
+        function speakQuestion() {
+            window.speechSynthesis.cancel();
+            let q = quizQuestions[currentQIndex];
+            if (q) {
+                let utterance = new SpeechSynthesisUtterance(q.fullJp);
+                utterance.lang = 'ja-JP';
+                utterance.rate = 0.85; // Sedikit pelan agar jelas
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Fungsi bantu mengacak Array (Fisher-Yates)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Memulai Quiz
+        function startQuiz(amount) {
+            let limit = Math.min(amount, dataKosakata.length);
+            let shuffledData = shuffleArray([...dataKosakata]);
+            quizQuestions = [];
+
+            for(let i=0; i<limit; i++) {
+                let targetData = shuffledData[i];
+                const formKeys = ['kamus', 'ます', 'て', 'た', 'ない'];
+                let selectedFormKey = formKeys[Math.floor(Math.random() * formKeys.length)];
+                
+                let targetFormObj = targetData[selectedFormKey];
+                let correctAnswer = targetFormObj.form;
+                let questionJp = targetFormObj.jp.replace(correctAnswer, '........');
+                
+                let distractors = [];
+                let otherData = shuffledData.filter(d => d.kosakata[1] !== targetData.kosakata[1]);
+                otherData = shuffleArray(otherData);
+                
+                for(let j=0; j < Math.min(3, otherData.length); j++) {
+                    distractors.push(otherData[j][selectedFormKey].form);
+                }
+
+                let options = [correctAnswer, ...distractors];
+                options = shuffleArray(options);
+
+                quizQuestions.push({
+                    jp: questionJp,
+                    fullJp: targetFormObj.jp, // Menyimpan kalimat utuh untuk pembacaan audio
+                    id: targetFormObj.id,
+                    options: options,
+                    answer: correctAnswer
+                });
+            }
+
+            score = 0;
+            currentQIndex = 0;
+            
+            document.getElementById('quiz-setup').style.display = 'none';
+            document.getElementById('quiz-active').style.display = 'block';
+            loadQuestion();
+        }
+
+        // Render satu soal ke layar
+        function loadQuestion() {
+            window.speechSynthesis.cancel();
+            let q = quizQuestions[currentQIndex];
+            
+            document.getElementById('quiz-progress').innerText = `Soal ${currentQIndex + 1} / ${quizQuestions.length}`;
+            document.getElementById('quiz-text-jp').innerText = q.jp;
+            document.getElementById('quiz-text-id').innerText = q.id;
+            
+            let optionsHtml = '';
+            q.options.forEach((opt, idx) => {
+                optionsHtml += `<button class="quiz-option" id="opt-${idx}" onclick="checkAnswer('${opt}', ${idx})">${opt}</button>`;
+            });
+            
+            document.getElementById('quiz-options-container').innerHTML = optionsHtml;
+            document.getElementById('btn-next-question').style.display = 'none';
+        }
+
+        // Cek jawaban & bacakan pilihan yang diklik
+        function checkAnswer(selectedWord, idxClicked) {
+            // Bacakan pilihan yang baru diklik
+            window.speechSynthesis.cancel();
+            let utterance = new SpeechSynthesisUtterance(selectedWord);
+            utterance.lang = 'ja-JP';
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+
+            let q = quizQuestions[currentQIndex];
+            let isCorrect = (selectedWord === q.answer);
+            
+            let allOptionBtns = document.querySelectorAll('.quiz-option');
+            allOptionBtns.forEach(btn => btn.disabled = true);
+
+            if (isCorrect) {
+                document.getElementById(`opt-${idxClicked}`).classList.add('correct');
+                score++;
+            } else {
+                document.getElementById(`opt-${idxClicked}`).classList.add('wrong');
+                allOptionBtns.forEach(btn => {
+                    if (btn.innerText === q.answer) {
+                        btn.classList.add('correct');
+                    }
+                });
+            }
+
+            document.getElementById('btn-next-question').style.display = 'inline-block';
+        }
+
+        // Lanjut ke soal berikutnya atau selesaikan quiz
+        function nextQuestion() {
+            currentQIndex++;
+            if (currentQIndex < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        // Layar akhir quiz
+        function finishQuiz() {
+            document.getElementById('quiz-active').style.display = 'none';
+            document.getElementById('quiz-result').style.display = 'block';
+            
+            let finalScoreText = `${score} / ${quizQuestions.length}`;
+            let percentage = (score / quizQuestions.length) * 100;
+            
+            document.getElementById('quiz-score').innerText = finalScoreText;
+            
+            let feedback = '';
+            if (percentage >= 80) feedback = "Luar biasa! Kemampuan bahasa Jepang Anda sangat baik!";
+            else if (percentage >= 50) feedback = "Bagus! Terus berlatih agar semakin lancar.";
+            else feedback = "Jangan menyerah, ayo belajar lagi!";
+            
+            document.getElementById('quiz-feedback').innerText = feedback;
+        }
 
         // Render data saat halaman dimuat
         renderData();
