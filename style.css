@@ -1,0 +1,199 @@
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            max-width: 800px;
+            margin: auto;
+            color: #333;
+        }
+        .header-controls {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 15px 0;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        button:hover { background-color: #0056b3; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        
+        button.btn-pause { background-color: #ffc107; color: black; }
+        button.btn-pause:hover { background-color: #e0a800; }
+        
+        button.btn-stop { background-color: #dc3545; }
+        button.btn-stop:hover { background-color: #c82333; }
+        
+        .list-item {
+            margin-bottom: 30px;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 15px;
+        }
+        .kosakata-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: inline-block;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .sentence-row {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .play-btn {
+            background: none;
+            color: #007BFF;
+            padding: 0;
+            margin-right: 10px;
+            font-size: 1.2em;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .play-btn:hover { background: #e9ecef; color: #0056b3; }
+        
+        /* Highlight untuk kalimat yang sedang dibaca */
+        .highlight {
+            background-color: #fff3cd; 
+            border-left: 4px solid #ffc107;
+        }
+
+        /* Styling Modal Quiz */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 200; 
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover, .close-btn:focus { color: black; }
+        
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            color: #333;
+            border: 1px solid #ddd;
+            font-size: 1.1em;
+        }
+        .quiz-option:hover:not(:disabled) { background-color: #e2e6ea; }
+        .quiz-option.correct { background-color: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .quiz-option.wrong { background-color: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        
+        #quiz-question-box {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        .q-jp { font-weight: bold; font-size: 1.2em; margin-bottom: 5px; }
+        .q-id { color: #555; }
+
+        /* Container pembungkus filter */
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    max-width: 420px;
+    margin: 15px 0;
+}
+
+/* Label "Pilih Kategori:" */
+.filter-container label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333333;
+    white-space: nowrap;
+}
+
+/* Dropdown <select> */
+#selectKategori {
+    flex: 1;
+    padding: 10px 36px 10px 14px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #2c3e50;
+    background-color: #f8f9fa;
+    border: 1px solid #dcdfe6;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    /* Menghapus panah bawaan browser & menggantinya dengan panah SVG modern */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+/* Efek saat mouse mengarah (Hover) */
+#selectKategori:hover {
+    border-color: #b0b5c1;
+    background-color: #ffffff;
+}
+
+/* Efek saat elemen diklik/aktif (Focus) */
+#selectKategori:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    background-color: #ffffff;
+}
+
+/* Responsif untuk layar HP kecil */
+@media (max-width: 480px) {
+    .filter-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+}
