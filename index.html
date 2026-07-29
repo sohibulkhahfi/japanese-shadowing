@@ -14,6 +14,7 @@
         <button id="btn-stop" class="btn-stop" disabled>⏹ Stop</button>
         <!-- Tombol yang sebelumnya hilang ada di sini: -->
         <button id="btn-open-quiz" style="background-color: #28a745;">🧠 Mulai Quiz</button>
+        <button id="btn-open-checklist" style="background-color: #ffc107; color: #333; font-weight: bold;">✅ Progress Hafalan</button>
         <label style="margin-left: 10px; font-size: 0.9em; cursor: pointer;">
             <input type="checkbox" id="chk-indonesia" checked> 
             Bacakan Bahasa Indonesia
@@ -67,6 +68,20 @@
                 <button onclick="document.getElementById('quiz-result').style.display='none'; document.getElementById('quiz-setup').style.display='block';">Main Lagi</button>
             </div>
         </div>
+    </div>
+
+    <!-- Modal checklist hafalan -->
+    <div id="checklist-modal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 500px;">
+        <span class="close-btn" onclick="closeChecklist()">&times;</span>
+        <h2 style="margin-top: 0;">Progress Hafalan</h2>
+        <p style="color: #666; font-size: 0.9em;">Tandai kosakata yang sudah kamu hafal. Data otomatis tersimpan.</p>
+        
+        <!-- Wadah List Checkbox -->
+        <div id="checklist-container" style="max-height: 400px; overflow-y: auto; text-align: left; margin-top: 15px; border-top: 1px solid #ddd; padding-top: 10px;">
+            <!-- Checkbox akan dimunculkan oleh JavaScript di sini -->
+        </div>
+    </div>
     </div>
 
 

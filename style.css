@@ -197,3 +197,39 @@
         gap: 8px;
     }
 }
+
+/* ==========================================
+   STYLE CHECKLIST PROGRESS
+   ========================================== */
+.checklist-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s;
+}
+
+.checklist-item:hover {
+    background-color: #f9f9f9;
+}
+
+.checklist-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.checklist-item label {
+    cursor: pointer;
+    font-size: 1.05em;
+    flex-grow: 1;
+    color: #333;
+    user-select: none; /* Mencegah teks terblok biru saat diklik cepat */
+}
+
+/* Jika dicentang, teks jadi abu-abu dan dicoret */
+.checklist-item.checked label {
+    text-decoration: line-through;
+    color: #aaa;
+}

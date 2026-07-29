@@ -282,6 +282,10 @@ window.startQuiz = function(amount) {
 
         const correctAnswer = formObj.form;
 
+        // menyimpan data ke localStorage
+        const kanji = item.kosakata[1];
+        saveQuizProgress(kanji, randomFormKey);
+
         // 1. Mengubah kata kunci di dalam kalimat soal Jepang menjadi "......"
         const maskedJpText = formObj.jp.replaceAll(correctAnswer, '......');
 
@@ -411,4 +415,119 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-pause')?.addEventListener('click', pauseAudio);
     document.getElementById('btn-stop')?.addEventListener('click', stopAudio);
     document.getElementById('btn-open-quiz')?.addEventListener('click', openQuiz);
+    document.getElementById('btn-open-checklist')?.addEventListener('click', openChecklist);
 });
+
+
+// ==========================================
+// FITUR CHECKLIST (PROGRESS HAFALAN)
+// ==========================================
+const STORAGE_KEY = 'hafalanKosakataProgress';
+
+// 1. Fungsi Buka/Tutup Modal
+window.openChecklist = function() {
+    stopAudio(); // Hentikan suara jika sedang memutar
+    document.getElementById('checklist-modal').style.display = 'block';
+    renderChecklist();
+};
+
+window.closeChecklist = function() {
+    document.getElementById('checklist-modal').style.display = 'none';
+};
+
+// 2. Fungsi Load dari LocalStorage
+function getProgressData() {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : {};
+}
+
+// 3. Fungsi Render Checkbox
+function renderChecklist() {
+    const container = document.getElementById('checklist-container');
+    container.innerHTML = '';
+    
+    // Ambil data yang tersimpan dari LocalStorage
+    const savedProgress = getProgressData();
+
+    // Ambil data yang sedang difilter
+    const activeData = getFilteredData();
+
+    if (activeData.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: #777;">Tidak ada kosakata dalam kategori ini.</p>';
+        return;
+    }
+
+    // Loop semua kosakata asli dari dataKosakata/activeData
+    activeData.forEach((item, index) => {
+        const kanji = item.kosakata[1]; // Teks Jepang (misal: 行く)
+        const arti = item.arti[1];      // Teks Arti (misal: pergi)
+        const isChecked = savedProgress[kanji] || false; // Cek apakah sebelumnya dicentang
+
+        // Buat div pembungkus item
+        const div = document.createElement('div');
+        div.className = 'checklist-item' + (isChecked ? ' checked' : '');
+
+        // Buat checkbox
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = `chk-vocab-${index}`;
+        checkbox.checked = isChecked;
+
+        // Event ketika checkbox diklik
+        checkbox.addEventListener('change', (e) => {
+            const currentProgress = getProgressData(); // Ambil data terbaru
+            currentProgress[kanji] = e.target.checked; // Update status (true/false)
+            
+            // Simpan kembali ke LocalStorage
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(currentProgress));
+            
+            // Ubah tampilan style tercoret
+            if (e.target.checked) {
+                div.classList.add('checked');
+            } else {
+                div.classList.remove('checked');
+            }
+        });
+
+        // Buat label (teks)
+        const label = document.createElement('label');
+        label.htmlFor = `chk-vocab-${index}`;
+        label.textContent = `${kanji} - ${arti}`; // Menampilkan Kanji & Artinya agar mudah
+
+        div.appendChild(checkbox);
+        div.appendChild(label);
+        container.appendChild(div);
+    });
+}
+
+
+// ==========================================
+// FITUR RIWAYAT KUIS (DENGAN HITUNGAN / COUNTER)
+// ==========================================
+const QUIZ_STORAGE_KEY = 'quizHistoryProgress';
+
+function getQuizProgress() {
+    const data = localStorage.getItem(QUIZ_STORAGE_KEY);
+    return data ? JSON.parse(data) : {};
+}
+
+// Fungsi untuk menambah jumlah hitungan (+1)
+function saveQuizProgress(kanji, formKey) {
+    const data = getQuizProgress();
+    
+    // 1. Jika kosakata ini belum ada, inisialisasi sebagai object {}
+    if (!data[kanji]) {
+        data[kanji] = {};
+    }
+    
+    // 2. Jika bentuk (formKey) ini belum pernah keluar, set awal = 0
+    if (!data[kanji][formKey]) {
+        data[kanji][formKey] = 0;
+    }
+    
+    // 3. Tambahkan +1 setiap kali dijadikan soal
+    data[kanji][formKey] += 1;
+    
+    // 4. Simpan kembali ke LocalStorage
+    localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(data));
+}
