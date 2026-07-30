@@ -279,12 +279,13 @@ window.startQuiz = function(amount) {
         const item = shuffledData[i];
         const randomFormKey = formKeys[Math.floor(Math.random() * formKeys.length)];
         const formObj = item[randomFormKey] || item['kamus'];
+        console.log(formObj.form)
 
         const correctAnswer = formObj.form;
 
         // menyimpan data ke localStorage
         const kanji = item.kosakata[1];
-        saveQuizProgress(kanji, randomFormKey);
+        saveQuizProgress(kanji, formObj.form);
 
         // 1. Mengubah kata kunci di dalam kalimat soal Jepang menjadi "......"
         const maskedJpText = formObj.jp.replaceAll(correctAnswer, '......');
@@ -405,6 +406,8 @@ function showQuizResult() {
 document.addEventListener('DOMContentLoaded', () => {
     setupDropdownKategori();
     renderData();
+
+    checkInAppBrowser();
 
     document.getElementById('btn-play-all')?.addEventListener('click', () => {
         currentWordIndex = 0;
@@ -530,4 +533,34 @@ function saveQuizProgress(kanji, formKey) {
     
     // 4. Simpan kembali ke LocalStorage
     localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(data));
+}
+
+// ==========================================
+// DETEKSI IN-APP BROWSER (SOSMED)
+// ==========================================
+function checkInAppBrowser() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    
+    // Pattern mendeteksi Instagram, Threads, TikTok, Twitter/X, Facebook, Line, dll.
+    const isInApp = /FB_IAB|FBAN|FBAV|Instagram|Threads|TikTok|BytedanceWebview|musical_ly|Twitter|Line|Snapchat/i.test(ua);
+
+    if (isInApp) {
+        const banner = document.getElementById('iab-warning');
+        const closeBtn = document.getElementById('close-iab-btn');
+
+        if (banner) {
+            banner.style.display = 'flex';
+
+            // 1. Hilangkan otomatis setelah 7 detik
+            const autoHide = setTimeout(() => {
+                banner.style.display = 'none';
+            }, 7000);
+
+            // 2. Jika tombol close diklik
+            closeBtn?.addEventListener('click', () => {
+                clearTimeout(autoHide);
+                banner.style.display = 'none';
+            });
+        }
+    }
 }
