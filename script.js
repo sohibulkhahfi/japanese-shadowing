@@ -109,7 +109,7 @@ function renderData() {
                 htmlContent += `
                     <div class="sentence-row" id="item-${wIndex}-${partNum}" style="padding: 6px; margin-top: 4px; border-radius: 4px;">
                         <button class="play-btn" onclick="playFromHere(${wIndex}, ${partNum})" title="Mulai dari sini">🔊</button>
-                        <strong>${formObj.form}:</strong> ${formObj.jp} <br>
+                        <strong>${formObj.form}:</strong> ${formObj.ruby} <br>
                         <span style="margin-left: 35px; color: #555; font-size: 0.9em;">${formObj.id}</span>
                     </div>
                 `;
@@ -405,6 +405,7 @@ function showQuizResult() {
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     setupDropdownKategori();
+    loadFuriganaPreference();
     renderData();
 
     checkInAppBrowser();
@@ -534,6 +535,46 @@ function saveQuizProgress(kanji, formKey) {
     // 4. Simpan kembali ke LocalStorage
     localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(data));
 }
+
+
+// ==========================================
+// FITUR TOGGLE FURIGANA
+// ==========================================
+const FURIGANA_STORAGE_KEY = 'furiganaPref';
+
+// Fungsi yang dipanggil saat toggle diklik
+window.toggleFurigana = function() {
+    const toggle = document.getElementById('furiganaToggle');
+    const isChecked = toggle.checked;
+
+    if (isChecked) {
+        // Jika ON, tampilkan Furigana (hapus class hide-furigana dari body)
+        document.body.classList.remove('hide-furigana');
+        localStorage.setItem(FURIGANA_STORAGE_KEY, 'show');
+    } else {
+        // Jika OFF, sembunyikan Furigana (tambahkan class hide-furigana ke body)
+        document.body.classList.add('hide-furigana');
+        localStorage.setItem(FURIGANA_STORAGE_KEY, 'hide');
+    }
+};
+
+// Fungsi untuk mengecek pengaturan tersimpan saat halaman dimuat
+function loadFuriganaPreference() {
+    const pref = localStorage.getItem(FURIGANA_STORAGE_KEY);
+    const toggle = document.getElementById('furiganaToggle');
+    
+    if (toggle) {
+        if (pref === 'hide') {
+            toggle.checked = false;
+            document.body.classList.add('hide-furigana');
+        } else {
+            // Default adalah tampil ('show' atau belum ada data)
+            toggle.checked = true;
+            document.body.classList.remove('hide-furigana');
+        }
+    }
+}
+
 
 // ==========================================
 // DETEKSI IN-APP BROWSER (SOSMED)

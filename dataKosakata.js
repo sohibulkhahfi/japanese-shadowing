@@ -1,1560 +1,7096 @@
 const dataKosakata = [
   {
-    "kosakata": ["jp", "行く","いく"],
-    "arti": ["id", "pergi"],
-    "kamus": {"jp": "来年、日本へ行くつもりです。", "id": "Tahun depan saya berencana pergi ke Jepang.", "form": "行く"},
-    "ます": {"jp": "毎朝七時に会社へ行きます。", "id": "Setiap pagi saya pergi ke kantor pukul tujuh.", "form": "行きます"},
-    "て": {"jp": "郵便局へ行って、荷物を出しました。", "id": "Saya pergi ke kantor pos lalu mengirim paket.", "form": "行って"},
-    "た": {"jp": "先週、友達と京都へ行った。", "id": "Minggu lalu saya pergi ke Kyoto bersama teman.", "form": "行った"},
-    "ない": {"jp": "雨だから今日は公園へ行かない。", "id": "Karena hujan, hari ini saya tidak pergi ke taman.", "form": "行かない"}
-  },
-  {
-    "kosakata": ["jp", "来る","くる"],
-    "arti": ["id", "datang"],
-    "kamus": {"jp": "明日、新しい先生が来る。", "id": "Besok guru baru akan datang.", "form": "来る"},
-    "ます": {"jp": "毎週金曜日に母が来ます。", "id": "Ibu datang setiap hari Jumat.", "form": "来ます"},
-    "て": {"jp": "こちらへ来て、一緒に写真を撮りましょう。", "id": "Kemarilah, mari kita berfoto bersama.", "form": "来て"},
-    "た": {"jp": "さっき友達が来た。", "id": "Tadi teman saya datang.", "form": "来た"},
-    "ない": {"jp": "バスはまだ来ない。", "id": "Busnya belum datang.", "form": "来ない"}
-  },
-  {
-    "kosakata": ["jp", "帰る","かえる"],
-    "arti": ["id", "pulang"],
-    "kamus": {"jp": "仕事が終わったら家へ帰る。", "id": "Setelah pekerjaan selesai saya pulang ke rumah.", "form": "帰る"},
-    "ます": {"jp": "毎日六時ごろ帰ります。", "id": "Setiap hari saya pulang sekitar pukul enam.", "form": "帰ります"},
-    "て": {"jp": "家へ帰って、夕飯を作ります。", "id": "Saya pulang ke rumah lalu memasak makan malam.", "form": "帰って"},
-    "た": {"jp": "昨日は早く帰った。", "id": "Kemarin saya pulang lebih awal.", "form": "帰った"},
-    "ない": {"jp": "今夜は家へ帰らない。", "id": "Malam ini saya tidak pulang ke rumah.", "form": "帰らない"}
-  },
-  {
-    "kosakata": ["jp", "食べる","たべる"],
-    "arti": ["id", "makan"],
-    "kamus": {"jp": "野菜をたくさん食べる。", "id": "Saya makan banyak sayuran.", "form": "食べる"},
-    "ます": {"jp": "昼休みにお弁当を食べます。", "id": "Saya makan bekal saat istirahat siang.", "form": "食べます"},
-    "て": {"jp": "ご飯を食べてから勉強します。", "id": "Saya belajar setelah makan.", "form": "食べて"},
-    "た": {"jp": "朝ご飯はもう食べた。", "id": "Saya sudah makan sarapan.", "form": "食べた"},
-    "ない": {"jp": "夜は甘い物を食べない。", "id": "Saya tidak makan makanan manis pada malam hari.", "form": "食べない"}
-  },
-  {
-    "kosakata": ["jp", "飲む","のむ"],
-    "arti": ["id", "minum"],
-    "kamus": {"jp": "水をたくさん飲むことは大切です。", "id": "Penting untuk minum banyak air.", "form": "飲む"},
-    "ます": {"jp": "毎朝牛乳を飲みます。", "id": "Saya minum susu setiap pagi.", "form": "飲みます"},
-    "て": {"jp": "薬を飲んで、早く寝てください。", "id": "Minulah obat lalu tidurlah lebih awal.", "form": "飲んで"},
-    "た": {"jp": "コーヒーを二杯飲んだ。", "id": "Saya minum dua cangkir kopi.", "form": "飲んだ"},
-    "ない": {"jp": "お酒は飲まない。", "id": "Saya tidak minum alkohol.", "form": "飲まない"}
-  },
-  {
-    "kosakata": ["jp", "見る","みる"],
-    "arti": ["id", "melihat"],
-    "kamus": {"jp": "夜に映画を見るのが好きです。", "id": "Saya suka menonton film pada malam hari.", "form": "見る"},
-    "ます": {"jp": "毎晩ニュースを見ます。", "id": "Saya menonton berita setiap malam.", "form": "見ます"},
-    "て": {"jp": "この写真を見てください。", "id": "Tolong lihat foto ini.", "form": "見て"},
-    "た": {"jp": "昨日、その映画を見た。", "id": "Kemarin saya menonton film itu.", "form": "見た"},
-    "ない": {"jp": "最近テレビを見ない。", "id": "Akhir-akhir ini saya tidak menonton televisi.", "form": "見ない"}
-  },
-  {
-    "kosakata": ["jp", "聞く","きく"],
-    "arti": ["id", "mendengar"],
-    "kamus": {"jp": "日本の音楽をよく聞く。", "id": "Saya sering mendengarkan musik Jepang.", "form": "聞く"},
-    "ます": {"jp": "分からないときは先生に聞きます。", "id": "Jika tidak mengerti, saya bertanya kepada guru.", "form": "聞きます"},
-    "て": {"jp": "最後まで話を聞いてください。", "id": "Tolong dengarkan sampai selesai.", "form": "聞いて"},
-    "た": {"jp": "面白い話を聞いた。", "id": "Saya mendengar cerita yang menarik.", "form": "聞いた"},
-    "ない": {"jp": "人の話を聞かない。", "id": "Dia tidak mau mendengarkan perkataan orang.", "form": "聞かない"}
-  },
-  {
-    "kosakata": ["jp", "話す","はなす"],
-    "arti": ["id", "berbicara"],
-    "kamus": {"jp": "日本人と日本語で話す。", "id": "Berbicara dengan orang Jepang menggunakan bahasa Jepang.", "form": "話す"},
-    "ます": {"jp": "毎日先生と話します。", "id": "Saya berbicara dengan guru setiap hari.", "form": "話します"},
-    "て": {"jp": "もっとゆっくり話してください。", "id": "Tolong berbicaralah lebih pelan.", "form": "話して"},
-    "た": {"jp": "昨日、店長と話した。", "id": "Kemarin saya berbicara dengan manajer toko.", "form": "話した"},
-    "ない": {"jp": "緊張するとあまり話さない。", "id": "Saat gugup, saya tidak banyak berbicara.", "form": "話さない"}
-  },
-  {
-    "kosakata": ["jp", "書く","かく"],
-    "arti": ["id", "menulis"],
-    "kamus": {"jp": "毎日、日本語で日記を書く。", "id": "Setiap hari saya menulis buku harian dalam bahasa Jepang.", "form": "書く"},
-    "ます": {"jp": "宿題をノートに書きます。", "id": "Saya menulis pekerjaan rumah di buku catatan.", "form": "書きます"},
-    "て": {"jp": "名前を書いてから、中に入ってください。", "id": "Silakan tulis nama Anda sebelum masuk.", "form": "書いて"},
-    "た": {"jp": "さっきレポートを書いた。", "id": "Tadi saya sudah menulis laporan.", "form": "書いた"},
-    "ない": {"jp": "漢字はあまり書かない。", "id": "Saya jarang menulis kanji.", "form": "書かない"}
-  },
-  {
-    "kosakata": ["jp", "読む","よむ"],
-    "arti": ["id", "membaca"],
-    "kamus": {"jp": "寝る前に本を読む。", "id": "Saya membaca buku sebelum tidur.", "form": "読む"},
-    "ます": {"jp": "毎朝、新聞を読みます。", "id": "Setiap pagi saya membaca koran.", "form": "読みます"},
-    "て": {"jp": "この文章を読んで、答えてください。", "id": "Bacalah teks ini lalu jawablah.", "form": "読んで"},
-    "た": {"jp": "昨日、その小説を読んだ。", "id": "Kemarin saya menonton film itu.", "form": "読んだ"},
-    "ない": {"jp": "最近、漫画を読まない。", "id": "Akhir-akhir ini saya tidak membaca manga.", "form": "読まない"}
-  },
-  {
-    "kosakata": ["jp", "買う","かう"],
-    "arti": ["id", "membeli"],
-    "kamus": {"jp": "新しい靴を買う予定です。", "id": "Saya berencana membeli sepatu baru.", "form": "買う"},
-    "ます": {"jp": "スーパーで野菜を買います。", "id": "Saya membeli sayuran di supermarket.", "form": "買います"},
-    "て": {"jp": "パンを買って、家へ帰ります。", "id": "Saya membeli roti lalu pulang.", "form": "買って"},
-    "た": {"jp": "昨日、新しい傘を買った。", "id": "Kemarin saya membeli payung baru.", "form": "買った"},
-    "ない": {"jp": "必要ではないので買わない。", "id": "Karena tidak diperlukan, saya tidak membelinya.", "form": "買わない"}
-  },
-  {
-    "kosakata": ["jp", "売る","うる"],
-    "arti": ["id", "menjual"],
-    "kamus": {"jp": "この店は野菜を売る。", "id": "Toko ini menjual sayuran.", "form": "売る"},
-    "ます": {"jp": "毎朝、市場で魚を売ります。", "id": "Setiap pagi menjual ikan di pasar.", "form": "売ります"},
-    "て": {"jp": "古い本を売って、新しい本を買った。", "id": "Saya menjual buku lama lalu membeli buku baru.", "form": "売って"},
-    "た": {"jp": "使わない自転車を売った。", "id": "Saya menjual sepeda yang sudah tidak dipakai.", "form": "売った"},
-    "ない": {"jp": "この商品は売らない。", "id": "Barang ini tidak dijual.", "form": "売らない"}
-  },
-  {
-    "kosakata": ["jp", "使う","つかう"],
-    "arti": ["id", "menggunakan"],
-    "kamus": {"jp": "パソコンを使う仕事です。", "id": "Ini adalah pekerjaan yang menggunakan komputer.", "form": "使う"},
-    "ます": {"jp": "毎日スマートフォンを使います。", "id": "Saya menggunakan ponsel setiap hari.", "form": "使います"},
-    "て": {"jp": "電子辞書を使って勉強します。", "id": "Saya belajar menggunakan kamus elektronik.", "form": "使って"},
-    "た": {"jp": "昨日、このペンを使った。", "id": "Kemarin saya menggunakan pena ini.", "form": "使った"},
-    "ない": {"jp": "最近、現金を使わない。", "id": "Akhir-akhir ini saya tidak menggunakan uang tunai.", "form": "使わない"}
-  },
-  {
-    "kosakata": ["jp", "作る","つくる"],
-    "arti": ["id", "membuat"],
-    "kamus": {"jp": "休日によく料理を作る。", "id": "Saya sering memasak pada hari libur.", "form": "作る"},
-    "ます": {"jp": "母は毎日お弁当を作ります。", "id": "Ibu membuat bekal setiap hari.", "form": "作ります"},
-    "て": {"jp": "カレーを作って、みんなで食べた。", "id": "Saya membuat kari lalu memakannya bersama semua orang.", "form": "作って"},
-    "た": {"jp": "自分でケーキを作った。", "id": "Saya membuat kue sendiri.", "form": "作った"},
-    "ない": {"jp": "朝ご飯は自分で作らない。", "id": "Saya tidak membuat sarapan sendiri.", "form": "作らない"}
-  },
-  {
-    "kosakata": ["jp", "待つ","まつ"],
-    "arti": ["id", "menunggu"],
-    "kamus": {"jp": "駅で友達を待つ。", "id": "Menunggu teman di stasiun.", "form": "待つ"},
-    "ます": {"jp": "バスを十分待ちます。", "id": "Saya menunggu bus selama sepuluh menit.", "form": "待ちます"},
-    "て": {"jp": "少し待ってください。", "id": "Tolong tunggu sebentar.", "form": "待って"},
-    "た": {"jp": "一時間も待った。", "id": "Saya menunggu sampai satu jam.", "form": "待った"},
-    "ない": {"jp": "時間がないから待たない。", "id": "Karena tidak ada waktu, saya tidak menunggu.", "form": "待たない"}
-  },
-  {
-    "kosakata": ["jp", "持つ","もつ"],
-    "arti": ["id", "membawa / memiliki"],
-    "kamus": {"jp": "重い荷物を持つ。", "id": "Membawa barang yang berat.", "form": "持つ"},
-    "ます": {"jp": "財布はいつも持ちます。", "id": "Saya selalu membawa dompet.", "form": "持ちます"},
-    "て": {"jp": "パスポートを持ってきてください。", "id": "Tolong bawa paspornya.", "form": "持って"},
-    "た": {"jp": "大きなかばんを持った人が来た。", "id": "Seseorang yang membawa tas besar datang.", "form": "持った"},
-    "ない": {"jp": "車を持たない人も多い。", "id": "Banyak juga orang yang tidak memiliki mobil.", "form": "持たない"}
-  },
-  {
-    "kosakata": ["jp", "会う","あう"],
-    "arti": ["id", "bertemu"],
-    "kamus": {"jp": "明日、駅で友達に会う。", "id": "Besok saya akan bertemu teman di stasiun.", "form": "会う"},
-    "ます": {"jp": "月に一回、お客様に会います。", "id": "Saya bertemu pelanggan sebulan sekali.", "form": "会います"},
-    "て": {"jp": "久しぶりに先生に会って、うれしかったです。", "id": "Saya senang karena bertemu guru setelah sekian lama.", "form": "会って"},
-    "た": {"jp": "昨日、高校の友達に会った。", "id": "Kemarin saya bertemu teman SMA.", "form": "会った"},
-    "ない": {"jp": "最近、忙しくて友達に会わない。", "id": "Akhir-akhir ini saya tidak bertemu teman karena sibuk.", "form": "会わない"}
-  },
-  {
-    "kosakata": ["jp", "開ける","あける"],
-    "arti": ["id", "membuka"],
-    "kamus": {"jp": "朝、窓を開ける。", "id": "Saya membuka jendela pada pagi hari.", "form": "開ける"},
-    "ます": {"jp": "店は九時に開けます。", "id": "Toko dibuka pukul sembilan.", "form": "開けます"},
-    "て": {"jp": "ドアを開けてください。", "id": "Tolong bukakan pintunya.", "form": "開けて"},
-    "た": {"jp": "暑かったので窓を開けた。", "id": "Karena panas, saya membuka jendela.", "form": "開けた"},
-    "ない": {"jp": "エアコンをつけるので窓は開けない。", "id": "Karena AC dinyalakan, jendelanya tidak dibuka.", "form": "開けない"}
-  },
-  {
-    "kosakata": ["jp", "閉める","しめる"],
-    "arti": ["id", "menutup"],
-    "kamus": {"jp": "寝る前にドアを閉める。", "id": "Saya menutup pintu sebelum tidur.", "form": "閉める"},
-    "ます": {"jp": "毎日午後六時に店を閉めます。", "id": "Setiap hari toko ditutup pukul enam sore.", "form": "閉めます"},
-    "て": {"jp": "窓を閉めてから出かけます。", "id": "Saya pergi setelah menutup jendela.", "form": "閉めて"},
-    "た": {"jp": "店長はもう店を閉めた。", "id": "Manajer toko sudah menutup toko.", "form": "閉めた"},
-    "ない": {"jp": "暑いのでドアを閉めない。", "id": "Karena panas, pintunya tidak ditutup.", "form": "閉めない"}
-  },
-  {
-    "kosakata": ["jp", "座る","すわる"],
-    "arti": ["id", "duduk"],
-    "kamus": {"jp": "空いている席に座る。", "id": "Saya duduk di kursi yang kosong.", "form": "座る"},
-    "ます": {"jp": "電車ではいつもここに座ります。", "id": "Di kereta saya selalu duduk di sini.", "form": "座ります"},
-    "て": {"jp": "どうぞ座ってください。", "id": "Silakan duduk.", "form": "座って"},
-    "た": {"jp": "窓の近くに座った。", "id": "Saya duduk di dekat jendela.", "form": "座った"},
-    "ない": {"jp": "次で降りるので座らない。", "id": "Karena akan turun di pemberhentian berikutnya, saya tidak duduk.", "form": "座らない"}
-  },
-  {
-    "kosakata": ["jp", "立つ","たつ"],
-    "arti": ["id", "berdiri"],
-    "kamus": {"jp": "信号の前で立つ。", "id": "Berdiri di depan lampu lalu lintas.", "form": "立つ"},
-    "ます": {"jp": "朝礼ではみんな立ちます。", "id": "Saat apel pagi semua orang berdiri.", "form": "立ちます"},
-    "て": {"jp": "立って話しましょう。", "id": "Mari berbicara sambil berdiri.", "form": "立って"},
-    "た": {"jp": "ベルが鳴るとすぐ立った。", "id": "Begitu bel berbunyi, saya langsung berdiri.", "form": "立った"},
-    "ない": {"jp": "足が痛いので立たない。", "id": "Karena kaki saya sakit, saya tidak berdiri.", "form": "立たない"}
-  },
-  {
-    "kosakata": ["jp", "入る","はいる"],
-    "arti": ["id", "masuk"],
-    "kamus": {"jp": "この店に入る。", "id": "Saya masuk ke toko ini.", "form": "入る"},
-    "ます": {"jp": "九時までに教室に入ります。", "id": "Saya masuk ke kelas sebelum pukul sembilan.", "form": "入ります"},
-    "て": {"jp": "部屋に入って、電気をつけた。", "id": "Saya masuk ke kamar lalu menyalakan lampu.", "form": "入って"},
-    "た": {"jp": "新しい会社に入った。", "id": "Saya masuk ke perusahaan baru.", "form": "入った"},
-    "ない": {"jp": "会員ではないので入らない。", "id": "Karena bukan anggota, saya tidak masuk.", "form": "入らない"}
-  },
-  {
-    "kosakata": ["jp", "出る","でる"],
-    "arti": ["id", "keluar"],
-    "kamus": {"jp": "朝七時に家を出る。", "id": "Saya keluar rumah pukul tujuh pagi.", "form": "出る"},
-    "ます": {"jp": "次の駅で電車を出ます。", "id": "Saya keluar dari kereta di stasiun berikutnya.", "form": "出ます"},
-    "て": {"jp": "部屋を出て、友達を待った。", "id": "Saya keluar dari kamar lalu menunggu teman.", "form": "出て"},
-    "た": {"jp": "五分前に家を出た。", "id": "Saya keluar rumah lima menit yang lalu.", "form": "出た"},
-    "ない": {"jp": "今日は外へ出ない。", "id": "Hari ini saya tidak keluar.", "form": "出ない"}
-  },
-  {
-    "kosakata": ["jp", "入れる","いれる"],
-    "arti": ["id", "memasukkan"],
-    "kamus": {"jp": "かばんに本を入れる。", "id": "Saya memasukkan buku ke dalam tas.", "form": "入れる"},
-    "ます": {"jp": "コーヒーに砂糖を入れます。", "id": "Saya memasukkan gula ke dalam kopi.", "form": "入れます"},
-    "て": {"jp": "名前を書いて、箱に入れてください。", "id": "Tulis nama Anda lalu masukkan ke dalam kotak.", "form": "入れて"},
-    "た": {"jp": "財布をかばんに入れた。", "id": "Saya memasukkan dompet ke dalam tas.", "form": "入れた"},
-    "ない": {"jp": "冷蔵庫には何も入れない。", "id": "Saya tidak memasukkan apa pun ke dalam kulkas.", "form": "入れない"}
-  },
-  {
-    "kosakata": ["jp", "出す","だす"],
-    "arti": ["id", "mengeluarkan / mengirim"],
-    "kamus": {"jp": "今日中に手紙を出す。", "id": "Saya akan mengirim surat hari ini.", "form": "出す"},
-    "ます": {"jp": "コンビニでお金を出します。", "id": "Saya mengeluarkan uang di minimarket.", "form": "出します"},
-    "て": {"jp": "宿題を出してから帰ってください。", "id": "Silakan kumpulkan PR sebelum pulang.", "form": "出して"},
-    "た": {"jp": "さっきメールを出した。", "id": "Tadi saya sudah mengirim email.", "form": "出した"},
-    "ない": {"jp": "今日はごみを出さない。", "id": "Hari ini saya tidak membuang sampah.", "form": "出さない"}
-  },
-  {
-    "kosakata": ["jp", "入浴する","にゅうよくする"],
-    "arti": ["id", "mandi"],
-    "kamus": {"jp": "毎晩寝る前に入浴する。", "id": "Saya mandi setiap malam sebelum tidur.", "form": "入浴する"},
-    "ます": {"jp": "ホテルでは夜に入浴します。", "id": "Saya mandi pada malam hari di hotel.", "form": "入浴します"},
-    "て": {"jp": "入浴してから寝ます。", "id": "Saya tidur setelah mandi.", "form": "入浴して"},
-    "た": {"jp": "昨日はゆっくり入浴した。", "id": "Kemarin saya mandi dengan santai.", "form": "入浴した"},
-    "ない": {"jp": "時間がないので入浴しない。", "id": "Karena tidak ada waktu, saya tidak mandi.", "form": "入浴しない"}
-  },
-  {
-    "kosakata": ["jp", "寝る","ねる"],
-    "arti": ["id", "tidur"],
-    "kamus": {"jp": "毎日十一時に寝る。", "id": "Saya tidur setiap hari pukul sebelas.", "form": "寝る"},
-    "ます": {"jp": "疲れた日は早く寝ます。", "id": "Pada hari yang melelahkan saya tidur lebih awal.", "form": "寝ます"},
-    "て": {"jp": "少し寝て、元気になった。", "id": "Saya tidur sebentar lalu menjadi segar.", "form": "寝て"},
-    "た": {"jp": "昨日は八時間寝た。", "id": "Kemarin saya tidur delapan jam.", "form": "寝た"},
-    "ない": {"jp": "コーヒーを飲むと寝ない。", "id": "Jika minum kopi, saya tidak bisa tidur.", "form": "寝ない"}
-  },
-  {
-    "kosakata": ["jp", "起きる","おきる"],
-    "arti": ["id", "bangun"],
-    "kamus": {"jp": "明日は早く起きる。", "id": "Besok saya akan bangun lebih awal.", "form": "起きる"},
-    "ます": {"jp": "毎朝六時に起きます。", "id": "Saya bangun setiap pagi pukul enam.", "form": "起きます"},
-    "て": {"jp": "起きてすぐ顔を洗います。", "id": "Setelah bangun saya langsung mencuci muka.", "form": "起きて"},
-    "た": {"jp": "今朝は五時に起きた。", "id": "Tadi pagi saya bangun pukul lima.", "form": "起きた"},
-    "ない": {"jp": "休みの日は早く起きない。", "id": "Pada hari libur saya tidak bangun pagi.", "form": "起きない"}
-  },
-  {
-    "kosakata": ["jp", "働く","はたらく"],
-    "arti": ["id", "bekerja"],
-    "kamus": {"jp": "将来、日本で働く。", "id": "Saya ingin bekerja di Jepang pada masa depan.", "form": "働く"},
-    "ます": {"jp": "父は病院で働きます。", "id": "Ayah bekerja di rumah sakit.", "form": "働きます"},
-    "て": {"jp": "毎日働いて、お金をためています。", "id": "Saya bekerja setiap hari and menabung uang.", "form": "働いて"},
-    "た": {"jp": "昨日は十時間働いた。", "id": "Kemarin saya bekerja selama tiga jam.", "form": "働いた"},
-    "ない": {"jp": "日曜日は働かない。", "id": "Saya tidak bekerja pada hari Minggu.", "form": "働かない"}
-  },
-  {
-    "kosakata": ["jp", "休む","やすむ"],
-    "arti": ["id", "beristirahat / libur"],
-    "kamus": {"jp": "疲れたら少し休む。", "id": "Jika lelah saya akan beristirahat.", "form": "休む"},
-    "ます": {"jp": "明日は仕事を休みます。", "id": "Besok saya libur kerja.", "form": "休みます"},
-    "て": {"jp": "無理をしないで、休んでください。", "id": "Jangan memaksakan diri, silakan beristirahat.", "form": "休んで"},
-    "た": {"jp": "昨日は一日休んだ。", "id": "Kemarin saya beristirahat seharian.", "form": "休んだ"},
-    "ない": {"jp": "忙しいので休まない。", "id": "Karena sibuk saya tidak beristirahat.", "form": "休まない"}
-  },
-  {
-    "kosakata": ["jp", "勉強する","べんきょうする"],
-    "arti": ["id", "belajar"],
-    "kamus": {"jp": "毎日日本語を勉強する。", "id": "Saya belajar bahasa Jepang setiap hari.", "form": "勉強する"},
-    "ます": {"jp": "夜、図書館で勉強します。", "id": "Saya belajar di perpustakaan pada malam hari.", "form": "勉強します"},
-    "て": {"jp": "毎日勉強して、日本語が上手になりました。", "id": "Saya belajar setiap hari sehingga bahasa Jepang saya menjadi lebih baik.", "form": "勉強して"},
-    "た": {"jp": "昨日は三時間勉強した。", "id": "Kemarin saya belajar selama tiga jam.", "form": "勉強した"},
-    "ない": {"jp": "試験が終わったので今日は勉強しない。", "id": "Karena ujian sudah selesai, hari ini saya tidak belajar.", "form": "勉強しない"}
-  },
-  {
-    "kosakata": ["jp", "教える","おしえる"],
-    "arti": ["id", "mengajar / memberi tahu"],
-    "kamus": {"jp": "日本語を教える仕事がしたい。", "id": "Saya ingin bekerja sebagai pengajar bahasa Jepang.", "form": "教える"},
-    "ます": {"jp": "先生は漢字を教えます。", "id": "Guru mengajarkan kanji.", "form": "教えます"},
-    "て": {"jp": "この言葉の意味を教えてください。", "id": "Tolong beri tahu arti kata ini.", "form": "教えて"},
-    "た": {"jp": "友達に道を教えた。", "id": "Saya memberi tahu jalan kepada teman.", "form": "教えた"},
-    "ない": {"jp": "答えはまだ教えない。", "id": "Jawabannya belum saya beri tahu.", "form": "教えない"}
-  },
-  {
-    "kosakata": ["jp", "覚える","おぼえる"],
-    "arti": ["id", "mengingat / menghafal"],
-    "kamus": {"jp": "新しい言葉をたくさん覚える。", "id": "Saya menghafal banyak kosakata baru.", "form": "覚える"},
-    "ます": {"jp": "毎日五つの漢字を覚えます。", "id": "Saya menghafal lima kanji setiap hari.", "form": "覚えます"},
-    "て": {"jp": "この文を覚えてください。", "id": "Tolong hafalkan kalimat ini.", "form": "覚えて"},
-    "た": {"jp": "やっとひらがなを全部覚えた。", "id": "Akhirnya saya sudah menghafal semua huruf hiragana.", "form": "覚えた"},
-    "ない": {"jp": "使わない言葉はなかなか覚えない。", "id": "Kata-kata yang tidak digunakan sulit diingat.", "form": "覚えない"}
-  },
-  {
-    "kosakata": ["jp", "忘れる","わすれる"],
-    "arti": ["id", "lupa"],
-    "kamus": {"jp": "大切な約束を忘れることはよくない。", "id": "Tidak baik melupakan janji yang penting.", "form": "忘れる"},
-    "ます": {"jp": "ときどき傘を忘れます。", "id": "Saya kadang-kadang lupa membawa payung.", "form": "忘れます"},
-    "て": {"jp": "財布を忘れてしまいました。", "id": "Saya tidak sengaja lupa membawa dompet.", "form": "忘れて"},
-    "た": {"jp": "宿題を忘れた。", "id": "Saya lupa mengerjakan/membawa PR.", "form": "忘れた"},
-    "ない": {"jp": "明日は忘れないようにします。", "id": "Besok saya akan berusaha agar tidak lupa.", "form": "忘れない"}
-  },
-  {
-    "kosakata": ["jp", "習う","ならう"],
-    "arti": ["id", "belajar dari seseorang"],
-    "kamus": {"jp": "日本語を先生から習う。", "id": "Saya belajar bahasa Jepang dari guru.", "form": "習う"},
-    "ます": {"jp": "毎週ピアノを習います。", "id": "Saya belajar piano setiap minggu.", "form": "習います"},
-    "て": {"jp": "友達に料理を習って、家でも作りました。", "id": "Saya belajar memasak dari teman lalu mencobanya di rumah.", "form": "習って"},
-    "た": {"jp": "学校で敬語を習った。", "id": "Saya belajar bahasa hormat di sekolah.", "form": "習った"},
-    "ない": {"jp": "今は車の運転を習わない。", "id": "Agora saya tidak belajar mengemudi.", "form": "習わない"}
-  },
-  {
-    "kosakata": ["jp", "練習する","れんしゅうする"],
-    "arti": ["id", "berlatih"],
-    "kamus": {"jp": "毎日会話を練習する。", "id": "Saya berlatih percakapan setiap hari.", "form": "練習する"},
-    "ます": {"jp": "試合の前によく練習します。", "id": "Saya banyak berlatih sebelum pertandingan.", "form": "練習します"},
-    "て": {"jp": "毎日練習して、上手になりました。", "id": "Saya berlatih setiap hari sehingga menjadi lebih mahir.", "form": "練習して"},
-    "た": {"jp": "昨日は一時間練習した。", "id": "Kemarin saya berlatih selama satu jam.", "form": "練習した"},
-    "ない": {"jp": "練習しないと上手になりません。", "id": "Kalau tidak berlatih, tidak akan menjadi mahir.", "form": "練習しない"}
-  },
-  {
-    "kosakata": ["jp", "運転する","うんてんする"],
-    "arti": ["id", "mengemudi"],
-    "kamus": {"jp": "将来、日本で車を運転する。", "id": "Suatu hari saya ingin mengemudi mobil di Jepang.", "form": "運転する"},
-    "ます": {"jp": "父は毎日車を運転します。", "id": "Ayah mengemudi mobil setiap hari.", "form": "運転します"},
-    "て": {"jp": "安全運転して帰ってください。", "id": "Tolong pulang dengan mengemudi secara aman.", "form": "運転して"},
-    "た": {"jp": "昨日、三時間運転した。", "id": "Kemarin saya mengemudi selama tiga jam.", "form": "運転した"},
-    "ない": {"jp": "お酒を飲んだので運転しない。", "id": "Karena minum alkohol, saya tidak mengemudi.", "form": "運転しない"}
-  },
-  {
-    "kosakata": ["jp", "掃除する","そうじする"],
-    "arti": ["id", "membersihkan"],
-    "kamus": {"jp": "部屋をきれいに掃除する。", "id": "Saya membersihkan kamar hingga bersih.", "form": "掃除する"},
-    "ます": {"jp": "毎週日曜日に掃除します。", "id": "Saya bersih-bersih setiap hari Minggu.", "form": "掃除します"},
-    "て": {"jp": "部屋を掃除してから出かけます。", "id": "Saya pergi setelah membersihkan kamar.", "form": "掃除して"},
-    "た": {"jp": "朝、部屋を掃除した。", "id": "Pagi tadi saya membersihkan kamar.", "form": "掃除した"},
-    "ない": {"jp": "忙しい日は掃除しない。", "id": "Pada hari yang sibuk saya tidak membersihkan rumah.", "form": "掃除しない"}
-  },
-  {
-    "kosakata": ["jp", "洗う","あらう"],
-    "arti": ["id", "mencuci"],
-    "kamus": {"jp": "食事の前に手を洗う。", "id": "Saya mencuci tangan sebelum makan.", "form": "洗う"},
-    "ます": {"jp": "毎日シャツを洗います。", "id": "Saya mencuci kemeja setiap hari.", "form": "洗います"},
-    "て": {"jp": "手を洗ってから食べましょう。", "id": "Mari makan setelah mencuci tangan.", "form": "洗って"},
-    "た": {"jp": "車をきれいに洗った。", "id": "Saya mencuci mobil hingga bersih.", "form": "洗った"},
-    "ない": {"jp": "野菜を洗わないで食べてはいけません。", "id": "Jangan makan sayuran tanpa mencucinya.", "form": "洗わない"}
-  },
-  {
-    "kosakata": ["jp", "料理する","りょうりする"],
-    "arti": ["id", "memasak"],
-    "kamus": {"jp": "休日は家で料理する。", "id": "Pada hari libur saya memasak di rumah.", "form": "料理する"},
-    "ます": {"jp": "毎晩家族のために料理します。", "id": "Saya memasak untuk keluarga setiap malam.", "form": "料理します"},
-    "て": {"jp": "一緒に料理して食べましょう。", "id": "Mari memasak dan makan bersama.", "form": "料理して"},
-    "た": {"jp": "初めてカレーを料理した。", "id": "Saya memasak kari untuk pertama kalinya.", "form": "料理した"},
-    "ない": {"jp": "疲れている日は料理しない。", "id": "Pada hari saat lelah saya tidak memasak.", "form": "料理しない"}
-  },
-  {
-    "kosakata": ["jp", "歩く","あるく"],
-    "arti": ["id", "berjalan"],
-    "kamus": {"jp": "健康のために毎日歩く。", "id": "Saya berjalan setiap hari demi kesehatan.", "form": "歩く"},
-    "ます": {"jp": "駅まで歩きます。", "id": "Saya berjalan kaki sampai stasiun.", "form": "歩きます"},
-    "て": {"jp": "歩いて学校へ行きます。", "id": "Saya pergi to sekolah dengan berjalan kaki.", "form": "歩いて"},
-    "た": {"jp": "昨日は一時間歩いた。", "id": "Kemarin saya berjalan selama satu jam.", "form": "歩いた"},
-    "ない": {"jp": "雨の日はあまり歩かない。", "id": "Saat hari hujan saya jarang berjalan kaki.", "form": "歩かない"}
-  },
-  {
-    "kosakata": ["jp", "走る","はしる"],
-    "arti": ["id", "berlari"],
-    "kamus": {"jp": "毎朝公園で走る。", "id": "Saya berlari di taman setiap pagi.", "form": "走る"},
-    "ます": {"jp": "遅れそうなので走ります。", "id": "Karena sepertinya akan terlambat, saya berlari.", "form": "走ります"},
-    "て": {"jp": "急いで走って駅へ向かった。", "id": "Saya berlari dengan cepat menuju stasiun.", "form": "走って"},
-    "た": {"jp": "マラソンで五キロ走った。", "id": "Saya berlari lima kilometer dalam maraton.", "form": "走った"},
-    "ない": {"jp": "足が痛いので今日は走らない。", "id": "Karena kaki saya sakit, hari ini saya tidak berlari.", "form": "走らない"}
-  },
-  {
-    "kosakata": ["jp", "乗る","のる"],
-    "arti": ["id", "naik"],
-    "kamus": {"jp": "毎日電車に乗る。", "id": "Saya naik kereta setiap hari.", "form": "乗る"},
-    "ます": {"jp": "次のバスに乗ります。", "id": "Saya akan naik bus berikutnya.", "form": "乗ります"},
-    "て": {"jp": "電車に乗って会社へ行きます。", "id": "Saya pergi ke kantor dengan naik kereta.", "form": "乗って"},
-    "た": {"jp": "初めて新幹線に乗った。", "id": "Saya pertama kali naik shinkansen.", "form": "乗った"},
-    "ない": {"jp": "今日はタクシーに乗らない。", "id": "Hari ini saya tidak naik taksi.", "form": "乗らない"}
-  },
-  {
-    "kosakata": ["jp", "降りる","おりる"],
-    "arti": ["id", "turun"],
-    "kamus": {"jp": "次の駅で降りる。", "id": "Saya turun di stasiun berikutnya.", "form": "降りる"},
-    "ます": {"jp": "このバスは病院の前で降ります。", "id": "Saya turun bus ini di depan rumah sakit.", "form": "降ります"},
-    "て": {"jp": "電車を降りて、まっすぐ歩いてください。", "id": "Turun dari kereta lalu berjalanlah lurus.", "form": "降りて"},
-    "た": {"jp": "一つ前の駅で降りた。", "id": "Saya turun di stasiun sebelumnya.", "form": "降りた"},
-    "ない": {"jp": "まだ降りないでください。", "id": "Tolong jangan turun dulu.", "form": "降りない"}
-  },
-  {
-    "kosakata": ["jp", "写真を撮る","しゃしんをとる"],
-    "arti": ["id", "memotret"],
-    "kamus": {"jp": "旅行ではたくさん写真を撮る。", "id": "Saat bepergian saya mengambil banyak foto.", "form": "写真を撮る"},
-    "ます": {"jp": "家族と写真を撮ります。", "id": "Saya berfoto bersama keluarga.", "form": "写真を撮ります"},
-    "て": {"jp": "ここで写真を撮ってもいいですか。", "id": "Bolehkah saya mengambil foto di sini?", "form": "写真を撮って"},
-    "た": {"jp": "桜の写真をたくさん撮った。", "id": "Saya mengambil banyak foto bunga sakura.", "form": "写真を撮った"},
-    "ない": {"jp": "美術館では写真を撮らない。", "id": "Saya tidak mengambil foto di museum.", "form": "写真を撮らない"}
-  },
-  {
-    "kosakata": ["jp", "電話する","でんわする"],
-    "arti": ["id", "menelepon"],
-    "kamus": {"jp": "家族に電話する。", "id": "Saya menelepon keluarga.", "form": "電話する"},
-    "ます": {"jp": "後で会社に電話します。", "id": "Nanti saya akan menelepon kantor.", "form": "電話します"},
-    "て": {"jp": "家に着いたら電話してください。", "id": "Tolong telepon setelah sampai di rumah.", "form": "電話して"},
-    "た": {"jp": "さっき友達に電話した。", "id": "Tadi saya menelepon teman.", "form": "電話した"},
-    "ない": {"jp": "夜遅くは電話しない。", "id": "Saya tidak menelepon larut malam.", "form": "電話しない"}
-  },
-  {
-    "kosakata": ["jp", "手伝う","てつだう"],
-    "arti": ["id", "membantu"],
-    "kamus": {"jp": "時間があれば家事を手伝う。", "id": "Jika ada waktu, saya membantu pekerjaan rumah.", "form": "手伝う"},
-    "ます": {"jp": "困っている人を手伝います。", "id": "Saya membantu orang yang sedang kesulitan.", "form": "手伝います"},
-    "て": {"jp": "忙しいので、少し手伝ってください。", "id": "Karena saya sibuk, tolong bantu saya sebentar.", "form": "手伝って"},
-    "た": {"jp": "昨日、引っ越しを手伝った。", "id": "Kemarin saya membantu proses pindahan.", "form": "手伝った"},
-    "ない": {"jp": "頼まれなかったので手伝わなかった。", "id": "Karena tidak diminta, saya tidak membantu.", "form": "手伝わない"}
-  },
-  {
-    "kosakata": ["jp", "起こす", "おこす"],
-    "arti": ["id", "membangunkan"],
-    "kamus": {"jp": "毎朝、子供を起こす。", "id": "Setiap pagi, saya membangunkan anak.", "form": "起こす"},
-    "ます": {"jp": "明日、６時に起こします。", "id": "Besok, saya akan membangunkan Anda jam 6.", "form": "起こします"},
-    "て": {"jp": "遅刻するので早く起こしてください。", "id": "Karena akan terlambat, tolong bangunkan dengan cepat.", "form": "起こして"},
-    "た": {"jp": "今朝、早く弟を起こした。", "id": "Pagi ini, saya membangunkan adik laki-laki saya lebih awal.", "form": "起こした"},
-    "ない": {"jp": "休日は子供を起こさない。", "id": "Pada hari libur, saya tidak membangunkan anak.", "form": "起こさない"}
-  },
-  {
-    "kosakata": ["jp", "浴びる", "あびる"],
-    "arti": ["id", "mandi / mandi dengan gayung/shower"],
-    "kamus": {"jp": "朝起きて、シャワーを浴びる。", "id": "Bangun pagi lalu mandi shower.", "form": "浴びる"},
-    "ます": {"jp": "毎日、冷たい水を浴びます。", "id": "Setiap hari, saya mandi dengan air dingin.", "form": "浴びます"},
-    "て": {"jp": "シャワーを浴びてから寝ます。", "id": "Saya tidur setelah mandi shower.", "form": "浴びて"},
-    "た": {"jp": "さっきシャワーを浴びた。", "id": "Tadi saya baru saja mandi shower.", "form": "浴びた"},
-    "ない": {"jp": "今日は疲れたので、シャワーを浴びない。", "id": "Karena hari ini lelah, saya tidak mandi shower.", "form": "浴びない"}
-  },
-  {
-    "kosakata": ["jp", "着る", "きる"],
-    "arti": ["id", "memakai (pakaian atas/seluruh badan)"],
-    "kamus": {"jp": "冬は厚いコートを着る。", "id": "Di musim dingin saya memakai mantel tebal.", "form": "着る"},
-    "ます": {"jp": "パーティーでドレスを着ます。", "id": "Saya memakai gaun di pesta.", "form": "着ます"},
-    "て": {"jp": "シャツを着て出かけます。", "id": "Saya pergi keluar dengan memakai kemeja.", "form": "着て"},
-    "た": {"jp": "昨日買った服を着た。", "id": "Saya memakai baju yang dibeli kemarin.", "form": "着た"},
-    "ない": {"jp": "暑いので、ジャケットは着ない。", "id": "Karena panas, saya tidak memakai jaket.", "form": "着ない"}
-  },
-  {
-    "kosakata": ["jp", "脱ぐ", "ぬぐ"],
-    "arti": ["id", "melepas (pakaian/sepatu)"],
-    "kamus": {"jp": "部屋に入る前に靴を脱ぐ。", "id": "Melepas sepatu sebelum masuk ke ruangan.", "form": "脱ぐ"},
-    "ます": {"jp": "暑いのでここでコートを脱ぎます。", "id": "Karena panas, saya melepas mantel di sini.", "form": "脱ぎます"},
-    "て": {"jp": "靴を脱いで上がってください。", "id": "Tolong lepas sepatu Anda dan masuklah.", "form": "脱いで"},
-    "た": {"jp": "雨に濡れた服をすぐに脱いだ。", "id": "Saya segera melepas pakaian yang basah karena hujan.", "form": "脱いだ"},
-    "ない": {"jp": "まだ寒いので、上着を脱がない。", "id": "Karena masih dingin, saya tidak melepas jaket.", "form": "脱がない"}
-  },
-  {
-    "kosakata": ["jp", "履く", "はく"],
-    "arti": ["id", "memakai (sepatu/celana/bawah)"],
-    "kamus": {"jp": "歩きやすい靴を履く。", "id": "Saya memakai sepatu yang nyaman untuk berjalan.", "form": "履く"},
-    "ます": {"jp": "学校へ行く時はスニーカーを履きます。", "id": "Saat pergi ke sekolah, saya memakai sepatu kets.", "form": "履きます"},
-    "て": {"jp": "新しい靴を履いて出かける。", "id": "Saya pergi keluar dengan memakai sepatu baru.", "form": "履いて"},
-    "た": {"jp": "昨日はスカートを履いた。", "id": "Kemarin saya memakai rok.", "form": "履いた"},
-    "ない": {"jp": "家の中では靴下を履かない。", "id": "Di dalam rumah, saya tidak memakai kaus kaki.", "form": "履かない"}
-  },
-  {
-    "kosakata": ["jp", "被る", "かぶる"],
-    "arti": ["id", "memakai (di atas kepala/topi)"],
-    "kamus": {"jp": "日差しが強いので帽子を被る。", "id": "Karena sinar matahari terik, saya memakai topi.", "form": "被る"},
-    "ます": {"jp": "外出する時は帽子を被ります。", "id": "Saat pergi keluar, saya memakai topi.", "form": "被ります"},
-    "て": {"jp": "ヘルメットを被って自転車に乗る。", "id": "Saya naik sepeda dengan memakai helm.", "form": "被って"},
-    "た": {"jp": "お気に入りの帽子を被った。", "id": "Saya memakai topi favorit saya.", "form": "被った"},
-    "ない": {"jp": "室内では帽子を被らない。", "id": "Di dalam ruangan, saya tidak memakai topi.", "form": "被らない"}
-  },
-  {
-    "kosakata": ["jp", "つける", "つける"],
-    "arti": ["id", "menyalakan / memasang"],
-    "kamus": {"jp": "暗くなったら電気をつける。", "id": "Jika menjadi gelap, saya menyalakan lampu.", "form": "つける"},
-    "ます": {"jp": "暑いのでエアコンをつけます。", "id": "Karena panas, saya menyalakan AC.", "form": "つけます"},
-    "て": {"jp": "ニュースを見たいのでテレビをつけてください。", "id": "Tolong nyalakan TV karena saya ingin menonton berita.", "form": "つけて"},
-    "た": {"jp": "部屋の電気をつけた。", "id": "Saya telah menyalakan lampu kamar.", "form": "つけた"},
-    "ない": {"jp": "涼しいのでエアコンをつけない。", "id": "Karena sejuk, saya tidak menyalakan AC.", "form": "つけない"}
-  },
-  {
-    "kosakata": ["jp", "消す", "けす"],
-    "arti": ["id", "mematikan / menghapus"],
-    "kamus": {"jp": "寝る前にテレビを消す。", "id": "Sebelum tidur, saya mematikan TV.", "form": "消す"},
-    "ます": {"jp": "黒板の字を消します。", "id": "Saya menghapus tulisan di papan tulis.", "form": "消します"},
-    "て": {"jp": "電気を消して寝てください。", "id": "Tolong matikan lampu lalu tidur.", "form": "消して"},
-    "た": {"jp": "ストーブの火を消した。", "id": "Saya telah mematikan api kompor.", "form": "消した"},
-    "ない": {"jp": "まだ見ているので、テレビを消さない。", "id": "Karena masih menonton, saya tidak mematikan TV.", "form": "消さない"}
-  },
-  {
-    "kosakata": ["jp", "開く", "あく"],
-    "arti": ["id", "terbuka"],
-    "kamus": {"jp": "風でドアが開く。", "id": "Pintu terbuka karena angin.", "form": "開く"},
-    "ます": {"jp": "朝９時に店が開きます。", "id": "Toko akan buka pada jam 9 pagi.", "form": "開きます"},
-    "て": {"jp": "ドアが開いて、猫が入ってきた。", "id": "Pintu terbuka, dan kucing masuk.", "form": "開いて"},
-    "た": {"jp": "突然、窓が開いた。", "id": "Tiba-tiba, jendela terbuka.", "form": "開いた"},
-    "ない": {"jp": "鍵がかかっていて、ドアが開かない。", "id": "Pintunya terkunci sehingga tidak bisa terbuka.", "form": "開かない"}
-  },
-  {
-    "kosakata": ["jp", "閉まる", "しまる"],
-    "arti": ["id", "tertutup / tutup"],
-    "kamus": {"jp": "自動ドアが閉まる。", "id": "Pintu otomatis tertutup.", "form": "閉まる"},
-    "ます": {"jp": "この店は午後８時に閉まります。", "id": "Toko ini tutup pada jam 8 malam.", "form": "閉まります"},
-    "て": {"jp": "ドアが閉まって、電車が動いた。", "id": "Pintu tertutup, dan kereta bergerak.", "form": "閉まって"},
-    "た": {"jp": "強風で窓がバンと閉まった。", "id": "Jendela tertutup dengan keras karena angin kencang.", "form": "閉まった"},
-    "ない": {"jp": "荷物が挟まって、ドアが閉まらない。", "id": "Karena ada barang yang terjepit, pintu tidak mau tertutup.", "form": "閉まらない"}
-  },
-  {
-    "kosakata": ["jp", "洗濯する", "せんたくする"],
-    "arti": ["id", "mencuci (pakaian)"],
-    "kamus": {"jp": "週末に服を洗濯する。", "id": "Di akhir pekan, saya mencuci baju.", "form": "洗濯する"},
-    "ます": {"jp": "毎日、タオルを洗濯します。", "id": "Setiap hari, saya mencuci handuk.", "form": "洗濯します"},
-    "て": {"jp": "服を洗濯して、外に干します。", "id": "Saya mencuci baju, lalu menjemurnya di luar.", "form": "洗濯して"},
-    "た": {"jp": "今朝、シーツを洗濯した。", "id": "Pagi ini, saya telah mencuci seprai.", "form": "洗濯した"},
-    "ない": {"jp": "雨の日は洗濯しない。", "id": "Pada hari hujan, saya tidak mencuci baju.", "form": "洗濯しない"}
-  },
-  {
-    "kosakata": ["jp", "片付ける", "かたづける"],
-    "arti": ["id", "membereskan / merapikan"],
-    "kamus": {"jp": "部屋を綺麗に片付ける。", "id": "Merapikan kamar dengan bersih.", "form": "片付ける"},
-    "ます": {"jp": "食事の後、お皿を片付けます。", "id": "Setelah makan, saya membereskan piring.", "form": "片付けます"},
-    "て": {"jp": "遊んだ後は、おもちゃを片付けてください。", "id": "Setelah bermain, tolong bereskan mainannya.", "form": "片付けて"},
-    "た": {"jp": "昨日、机の上を片付けた。", "id": "Kemarin, saya membereskan atas meja.", "form": "片付けた"},
-    "ない": {"jp": "疲れたので、今日は片付けない。", "id": "Karena lelah, hari ini saya tidak beres-beres.", "form": "片付けない"}
-  },
-  {
-    "kosakata": ["jp", "捨てる", "すてる"],
-    "arti": ["id", "membuang"],
-    "kamus": {"jp": "ゴミ箱にゴミを捨てる。", "id": "Membuang sampah ke tempat sampah.", "form": "捨てる"},
-    "ます": {"jp": "古い雑誌を捨てます。", "id": "Saya akan membuang majalah lama.", "form": "捨てます"},
-    "て": {"jp": "この紙は捨ててください。", "id": "Tolong buang kertas ini.", "form": "捨てて"},
-    "た": {"jp": "壊れた時計を捨てた。", "id": "Saya telah membuang jam yang rusak.", "form": "捨てた"},
-    "ない": {"jp": "まだ使えるので捨てない。", "id": "Karena masih bisa dipakai, saya tidak membuangnya.", "form": "捨てない"}
-  },
-  {
-    "kosakata": ["jp", "並べる", "ならべる"],
-    "arti": ["id", "menata (berjajar) / membariskan"],
-    "kamus": {"jp": "本棚に本を並べる。", "id": "Menata buku di rak buku.", "form": "並べる"},
-    "ます": {"jp": "テーブルにお皿を並べます。", "id": "Saya menata piring di atas meja.", "form": "並べます"},
-    "て": {"jp": "ここに椅子を並べてください。", "id": "Tolong jajarkan kursi di sini.", "form": "並べて"},
-    "た": {"jp": "店の前に商品を並べた。", "id": "Saya telah menata produk di depan toko.", "form": "並べた"},
-    "ない": {"jp": "邪魔になるので、ここには自転車を並べない。", "id": "Karena menghalangi, saya tidak menjejerkan sepeda di sini.", "form": "並べない"}
-  },
-  {
-    "kosakata": ["jp", "置く", "おく"],
-    "arti": ["id", "meletakkan / menaruh"],
-    "kamus": {"jp": "机の上にカバンを置く。", "id": "Meletakkan tas di atas meja.", "form": "置く"},
-    "ます": {"jp": "荷物はここに置きます。", "id": "Saya meletakkan barang bawaan di sini.", "form": "置きます"},
-    "て": {"jp": "鍵はそこら辺に置いてください。", "id": "Tolong letakkan kunci di sekitar sana.", "form": "置いて"},
-    "た": {"jp": "さっき、ここにスマホを置いた。", "id": "Tadi, saya meletakkan ponsel di sini.", "form": "置いた"},
-    "ない": {"jp": "大切なものはここに置かない。", "id": "Saya tidak meletakkan barang berharga di sini.", "form": "置かない"}
-  },
-  {
-    "kosakata": ["jp", "取る", "とる"],
-    "arti": ["id", "mengambil"],
-    "kamus": {"jp": "棚から本を取る。", "id": "Mengambil buku dari rak.", "form": "取る"},
-    "ます": {"jp": "会議中にメモを取ります。", "id": "Saya mengambil catatan (mencatat) selama rapat.", "form": "取ります"},
-    "て": {"jp": "すみません、その塩を取ってください。", "id": "Permisi, tolong ambilkan garam itu.", "form": "取って"},
-    "た": {"jp": "ポケットから財布を取った。", "id": "Saya mengambil dompet dari saku.", "form": "取った"},
-    "ない": {"jp": "人の物は取らない。", "id": "Saya tidak mengambil barang milik orang lain.", "form": "取らない"}
-  },
-  {
-    "kosakata": ["jp", "持って行く", "もっていく"],
-    "arti": ["id", "membawa pergi"],
-    "kamus": {"jp": "学校へお弁当を持って行く。", "id": "Membawa bekal pergi ke sekolah.", "form": "持って行く"},
-    "ます": {"jp": "明日、カメラを持って行きます。", "id": "Besok, saya akan membawa kamera.", "form": "持って行きます"},
-    "て": {"jp": "雨が降るかもしれないので、傘を持って行ってください。", "id": "Karena mungkin akan hujan, tolong bawa payung.", "form": "持って行って"},
-    "た": {"jp": "パーティーにケーキを持って行った。", "id": "Saya telah membawa kue ke pesta.", "form": "持って行った"},
-    "ない": {"jp": "重いので、教科書は持って行かない。", "id": "Karena berat, saya tidak membawa buku pelajaran.", "form": "持って行かない"}
-  },
-  {
-    "kosakata": ["jp", "持って来る", "もってくる"],
-    "arti": ["id", "membawa datang"],
-    "kamus": {"jp": "友達がうちにゲームを持って来る。", "id": "Teman membawa game datang ke rumah saya.", "form": "持って来る"},
-    "ます": {"jp": "明日の授業に辞書を持って来ます。", "id": "Saya akan membawa kamus ke pelajaran besok.", "form": "持って来ます"},
-    "て": {"jp": "パーティーに飲み物を持って来てください。", "id": "Tolong bawa minuman ke pesta.", "form": "持って来て"},
-    "た": {"jp": "昨日、彼がお土産を持って来た。", "id": "Kemarin, dia membawa oleh-oleh ke sini.", "form": "持って来た"},
-    "ない": {"jp": "今日は傘を持って来ない。", "id": "Hari ini, saya tidak membawa payung ke sini.", "form": "持って来ない"}
-  },
-  {
-    "kosakata": ["jp", "答える", "こたえる"],
-    "arti": ["id", "menjawab"],
-    "kamus": {"jp": "先生の質問に答える。", "id": "Menjawab pertanyaan guru.", "form": "答える"},
-    "ます": {"jp": "今からあなたの質問に答えます。", "id": "Mulai sekarang saya akan menjawab pertanyaan Anda.", "form": "答えます"},
-    "て": {"jp": "大きな声で答えてください。", "id": "Tolong jawab dengan suara keras.", "form": "答えて"},
-    "た": {"jp": "インタビューに正直に答えた。", "id": "Saya telah menjawab wawancara dengan jujur.", "form": "答えた"},
-    "ない": {"jp": "わからないので何も答えない。", "id": "Karena tidak tahu, saya tidak menjawab apa-apa.", "form": "答えない"}
-  },
-  {
-    "kosakata": ["jp", "質問する", "しつもんする"],
-    "arti": ["id", "bertanya / mengajukan pertanyaan"],
-    "kamus": {"jp": "わからないことを先生に質問する。", "id": "Menanyakan hal yang tidak dimengerti kepada guru.", "form": "質問する"},
-    "ます": {"jp": "会議の最後に質問します。", "id": "Saya akan bertanya di akhir rapat.", "form": "質問します"},
-    "て": {"jp": "疑問があれば、すぐに質問してください。", "id": "Jika ada keraguan, tolong segera bertanyalah.", "form": "質問して"},
-    "た": {"jp": "昨日、先輩に仕事について質問した。", "id": "Kemarin, saya bertanya kepada senior tentang pekerjaan.", "form": "質問した"},
-    "ない": {"jp": "恥ずかしいので、あまり質問しない。", "id": "Karena malu, saya tidak terlalu banyak bertanya.", "form": "質問しない"}
-  },
-  {
-    "kosakata": ["jp", "説明する", "せつめいする"],
-    "arti": ["id", "menjelaskan"],
-    "kamus": {"jp": "新しいパソコンの使い方を説明する。", "id": "Menjelaskan cara menggunakan komputer baru.", "form": "説明する"},
-    "ます": {"jp": "今からルールの変更について説明します。", "id": "Mulai sekarang saya akan menjelaskan tentang perubahan aturan.", "form": "説明します"},
-    "て": {"jp": "遅刻した理由を説明してください。", "id": "Tolong jelaskan alasan terlambat.", "form": "説明して"},
-    "た": {"jp": "昨日、お客様に商品を説明した。", "id": "Kemarin, saya telah menjelaskan produk kepada pelanggan.", "form": "説明した"},
-    "ない": {"jp": "時間がありませんから、今は説明しない。", "id": "Karena tidak ada waktu, sekarang saya tidak akan menjelaskan.", "form": "説明しない"}
-  },
-  {
-    "kosakata": ["jp", "理解する", "りかいする"],
-    "arti": ["id", "memahami / mengerti"],
-    "kamus": {"jp": "相手の気持ちを理解する。", "id": "Memahami perasaan lawan bicara.", "form": "理解する"},
-    "ます": {"jp": "彼の言っていることを理解します。", "id": "Saya memahami apa yang dia katakan.", "form": "理解します"},
-    "て": {"jp": "現在の状況を理解してください。", "id": "Tolong pahami situasi saat ini.", "form": "理解して"},
-    "た": {"jp": "説明を読んで、内容を深く理解した。", "id": "Setelah membaca penjelasan, saya memahami isinya dengan mendalam.", "form": "理解した"},
-    "ない": {"jp": "なぜ彼が怒っているのか理解しない。", "id": "Saya tidak mengerti mengapa dia marah.", "form": "理解しない"}
-  },
-  {
-    "kosakata": ["jp", "使える", "つかえる"],
-    "arti": ["id", "bisa menggunakan / dapat dipakai"],
-    "kamus": {"jp": "このアプリはとても便利で使える。", "id": "Aplikasi ini sangat praktis dan bisa digunakan.", "form": "使える"},
-    "ます": {"jp": "このカードは海外でも使えます。", "id": "Kartu ini bisa digunakan di luar negeri juga.", "form": "使えます"},
-    "て": {"jp": "古いパソコンがまだ使えて嬉しい。", "id": "Saya senang komputer lama masih bisa digunakan.", "form": "使えて"},
-    "た": {"jp": "Wi-Fiが繋がって、インターネットが使えた。", "id": "Wi-Fi terhubung, dan internet bisa digunakan.", "form": "使えた"},
-    "ない": {"jp": "パスワードを忘れて、パソコンが使えない。", "id": "Karena lupa kata sandi, komputer tidak bisa digunakan.", "form": "使えない"}
-  },
-  {
-    "kosakata": ["jp", "できる", "できる"],
-    "arti": ["id", "bisa / dapat / mampu"],
-    "kamus": {"jp": "日本語を少し話すことができる。", "id": "Bisa berbicara bahasa Jepang sedikit.", "form": "できる"},
-    "ます": {"jp": "明日のパーティーに参加できます。", "id": "Saya bisa berpartisipasi dalam pesta besok.", "form": "できます"},
-    "て": {"jp": "仕事が早くできて、とても助かった。", "id": "Pekerjaannya bisa selesai cepat, saya sangat tertolong.", "form": "できて"},
-    "た": {"jp": "今日のテストはよくできた。", "id": "Ujian hari ini bisa dikerjakan dengan baik.", "form": "できた"},
-    "ない": {"jp": "忙しくて、今日はゲームができない。", "id": "Karena sibuk, hari ini saya tidak bisa bermain game.", "form": "できない"}
-  },
-  {
-    "kosakata": ["jp", "始める", "はじめる"],
-    "arti": ["id", "memulai (objek + を)"],
-    "kamus": {"jp": "新しい仕事を始める。", "id": "Memulai pekerjaan baru.", "form": "始める"},
-    "ます": {"jp": "明日からダイエットを始めます。", "id": "Mulai besok saya akan memulai diet.", "form": "始めます"},
-    "て": {"jp": "準備ができたら、テストを始めてください。", "id": "Jika persiapannya sudah selesai, tolong mulai ujiannya.", "form": "始めて"},
-    "た": {"jp": "先月、ピアノを習い始めた。", "id": "Bulan lalu, saya mulai belajar piano.", "form": "始めた"},
-    "ない": {"jp": "全員集まるまで会議を始めない。", "id": "Sampai semua orang berkumpul, saya tidak akan memulai rapat.", "form": "始めない"}
-  },
-  {
-    "kosakata": ["jp", "始まる", "はじまる"],
-    "arti": ["id", "dimulai (subjek + が)"],
-    "kamus": {"jp": "もうすぐ映画が始まる。", "id": "Sebentar lagi filmnya akan dimulai.", "form": "始まる"},
-    "ます": {"jp": "日本語の授業は９時に始まります。", "id": "Pelajaran bahasa Jepang akan dimulai pada jam 9.", "form": "始まります"},
-    "て": {"jp": "コンサートが始まって、音楽が聞こえた。", "id": "Konser dimulai, dan musik terdengar.", "form": "始まって"},
-    "た": {"jp": "予定より早く試合が始まった。", "id": "Pertandingan dimulai lebih cepat dari jadwal.", "form": "始まった"},
-    "ない": {"jp": "先生が来ないので、授業がなかなか始まらない。", "id": "Karena guru tidak datang, pelajaran tidak kunjung dimulai.", "form": "始まらない"}
-  },
-  {
-    "kosakata": ["jp", "終わる", "おわる"],
-    "arti": ["id", "selesai / berakhir (subjek + が)"],
-    "kamus": {"jp": "午後５時に仕事が終わる。", "id": "Pekerjaan selesai pada jam 5 sore.", "form": "終わる"},
-    "ます": {"jp": "この番組は１０時に終わります。", "id": "Acara ini akan selesai pada jam 10.", "form": "終わります"},
-    "て": {"jp": "早く仕事が終わって、家に帰った。", "id": "Pekerjaan cepat selesai, dan saya pulang ke rumah.", "form": "終わって"},
-    "た": {"jp": "楽しい夏休みが昨日終わった。", "id": "Liburan musim panas yang menyenangkan telah berakhir kemarin.", "form": "終わった"},
-    "ない": {"jp": "宿題が多くて、なかなか終わらない。", "id": "Karena PR-nya banyak, sulit untuk cepat selesai.", "form": "終わらない"}
-  },
-  {
-    "kosakata": ["jp", "終える", "おえる"],
-    "arti": ["id", "menyelesaikan / mengakhiri (objek + を)"],
-    "kamus": {"jp": "今日の仕事を終える。", "id": "Menyelesaikan pekerjaan hari ini.", "form": "終える"},
-    "ます": {"jp": "３時までにすべての宿題を終えます。", "id": "Saya akan menyelesaikan semua PR sebelum jam 3.", "form": "終えます"},
-    "て": {"jp": "早く食事を終えて、出かけましょう。", "id": "Mari kita cepat selesaikan makan dan pergi keluar.", "form": "終えて"},
-    "た": {"jp": "大学のすべての授業を終えた。", "id": "Saya telah menyelesaikan semua kelas di universitas.", "form": "終えた"},
-    "ない": {"jp": "まだ準備を終えないまま、出発した。", "id": "Saya berangkat tanpa menyelesaikan persiapan.", "form": "終えない"}
-  },
-  {
-    "kosakata": ["jp", "曲がる", "まがる"],
-    "arti": ["id", "berbelok / bengkok (subjek + が / objek + を + 曲がる)"],
-    "kamus": {"jp": "次の角を右に曲がる。", "id": "Berbelok ke kanan di tikungan berikutnya.", "form": "曲がる"},
-    "ます": {"jp": "あの交差点を左に曲がります。", "id": "Saya akan berbelok ke kiri di perempatan itu.", "form": "曲がります"},
-    "て": {"jp": "まっすぐ行って、右に曲がってください。", "id": "Jalan lurus, lalu tolong berbelok ke kanan.", "form": "曲がって"},
-    "た": {"jp": "道を間違えて、左に曲がった。", "id": "Saya salah jalan dan berbelok ke kiri.", "form": "曲がった"},
-    "ない": {"jp": "この道はまっすぐで曲がらない。", "id": "Jalan ini lurus dan tidak berbelok.", "form": "曲がらない"}
-  },
-  {
-    "kosakata": ["jp", "渡る", "わたる"],
-    "arti": ["id", "menyeberang"],
-    "kamus": {"jp": "歩道橋を渡る。", "id": "Menyeberangi jembatan penyeberangan.", "form": "渡る"},
-    "ます": {"jp": "青信号になったら道を渡ります。", "id": "Kalau lampu hijau, saya akan menyeberang jalan.", "form": "渡ります"},
-    "て": {"jp": "その橋を渡って、まっすぐ行ってください。", "id": "Tolong seberangi jembatan itu dan jalan lurus.", "form": "渡って"},
-    "た": {"jp": "危ない道を急いで渡った。", "id": "Saya buru-buru menyeberangi jalan yang berbahaya.", "form": "渡った"},
-    "ない": {"jp": "赤信号の時は道を渡らない。", "id": "Saat lampu merah, saya tidak menyeberang jalan.", "form": "渡らない"}
-  },
-  {
-    "kosakata": ["jp", "曲げる", "まげる"],
-    "arti": ["id", "membengkokkan / menekuk (objek + を)"],
-    "kamus": {"jp": "体操で膝を曲げる。", "id": "Menekuk lutut saat senam.", "form": "曲げる"},
-    "ます": {"jp": "体を前に曲げます。", "id": "Saya menekuk tubuh ke depan.", "form": "曲げます"},
-    "て": {"jp": "痛くないところまで腕を曲げてください。", "id": "Tolong tekuk lengan Anda sampai batas yang tidak sakit.", "form": "曲げて"},
-    "た": {"jp": "工作で針金を曲げた。", "id": "Saya membengkokkan kawat untuk prakarya.", "form": "曲げた"},
-    "ない": {"jp": "怪我をしているので、足を曲げない。", "id": "Karena terluka, saya tidak menekuk kaki.", "form": "曲げない"}
-  },
-  {
-    "kosakata": ["jp", "止まる", "とまる"],
-    "arti": ["id", "berhenti (subjek + が)"],
-    "kamus": {"jp": "駅に電車が止まる。", "id": "Kereta berhenti di stasiun.", "form": "止まる"},
-    "ます": {"jp": "このバスは病院の前に止まります。", "id": "Bus ini akan berhenti di depan rumah sakit.", "form": "止まります"},
-    "て": {"jp": "車が止まってから、降りてください。", "id": "Tolong turun setelah mobil berhenti.", "form": "止まって"},
-    "た": {"jp": "突然、時計が止まった。", "id": "Tiba-tiba, jam tangan berhenti.", "form": "止まった"},
-    "ない": {"jp": "咳がなかなか止まらない。", "id": "Batuknya tidak kunjung berhenti.", "form": "止まらない"}
-  },
-  {
-    "kosakata": ["jp", "止める", "とめる"],
-    "arti": ["id", "menghentikan / memberhentikan (objek + を)"],
-    "kamus": {"jp": "駐車場に車を止める。", "id": "Memarkir/menghentikan mobil di tempat parkir.", "form": "止める"},
-    "ます": {"jp": "ここでタクシーを止めます。", "id": "Saya akan menghentikan taksi di sini.", "form": "止めます"},
-    "て": {"jp": "危ないから、機械を止めてください。", "id": "Karena berbahaya, tolong hentikan mesinnya.", "form": "止めて"},
-    "た": {"jp": "門の前に自転車を止めた。", "id": "Saya memarkir/menghentikan sepeda di depan gerbang.", "form": "止めた"},
-    "ない": {"jp": "邪魔になるので、ここに車を止めない。", "id": "Karena menghalangi, saya tidak memarkir mobil di sini.", "form": "止めない"}
-  },
-  {
-    "kosakata": ["jp", "急ぐ", "いそぐ"],
-    "arti": ["id", "bergegas / buru-buru"],
-    "kamus": {"jp": "遅刻しそうなので急ぐ。", "id": "Karena sepertinya akan terlambat, saya bergegas.", "form": "急ぐ"},
-    "ます": {"jp": "時間がないので急ぎます。", "id": "Karena tidak ada waktu, saya akan bergegas.", "form": "急ぎます"},
-    "て": {"jp": "急いで駅に向かってください。", "id": "Tolong bergegas menuju stasiun.", "form": "急いで"},
-    "た": {"jp": "約束の時間に遅れないように急いだ。", "id": "Saya bergegas agar tidak terlambat dari waktu janjian.", "form": "急いだ"},
-    "ない": {"jp": "まだ時間があるので、急がない。", "id": "Karena masih ada waktu, saya tidak buru-buru.", "form": "急がない"}
-  },
-  {
-    "kosakata": ["jp", "遅れる", "おくれる"],
-    "arti": ["id", "terlambat"],
-    "kamus": {"jp": "明日の会議に遅れる。", "id": "Terlambat untuk rapat besok.", "form": "遅れる"},
-    "ます": {"jp": "事故で電車が遅れます。", "id": "Kereta akan terlambat karena kecelakaan.", "form": "遅れます"},
-    "て": {"jp": "授業に遅れて、すみません。", "id": "Maaf, saya terlambat ke kelas.", "form": "遅れて"},
-    "た": {"jp": "寝坊して学校に遅れた。", "id": "Saya bangun kesiangan dan terlambat ke sekolah.", "form": "遅れた"},
-    "ない": {"jp": "明日の約束には絶対に遅れない。", "id": "Saya pasti tidak akan terlambat pada janji besok.", "form": "遅れない"}
-  },
-  {
-    "kosakata": ["jp", "働き始める", "はたらきはじめる"],
-    "arti": ["id", "mulai bekerja"],
-    "kamus": {"jp": "来月から新しい会社で働き始める。", "id": "Mulai bekerja di perusahaan baru dari bulan depan.", "form": "働き始める"},
-    "ます": {"jp": "私は９時から働き始めます。", "id": "Saya mulai bekerja dari jam 9.", "form": "働き始めます"},
-    "て": {"jp": "すぐに働き始めてください。", "id": "Tolong segera mulai bekerja.", "form": "働き始めて"},
-    "た": {"jp": "去年から日本で働き始めた。", "id": "Saya mulai bekerja di Jepang sejak tahun lalu.", "form": "働き始めた"},
-    "ない": {"jp": "まだ準備ができていないので働き始めない。", "id": "Karena belum siap, saya belum mulai bekerja.", "form": "働き始めない"}
-  },
-  {
-    "kosakata": ["jp", "残業する", "ざんぎょうする"],
-    "arti": ["id", "kerja lembur"],
-    "kamus": {"jp": "今日は仕事が多いので残業する。", "id": "Karena hari ini banyak pekerjaan, saya kerja lembur.", "form": "残業する"},
-    "ます": {"jp": "毎日、夜の８時まで残業します。", "id": "Setiap hari, saya kerja lembur sampai jam 8 malam.", "form": "残業します"},
-    "て": {"jp": "残業して、このレポートを終わらせます。", "id": "Saya akan kerja lembur dan menyelesaikan laporan ini.", "form": "残業して"},
-    "た": {"jp": "昨日は遅くまで残業した。", "id": "Kemarin saya kerja lembur sampai larut.", "form": "残業した"},
-    "ない": {"jp": "今日は疲れたので残業しない。", "id": "Karena hari ini lelah, saya tidak kerja lembur.", "form": "残業しない"}
-  },
-  {
-    "kosakata": ["jp", "休憩する", "きゅうけいする"],
-    "arti": ["id", "beristirahat"],
-    "kamus": {"jp": "疲れたら、少し休憩する。", "id": "Jika lelah, saya beristirahat sebentar.", "form": "休憩する"},
-    "ます": {"jp": "１２時から１時間休憩します。", "id": "Saya beristirahat selama 1 jam dari jam 12.", "form": "休憩します"},
-    "て": {"jp": "喫茶店で休憩して、コーヒーを飲みましょう。", "id": "Mari beristirahat di kafe dan minum kopi.", "form": "休憩して"},
-    "た": {"jp": "公園のベンチで休憩した。", "id": "Saya beristirahat di bangku taman.", "form": "休憩した"},
-    "ない": {"jp": "忙しいので、今日は休憩しない。", "id": "Karena sibuk, hari ini saya tidak beristirahat.", "form": "休憩しない"}
-  },
-  {
-    "kosakata": ["jp", "連絡する", "れんらくする"],
-    "arti": ["id", "menghubungi"],
-    "kamus": {"jp": "後で彼に連絡する。", "id": "Nanti saya akan menghubunginya.", "form": "連絡する"},
-    "ます": {"jp": "明日、また連絡します。", "id": "Besok, saya akan menghubungi lagi.", "form": "連絡します"},
-    "て": {"jp": "着いたら、私に連絡してください。", "id": "Jika sudah tiba, tolong hubungi saya.", "form": "連絡して"},
-    "た": {"jp": "昨日、家族に連絡した。", "id": "Kemarin saya menghubungi keluarga.", "form": "連絡した"},
-    "ない": {"jp": "用事がないので、彼には連絡しない。", "id": "Karena tidak ada urusan, saya tidak menghubunginya.", "form": "連絡しない"}
-  },
-  {
-    "kosakata": ["jp", "確認する", "かくにんする"],
-    "arti": ["id", "memastikan / mengecek / mengonfirmasi"],
-    "kamus": {"jp": "出発する前に荷物を確認する。", "id": "Mengecek barang bawaan sebelum berangkat.", "form": "確認する"},
-    "ます": {"jp": "今からスケジュールを確認します。", "id": "Mulai sekarang saya akan mengecek jadwal.", "form": "確認します"},
-    "て": {"jp": "この書類の内容を確認してください。", "id": "Tolong cek isi dokumen ini.", "form": "確認して"},
-    "た": {"jp": "会議の時間を確認した。", "id": "Saya telah memastikan waktu rapat.", "form": "確認した"},
-    "ない": {"jp": "時間がないので、今は確認しない。", "id": "Karena tidak ada waktu, saya tidak mengeceknya sekarang.", "form": "確認しない"}
-  },
-  {
-    "kosakata": ["jp", "予約する", "よやくする"],
-    "arti": ["id", "memesan / reservasi"],
-    "kamus": {"jp": "インターネットでホテルを予約する。", "id": "Memesan hotel melalui internet.", "form": "予約する"},
-    "ます": {"jp": "明日のレストランを予約します。", "id": "Saya akan memesan restoran untuk besok.", "form": "予約します"},
-    "て": {"jp": "早めに飛行機のチケットを予約してください。", "id": "Tolong pesan tiket pesawat lebih awal.", "form": "予約して"},
-    "た": {"jp": "来月の旅行のためにホテルを予約した。", "id": "Saya telah memesan hotel untuk liburan bulan depan.", "form": "予約した"},
-    "ない": {"jp": "まだ予定がわからないので予約しない。", "id": "Karena jadwalnya belum pasti, saya tidak memesan.", "form": "予約しない"}
-  },
-  {
-    "kosakata": ["jp", "案内する", "あんないする"],
-    "arti": ["id", "memandu / mengantar (guide)"],
-    "kamus": {"jp": "友達に町を案内する。", "id": "Memandu teman berkeliling kota.", "form": "案内する"},
-    "ます": {"jp": "私が工場の中を案内します。", "id": "Saya akan memandu di dalam pabrik.", "form": "案内します"},
-    "て": {"jp": "お客様を席へ案内してください。", "id": "Tolong antar tamu ke tempat duduknya.", "form": "案内して"},
-    "た": {"jp": "昨日、観光客を京都に案内した。", "id": "Kemarin, saya memandu turis ke Kyoto.", "form": "案内した"},
-    "ない": {"jp": "道がよくわからないので、案内しない。", "id": "Karena kurang tahu jalannya, saya tidak memandu.", "form": "案内しない"}
-  },
-  {
-    "kosakata": ["jp", "言う", "いう"],
-    "arti": ["id", "berkata / mengatakan"],
-    "kamus": {"jp": "自分の意見を言う。", "id": "Mengatakan pendapat sendiri.", "form": "言う"},
-    "ます": {"jp": "本当のことを言います。", "id": "Saya mengatakan hal yang sebenarnya.", "form": "言います"},
-    "て": {"jp": "もう一度言ってください。", "id": "Tolong katakan sekali lagi.", "form": "言って"},
-    "た": {"jp": "昨日、彼に本当のことを言った。", "id": "Kemarin saya mengatakan hal sebenarnya kepadanya.", "form": "言った"},
-    "ない": {"jp": "嘘は言わない。", "id": "Saya tidak mengatakan kebohongan.", "form": "言わない"}
-  },
-  {
-    "kosakata": ["jp", "答える", "こたえる"],
-    "arti": ["id", "menjawab"],
-    "kamus": {"jp": "先生の質問に答える。", "id": "Menjawab pertanyaan guru.", "form": "答える"},
-    "ます": {"jp": "今からあなたの質問に答えます。", "id": "Mulai sekarang saya akan menjawab pertanyaan Anda.", "form": "答えます"},
-    "て": {"jp": "大きな声で答えてください。", "id": "Tolong jawab dengan suara keras.", "form": "答えて"},
-    "た": {"jp": "インタビューに正直に答えた。", "id": "Saya telah menjawab wawancara dengan jujur.", "form": "答えた"},
-    "ない": {"jp": "わからないので何も答えない。", "id": "Karena tidak tahu, saya tidak menjawab apa-apa.", "form": "答えない"}
-  },
-  {
-    "kosakata": ["jp", "呼ぶ", "よぶ"],
-    "arti": ["id", "memanggil"],
-    "kamus": {"jp": "タクシーを呼ぶ。", "id": "Memanggil taksi.", "form": "呼ぶ"},
-    "ます": {"jp": "友達を家に呼びます。", "id": "Saya memanggil/mengundang teman ke rumah.", "form": "呼びます"},
-    "て": {"jp": "医者を呼んでください。", "id": "Tolong panggil dokter.", "form": "呼んで"},
-    "た": {"jp": "遠くから友達を呼んだ。", "id": "Saya memanggil teman dari kejauhan.", "form": "呼んだ"},
-    "ない": {"jp": "誰も呼具つもりはない。", "id": "Saya tidak berniat memanggil siapa pun.", "form": "呼ばない"}
-  },
-  {
-    "kosakata": ["jp", "呼ばれる", "よばれる"],
-    "arti": ["id", "dipanggil"],
-    "kamus": {"jp": "名前を呼ばれる。", "id": "Nama saya dipanggil.", "form": "呼ばれる"},
-    "ます": {"jp": "病院で名前を呼ばれます。", "id": "Nama saya dipanggil di rumah sakit.", "form": "呼ばれます"},
-    "て": {"jp": "先生に呼ばれて、職員室に行った。", "id": "Dipanggil oleh guru, saya pergi ke ruang guru.", "form": "呼ばれて"},
-    "た": {"jp": "昨日、社長に呼ばれた。", "id": "Kemarin, saya dipanggil oleh direktur.", "form": "呼ばれた"},
-    "ない": {"jp": "今日は誰にも呼ばれない。", "id": "Hari ini saya tidak dipanggil oleh siapa pun.", "form": "呼ばれない"}
-  },
-  {
-    "kosakata": ["jp", "伝える", "つたえる"],
-    "arti": ["id", "menyampaikan"],
-    "kamus": {"jp": "感謝の気持ちを伝える。", "id": "Menyampaikan rasa terima kasih.", "form": "伝える"},
-    "ます": {"jp": "後で彼にメッセージを伝えます。", "id": "Nanti saya akan menyampaikan pesan kepadanya.", "form": "伝えます"},
-    "て": {"jp": "田中さんに「よろしく」と伝えてください。", "id": "Tolong sampaikan salam saya kepada Tanaka-san.", "form": "伝えて"},
-    "た": {"jp": "大事な連絡をみんなに伝えた。", "id": "Saya telah menyampaikan informasi penting kepada semua orang.", "form": "伝えた"},
-    "ない": {"jp": "まだ誰にもこの秘密を伝えない。", "id": "Saya belum menyampaikan rahasia ini kepada siapa pun.", "form": "伝えない"}
-  },
-  {
-    "kosakata": ["jp", "相談する", "そうだんする"],
-    "arti": ["id", "berkonsultasi / berdiskusi"],
-    "kamus": {"jp": "悩みを友達に相談する。", "id": "Membicarakan/berkonsultasi tentang masalah kepada teman.", "form": "相談する"},
-    "ます": {"jp": "明日、先生に相談します。", "id": "Besok saya akan berkonsultasi dengan guru.", "form": "相談します"},
-    "て": {"jp": "一人で悩まないで、私に相談してください。", "id": "Jangan dipikirkan sendiri, tolong berkonsultasilah dengan saya.", "form": "相談して"},
-    "た": {"jp": "進路について親と相談した。", "id": "Saya berkonsultasi dengan orang tua mengenai masa depan.", "form": "相談した"},
-    "ない": {"jp": "誰にも相談しない。", "id": "Saya tidak berkonsultasi dengan siapa pun.", "form": "相談しない"}
-  },
-  {
-    "kosakata": ["jp", "頼む", "たのむ"],
-    "arti": ["id", "meminta / memohon / memesan"],
-    "kamus": {"jp": "友達に助けを頼む。", "id": "Meminta bantuan kepada teman.", "form": "頼む"},
-    "ます": {"jp": "レストランでコーヒーを頼みます。", "id": "Saya memesan kopi di restoran.", "form": "頼みます"},
-    "て": {"jp": "この仕事を彼に頼んでください。", "id": "Tolong minta dia untuk mengerjakan tugas ini.", "form": "頼んで"},
-    "た": {"jp": "昨日、彼に買い物をお願いした（頼んだ）。", "id": "Kemarin, saya meminta tolong belanja kepadanya.", "form": "頼んだ"},
-    "ない": {"jp": "自分でできるので、誰にも頼まない。", "id": "Karena bisa sendiri, saya tidak meminta tolong ke siapa pun.", "form": "頼まない"}
-  },
-  {
-    "kosakata": ["jp", "手伝ってもらう", "てつだってもらう"],
-    "arti": ["id", "dibantu / mendapat bantuan (dari orang lain)"],
-    "kamus": {"jp": "引っ越しを友達に手伝ってもらう。", "id": "Mendapat bantuan pindahan dari teman.", "form": "手伝ってもらう"},
-    "ます": {"jp": "宿題を兄に手伝ってもらいます。", "id": "Saya dibantu kakak laki-laki mengerjakan PR.", "form": "手伝ってもらいます"},
-    "て": {"jp": "友達に手伝ってもらって、荷物を運んだ。", "id": "Dibantu oleh teman, saya membawa barang bawaan.", "form": "手伝ってもらって"},
-    "た": {"jp": "昨日、彼に仕事を手伝ってもらった。", "id": "Kemarin, saya dibantu olehnya dalam pekerjaan.", "form": "手伝ってもらった"},
-    "ない": {"jp": "今日は誰も手伝ってもらわない。", "id": "Hari ini saya tidak meminta bantuan dari siapa pun.", "form": "手伝ってもらわない"}
-  },
-  {
-    "kosakata": ["jp", "ある", "ある"],
-    "arti": ["id", "ada (benda mati / tidak bernyawa)"],
-    "kamus": {"jp": "机の上に megane（眼鏡）がある。", "id": "Ada kacamata di atas meja.", "form": "ある"},
-    "ます": {"jp": "明日、試験があります。", "id": "Besok ada ujian.", "form": "あります"},
-    "て": {"jp": "時間があって、よかったです。", "id": "Baguslah/syukurlah karena ada waktu.", "form": "あって"},
-    "た": {"jp": "昨日、大切な約束があった。", "id": "Kemarin ada janji penting.", "form": "あった"},
-    "ない": {"jp": "今日は何も予定がない。", "id": "Hari ini tidak ada rencana apa pun.", "form": "ない"}
-  },
-  {
-    "kosakata": ["jp", "いる", "いる"],
-    "arti": ["id", "ada (benda hidup / bernyawa)"],
-    "kamus": {"jp": "部屋に猫がいる。", "id": "Ada kucing di dalam kamar.", "form": "いる"},
-    "ます": {"jp": "あそこに田中さんがいます。", "id": "Di sana ada Tanaka-san.", "form": "います"},
-    "て": {"jp": "友達が家にいて、賑やかだ。", "id": "Ada teman di rumah, jadi ramai.", "form": "いて"},
-    "た": {"jp": "公園に子供がたくさんいた。", "id": "Dulu/tadi ada banyak anak-anak di taman.", "form": "いた"},
-    "ない": {"jp": "今、事務所には誰もいない。", "id": "Sekarang tidak ada siapa-siapa di kantor.", "form": "いない"}
-  },
-  {
-    "kosakata": ["jp", "要る", "いる"],
-    "arti": ["id", "memerlukan / membutuhkan"],
-    "kamus": {"jp": "ビザを取るのにパスポートが要る。", "id": "Membutuhkan paspor untuk membuat visa.", "form": "要る"},
-    "ます": {"jp": "旅行に行くのにお金が要ります。", "id": "Membutuhkan uang untuk pergi berlibur.", "form": "要ります"},
-    "て": {"jp": "ハサミが要って、友達に借りた。", "id": "Membutuhkan gunting, jadi saya meminjam dari teman.", "form": "要って"},
-    "た": {"jp": "手続きにハンコが要った。", "id": "Kemarin/tadi membutuhkan stempel untuk prosedur tersebut.", "form": "要った"},
-    "ない": {"jp": "この書類はもう要らない。", "id": "Dokumen ini sudah tidak diperlukan lagi.", "form": "要らない"}
-  },
-  {
-    "kosakata": ["jp", "困る", "こまる"],
-    "arti": ["id", "kesusahan / bingung / mengalami kesulitan"],
-    "kamus": {"jp": "財布を忘れて困る。", "id": "Kesusahan karena lupa membawa dompet.", "form": "困る"},
-    "ます": {"jp": "言葉が通じなくて困ります。", "id": "Saya kesusahan karena tidak bisa saling berkomunikasi.", "form": "困ります"},
-    "て": {"jp": "道に迷って困っている。", "id": "Saya sedang kesusahan/bingung karena tersesat.", "form": "困って"},
-    "た": {"jp": "雨に降られて困った。", "id": "Kemarin/tadi saya kesusahan karena kehujanan.", "form": "困った"},
-    "ない": {"jp": "お金があるので、何も困らない。", "id": "Karena ada uang, saya tidak mengalami kesulitan apa pun.", "form": "困らない"}
-  },
-  {
-    "kosakata": ["jp", "心配する", "しんぱいする"],
-    "arti": ["id", "khawatir / mencemaskan"],
-    "kamus": {"jp": "子供の将来を心配する。", "id": "Khawatir akan masa depan anak.", "form": "心配する"},
-    "ます": {"jp": "テストの結果を心配します。", "id": "Saya khawatir dengan hasil ujian.", "form": "心配します"},
-    "て": {"jp": "そんなに心配しないでください。", "id": "Tolong jangan sekhawatir itu.", "form": "心配して"},
-    "た": {"jp": "連絡がなくて、とても心配した。", "id": "Karena tidak ada kabar, saya sangat khawatir.", "form": "心配した"},
-    "ない": {"jp": "彼は大丈夫だから、心配しない。", "id": "Karena dia tidak apa-apa, saya tidak khawatir.", "form": "心配しない"}
-  },
-  {
-    "kosakata": ["jp", "安心する", "あんしんする"],
-    "arti": ["id", "lega / merasa tenang"],
-    "kamus": {"jp": "無事に着いて安心する。", "id": "Merasa lega karena tiba dengan selamat.", "form": "安心する"},
-    "ます": {"jp": "合格して安心しました。", "id": "Saya merasa lega karena lulus.", "form": "安心します"},
-    "て": {"jp": "声を聞いて安心してください。", "id": "Tolong merasa tenanglah setelah mendengar suaranya.", "form": "安心て"},
-    "た": {"jp": "手術が成功して安心した。", "id": "Saya merasa lega karena operasinya berhasil.", "form": "安心した"},
-    "ない": {"jp": "まだ結果がわからないので安心しない。", "id": "Karena belum tahu hasilnya, saya tidak bisa tenang.", "form": "安心しない"}
-  },
-  {
-    "kosakata": ["jp", "疲れる", "つかれる"],
-    "arti": ["id", "lelah / capek"],
-    "kamus": {"jp": "長時間歩くと疲れる。", "id": "Jika berjalan waktu lama, terasa lelah.", "form": "疲れる"},
-    "ます": {"jp": "今日はたくさん働いて疲れました。", "id": "Hari ini saya lelah karena bekerja banyak.", "form": "疲れます"},
-    "て": {"jp": "疲れて、すぐに寝てしまった。", "id": "Karena lelah, saya langsung tertidur.", "form": "疲れて"},
-    "た": {"jp": "昨日の運動で体が疲れた。", "id": "Badan merasa lelah karena olahraga kemarin.", "form": "疲れた"},
-    "ない": {"jp": "少ししか歩いていないので疲れない。", "id": "Karena baru berjalan sedikit, saya tidak lelah.", "form": "疲れない"}
-  },
-  {
-    "kosakata": ["jp", "痛む", "いたむ"],
-    "arti": ["id", "sakit / nyeri"],
-    "kamus": {"jp": "虫歯で歯が痛む。", "id": "Gigi terasa sakit/nyeri karena berlubang.", "form": "痛む"},
-    "ます": {"jp": "頭が強く痛みます。", "id": "Kepala saya terasa sangat sakit.", "form": "痛みます"},
-    "て": {"jp": "お腹が痛んで、動けない。", "id": "Perut terasa sakit sehingga tidak bisa bergerak.", "form": "痛んで"},
-    "た": {"jp": "昨日から足が痛んだ。", "id": "Sejak kemarin kaki terasa sakit.", "form": "痛んだ"},
-    "ない": {"jp": "薬を飲んだので、もう痛まない。", "id": "Karena sudah minum obat, sekarang tidak sakit lagi.", "form": "痛まない"}
-  },
-  {
-    "kosakata": ["jp", "なる", "なる"],
-    "arti": ["id", "menjadi"],
-    "kamus": {"jp": "将来、医者になる。", "id": "Di masa depan, saya ingin menjadi dokter.", "form": "なる"},
-    "ます": {"jp": "来月、２０歳になります。", "id": "Bulan depan, saya akan menjadi (berumur) 20 tahun.", "form": "なります"},
-    "て": {"jp": "暗くなって、何も見えない。", "id": "Menjadi gelap, sehingga tidak kelihatan apa-apa.", "form": "なって"},
-    "た": {"jp": "天気は急に寒くなった。", "id": "Cuaca tiba-tiba menjadi dingin.", "form": "なった"},
-    "ない": {"jp": "どれだけ練習しても上手にならない。", "id": "Sebanyak apa pun berlatih, saya tidak kunjung menjadi mahir.", "form": "ならない"}
-  },
-  {
-    "kosakata": ["jp", "変わる", "かわる"],
-    "arti": ["id", "berubah (subjek + が)"],
-    "kamus": {"jp": "季節が変わる。", "id": "Musim berubah.", "form": "変わる"},
-    "ます": {"jp": "信号の色が赤に変わります。", "id": "Warna lampu lalu lintas berubah menjadi merah.", "form": "変わります"},
-    "て": {"jp": "時代が変わって、生活が便利になった。", "id": "Zaman berubah, dan kehidupan menjadi praktis.", "form": "変わって"},
-    "た": {"jp": "彼の意見が急に変わった。", "id": "Pendapatnya tiba-tiba berubah.", "form": "変わった"},
-    "ない": {"jp": "昔から何も変わらない。", "id": "Dari dulu tidak ada yang berubah.", "form": "変わらない"}
-  },
-  {
-    "kosakata": ["jp", "変える", "かえる"],
-    "arti": ["id", "mengubah (objek + を)"],
-    "kamus": {"jp": "髪型を変える。", "id": "Mengubah gaya rambut.", "form": "変える"},
-    "ます": {"jp": "パスワードを定期的変えます。", "id": "Saya mengubah kata sandi secara berkala.", "form": "変えます"},
-    "て": {"jp": "予定を変更して（変えて）、旅行に行く。", "id": "Mengubah jadwal lalu pergi berlibur.", "form": "変えて"},
-    "た": {"jp": "昨日、スマホのカバーを変えた。", "id": "Kemarin, saya mengubah casing ponsel.", "form": "変えた"},
-    "ない": {"jp": "自分の考えを変えない。", "id": "Saya tidak akan mengubah pemikiran saya.", "form": "変えない"}
-  },
-  {
-    "kosakata": ["jp", "増える", "ふえる"],
-    "arti": ["id", "bertambah / meningkat (subjek + が)"],
-    "kamus": {"jp": "人口が増える。", "id": "Jumlah penduduk bertambah.", "form": "増える"},
-    "ます": {"jp": "最近、日本語を勉強する人が増えます。", "id": "Belakangan ini, orang yang belajar bahasa Jepang bertambah.", "form": "増えます"},
-    "て": {"jp": "体重が増えて、服が入らなくなった。", "id": "Berat badan bertambah, sehingga baju tidak muat lagi.", "form": "増えて"},
-    "た": {"jp": "この街は外国人が増えた。", "id": "Kota ini telah bertambah jumlah orang asingnya.", "form": "増えた"},
-    "ない": {"jp": "給料が全然増えない。", "id": "Gaji tidak bertambah sama sekali.", "form": "増えない"}
-  },
-  {
-    "kosakata": ["jp", "増やす", "ふやす"],
-    "arti": ["id", "menambah / meningkatkan (objek + を)"],
-    "kamus": {"jp": "貯金を増やす。", "id": "Menambah tabungan.", "form": "増やす"},
-    "ます": {"jp": "運動して筋肉を増やします。", "id": "Saya berolahraga dan menambah otot.", "form": "増やします"},
-    "て": {"jp": "本を読んで、語彙を増やしてください。", "id": "Tolong baca buku dan tambahlah kosakata Anda.", "form": "増やして"},
-    "た": {"jp": "アルバイトの時間を増やした。", "id": "Saya telah menambah jam kerja paruh waktu.", "form": "増やした"},
-    "ない": {"jp": "これ以上、無駄な出費を増やさない。", "id": "Saya tidak akan menambah pengeluaran tak berguna lebih dari ini.", "form": "増やさない"}
-  },
-  {
-    "kosakata": ["jp", "減る", "へる"],
-    "arti": ["id", "berkurang (subjek + が)"],
-    "kamus": {"jp": "お腹が減る。", "id": "Perut menjadi lapar (berkurang isinya).", "form": "減る"},
-    "ます": {"jp": "冬は貯金が減ります。", "id": "Di musim dingin, tabungan berkurang.", "form": "減ります"},
-    "て": {"jp": "体重が減って、体が軽くなった。", "id": "Berat badan berkurang, dan tubuh menjadi ringan.", "form": "減って"},
-    "た": {"jp": "事故の数が前より減った。", "id": "Jumlah kecelakaan berkurang dari sebelumnya.", "form": "減った"},
-    "ない": {"jp": "いくら使ってもお金が減らない。", "id": "Sebanyak apa pun dipakai, uangnya tidak berkurang.", "form": "減らない"}
-  },
-  {
-    "kosakata": ["jp", "減らす", "へらす"],
-    "arti": ["id", "mengurangi (objek + を)"],
-    "kamus": {"jp": "体重を減らすために運動する。", "id": "Berolahraga untuk mengurangi berat badan.", "form": "減らす"},
-    "ます": {"jp": "砂糖の量を減らします。", "id": "Saya mengurangi takaran gula.", "form": "減らします"},
-    "て": {"jp": "塩分を減らして、健康に気をつけましょう。", "id": "Mari kurangi kadar garam dan menjaga kesehatan.", "form": "減らして"},
-    "た": {"jp": "無駄な買い物を減らした。", "id": "Saya telah mengurangi belanjaan yang tidak berguna.", "form": "減らした"},
-    "ない": {"jp": "睡眠時間は減らさないほうがいい。", "id": "Sebaiknya tidak mengurangi waktu tidur.", "form": "減らさない"}
-  },
-  {
-    "kosakata": ["jp", "あげる", "あげる"],
-    "arti": ["id", "memberi (kepada orang lain)"],
-    "kamus": {"jp": "友達にプレゼントをあげる。", "id": "Memberi hadiah kepada teman.", "form": "あげる"},
-    "ます": {"jp": "母の日に花をあげます。", "id": "Saya akan memberi bunga pada Hari Ibu.", "form": "あげます"},
-    "て": {"jp": "お菓子をみんなにあげてください。", "id": "Tolong berikan kue ke semua orang.", "form": "あげて"},
-    "た": {"jp": "昨日、弟におもちゃをあげた。", "id": "Kemarin saya memberi mainan kepada adik laki-laki.", "form": "あげた"},
-    "ない": {"jp": "もう誰も何もあげない。", "id": "Saya tidak akan memberi apa pun lagi kepada siapa pun.", "form": "あげない"}
-  },
-  {
-    "kosakata": ["jp", "もらう", "もらう"],
-    "arti": ["id", "menerima / mendapat"],
-    "kamus": {"jp": "誕生日プレゼントをもらう。", "id": "Menerima hadiah ulang tahun.", "form": "もらう"},
-    "ます": {"jp": "給料をもらいます。", "id": "Saya menerima gaji.", "form": "もらいます"},
-    "て": {"jp": "許可をもらってから出かける。", "id": "Saya pergi keluar setelah mendapat izin.", "form": "もらって"},
-    "た": {"jp": "友達に素敵なお土産をもらった。", "id": "Saya mendapat oleh-oleh bagus dari teman.", "form": "もらった"},
-    "ない": {"jp": "彼からは何ももらわない。", "id": "Saya tidak menerima apa pun darinya.", "form": "もらわない"}
-  },
-  {
-    "kosakata": ["jp", "くれる", "くれる"],
-    "arti": ["id", "memberi (orang lain memberi kepada saya/keluarga saya)"],
-    "kamus": {"jp": "友達が本をくれる。", "id": "Teman memberi saya buku.", "form": "くれる"},
-    "ます": {"jp": "先生がアドバイスをくれます。", "id": "Guru memberi saya nasihat.", "form": "くれます"},
-    "て": {"jp": "親切にしてくれてありがとう。", "id": "Terima kasih telah baik kepada saya.", "form": "くれて"},
-    "た": {"jp": "昨日、彼がお菓子をくれた。", "id": "Kemarin dia memberi saya kue.", "form": "くれた"},
-    "ない": {"jp": "彼は何もくれない。", "id": "Dia tidak memberi saya apa pun.", "form": "くれない"}
-  },
-  {
-    "kosakata": ["jp", "返す", "かえす"],
-    "arti": ["id", "mengembalikan"],
-    "kamus": {"jp": "図書館に本を返す。", "id": "Mengembalikan buku ke perpustakaan.", "form": "返す"},
-    "ます": {"jp": "明日、借りたお金を返します。", "id": "Besok saya akan mengembalikan uang yang dipinjam.", "form": "返します"},
-    "て": {"jp": "使ったら元の場所へ返してください。", "id": "Setelah dipakai, tolong kembalikan ke tempat semula.", "form": "返して"},
-    "た": {"jp": "先週借りたDVDを返した。", "id": "Saya telah mengembalikan DVD yang dipinjam minggu lalu.", "form": "返した"},
-    "ない": {"jp": "約束の日にまだ返さない。", "id": "Saya belum mengembalikannya pada hari yang dijanjikan.", "form": "返さない"}
-  },
-  {
-    "kosakata": ["jp", "借りる", "かりる"],
-    "arti": ["id", "meminjam"],
-    "kamus": {"jp": "図書館で本を借りる。", "id": "Meminjam buku di perpustakaan.", "form": "借りる"},
-    "ます": {"jp": "友達から自転車を借ります。", "id": "Saya meminjam sepeda dari teman.", "form": "借ります"},
-    "て": {"jp": "傘を借りて帰った。", "id": "Saya meminjam payung lalu pulang.", "form": "借りて"},
-    "た": {"jp": "昨日、銀行でお金を借りた。", "id": "Kemarin saya meminjam uang di bank.", "form": "借りた"},
-    "ない": {"jp": "人からはお金を借りない。", "id": "Saya tidak meminjam uang dari orang lain.", "form": "借りない"}
-  },
-  {
-    "kosakata": ["jp", "貸す", "かす"],
-    "arti": ["id", "meminjamkan"],
-    "kamus": {"jp": "友達に消しゴムを貸す。", "id": "Meminjamkan penghapus kepada teman.", "form": "貸す"},
-    "ます": {"jp": "私のペンを貸します。", "id": "Saya akan meminjamkan pulpen saya.", "form": "貸します"},
-    "て": {"jp": "ちょっと辞書を貸してください。", "id": "Tolong pinjamkan kamusnya sebentar.", "form": "貸して"},
-    "た": {"jp": "彼に車を貸した。", "id": "Saya telah meminjamkan mobil kepadanya.", "form": "貸した"},
-    "ない": {"jp": "大切な物だから誰にも貸さない。", "id": "Karena barang berharga, saya tidak meminjamkannya kepada siapa pun.", "form": "貸さない"}
-  },
-  {
-    "kosakata": ["jp", "払う", "はらう"],
-    "arti": ["id", "membayar"],
-    "kamus": {"jp": "現金で代金を払う。", "id": "Membayar biaya dengan uang tunai.", "form": "払う"},
-    "ます": {"jp": "クレジットカードで払います。", "id": "Saya akan membayar dengan kartu kredit.", "form": "払います"},
-    "て": {"jp": "レジでお金を払ってください。", "id": "Tolong bayar uangnya di kasir.", "form": "払って"},
-    "た": {"jp": "昨日、家賃を払った。", "id": "Kemarin saya telah membayar uang sewa rumah.", "form": "払った"},
-    "ない": {"jp": "お金がないので、まだ払わない。", "id": "Karena tidak ada uang, saya belum membayar.", "form": "払わない"}
-  },
-  {
-    "kosakata": ["jp", "選ぶ", "えらぶ"],
-    "arti": ["id", "memilih"],
-    "kamus": {"jp": "プレゼントを選ぶ。", "id": "Memilih hadiah.", "form": "選ぶ"},
-    "ます": {"jp": "メニューから好きな料理を選びます。", "id": "Saya memilih masakan yang disukai dari menu.", "form": "選びます"},
-    "て": {"jp": "一番いいものを選んでください。", "id": "Tolong pilih yang paling bagus.", "form": "選んで"},
-    "た": {"jp": "新しい服を選んだ。", "id": "Saya telah memilih baju baru.", "form": "選んだ"},
-    "ない": {"jp": "迷っていて、まだ選ばない。", "id": "Because bingung, saya belum memilih.", "form": "選ばない"}
-  },
-  {
-    "kosakata": ["jp", "届ける", "とどける"],
-    "arti": ["id", "mengirimkan / menyampaikan / mengantarkan"],
-    "kamus": {"jp": "荷物を家に届ける。", "id": "Mengantarkan barang ke rumah.", "form": "届ける"},
-    "ます": {"jp": "明日、書類をオフィスに届けます。", "id": "Besok saya akan mengantarkan dokumen ke kantor.", "form": "届けます"},
-    "て": {"jp": "警察に落とし物を届けてください。", "id": "Tolong laporkan/serahkan barang hilang ke polisi.", "form": "届けて"},
-    "た": {"jp": "手紙を届けてくれた。", "id": "Dia telah mengantarkan surat.", "form": "届けた"},
-    "ない": {"jp": "今日は荷物を届けない。", "id": "Hari ini saya tidak mengantarkan barang.", "form": "届けない"}
-  },
-  {
-    "kosakata": ["jp", "届く", "とどく"],
-    "arti": ["id", "sampai / tiba (barang/surat, subjek + が)"],
-    "kamus": {"jp": "注文した荷物が届く。", "id": "Barang yang dipesan sampai.", "form": "届く"},
-    "ます": {"jp": "明日、手紙が届きます。", "id": "Besok suratnya akan sampai.", "form": "届きます"},
-    "て": {"jp": "荷物が届いて、安心した。", "id": "Barangnya sampai, saya merasa lega.", "form": "届いて"},
-    "た": {"jp": "今朝、荷物が届いた。", "id": "Pagi ini barangnya sudah sampai.", "form": "届いた"},
-    "ない": {"jp": "まだ荷物が届かない。", "id": "Barangnya belum juga sampai.", "form": "届かない"}
-  },
-  {
-    "kosakata": ["jp", "送る", "おくる"],
-    "arti": ["id", "mengirim / mengantar (orang)"],
-    "kamus": {"jp": "友達にメールを送る。", "id": "Mengirim email kepada teman.", "form": "送る"},
-    "ます": {"jp": "車で駅まで送ります。", "id": "Saya akan mengantar ke stasiun dengan mobil.", "form": "送ります"},
-    "て": {"jp": "写真をメールで送ってください。", "id": "Tolong kirim foto lewat email.", "form": "送って"},
-    "た": {"jp": "昨日、両親に荷物を送った。", "id": "Kemarin saya mengirim barang ke orang tua.", "form": "送った"},
-    "ない": {"jp": "今日は何も送らない。", "id": "Hari ini saya tidak mengirim apa-apa.", "form": "送らない"}
-  },
-  {
-    "kosakata": ["jp", "切る", "きる"],
-    "arti": ["id", "memotong / mematikan (telepon/listrik)"],
-    "kamus": {"jp": "ハサミで紙を切る。", "id": "Memotong kertas dengan gunting.", "form": "切る"},
-    "ます": {"jp": "包丁で野菜を切ります。", "id": "Saya memotong sayuran dengan pisau dapur.", "form": "切ります"},
-    "て": {"jp": "電話を切って、もう一度かけてください。", "id": "Tolong tutup/matikan teleponnya lalu telepon sekali lagi.", "form": "切って"},
-    "た": {"jp": "昨日、髪を切った。", "id": "Kemarin saya memotong rambut.", "form": "切った"},
-    "ない": {"jp": "爪を切らない。", "id": "Saya tidak memotong kuku.", "form": "切らない"}
-  },
-  {
-    "kosakata": ["jp", "押す", "おす"],
-    "arti": ["id", "menekan / mendorong"],
-    "kamus": {"jp": "エレベーターのボタンを押す。", "id": "Menekan tombol lift.", "form": "押す"},
-    "ます": {"jp": "ここにハンコを押します。", "id": "Saya membubuhkan/menekan stempel di sini.", "form": "押します"},
-    "て": {"jp": "ドアを強く押してください。", "id": "Tolong dorong pintunya dengan kuat.", "form": "押して"},
-    "た": {"jp": "スイッチを押した。", "id": "Saya telah menekan sakelar/tombol.", "form": "押した"},
-    "ない": {"jp": "無理に押さない。", "id": "Saya tidak mendorong secara paksa.", "form": "押さない"}
-  },
-  {
-    "kosakata": ["jp", "引く", "ひく"],
-    "arti": ["id", "menarik / mengurang"],
-    "kamus": {"jp": "ドアを引く。", "id": "Menarik pintu.", "form": "引く"},
-    "ます": {"jp": "辞書を引きます。", "id": "Saya membuka/mencari di kamus.", "form": "引きます"},
-    "て": {"jp": "綱を引いて、遊ぶ。", "id": "Menarik tali lalu bermain.", "form": "引いて"},
-    "た": {"jp": "風邪を引いた。", "id": "Saya kena flu/masuk angin.", "form": "引いた"},
-    "ない": {"jp": "線を引かない。", "id": "Saya tidak menarik/membuat garis.", "form": "引かない"}
-  },
-  {
-    "kosakata": ["jp", "並ぶ", "ならぶ"],
-    "arti": ["id", "mengantre / berbaris"],
-    "kamus": {"jp": "店の前に並ぶ。", "id": "Mengantre di depan toko.", "form": "並ぶ"},
-    "ます": {"jp": "列に並びます。", "id": "Saya berbaris dalam antrean.", "form": "並びます"},
-    "て": {"jp": "順番に並んで待ってください。", "id": "Tolong berbaris secara teratur dan tunggu.", "form": "並んで"},
-    "た": {"jp": "チケットを買うために一時間並んだ。", "id": "Saya mengantre selama satu jam untuk membeli tiket.", "form": "並んだ"},
-    "ない": {"jp": "混んでいるので並ばない。", "id": "Karena ramai, saya tidak mengantre.", "form": "並ばない"}
-  },
-  {
-    "kosakata": ["jp", "集める", "あつめる"],
-    "arti": ["id", "mengumpulkan"],
-    "kamus": {"jp": "趣味で切手を集める。", "id": "Mengumpulkan perangko sebagai hobi.", "form": "集める"},
-    "ます": {"jp": "情報を集めます。", "id": "Saya mengumpulkan informasi.", "form": "集めます"},
-    "て": {"jp": "書類を集めて、提出してください。", "id": "Tolong kumpulkan dokumen dan kumpulkan/serahkan.", "form": "集めて"},
-    "た": {"jp": "寄付金をたくさん集めた。", "id": "Saya telah mengumpulkan banyak uang donasi.", "form": "集めた"},
-    "ない": {"jp": "古いものは集めない。", "id": "Saya tidak mengumpulkan barang-barang lama.", "form": "集めない"}
-  },
-  {
-    "kosakata": ["jp", "調べる", "しらべる"],
-    "arti": ["id", "memeriksa / menyelidiki / mencari tahu"],
-    "kamus": {"jp": "辞書で言葉の意味を調べる。", "id": "Mencari arti kata di kamus.", "form": "調べる"},
-    "ます": {"jp": "インターネットで電車の時間を調べます。", "id": "Saya mencari tahu jadwal kereta di internet.", "form": "調べます"},
-    "て": {"jp": "詳しく調べてみてください。", "id": "Tolong coba periksa/cari tahu secara terperinci.", "form": "調べて"},
-    "た": {"jp": "昨日、ホテルの予約方法を調べた。", "id": "Kemarin, saya mencari tahu cara reservasi hotel.", "form": "調べた"},
-    "ない": {"jp": "興味がないので調べない。", "id": "Karena tidak tertarik, saya tidak mencari tahu.", "form": "調べない"}
-  },
-  {
-    "kosakata": ["jp", "考える", "かんがえる"],
-    "arti": ["id", "memikirkan / memikirkan solusi"],
-    "kamus": {"jp": "将来について考える。", "id": "Memikirkan tentang masa depan.", "form": "考える"},
-    "ます": {"jp": "問題の解決策を考えます。", "id": "Saya akan memikirkan jalan keluar dari masalah ini.", "form": "考えます"},
-    "て": {"jp": "よく考えてから答えてください。", "id": "Tolong jawab setelah memikirkannya baik-baik.", "form": "考えて"},
-    "た": {"jp": "いいアイデアを考えた。", "id": "Saya telah memikirkan ide yang bagus.", "form": "考えた"},
-    "ない": {"jp": "何も考えないで寝る。", "id": "Tidur tanpa memikirkan apa pun.", "form": "考えない"}
-  },
-  {
-    "kosakata": ["jp", "続ける", "つづける"],
-    "arti": ["id", "melanjutkan / meneruskan"],
-    "kamus": {"jp": "毎日勉強を続ける。", "id": "Melanjutkan belajar setiap hari.", "form": "続ける"},
-    "ます": {"jp": "これからも仕事を続けます。", "id": "Saya akan terus melanjutkan pekerjaan ini ke depannya.", "form": "続けます"},
-    "て": {"jp": "あきらめないで、仕事を続けてください。", "id": "Jangan menyerah, tolong lanjutkan pekerjaannya.", "form": "続けて"},
-    "た": {"jp": "三年間、サッカーを続けた。", "id": "Saya telah melanjutkan/bermain sepak bola selama tiga tahun.", "form": "続けた"},
-    "ない": {"jp": "無理なら続けないほうがいい。", "id": "Jika mustahil, sebaiknya tidak dilanjutkan.", "form": "続けない"}
-  },
-  {
-    "kosakata": ["jp", "決める", "きめる"],
-    "arti": ["id", "menentukan / memutuskan"],
-    "kamus": {"jp": "旅行の行き先を決める。", "id": "Menentukan tujuan wisata.", "form": "決める"},
-    "ます": {"jp": "明日、メニューを決めます。", "id": "Besok saya akan memutuskan menunya.", "form": "決めます"},
-    "て": {"jp": "自分で考えて決めてください。", "id": "Tolong pikirkan dan putuskan sendiri.", "form": "決めて"},
-    "た": {"jp": "進路を自分で決めた。", "id": "Saya memutuskan jalan masa depan saya sendiri.", "form": "決めた"},
-    "ない": {"jp": "まだ何も決めない。", "id": "Saya belum memutuskan apa pun.", "form": "決めない"}
-  },
-  {
-    "kosakata": ["jp", "着く", "つく"],
-    "arti": ["id", "tiba / sampai"],
-    "kamus": {"jp": "もうすぐ駅に着く。", "id": "Sebentar lagi sampai di stasiun.", "form": "着く"},
-    "ます": {"jp": "９時に会社に着きます。", "id": "Saya akan tiba di kantor pada jam 9.", "form": "着きます"},
-    "て": {"jp": "着いてから、連絡してください。", "id": "Tolong hubungi saya setelah sampai.", "form": "着いて"},
-    "た": {"jp": "無事にホテルに着いた。", "id": "Saya telah tiba di hotel dengan selamat.", "form": "着いた"},
-    "ない": {"jp": "バスが遅れて、なかなか着かない。", "id": "Busnya terlambat sehingga tidak kunjung sampai.", "form": "着かない"}
-  },
-  {
-    "kosakata": ["jp", "乗り換える", "のりかえる"],
-    "arti": ["id", "transit / berganti kendaraan"],
-    "kamus": {"jp": "新宿駅で電車を乗り換える。", "id": "Berganti kereta di Stasiun Shinjuku.", "form": "乗り換える"},
-    "ます": {"jp": "次の駅でバスに乗り換えます。", "id": "Saya akan berganti ke bus di stasiun berikutnya.", "form": "乗り換えます"},
-    "て": {"jp": "地下鉄に乗り換えて行きます。", "id": "Saya pergi dengan berganti ke kereta bawah tanah.", "form": "乗り換えて"},
-    "た": {"jp": "途中で新幹線に乗り換えた。", "id": "Di tengah perjalanan saya berganti ke Shinkansen.", "form": "乗り換えた"},
-    "ない": {"jp": "直通だから乗り換えない。", "id": "Karena langsung, saya tidak berganti kendaraan.", "form": "乗り換えない"}
-  },
-  {
-    "kosakata": ["jp", "呼ぶ", "よぶ"],
-    "arti": ["id", "memanggil / mengundang"],
-    "kamus": {"jp": "友達を家に呼ぶ。", "id": "Memanggil/mengundang teman ke rumah.", "form": "呼ぶ"},
-    "ます": {"jp": "タクシーを呼びます。", "id": "Saya akan memanggil taksi.", "form": "呼びます"},
-    "て": {"jp": "大きな声で呼んでください。", "id": "Tolong panggil dengan suara keras.", "form": "呼んで"},
-    "た": {"jp": "昨日、医者を呼んだ。", "id": "Kemarin saya memanggil dokter.", "form": "呼んだ"},
-    "ない": {"jp": "誰も呼ばない。", "id": "Saya tidak memanggil siapa pun.", "form": "呼ばない"}
-  },
-  {
-    "kosakata": ["jp", "伝わる", "つたわる"],
-    "arti": ["id", "tersampaikan / tersiar"],
-    "kamus": {"jp": "気持ちが相手に伝わる。", "id": "Perasaan tersampaikan kepada lawan bicara.", "form": "伝わる"},
-    "ます": {"jp": "熱意が皆に伝わります。", "id": "Antusiasme akan tersampaikan kepada semua orang.", "form": "伝わります"},
-    "て": {"jp": "想いが伝わって、嬉しい。", "id": "Saya senang karena perasaan saya tersampaikan.", "form": "伝わって"},
-    "た": {"jp": "ニュースがすぐに伝わった。", "id": "Berita itu segera tersiar/tersampaikan.", "form": "伝わった"},
-    "ない": {"jp": "言葉が違って、意味が伝わらない。", "id": "Karena bahasanya berbeda, maknanya tidak tersampaikan.", "form": "伝わらない"}
-  },
-  {
-    "kosakata": ["jp", "知らせる", "しらせる"],
-    "arti": ["id", "memberitahukan / mengabarkan"],
-    "kamus": {"jp": "結果をメールで知らせる。", "id": "Memberitahukan hasil melalui email.", "form": "知らせる"},
-    "ます": {"jp": "予定が決まったら知らせます。", "id": "Saya akan memberitahu jika jadwal sudah diputuskan.", "form": "知らせます"},
-    "て": {"jp": "時間を私に知らせてください。", "id": "Tolong beritahukan waktunya kepada saya.", "form": "知らせて"},
-    "た": {"jp": "昨日、変更をみんなに知らせた。", "id": "Kemarin saya telah memberitahukan perubahannya kepada semua orang.", "form": "知らせた"},
-    "ない": {"jp": "まだ確定していないので知らせない。", "id": "Karena belum pasti, saya tidak memberitahukannya.", "form": "知らせない"}
-  },
-  {
-    "kosakata": ["jp", "住む", "すむ"],
-    "arti": ["id", "tinggal / bermukim"],
-    "kamus": {"jp": "東京に住む。", "id": "Tinggal di Tokyo.", "form": "住む"},
-    "ます": {"jp": "静かな町に住みます。", "id": "Saya tinggal di kota yang tenang.", "form": "住みます"},
-    "て": {"jp": "日本に住んで、３年になる。", "id": "Sudah 3 tahun saya tinggal di Jepang.", "form": "住んで"},
-    "た": {"jp": "昔、大阪に住んでいた（住んだ）。", "id": "Dulu saya pernah tinggal di Osaka.", "form": "住んだ"},
-    "ない": {"jp": "都会には住まない。", "id": "Saya tidak tinggal di kota besar.", "form": "住まない"}
-  },
-  {
-    "kosakata": ["jp", "生きる", "いきる"],
-    "arti": ["id", "hidup"],
-    "kamus": {"jp": "自由に生きる。", "id": "Hidup dengan bebas.", "form": "生きる"},
-    "ます": {"jp": "力強く生きます。", "id": "Saya akan hidup dengan kuat.", "form": "生きます"},
-    "て": {"jp": "懸命に生きて、夢を叶える。", "id": "Hidup bersungguh-sungguh dan mewujudkan impian.", "form": "生きて"},
-    "た": {"jp": "彼は100歳まで生きた。", "id": "Dia telah hidup sampai usia 100 tahun.", "form": "生きた"},
-    "ない": {"jp": "目標がないと、面白く生きられない（生きない）。", "id": "Tanpa tujuan, hidup terasa tidak menyenangkan.", "form": "生きない"}
-  },
-  {
-    "kosakata": ["jp", "死ぬ", "しぬ"],
-    "arti": ["id", "mati / meninggal"],
-    "kamus": {"jp": "人は誰でもいつか死ぬ。", "id": "Semua orang suatu saat akan mati.", "form": "死ぬ"},
-    "ます": {"jp": "植物が水不足で死にます（枯れます）。", "id": "Tanaman mati karena kekurangan air.", "form": "死にます"},
-    "て": {"jp": "金魚が死んで、悲しい。", "id": "Saya sedih karena ikan koki mati.", "form": "死んで"},
-    "た": {"jp": "去年、飼っていた犬が死んだ。", "id": "Tahun lalu, anjing peliharaan saya mati.", "form": "死んだ"},
-    "ない": {"jp": "この虫は簡単には死なない。", "id": "Serangga ini tidak mudah mati.", "form": "死なない"}
-  },
-  {
-    "kosakata": ["jp", "間に合う", "まにあう"],
-    "arti": ["id", "keburu / tepat waktu"],
-    "kamus": {"jp": "電車の時間に間に合う。", "id": "Tepat waktu untuk jadwal kereta.", "form": "間に合う"},
-    "ます": {"jp": "走れば９時に間に合います。", "id": "Kalau berlari, akan keburu jam 9.", "form": "間に合います"},
-    "て": {"jp": "間に合って、よかった。", "id": "Baguslah karena bisa keburu/tepat waktu.", "form": "間に合って"},
-    "た": {"jp": "急いだので会議に間に合った。", "id": "Karena bergegas, saya tepat waktu menghadiri rapat.", "form": "間に合った"},
-    "ない": {"jp": "渋滞でバスが間に合わない。", "id": "Bus tidak keburu/terlambat karena kemacetan.", "form": "間に合わない"}
-  },
-  {
-    "kosakata": ["jp", "遅刻する", "ちこくする"],
-    "arti": ["id", "terlambat"],
-    "kamus": {"jp": "学校に遅刻する。", "id": "Terlambat datang ke sekolah.", "form": "遅刻する"},
-    "ます": {"jp": "寝坊すると遅刻します。", "id": "Kalau bangun kesiangan akan terlambat.", "form": "遅刻します"},
-    "て": {"jp": "遅刻して、先生に怒られた。", "id": "Saya terlambat dan dimarahi guru.", "form": "遅刻して"},
-    "た": {"jp": "昨日、電車が遅れて遅刻した。", "id": "Kemarin kereta terlambat sehingga saya datang terlambat.", "form": "遅刻した"},
-    "ない": {"jp": "明日は絶対に遅刻しない。", "id": "Besok saya pasti tidak akan terlambat.", "form": "遅刻しない"}
-  },
-  {
-    "kosakata": ["jp", "思う", "おもう"],
-    "arti": ["id", "berpikir / menganggap / merasa"],
-    "kamus": {"jp": "正しいと思う。", "id": "Saya berpikir itu benar.", "form": "思う"},
-    "ます": {"jp": "そう思います。", "id": "Saya berpikir demikian.", "form": "思います"},
-    "て": {"jp": "ずっとあなたのことを思っている。", "id": "Saya selalu memikirkanmu.", "form": "思って"},
-    "た": {"jp": "無理だと思った。", "id": "Saya tadinya berpikir itu tidak mungkin.", "form": "思った"},
-    "ない": {"jp": "そうは思わない。", "id": "Saya tidak berpikir begitu.", "form": "思わない"}
-  },
-  {
-    "kosakata": ["jp", "感じる", "かんじる"],
-    "arti": ["id", "merasakan"],
-    "kamus": {"jp": "春の訪れを感じる。", "id": "Merasakan kedatangan musim semi.", "form": "感じる"},
-    "ます": {"jp": "少し痛みを感じます。", "id": "Saya merasa sedikit sakit.", "form": "感じます"},
-    "て": {"jp": "不安を感じて、眠れない。", "id": "Saya merasa cemas dan tidak bisa tidur.", "form": "感じて"},
-    "た": {"jp": "彼の優しさを感じた。", "id": "Saya merasakan kebaikannya.", "form": "感じた"},
-    "ない": {"jp": "特に危険を感じない。", "id": "Saya tidak merasa bahaya secara khusus.", "form": "感じない"}
-  },
-  {
-    "kosakata": ["jp", "笑う", "わらう"],
-    "arti": ["id", "tertawa / tersenyum"],
-    "kamus": {"jp": "面白い話を聞いて笑う。", "id": "Tertawa mendengar cerita lucu.", "form": "笑う"},
-    "ます": {"jp": "彼女はいつも明るく笑います。", "id": "Dia selalu tertawa dengan ceria.", "form": "笑います"},
-    "て": {"jp": "そんなに笑わないでください。", "id": "Tolong jangan tertawa seperti itu.", "form": "笑って"},
-    "た": {"jp": "テレビを見て大声で笑った。", "id": "Saya tertawa keras melihat TV.", "form": "笑った"},
-    "ない": {"jp": "今日は一度も笑わない。", "id": "Hari ini saya tidak tertawa sekali pun.", "form": "笑わない"}
-  },
-  {
-    "kosakata": ["jp", "泣く", "なく"],
-    "arti": ["id", "menangis"],
-    "kamus": {"jp": "悲しい映画を見て泣く。", "id": "Menangis menonton film sedih.", "form": "泣く"},
-    "ます": {"jp": "赤ちゃんがよく泣きます。", "id": "Bayi sering menangis.", "form": "泣きます"},
-    "て": {"jp": "泣かないで、話してください。", "id": "Jangan menangis, tolong bicaralah.", "form": "泣いて"},
-    "た": {"jp": "悔しくて泣いた。", "id": "Saya menangis karena kesal/kecewa.", "form": "泣いた"},
-    "ない": {"jp": "どんなに辛くても泣かない。", "id": "Secapa apa pun, saya tidak akan menangis.", "form": "泣かない"}
-  },
-  {
-    "kosakata": ["jp", "怒る", "おこる"],
-    "arti": ["id", "marah"],
-    "kamus": {"jp": "嘘をつかれて怒る。", "id": "Marah karena dibohongi.", "form": "怒る"},
-    "ます": {"jp": "父はめったに怒りません。", "id": "Ayah saya jarang sekali marah.", "form": "怒ります"},
-    "て": {"jp": "そんなに怒らないでください。", "id": "Tolong jangan marah seperti itu.", "form": "怒って"},
-    "た": {"jp": "宿題を忘れて先生に怒られた（怒った）。", "id": "Saya dimarahi guru (atau: guru marah) karena lupa PR.", "form": "怒った"},
-    "ない": {"jp": "彼は優しくて全然怒らない。", "id": "Dia baik hati dan tidak pernah marah sama sekali.", "form": "怒らない"}
-  },
-  {
-    "kosakata": ["jp", "始まる", "はじまる"],
-    "arti": ["id", "dimulai (subjek + が)"],
-    "kamus": {"jp": "もうすぐ授業が始まる。", "id": "Sebentar lagi pelajaran akan dimulai.", "form": "始まる"},
-    "ます": {"jp": "会議は１０時に始まります。", "id": "Rapat dimulai jam 10.", "form": "始まります"},
-    "て": {"jp": "映画が始まって、静かになった。", "id": "Film dimulai, dan menjadi hening.", "form": "始まって"},
-    "た": {"jp": "雨が急に降り始まった（始まった）。", "id": "Acara/kegiatan telah dimulai.", "form": "始まった"},
-    "ない": {"jp": "時間になっても始まらない。", "id": "Meskipun sudah waktunya, belum kunjung dimulai.", "form": "始まらない"}
-  },
-  {
-    "kosakata": ["jp", "終わる", "おわる"],
-    "arti": ["id", "selesai / berakhir (subjek + が)"],
-    "kamus": {"jp": "午後５時に仕事が終わる。", "id": "Pekerjaan selesai jam 5 sore.", "form": "終わる"},
-    "ます": {"jp": "テストは３時に終わります。", "id": "Ujian akan selesai jam 3.", "form": "終わります"},
-    "て": {"jp": "授業が終わってから遊ぶ。", "id": "Bermain setelah pelajaran selesai.", "form": "終わって"},
-    "た": {"jp": "夏休みが昨日終わった。", "id": "Liburan musim panas telah berakhir kemarin.", "form": "終わった"},
-    "ない": {"jp": "宿題がまだ終わらない。", "id": "PR-nya belum selesai juga.", "form": "終わらない"}
-  },
-  {
-    "kosakata": ["jp", "開く", "あく"],
-    "arti": ["id", "terbuka"],
-    "kamus": {"jp": "風で窓が開く。", "id": "Jendela terbuka karena angin.", "form": "開く"},
-    "ます": {"jp": "デパートは１０時に開きます。", "id": "Department store buka jam 10.", "form": "開きます"},
-    "て": {"jp": "ドアが開いて、人が入ってきた。", "id": "Pintu terbuka dan orang masuk.", "form": "開いて"},
-    "た": {"jp": "自動ドアが開いた。", "id": "Pintu otomatis terbuka.", "form": "開いた"},
-    "ない": {"jp": "鍵がかかっていて開かない。", "id": "Terkunci sehingga tidak bisa terbuka.", "form": "開かない"}
-  },
-  {
-    "kosakata": ["jp", "閉まる", "しまる"],
-    "arti": ["id", "tertutup / tutup"],
-    "kamus": {"jp": "夜遅くに店が閉まる。", "id": "Toko tutup pada larut malam.", "form": "閉まる"},
-    "ます": {"jp": "銀行は４時に閉まります。", "id": "Bank tutup pada jam 4.", "form": "閉まります"},
-    "て": {"jp": "ドアが閉まって、出発した。", "id": "Pintu tertutup lalu berangkat.", "form": "閉まって"},
-    "た": {"jp": "お店はもう閉まった。", "id": "Tokonya sudah tutup.", "form": "閉まった"},
-    "ない": {"jp": "壊れていてドアが閉まらない。", "id": "Karena rusak, pintunya tidak mau tertutup.", "form": "閉まらない"}
-  },
-  {
-    "kosakata": ["jp", "治る", "なおる"],
-    "arti": ["id", "sembuh / pulih (penyakit/luka)"],
-    "kamus": {"jp": "薬を飲めば風邪が治る。", "id": "Jika minum obat, flu akan sembuh.", "form": "治る"},
-    "ます": {"jp": "すぐに病気が治ります。", "id": "Penyakitnya akan segera sembuh.", "form": "治ります"},
-    "て": {"jp": "怪我が治って、安心した。", "id": "Luka sudah sembuh, saya merasa lega.", "form": "治って"},
-    "た": {"jp": "おかげさまで病気が治った。", "id": "Berkat doa/bantuan Anda, penyakitnya sudah sembuh.", "form": "治った"},
-    "ない": {"jp": "なかなか風邪が治らない。", "id": "Flunya tak kunjung sembuh.", "form": "治らない"}
-  },
-  {
-    "kosakata": ["jp", "治す", "なおす"],
-    "arti": ["id", "menyembuhkan / mengobati"],
-    "kamus": {"jp": "医者が病気を治す。", "id": "Dokter menyembuhkan penyakit.", "form": "治す"},
-    "ます": {"jp": "虫歯を治します。", "id": "Saya mengobati/menyembuhkan gigi berlubang.", "form": "治します"},
-    "て": {"jp": "しっかりと風邪を治してください。", "id": "Tolong sembuhkan flumu dengan benar.", "form": "治して"},
-    "た": {"jp": "休養して体を治した。", "id": "Saya beristirahat dan memulihkan/menyembuhkan tubuh.", "form": "治した"},
-    "ない": {"jp": "自分で病気を治せない（治さない）。", "id": "Tidak mengobati penyakit secara mandiri.", "form": "治さない"}
-  },
-  {
-    "kosakata": ["jp", "する", "する"],
-    "arti": ["id", "melakukan / mengerjakan"],
-    "kamus": {"jp": "毎日運動をする。", "id": "Melakukan olahraga setiap hari.", "form": "する"},
-    "ます": {"jp": "これから宿題をします。", "id": "Mulai sekarang saya akan mengerjakan PR.", "form": "します"},
-    "て": {"jp": "準備をして、出かけます。", "id": "Saya melakukan persiapan lalu pergi keluar.", "form": "して"},
-    "た": {"jp": "昨日、サッカーをした。", "id": "Kemarin saya bermain/melakukan sepak bola.", "form": "した"},
-    "ない": {"jp": "今日は何も勉強しない。", "id": "Hari ini saya tidak melakukan pelajaran/belajar apa pun.", "form": "しない"}
-  },
-  {
-    "kosakata": ["jp", "始まっている", "はじまっている"],
-    "arti": ["id", "sudah dimulai / sedang berlangsung"],
-    "kamus": {"jp": "会場に着いた時、既に映画が始まっている。", "id": "Saat tiba di lokasi, filmnya sudah dimulai.", "form": "始まっている"},
-    "ます": {"jp": "会議はもう始まっています。", "id": "Rapatnya sudah dimulai.", "form": "始まっています"},
-    "て": {"jp": "授業が始まっているので、静かにしてください。", "id": "Karena pelajaran sudah dimulai, tolong tenang.", "form": "始まっていて"},
-    "た": {"jp": "その時、イベントはもう始まっていた。", "id": "Pada saat itu, acaranya sudah dimulai.", "form": "始まっていた"},
-    "ない": {"jp": "まだ試合は始まっていない。", "id": "Pertandingannya belum dimulai.", "form": "始まっていない"}
-  },
-  {
-    "kosakata": ["jp", "終わっている", "おわっている"],
-    "arti": ["id", "sudah selesai"],
-    "kamus": {"jp": "家に着く頃には、番組が終っている。", "id": "Saat sampai rumah, acara televisinya sudah selesai.", "form": "終わっている"},
-    "ます": {"jp": "テストはもう終わっています。", "id": "Ujiannya sudah selesai.", "form": "終わっています"},
-    "て": {"jp": "仕事が we終わり（終わって）いるので、帰ってもいいです。", "id": "Karena pekerjaan sudah selesai, Anda boleh pulang.", "form": "終わっていて"},
-    "た": {"jp": "受付時間は既に終わっていた。", "id": "Waktu pendaftaran sudah selesai pada saat itu.", "form": "終わっていた"},
-    "ない": {"jp": "まだ宿題は終わっていない。", "id": "PR-nya belum selesai.", "form": "終わっていない"}
-  },
-  {
-    "kosakata": ["jp", "亡くなる", "なくなる"],
-    "arti": ["id", "meninggal dunia (bentuk halus dari 死ぬ)"],
-    "kamus": {"jp": "人はいつか亡くなる。", "id": "Manusia suatu saat akan meninggal dunia.", "form": "亡くなる"},
-    "ます": {"jp": "先月、祖父が亡くなりました。", "id": "Bulan lalu, kakek saya meninggal dunia.", "form": "亡くなりました"},
-    "て": {"jp": "有名人が亡くなって、とても悲しい。", "id": "Tokoh terkenal meninggal dunia, saya sangat sedih.", "form": "亡くなって"},
-    "た": {"jp": "昨年、愛犬が亡くなった。", "id": "Tahun lalu, anjing kesayangan saya meninggal dunia.", "form": "亡くなった"},
-    "ない": {"jp": "幸い、事故での死者は亡くなっていない（出ていない）。", "id": "Beruntung, tidak ada korban yang meninggal dalam kecelakaan.", "form": "亡くならない"}
-  },
-  {
-    "kosakata": ["jp", "育てる", "そだてる"],
-    "arti": ["id", "merawat / membesarkan / mendidik"],
-    "kamus": {"jp": "愛情を持って子供を育てる。", "id": "Membesarkan anak dengan kasih sayang.", "form": "育てる"},
-    "ます": {"jp": "庭で野菜や花を育てます。", "id": "Saya merawat/menanam sayur dan bunga di halaman.", "form": "育てます"},
-    "て": {"jp": "大切に植物を育ててください。", "id": "Tolong rawat tanaman ini dengan baik.", "form": "育てて"},
-    "た": {"jp": "両親が私を立派に育てた。", "id": "Orang tua telah membesarkan saya dengan baik.", "form": "育てた"},
-    "ない": {"jp": "ペットを育てる余裕がない。", "id": "Saya tidak memiliki kelonggaran untuk merawat hewan peliharaan.", "form": "育てない"}
-  },
-  {
-    "kosakata": ["jp", "育つ", "そだつ"],
-    "arti": ["id", "tumbuh / berkembang / dibesarkan"],
-    "kamus": {"jp": "豊かな自然の中で育つ。", "id": "Tumbuh di tengah alam yang asri.", "form": "育つ"},
-    "ます": {"jp": "子供は元気に育ちます。", "id": "Anak-anak tumbuh dengan sehat.", "form": "育ちます"},
-    "て": {"jp": "順調に育っていて、うれしい。", "id": "Saya senang karena tumbuh dengan lancar.", "form": "育って"},
-    "た": {"jp": "私は田舎で育った。", "id": "Saya dibesarkan di desa.", "form": "育った"},
-    "ない": {"jp": "日当たりが悪いと植物がうまく育たない。", "id": "Jika kurang pencahayaan matahari, tanaman tidak akan tumbuh dengan baik.", "form": "育たない"}
-  },
-  {
-    "kosakata": ["jp", "見せる", "みせる"],
-    "arti": ["id", "memperlihatkan / menunjukkan"],
-    "kamus": {"jp": "友達に写真を見せる。", "id": "Memperlihatkan foto kepada teman.", "form": "見せる"},
-    "ます": {"jp": "パスポートを見せます。", "id": "Saya menunjukkan paspor.", "form": "見せます"},
-    "て": {"jp": "切符を見せてください。", "id": "Tolong perlihatkan tiketnya.", "form": "見せて"},
-    "た": {"jp": "昨日、彼に新しい服を見せた。", "id": "Kemarin saya memperlihatkan baju baru kepadanya.", "form": "見せた"},
-    "ない": {"jp": "秘密だから誰にも見せない。", "id": "Karena rahasia, saya tidak memperlihatkannya kepada siapa pun.", "form": "見せない"}
-  },
-  {
-    "kosakata": ["jp", "見つける", "みつける"],
-    "arti": ["id", "menemukan (mengejar/mencari, subjek sengaja)"],
-    "kamus": {"jp": "無くした鍵を見つける。", "id": "Menemukan kunci yang hilang.", "form": "見つける"},
-    "ます": {"jp": "いい仕事を見つけます。", "id": "Saya akan menemukan pekerjaan yang bagus.", "form": "見つけます"},
-    "て": {"jp": "間違いを見つけて、直してください。", "id": "Tolong temukan kesalahannya dan perbaiki.", "form": "見つけて"},
-    "た": {"jp": "図書館で面白い本を見つけた。", "id": "Saya menemukan buku menarik di perpustakaan.", "form": "見つけた"},
-    "ない": {"jp": "いくら探しても見つからない（見つけない）。", "id": "Berapa kali pun dicari, saya tidak menemukannya.", "form": "見つけない"}
-  },
-  {
-    "kosakata": ["jp", "見つかる", "みつかる"],
-    "arti": ["id", "ditemukan / ketemu"],
-    "kamus": {"jp": "無くした財布が見つかる。", "id": "Dompet yang hilang ketemu.", "form": "見つかる"},
-    "ます": {"jp": "すぐに犯人が見つかります。", "id": "Pelakunya akan segera ditemukan.", "form": "見つかります"},
-    "て": {"jp": "鍵が見つかって、よかった。", "id": "Baguslah kuncinya sudah ketemu.", "form": "見つかって"},
-    "た": {"jp": "昨日、消えた書類が見つかった。", "id": "Kemarin dokumen yang hilang sudah ditemukan.", "form": "見つかった"},
-    "ない": {"jp": "まだいい部屋が見つからない。", "id": "Kamar yang bagus belum juga ketemu.", "form": "見つからない"}
-  },
-  {
-    "kosakata": ["jp", "落とす", "おとす"],
-    "arti": ["id", "menjatuhkan / menghilangkan (karena tidak sengaja)"],
-    "kamus": {"jp": "ポケットから鍵を落とす。", "id": "Menjatuhkan kunci dari saku.", "form": "落とす"},
-    "ます": {"jp": "スピードを落とします。", "id": "Saya menurunkan/mengurangi kecepatan.", "form": "落とします"},
-    "て": {"jp": "コップを落として、割ってしまった。", "id": "Saya menjatuhkan gelas dan memecahkannya.", "form": "落として"},
-    "た": {"jp": "道でお金を落とした。", "id": "Saya menjatuhkan/menghilangkan uang di jalan.", "form": "落とした"},
-    "ない": {"jp": "大切な物だから絶対に落とさない。", "id": "Karena barang berharga, saya tidak akan menjatuhkannya.", "form": "落とさない"}
-  },
-  {
-    "kosakata": ["jp", "落ちる", "おちる"],
-    "arti": ["id", "jatuh / gugur"],
-    "kamus": {"jp": "木から葉っぱが落ちる。", "id": "Daun gugur/jatuh dari pohon.", "form": "落ちる"},
-    "ます": {"jp": "試験に落ちます。", "id": "Gagal/jatuh dalam ujian.", "form": "落ちます"},
-    "て": {"jp": "お皿が落ちて、割れた。", "id": "Piringnya jatuh dan pecah.", "form": "落ちて"},
-    "た": {"jp": "階段から落ちた。", "id": "Saya jatuh dari tangga.", "form": "落ちた"},
-    "ない": {"jp": "この汚れは洗っても落ちない。", "id": "Noda ini tidak akan hilang/jatuh meskipun dicuci.", "form": "落ちない"}
-  },
-  {
-    "kosakata": ["jp", "払い戻す", "はらいもどす"],
-    "arti": ["id", "mengembalikan uang / refund"],
-    "kamus": {"jp": "チケットの代金を払い戻す。", "id": "Mengembalikan uang pembelian tiket.", "form": "払い戻す"},
-    "ます": {"jp": "キャンセルした場合、全額払い戻します。", "id": "Jika dibatalkan, kami akan mengembalikan uang secara penuh.", "form": "払い戻します"},
-    "て": {"jp": "窓口で手数料を払い戻してください。", "id": "Tolong lakukan refund biaya di loket.", "form": "払い戻して"},
-    "た": {"jp": "使わなかった切符を払い戻した。", "id": "Saya telah melakukan refund tiket yang tidak terpakai.", "form": "払い戻した"},
-    "ない": {"jp": "購入後の返金は払い戻さない（行わない）。", "id": "Kami tidak mengembalikan uang setelah pembelian.", "form": "払い戻さない"}
-  },
-  {
-    "kosakata": ["jp", "直す", "なおす"],
-    "arti": ["id", "memperbaiki / mengoreksi"],
-    "kamus": {"jp": "壊れた時計を直す。", "id": "Memperbaiki jam yang rusak.", "form": "直す"},
-    "ます": {"jp": "文章の間違いを直します。", "id": "Saya mengoreksi/memperbaiki kesalahan pada kalimat.", "form": "直します"},
-    "て": {"jp": "発音を直してください。", "id": "Tolong koreksi pelafalan saya.", "form": "直して"},
-    "た": {"jp": "自分で自転車を直した。", "id": "Saya memperbaiki sepeda sendiri.", "form": "直した"},
-    "ない": {"jp": "簡単には直せない（直さない）。", "id": "Saya tidak memperbaikinya secara sembarangan.", "form": "直さない"}
-  },
-  {
-    "kosakata": ["jp", "降る", "ふる"],
-    "arti": ["id", "turun (hujan/salju)"],
-    "kamus": {"jp": "午後から雨が降る。", "id": "Hujan akan turun mulai siang hari.", "form": "降る"},
-    "ます": {"jp": "冬には雪が降ります。", "id": "Salju turun di musim dingin.", "form": "降ります"},
-    "て": {"jp": "雨が降っていて、出かけられない。", "id": "Karena hujan sedang turun, saya tidak bisa pergi keluar.", "form": "降っていて"},
-    "た": {"jp": "昨日は一日中雨が降った。", "id": "Kemarin hujan turun seharian.", "form": "降った"},
-    "ない": {"jp": "今日は雨が降らない。", "id": "Hari ini hujan tidak turun.", "form": "降らない"}
-  },
-  {
-    "kosakata": ["jp", "咲く", "さく"],
-    "arti": ["id", "mekar"],
-    "kamus": {"jp": "春になると桜が咲く。", "id": "Bunga sakura mekar ketika musim semi tiba.", "form": "咲く"},
-    "ます": {"jp": "庭できれいな花が咲きます。", "id": "Bunga yang indah mekar di halaman.", "form": "咲きます"},
-    "て": {"jp": "花が咲いて、とてもきれいです。", "id": "Bunganya mekar dan sangat indah.", "form": "咲いて"},
-    "た": {"jp": "公園のチューリップが咲いた。", "id": "Bunga tulip di taman telah mekar.", "form": "咲いた"},
-    "ない": {"jp": "まだこの花は咲かない。", "id": "Bunga ini belum mekar.", "form": "咲かない"}
-  },
-  {
-    "kosakata": ["jp", "曇る", "くもる"],
-    "arti": ["id", "berawan"],
-    "kamus": {"jp": "午後から空が曇る。", "id": "Langit akan berawan mulai siang hari.", "form": "曇る"},
-    "ます": {"jp": "明日は一日中曇ります。", "id": "Besok akan berawan seharian.", "form": "曇ります"},
-    "て": {"jp": "空が曇っていて、今にも雨が降りそうだ。", "id": "Langit sedang berawan dan sepertinya hujan akan segera turun.", "form": "曇っていて"},
-    "た": {"jp": "夕方から急に曇った。", "id": "Mulai sore hari langit tiba-tiba berawan.", "form": "曇った"},
-    "ない": {"jp": "今日は少しも曇らない。", "id": "Hari ini langit tidak berawan sedikit pun.", "form": "曇らない"}
-  },
-  {
-    "kosakata": ["jp", "晴れる", "はれる"],
-    "arti": ["id", "cerah"],
-    "kamus": {"jp": "明日は空が晴れる。", "id": "Besok langit akan cerah.", "form": "晴れる"},
-    "ます": {"jp": "午後はいい天気に晴れます。", "id": "Siang hari cuaca akan menjadi cerah.", "form": "晴れます"},
-    "て": {"jp": "空が晴れて、気持ちがいい。", "id": "Langit cerah dan rasanya menyenangkan.", "form": "晴れて"},
-    "た": {"jp": "雨が止んで、空が晴れた。", "id": "Hujan berhenti dan langit menjadi cerah.", "form": "晴れた"},
-    "ない": {"jp": "今日は全然晴れない。", "id": "Hari ini sama sekali tidak cerah.", "form": "晴れない"}
-  },
-  {
-    "kosakata": ["jp", "泳ぐ", "およぐ"],
-    "arti": ["id", "berenang"],
-    "kamus": {"jp": "夏に海で泳ぐ。", "id": "Berenang di laut pada musim panas.", "form": "泳ぐ"},
-    "ます": {"jp": "毎週プールで泳ぎます。", "id": "Saya berenang di kolam renang setiap minggu.", "form": "泳ぎます"},
-    "て": {"jp": "気持ちよく泳いでいる。", "id": "Sedang berenang dengan nyaman.", "form": "泳いで"},
-    "た": {"jp": "昨日、友達と一緒に泳いだ。", "id": "Kemarin saya berenang bersama teman.", "form": "泳いだ"},
-    "ない": {"jp": "私は泳げない（泳がない）。", "id": "Saya tidak berenang.", "form": "泳がない"}
-  },
-  {
-    "kosakata": ["jp", "登る", "のぼる"],
-    "arti": ["id", "mendaki / naik"],
-    "kamus": {"jp": "休日に山に登る。", "id": "Mendaki gunung di hari libur.", "form": "登る"},
-    "ます": {"jp": "富士山に登ります。", "id": "Saya mendaki Gunung Fuji.", "form": "登ります"},
-    "て": {"jp": "階段を登って、上に行く。", "id": "Naik tangga lalu pergi ke atas.", "form": "登って"},
-    "た": {"jp": "去年、高い山に登った。", "id": "Tahun lalu saya mendaki gunung yang tinggi.", "form": "登った"},
-    "ない": {"jp": "疲れているので登らない。", "id": "Karena lelah, saya tidak mendaki.", "form": "登らない"}
-  },
-  {
-    "kosakata": ["jp", "注文する", "ちゅうもんする"],
-    "arti": ["id", "memesan / memesan barang atau makanan"],
-    "kamus": {"jp": "レストランで料理を注文する。", "id": "Memesan makanan di restoran.", "form": "注文する"},
-    "ます": {"jp": "ネットで新しい本を注文します。", "id": "Saya memesan buku baru secara online.", "form": "注文します"},
-    "て": {"jp": "メニューを見て、注文してください。", "id": "Tolong lihat menu dan silakan memesan.", "form": "注文して"},
-    "た": {"jp": "昨日、服をオンラインで注文した。", "id": "Kemarin saya memesan pakaian secara online.", "form": "注文した"},
-    "ない": {"jp": "お腹が空いていないので注文しない。", "id": "Karena tidak lapar, saya tidak memesan.", "form": "注文しない"}
+    "kosakata": [
+      "jp",
+      "行く",
+      "いく"
+    ],
+    "arti": [
+      "id",
+      "pergi"
+    ],
+    "kamus": {
+      "jp": "来年、日本へ行くつもりです。",
+      "id": "Tahun depan saya berencana pergi ke Jepang.",
+      "form": "行く",
+      "ruby": "<ruby>来年<rt>らいねん</rt></ruby>、<ruby>日本<rt>にほん</rt></ruby>へ<ruby>行<rt>い</rt></ruby>くつもりです。"
+    },
+    "ます": {
+      "jp": "毎朝七時に会社へ行きます。",
+      "id": "Setiap pagi saya pergi ke kantor pukul tujuh.",
+      "form": "行きます",
+      "ruby": "<ruby>毎朝<rt>まいあさ</rt></ruby><ruby>七時<rt>しちじ</rt></ruby>に<ruby>会社<rt>かいしゃ</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "郵便局へ行って、荷物を出しました。",
+      "id": "Saya pergi ke kantor pos lalu mengirim paket.",
+      "form": "行って",
+      "ruby": "<ruby>郵便局<rt>ゆうびんきょく</rt></ruby>へ<ruby>行<rt>い</rt></ruby>って、<ruby>荷物<rt>にもつ</rt></ruby>を<ruby>出<rt>だ</rt></ruby>しました。"
+    },
+    "た": {
+      "jp": "先週、友達と京都へ行った。",
+      "id": "Minggu lalu saya pergi ke Kyoto bersama teman.",
+      "form": "行った",
+      "ruby": "<ruby>先週<rt>せんしゅう</rt></ruby>、<ruby>友達<rt>ともだち</rt></ruby>と<ruby>京都<rt>きょうと</rt></ruby>へ<ruby>行<rt>い</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "雨だから今日は公園へ行かない。",
+      "id": "Karena hujan, hari ini saya tidak pergi ke taman.",
+      "form": "行かない",
+      "ruby": "<ruby>雨<rt>あめ</rt></ruby>だから<ruby>今日<rt>きょう</rt></ruby>は<ruby>公園<rt>こうえん</rt></ruby>へ<ruby>行<rt>い</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "来る",
+      "くる"
+    ],
+    "arti": [
+      "id",
+      "datang"
+    ],
+    "kamus": {
+      "jp": "明日、新しい先生が来る。",
+      "id": "Besok guru baru akan datang.",
+      "form": "来る",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>、<ruby>新<rt>あたら</rt></ruby>しい<ruby>先生<rt>せんせい</rt></ruby>が<ruby>来<rt>く</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "毎週金曜日に母が来ます。",
+      "id": "Ibu datang setiap hari Jumat.",
+      "form": "来ます",
+      "ruby": "<ruby>毎週<rt>まいしゅう</rt></ruby><ruby>金曜日<rt>きんようび</rt></ruby>に<ruby>母<rt>はは</rt></ruby>が<ruby>来<rt>き</rt></ruby>ます。"
+    },
+    "て": {
+      "jp": "こちらへ来て、一緒に写真を撮りましょう。",
+      "id": "Kemarilah, mari kita berfoto bersama.",
+      "form": "来て",
+      "ruby": "こちらへ<ruby>来<rt>き</rt></ruby>て、<ruby>一緒<rt>いっしょ</rt></ruby>に<ruby>写真<rt>しゃしん</rt></ruby>を<ruby>撮<rt>と</rt></ruby>りましょう。"
+    },
+    "た": {
+      "jp": "さっき友達が来た。",
+      "id": "Tadi teman saya datang.",
+      "form": "来た",
+      "ruby": "さっき<ruby>友達<rt>ともだち</rt></ruby>が<ruby>来<rt>き</rt></ruby>た。"
+    },
+    "ない": {
+      "jp": "バスはまだ来ない。",
+      "id": "Busnya belum datang.",
+      "form": "来ない",
+      "ruby": "バスはまだ<ruby>来<rt>こ</rt></ruby>ない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "帰る",
+      "かえる"
+    ],
+    "arti": [
+      "id",
+      "pulang"
+    ],
+    "kamus": {
+      "jp": "仕事が終わったら家へ帰る。",
+      "id": "Setelah pekerjaan selesai saya pulang ke rumah.",
+      "form": "帰る",
+      "ruby": "<ruby>仕事<rt>しごと</rt></ruby>が<ruby>事<rt>お</rt></ruby>わったら<ruby>家<rt>うち</rt></ruby>へ<ruby>帰<rt>かえ</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "毎日六時ごろ帰ります。",
+      "id": "Setiap hari saya pulang sekitar pukul enam.",
+      "form": "帰ります",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>六時<rt>ろくじ</rt></ruby>ごろ<ruby>帰<rt>かえ</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "家へ帰って、夕飯を作ります。",
+      "id": "Saya pulang ke rumah lalu memasak makan malam.",
+      "form": "帰って",
+      "ruby": "<ruby>家<rt>うち</rt></ruby>へ<ruby>帰<rt>かえ</rt></ruby>って、<ruby>夕飯<rt>ゆうはん</rt></ruby>を<ruby>作<rt>つく</rt></ruby>ります。"
+    },
+    "た": {
+      "jp": "昨日は早く帰った。",
+      "id": "Kemarin saya pulang lebih awal.",
+      "form": "帰った",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>は<ruby>早<rt>はや</rt></ruby>く<ruby>帰<rt>かえ</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "今夜は家へ帰らない。",
+      "id": "Malam ini saya tidak pulang ke rumah.",
+      "form": "帰らない",
+      "ruby": "<ruby>今夜<rt>こんや</rt></ruby>は<ruby>家<rt>うち</rt></ruby>へ<ruby>帰<rt>かえ</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "食べる",
+      "たべる"
+    ],
+    "arti": [
+      "id",
+      "makan"
+    ],
+    "kamus": {
+      "jp": "野菜をたくさん食べる。",
+      "id": "Saya makan banyak sayuran.",
+      "form": "食べる",
+      "ruby": "<ruby>野菜<rt>やさい</rt></ruby>をたくさん<ruby>食<rt>た</rt></ruby>べる。"
+    },
+    "ます": {
+      "jp": "昼休みにお弁当を食べます。",
+      "id": "Saya makan bekal saat istirahat siang.",
+      "form": "食べます",
+      "ruby": "<ruby>昼休<rt>ひるやす</rt></ruby>みにお<ruby>弁当<rt>べんとう</rt></ruby>を<ruby>食<rt>た</rt></ruby>べます。"
+    },
+    "て": {
+      "jp": "ご飯を食べてから勉強します。",
+      "id": "Saya belajar setelah makan.",
+      "form": "食べて",
+      "ruby": "ご<ruby>飯<rt>はん</rt></ruby>を<ruby>食<rt>た</rt></ruby>べてから<ruby>勉強<rt>べんきょう</rt></ruby>します。"
+    },
+    "た": {
+      "jp": "朝ご飯はもう食べた。",
+      "id": "Saya sudah makan sarapan.",
+      "form": "食べた",
+      "ruby": "<ruby>朝<rt>あさ</rt></ruby>ご<ruby>飯<rt>はん</rt></ruby>はもう<ruby>食<rt>た</rt></ruby>べた。"
+    },
+    "ない": {
+      "jp": "夜は甘い物を食べない。",
+      "id": "Saya tidak makan makanan manis pada malam hari.",
+      "form": "食べない",
+      "ruby": "<ruby>夜<rt>よる</rt></ruby>は<ruby>甘<rt>あま</rt></ruby>い<ruby>物<rt>もの</rt></ruby>を<ruby>食<rt>た</rt></ruby>べない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "飲む",
+      "のむ"
+    ],
+    "arti": [
+      "id",
+      "minum"
+    ],
+    "kamus": {
+      "jp": "水をたくさん飲むことは大切です。",
+      "id": "Penting untuk minum banyak air.",
+      "form": "飲む",
+      "ruby": "<ruby>水<rt>みず</rt></ruby>をたくさん<ruby>飲<rt>の</rt></ruby>むことは<ruby>大切<rt>たいせつ</rt></ruby>です。"
+    },
+    "ます": {
+      "jp": "毎朝牛乳を飲みます。",
+      "id": "Saya minum susu setiap pagi.",
+      "form": "飲みます",
+      "ruby": "<ruby>毎朝<rt>まいあさ</rt></ruby><ruby>牛乳<rt>ぎゅうにゅう</rt></ruby>を<ruby>飲<rt>の</rt></ruby>みます。"
+    },
+    "て": {
+      "jp": "薬を飲んで、早く寝てください。",
+      "id": "Minulah obat lalu tidurlah lebih awal.",
+      "form": "飲んで",
+      "ruby": "<ruby>薬<rt>くすり</rt></ruby>を<ruby>飲<rt>の</rt></ruby>んで、<ruby>早<rt>はや</rt></ruby>く<ruby>寝<rt>ね</rt></ruby>てください。"
+    },
+    "た": {
+      "jp": "コーヒーを二杯飲んだ。",
+      "id": "Saya minum dua cangkir kopi.",
+      "form": "飲んだ",
+      "ruby": "コーヒーを<ruby>二杯<rt>にごう</rt></ruby><ruby>飲<rt>の</rt></ruby>んだ。"
+    },
+    "ない": {
+      "jp": "お酒は飲まない。",
+      "id": "Saya tidak minum alkohol.",
+      "form": "飲まない",
+      "ruby": "お<ruby>酒<rt>さけ</rt></ruby>は<ruby>飲<rt>の</rt></ruby>まない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "見る",
+      "みる"
+    ],
+    "arti": [
+      "id",
+      "melihat"
+    ],
+    "kamus": {
+      "jp": "夜に映画を見るのが好きです。",
+      "id": "Saya suka menonton film pada malam hari.",
+      "form": "見る",
+      "ruby": "<ruby>夜<rt>よる</rt></ruby>に<ruby>映画<rt>えいが</rt></ruby>を<ruby>見<rt>み</rt></ruby>るのが<ruby>好<rt>す</rt></ruby>きです。"
+    },
+    "ます": {
+      "jp": "毎晩ニュースを見ます。",
+      "id": "Saya menonton berita setiap malam.",
+      "form": "見ます",
+      "ruby": "<ruby>毎晩<rt>まいばん</rt></ruby>ニュースを<ruby>見<rt>み</rt></ruby>ます。"
+    },
+    "て": {
+      "jp": "この写真を見てください。",
+      "id": "Tolong lihat foto ini.",
+      "form": "見て",
+      "ruby": "この<ruby>写真<rt>しゃしん</rt></ruby>を<ruby>見<rt>み</rt></ruby>てください。"
+    },
+    "た": {
+      "jp": "昨日、その映画を見た。",
+      "id": "Kemarin saya menonton film itu.",
+      "form": "見た",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、その<ruby>映画<rt>えいが</rt></ruby>を<ruby>見<rt>み</rt></ruby>た。"
+    },
+    "ない": {
+      "jp": "最近テレビを見ない。",
+      "id": "Akhir-akhir ini saya tidak menonton televisi.",
+      "form": "見ない",
+      "ruby": "<ruby>最近<rt>さいきん</rt></ruby>テレビを<ruby>見<rt>み</rt></ruby>ない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "聞く",
+      "きく"
+    ],
+    "arti": [
+      "id",
+      "mendengar"
+    ],
+    "kamus": {
+      "jp": "日本の音楽をよく聞く。",
+      "id": "Saya sering mendengarkan musik Jepang.",
+      "form": "聞く",
+      "ruby": "<ruby>日本<rt>にほん</rt></ruby>の<ruby>音楽<rt>おんがく</rt></ruby>をよく<ruby>聞<rt>き</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "分からないときは先生に聞きます。",
+      "id": "Jika tidak mengerti, saya bertanya kepada guru.",
+      "form": "聞きます",
+      "ruby": "<ruby>分<rt>わ</rt></ruby>からないときは<ruby>先生<rt>せんせい</rt></ruby>に<ruby>聞<rt>き</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "最後まで話を聞いてください。",
+      "id": "Tolong dengarkan sampai selesai.",
+      "form": "聞いて",
+      "ruby": "<ruby>最後<rt>さいご</rt></ruby>まで<ruby>話<rt>はなし</rt></ruby>を<ruby>聞<rt>き</rt></ruby>いてください。"
+    },
+    "た": {
+      "jp": "面白い話を聞いた。",
+      "id": "Saya mendengar cerita yang menarik.",
+      "form": "聞いた",
+      "ruby": "<ruby>面白<rt>おもしろ</rt></ruby>い<ruby>話<rt>はなし</rt></ruby>を<ruby>聞<rt>き</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "人の話を聞かない。",
+      "id": "Dia tidak mau mendengarkan perkataan orang.",
+      "form": "聞かない",
+      "ruby": "<ruby>人<rt>ひと</rt></ruby>の<ruby>話<rt>はなし</rt></ruby>を<ruby>聞<rt>き</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "話す",
+      "はなす"
+    ],
+    "arti": [
+      "id",
+      "berbicara"
+    ],
+    "kamus": {
+      "jp": "日本人と日本語で話す。",
+      "id": "Berbicara dengan orang Jepang menggunakan bahasa Jepang.",
+      "form": "話す",
+      "ruby": "<ruby>日本人<rt>にほんじん</rt></ruby>と<ruby>日本語<rt>にほんご</rt></ruby>で<ruby>話<rt>はな</rt></ruby>す。"
+    },
+    "ます": {
+      "jp": "毎日先生と話します。",
+      "id": "Saya berbicara dengan guru setiap hari.",
+      "form": "話します",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>先生<rt>せんせい</rt></ruby>と<ruby>話<rt>はな</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "もっとゆっくり話してください。",
+      "id": "Tolong berbicaralah lebih pelan.",
+      "form": "話して",
+      "ruby": "もっとゆっくり<ruby>話<rt>はな</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "昨日、店長と話した。",
+      "id": "Kemarin saya berbicara dengan manajer toko.",
+      "form": "話した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>店長<rt>てんちょう</rt></ruby>と<ruby>話<rt>はな</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "緊張するとあまり話さない。",
+      "id": "Saat gugup, saya tidak banyak berbicara.",
+      "form": "話さない",
+      "ruby": "<ruby>緊張<rt>きんちょう</rt></ruby>するとあまり<ruby>話<rt>はな</rt></ruby>さない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "書く",
+      "かく"
+    ],
+    "arti": [
+      "id",
+      "menulis"
+    ],
+    "kamus": {
+      "jp": "毎日、日本語で日記を書く。",
+      "id": "Setiap hari saya menulis buku harian dalam bahasa Jepang.",
+      "form": "書く",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby>、<ruby>日本語<rt>にほんご</rt></ruby>で<ruby>日記<rt>にっき</rt></ruby>を<ruby>書<rt>か</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "宿題をノートに書きます。",
+      "id": "Saya menulis pekerjaan rumah di buku catatan.",
+      "form": "書きます",
+      "ruby": "<ruby>宿題<rt>しゅくだい</rt></ruby>をノートに<ruby>書<rt>か</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "名前を書いてから、中に入ってください。",
+      "id": "Silakan tulis nama Anda sebelum masuk.",
+      "form": "書いて",
+      "ruby": "<ruby>名前<rt>なまえ</rt></ruby>を<ruby>書<rt>か</rt></ruby>いてから、<ruby>中<rt>なか</rt></ruby>に<ruby>入<rt>はい</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "さっきレポートを書いた。",
+      "id": "Tadi saya sudah menulis laporan.",
+      "form": "書いた",
+      "ruby": "さっきレポートを<ruby>書<rt>か</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "漢字はあまり書かない。",
+      "id": "Saya jarang menulis kanji.",
+      "form": "書かない",
+      "ruby": "<ruby>漢字<rt>かんじ</rt></ruby>はあまり<ruby>書<rt>か</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "読む",
+      "よむ"
+    ],
+    "arti": [
+      "id",
+      "membaca"
+    ],
+    "kamus": {
+      "jp": "寝る前に本を読む。",
+      "id": "Saya membaca buku sebelum tidur.",
+      "form": "読む",
+      "ruby": "<ruby>寝<rt>ね</rt></ruby>る<ruby>前<rt>まえ</rt></ruby>に<ruby>本<rt>ほん</rt></ruby>を<ruby>読<rt>よ</rt></ruby>む。"
+    },
+    "ます": {
+      "jp": "毎朝、新聞を読みます。",
+      "id": "Setiap pagi saya membaca koran.",
+      "form": "読みます",
+      "ruby": "<ruby>毎朝<rt>まいあさ</rt></ruby>、<ruby>新聞<rt>しんぶん</rt></ruby>を<ruby>読<rt>よ</rt></ruby>みます。"
+    },
+    "て": {
+      "jp": "この文章を読んで、答えてください。",
+      "id": "Bacalah teks ini lalu jawablah.",
+      "form": "読んで",
+      "ruby": "この<ruby>文章<rt>ぶんしょう</rt></ruby>を<ruby>読<rt>よ</rt></ruby>んで、<ruby>答<rt>こた</rt></ruby>えてください。"
+    },
+    "た": {
+      "jp": "昨日、その小説を読んだ。",
+      "id": "Kemarin saya menonton film itu.",
+      "form": "読んだ",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、その<ruby>小説<rt>しょうせつ</rt></ruby>を<ruby>読<rt>よ</rt></ruby>んだ。"
+    },
+    "ない": {
+      "jp": "最近、漫画を読まない。",
+      "id": "Akhir-akhir ini saya tidak membaca manga.",
+      "form": "読まない",
+      "ruby": "<ruby>最近<rt>さいきん</rt></ruby>、<ruby>漫画<rt>まんが</rt></ruby>を<ruby>読<rt>よ</rt></ruby>まない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "買う",
+      "かう"
+    ],
+    "arti": [
+      "id",
+      "membeli"
+    ],
+    "kamus": {
+      "jp": "新しい靴を買う予定です。",
+      "id": "Saya berencana membeli sepatu baru.",
+      "form": "買う",
+      "ruby": "<ruby>新<rt>あたら</rt></ruby>しい<ruby>靴<rt>くつ</rt></ruby>を<ruby>買<rt>か</rt></ruby>う<ruby>予定<rt>よてい</rt></ruby>です。"
+    },
+    "ます": {
+      "jp": "スーパーで野菜を買います。",
+      "id": "Saya membeli sayuran di supermarket.",
+      "form": "買います",
+      "ruby": "スーパーで<ruby>野菜<rt>やさい</rt></ruby>を<ruby>買<rt>か</rt></ruby>います。"
+    },
+    "て": {
+      "jp": "パンを買って、家へ帰ります。",
+      "id": "Saya membeli roti lalu pulang.",
+      "form": "買って",
+      "ruby": "パンを<ruby>買<rt>か</rt></ruby>って、<ruby>家<rt>うち</rt></ruby>へ<ruby>帰<rt>かえ</rt></ruby>ります。"
+    },
+    "た": {
+      "jp": "昨日、新しい傘を買った。",
+      "id": "Kemarin saya membeli payung baru.",
+      "form": "買った",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>新<rt>あたら</rt></ruby>しい<ruby>傘<rt>かさ</rt></ruby>を<ruby>買<rt>か</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "必要ではないので買わない。",
+      "id": "Karena tidak diperlukan, saya tidak membelinya.",
+      "form": "買わない",
+      "ruby": "<ruby>必要<rt>ひつよう</rt></ruby>ではないので<ruby>買<rt>か</rt></ruby>わない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "売る",
+      "うる"
+    ],
+    "arti": [
+      "id",
+      "menjual"
+    ],
+    "kamus": {
+      "jp": "この店は野菜を売る。",
+      "id": "Toko ini menjual sayuran.",
+      "form": "売る",
+      "ruby": "この<ruby>店<rt>みせ</rt></ruby>は<ruby>野菜<rt>やさい</rt></ruby>を<ruby>売<rt>う</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "毎朝、市場で魚を売ります。",
+      "id": "Setiap pagi menjual ikan di pasar.",
+      "form": "売ります",
+      "ruby": "<ruby>毎朝<rt>まいあさ</rt></ruby>、<ruby>市場<rt>いちば</rt></ruby>で<ruby>魚<rt>さかな</rt></ruby>を<ruby>売<rt>う</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "古い本を売って、新しい本を買った。",
+      "id": "Saya menjual buku lama lalu membeli buku baru.",
+      "form": "売って",
+      "ruby": "<ruby>古<rt>ふる</rt></ruby>い<ruby>本<rt>ほん</rt></ruby>を<ruby>売<rt>う</rt></ruby>って、<ruby>新<rt>あたら</rt></ruby>しい<ruby>本<rt>ほん</rt></ruby>を<ruby>買<rt>か</rt></ruby>った。"
+    },
+    "た": {
+      "jp": "使わない自転車を売った。",
+      "id": "Saya menjual sepeda yang sudah tidak dipakai.",
+      "form": "売った",
+      "ruby": "<ruby>使<rt>つか</rt></ruby>わない<ruby>自転車<rt>じてんしゃ</rt></ruby>を<ruby>売<rt>う</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "この商品は売らない。",
+      "id": "Barang ini tidak dijual.",
+      "form": "売らない",
+      "ruby": "この<ruby>商品<rt>しょうひん</rt></ruby>は<ruby>売<rt>う</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "使う",
+      "つかう"
+    ],
+    "arti": [
+      "id",
+      "menggunakan"
+    ],
+    "kamus": {
+      "jp": "パソコンを使う仕事です。",
+      "id": "Ini adalah pekerjaan yang menggunakan komputer.",
+      "form": "使う",
+      "ruby": "パソコンを<ruby>使<rt>つか</rt></ruby>う<ruby>仕事<rt>しごと</rt></ruby>です。"
+    },
+    "ます": {
+      "jp": "毎日スマートフォンを使います。",
+      "id": "Saya menggunakan ponsel setiap hari.",
+      "form": "使います",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby>スマートフォンを<ruby>使<rt>つか</rt></ruby>います。"
+    },
+    "て": {
+      "jp": "電子辞書を使って勉強します。",
+      "id": "Saya belajar menggunakan kamus elektronik.",
+      "form": "使って",
+      "ruby": "<ruby>電子辞書<rt>でんしじしょ</rt></ruby>を<ruby>使<rt>つか</rt></ruby>って<ruby>勉強<rt>べんきょう</rt></ruby>します。"
+    },
+    "た": {
+      "jp": "昨日、このペンを使った。",
+      "id": "Kemarin saya menggunakan pena ini.",
+      "form": "使った",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、このペンを<ruby>使<rt>つか</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "最近、現金を使わない。",
+      "id": "Akhir-akhir ini saya tidak menggunakan uang tunai.",
+      "form": "使わない",
+      "ruby": "<ruby>最近<rt>さいきん</rt></ruby>、<ruby>現金<rt>げんきん</rt></ruby>を<ruby>使<rt>つか</rt></ruby>わない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "作る",
+      "つくる"
+    ],
+    "arti": [
+      "id",
+      "membuat"
+    ],
+    "kamus": {
+      "jp": "休日によく料理を作る。",
+      "id": "Saya sering memasak pada hari libur.",
+      "form": "作る",
+      "ruby": "<ruby>休日<rt>きゅうじつ</rt></ruby>によく<ruby>料理<rt>りょうり</rt></ruby>を<ruby>作<rt>つく</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "母は毎日お弁当を作ります。",
+      "id": "Ibu membuat bekal setiap hari.",
+      "form": "作ります",
+      "ruby": "<ruby>母<rt>はは</rt></ruby>は<ruby>毎日<rt>まいにち</rt></ruby>お<ruby>弁当<rt>べんとう</rt></ruby>を<ruby>作<rt>つく</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "カレーを作って、みんなで食べた。",
+      "id": "Saya membuat kari lalu memakannya bersama semua orang.",
+      "form": "作って",
+      "ruby": "カレーを<ruby>作<rt>つく</rt></ruby>って、みんなで<ruby>食<rt>た</rt></ruby>べた。"
+    },
+    "た": {
+      "jp": "自分でケーキを作った。",
+      "id": "Saya membuat kue sendiri.",
+      "form": "作った",
+      "ruby": "<ruby>自分<rt>じぶん</rt></ruby>でケーキを<ruby>作<rt>つく</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "朝ご飯は自分で作らない。",
+      "id": "Saya tidak membuat sarapan sendiri.",
+      "form": "作らない",
+      "ruby": "<ruby>朝<rt>あさ</rt></ruby>ご<ruby>飯<rt>はん</rt></ruby>は<ruby>自分<rt>じぶん</rt></ruby>で<ruby>作<rt>つく</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "待つ",
+      "まつ"
+    ],
+    "arti": [
+      "id",
+      "menunggu"
+    ],
+    "kamus": {
+      "jp": "駅で友達を待つ。",
+      "id": "Menunggu teman di stasiun.",
+      "form": "待つ",
+      "ruby": "<ruby>駅<rt>えき</rt></ruby>で<ruby>友達<rt>ともだち</rt></ruby>を<ruby>待<rt>ま</rt></ruby>つ。"
+    },
+    "ます": {
+      "jp": "バスを十分待ちます。",
+      "id": "Saya menunggu bus selama sepuluh menit.",
+      "form": "待ちます",
+      "ruby": "バスを<ruby>十分<rt>じゅっぷん</rt></ruby><ruby>待<rt>ま</rt></ruby>ちます。"
+    },
+    "て": {
+      "jp": "少し待ってください。",
+      "id": "Tolong tunggu sebentar.",
+      "form": "待って",
+      "ruby": "<ruby>少<rt>すこ</rt></ruby>し<ruby>待<rt>ま</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "一時間も待った。",
+      "id": "Saya menunggu sampai satu jam.",
+      "form": "待った",
+      "ruby": "<ruby>一時間<rt>いちじかん</rt></ruby>も<ruby>待<rt>ま</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "時間がないから待たない。",
+      "id": "Karena tidak ada waktu, saya tidak menunggu.",
+      "form": "待たない",
+      "ruby": "<ruby>時間<rt>じかん</rt></ruby>がないから<ruby>待<rt>ま</rt></ruby>たない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "持つ",
+      "もつ"
+    ],
+    "arti": [
+      "id",
+      "membawa / memiliki"
+    ],
+    "kamus": {
+      "jp": "重い荷物を持つ。",
+      "id": "Membawa barang yang berat.",
+      "form": "持つ",
+      "ruby": "<ruby>重<rt>おも</rt></ruby>い<ruby>荷物<rt>にもつ</rt></ruby>を<ruby>持<rt>も</rt></ruby>つ。"
+    },
+    "ます": {
+      "jp": "財布はいつも持ちます。",
+      "id": "Saya selalu membawa dompet.",
+      "form": "持ちます",
+      "ruby": "<ruby>財布<rt>さいふ</rt></ruby>はいつも<ruby>持<rt>も</rt></ruby>ちます。"
+    },
+    "て": {
+      "jp": "パスポートを持ってきてください。",
+      "id": "Tolong bawa paspornya.",
+      "form": "持って",
+      "ruby": "パスポートを<ruby>持<rt>も</rt></ruby>ってきてください。"
+    },
+    "た": {
+      "jp": "大きなかばんを持った人が来た。",
+      "id": "Seseorang yang membawa tas besar datang.",
+      "form": "持った",
+      "ruby": "<ruby>大<rt>おお</rt></ruby>きなかばんを<ruby>持<rt>も</rt></ruby>った<ruby>人<rt>ひと</rt></ruby>が<ruby>来<rt>き</rt></ruby>た。"
+    },
+    "ない": {
+      "jp": "車を持たない人も多い。",
+      "id": "Banyak juga orang yang tidak memiliki mobil.",
+      "form": "持たない",
+      "ruby": "<ruby>車<rt>くるま</rt></ruby>を<ruby>持<rt>も</rt></ruby>たない<ruby>人<rt>ひと</rt></ruby>も<ruby>多<rt>おお</rt></ruby>い。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "会う",
+      "あう"
+    ],
+    "arti": [
+      "id",
+      "bertemu"
+    ],
+    "kamus": {
+      "jp": "明日、駅で友達に会う。",
+      "id": "Besok saya akan bertemu teman di stasiun.",
+      "form": "会う",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>、<ruby>駅<rt>えき</rt></ruby>で<ruby>友達<rt>ともだち</rt></ruby>に<ruby>会<rt>あ</rt></ruby>う。"
+    },
+    "ます": {
+      "jp": "月に一回、お客様に会います。",
+      "id": "Saya bertemu pelanggan sebulan sekali.",
+      "form": "会います",
+      "ruby": "<ruby>月<rt>つき</rt></ruby>に<ruby>一回<rt>いっかい</rt></ruby>、お<ruby>客<rt>きゃく</rt></ruby><ruby>様<rt>さま</rt></ruby>に<ruby>会<rt>あ</rt></ruby>います。"
+    },
+    "て": {
+      "jp": "久しぶりに先生に会って、うれしかったです。",
+      "id": "Saya senang karena bertemu guru setelah sekian lama.",
+      "form": "会って",
+      "ruby": "<ruby>久<rt>ひさ</rt></ruby>しぶりに<ruby>先生<rt>せんせい</rt></ruby>に<ruby>会<rt>あ</rt></ruby>って、うれしかったです。"
+    },
+    "た": {
+      "jp": "昨日、高校の友達に会った。",
+      "id": "Kemarin saya bertemu teman SMA.",
+      "form": "会った",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>高校<rt>こうこう</rt></ruby>の<ruby>友達<rt>ともだち</rt></ruby>に<ruby>会<rt>あ</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "最近、忙しくて友達に会わない。",
+      "id": "Akhir-akhir ini saya tidak bertemu teman karena sibuk.",
+      "form": "会わない",
+      "ruby": "<ruby>最近<rt>さいきん</rt></ruby>、<ruby>忙<rt>いそが</rt></ruby>しくて<ruby>友達<rt>ともだち</rt></ruby>に<ruby>会<rt>あ</rt></ruby>わない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "開ける",
+      "あける"
+    ],
+    "arti": [
+      "id",
+      "membuka"
+    ],
+    "kamus": {
+      "jp": "朝、窓を開ける。",
+      "id": "Saya membuka jendela pada pagi hari.",
+      "form": "開ける",
+      "ruby": "<ruby>朝<rt>あさ</rt></ruby>、<ruby>窓<rt>まど</rt></ruby>を<ruby>開<rt>あ</rt></ruby>ける。"
+    },
+    "ます": {
+      "jp": "店は九時に開けます。",
+      "id": "Toko dibuka pukul sembilan.",
+      "form": "開けます",
+      "ruby": "<ruby>店<rt>みせ</rt></ruby>は<ruby>九時<rt>くじ</rt></ruby>に<ruby>開<rt>あ</rt></ruby>けます。"
+    },
+    "て": {
+      "jp": "ドアを開けてください。",
+      "id": "Tolong bukakan pintunya.",
+      "form": "開けて",
+      "ruby": "ドアを<ruby>開<rt>あ</rt></ruby>けてください。"
+    },
+    "た": {
+      "jp": "暑かったので窓を開けた。",
+      "id": "Karena panas, saya membuka jendela.",
+      "form": "開けた",
+      "ruby": "<ruby>暑<rt>あつ</rt></ruby>かったので<ruby>窓<rt>まど</rt></ruby>を<ruby>開<rt>あ</rt></ruby>けた。"
+    },
+    "ない": {
+      "jp": "エアコンをつけるので窓は開けない。",
+      "id": "Karena AC dinyalakan, jendelanya tidak dibuka.",
+      "form": "開けない",
+      "ruby": "エアコンをつけるので<ruby>窓<rt>まど</rt></ruby>は<ruby>開<rt>あ</rt></ruby>けない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "閉める",
+      "しめる"
+    ],
+    "arti": [
+      "id",
+      "menutup"
+    ],
+    "kamus": {
+      "jp": "寝る前にドアを閉める。",
+      "id": "Saya menutup pintu sebelum tidur.",
+      "form": "閉める",
+      "ruby": "<ruby>寝<rt>ね</rt></ruby>る<ruby>前<rt>まえ</rt></ruby>にドアを<ruby>閉<rt>し</rt></ruby>める。"
+    },
+    "ます": {
+      "jp": "毎日午後六時に店を閉めます。",
+      "id": "Setiap hari toko ditutup pukul enam sore.",
+      "form": "閉めます",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>午後<rt>ごご</rt></ruby><ruby>六時<rt>ろくじ</rt></ruby>に<ruby>店<rt>みせ</rt></ruby>を<ruby>閉<rt>し</rt></ruby>めます。"
+    },
+    "て": {
+      "jp": "窓を閉めてから出かけます。",
+      "id": "Saya pergi setelah menutup jendela.",
+      "form": "閉めて",
+      "ruby": "<ruby>窓<rt>まど</rt></ruby>を<ruby>閉<rt>し</rt></ruby>めてから<ruby>出<rt>で</rt></ruby>かけます。"
+    },
+    "た": {
+      "jp": "店長はもう店を閉めた。",
+      "id": "Manajer toko sudah menutup toko.",
+      "form": "閉めた",
+      "ruby": "<ruby>店長<rt>てんちょう</rt></ruby>はもう<ruby>店<rt>みせ</rt></ruby>を<ruby>閉<rt>し</rt></ruby>めた。"
+    },
+    "ない": {
+      "jp": "暑いのでドアを閉めない。",
+      "id": "Karena panas, pintunya tidak ditutup.",
+      "form": "閉めない",
+      "ruby": "<ruby>暑<rt>あつ</rt></ruby>いのでドアを<ruby>閉<rt>し</rt></ruby>めない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "座る",
+      "すわる"
+    ],
+    "arti": [
+      "id",
+      "duduk"
+    ],
+    "kamus": {
+      "jp": "空いている席に座る。",
+      "id": "Saya duduk di kursi yang kosong.",
+      "form": "座る",
+      "ruby": "<ruby>空<rt>あ</rt></ruby>いている<ruby>席<rt>せき</rt></ruby>に<ruby>座<rt>すわ</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "電車ではいつもここに座ります。",
+      "id": "Di kereta saya selalu duduk di sini.",
+      "form": "座ります",
+      "ruby": "<ruby>電車<rt>でんしゃ</rt></ruby>ではいつもここに<ruby>座<rt>すわ</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "どうぞ座ってください。",
+      "id": "Silakan duduk.",
+      "form": "座って",
+      "ruby": "どうぞ<ruby>座<rt>すわ</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "窓の近くに座った。",
+      "id": "Saya duduk di dekat jendela.",
+      "form": "座った",
+      "ruby": "<ruby>窓<rt>まど</rt></ruby>の<ruby>近<rt>ちか</rt></ruby>くに<ruby>座<rt>すわ</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "次で降りるので座らない。",
+      "id": "Karena akan turun di pemberhentian berikutnya, saya tidak duduk.",
+      "form": "座らない",
+      "ruby": "<ruby>次<rt>つぎ</rt></ruby>で<ruby>降<rt>お</rt></ruby>りるので<ruby>座<rt>すわ</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "立つ",
+      "たつ"
+    ],
+    "arti": [
+      "id",
+      "berdiri"
+    ],
+    "kamus": {
+      "jp": "信号の前で立つ。",
+      "id": "Berdiri di depan lampu lalu lintas.",
+      "form": "立つ",
+      "ruby": "<ruby>信号<rt>しんごう</rt></ruby>の<ruby>前<rt>まえ</rt></ruby>で<ruby>立<rt>た</rt></ruby>つ。"
+    },
+    "ます": {
+      "jp": "朝礼ではみんな立ちます。",
+      "id": "Saat apel pagi semua orang berdiri.",
+      "form": "立ちます",
+      "ruby": "<ruby>朝礼<rt>ちょうれい</rt></ruby>ではみんな<ruby>立<rt>た</rt></ruby>ちます。"
+    },
+    "て": {
+      "jp": "立って話しましょう。",
+      "id": "Mari berbicara sambil berdiri.",
+      "form": "立って",
+      "ruby": "<ruby>立<rt>た</rt></ruby>って<ruby>話<rt>はな</rt></ruby>しましょう。"
+    },
+    "た": {
+      "jp": "ベルが鳴るとすぐ立った。",
+      "id": "Begitu bel berbunyi, saya langsung berdiri.",
+      "form": "立った",
+      "ruby": "ベルが<ruby>鳴<rt>な</rt></ruby>るとすぐ<ruby>立<rt>た</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "足が痛いので立たない。",
+      "id": "Karena kaki saya sakit, saya tidak berdiri.",
+      "form": "立たない",
+      "ruby": "<ruby>足<rt>あし</rt></ruby>が<ruby>痛<rt>いた</rt></ruby>いので<ruby>立<rt>た</rt></ruby>たない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "入る",
+      "はいる"
+    ],
+    "arti": [
+      "id",
+      "masuk"
+    ],
+    "kamus": {
+      "jp": "この店に入る。",
+      "id": "Saya masuk ke toko ini.",
+      "form": "入る",
+      "ruby": "この<ruby>店<rt>みせ</rt></ruby>に<ruby>入<rt>はい</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "九時までに教室に入ります。",
+      "id": "Saya masuk ke kelas sebelum pukul sembilan.",
+      "form": "入ります",
+      "ruby": "<ruby>九時<rt>くじ</rt></ruby>までに<ruby>教室<rt>きょうしつ</rt></ruby>に<ruby>入<rt>はい</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "部屋に入って、電気をつけた。",
+      "id": "Saya masuk ke kamar lalu menyalakan lampu.",
+      "form": "入って",
+      "ruby": "<ruby>部屋<rt>へや</rt></ruby>に<ruby>入<rt>はい</rt></ruby>って、<ruby>電気<rt>でんき</rt></ruby>をつけた。"
+    },
+    "た": {
+      "jp": "新しい会社に入った。",
+      "id": "Saya masuk ke perusahaan baru.",
+      "form": "入った",
+      "ruby": "<ruby>新<rt>あたら</rt></ruby>しい<ruby>会社<rt>かいしゃ</rt></ruby>に<ruby>入<rt>はい</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "会員ではないので入らない。",
+      "id": "Karena bukan anggota, saya tidak masuk.",
+      "form": "入らない",
+      "ruby": "<ruby>会員<rt>かいいん</rt></ruby>ではないので<ruby>入<rt>はい</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "出る",
+      "でる"
+    ],
+    "arti": [
+      "id",
+      "keluar"
+    ],
+    "kamus": {
+      "jp": "朝七時に家を出る。",
+      "id": "Saya keluar rumah pukul tujuh pagi.",
+      "form": "出る",
+      "ruby": "<ruby>朝<rt>あさ</rt></ruby><ruby>七時<rt>しちじ</rt></ruby>に<ruby>家<rt>うち</rt></ruby>を<ruby>出<rt>で</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "次の駅で電車を出ます。",
+      "id": "Saya keluar dari kereta di stasiun berikutnya.",
+      "form": "出ます",
+      "ruby": "<ruby>次<rt>つぎ</rt></ruby>の<ruby>駅<rt>えき</rt></ruby>で<ruby>電車<rt>でんしゃ</rt></ruby>を<ruby>出<rt>で</rt></ruby>ます。"
+    },
+    "て": {
+      "jp": "部屋を出て、友達を待った。",
+      "id": "Saya keluar dari kamar lalu menunggu teman.",
+      "form": "出て",
+      "ruby": "<ruby>部屋<rt>へや</rt></ruby>を<ruby>出<rt>で</rt></ruby>て、<ruby>友達<rt>ともだち</rt></ruby>を<ruby>待<rt>ま</rt></ruby>った。"
+    },
+    "た": {
+      "jp": "五分前に家を出た。",
+      "id": "Saya keluar rumah lima menit yang lalu.",
+      "form": "出た",
+      "ruby": "<ruby>五分前<rt>ごふんまえ</rt></ruby>に<ruby>家<rt>うち</rt></ruby>を<ruby>出<rt>で</rt></ruby>た。"
+    },
+    "ない": {
+      "jp": "今日は外へ出ない。",
+      "id": "Hari ini saya tidak keluar.",
+      "form": "出ない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>外<rt>そと</rt></ruby>へ<ruby>出<rt>で</rt></ruby>ない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "入れる",
+      "いれる"
+    ],
+    "arti": [
+      "id",
+      "memasukkan"
+    ],
+    "kamus": {
+      "jp": "かばんに本を入れる。",
+      "id": "Saya memasukkan buku ke dalam tas.",
+      "form": "入れる",
+      "ruby": "かばんに<ruby>本<rt>ほん</rt></ruby>を<ruby>入<rt>い</rt></ruby>れる。"
+    },
+    "ます": {
+      "jp": "コーヒーに砂糖を入れます。",
+      "id": "Saya memasukkan gula ke dalam kopi.",
+      "form": "入れます",
+      "ruby": "コーヒーに<ruby>砂糖<rt>さとう</rt></ruby>を<ruby>入<rt>い</rt></ruby>れます。"
+    },
+    "て": {
+      "jp": "名前を書いて、箱に入れてください。",
+      "id": "Tulis nama Anda lalu masukkan ke dalam kotak.",
+      "form": "入れて",
+      "ruby": "<ruby>名前<rt>なまえ</rt></ruby>を<ruby>書<rt>か</rt></ruby>いて、<ruby>箱<rt>はこ</rt></ruby>に<ruby>入<rt>い</rt></ruby>れてください。"
+    },
+    "た": {
+      "jp": "財布をかばんに入れた。",
+      "id": "Saya memasukkan dompet ke dalam tas.",
+      "form": "入れた",
+      "ruby": "<ruby>財布<rt>さいふ</rt></ruby>をかばんに<ruby>入<rt>い</rt></ruby>れた。"
+    },
+    "ない": {
+      "jp": "冷蔵庫には何も入れない。",
+      "id": "Saya tidak memasukkan apa pun ke dalam kulkas.",
+      "form": "入れない",
+      "ruby": "<ruby>冷蔵庫<rt>れいぞうこ</rt></ruby>には<ruby>何<rt>なに</rt></ruby>も<ruby>入<rt>い</rt></ruby>れない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "出す",
+      "だす"
+    ],
+    "arti": [
+      "id",
+      "mengeluarkan / mengirim"
+    ],
+    "kamus": {
+      "jp": "今日中に手紙を出す。",
+      "id": "Saya akan mengirim surat hari ini.",
+      "form": "出す",
+      "ruby": "<ruby>今日中<rt>きょうじゅう</rt></ruby>に<ruby>手紙<rt>てがみ</rt></ruby>を<ruby>出<rt>だ</rt></ruby>す。"
+    },
+    "ます": {
+      "jp": "コンビニでお金を出します。",
+      "id": "Saya mengeluarkan uang di minimarket.",
+      "form": "出します",
+      "ruby": "コンビニでお<ruby>金<rt>かね</rt></ruby>を<ruby>出<rt>だ</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "宿題を出してから帰ってください。",
+      "id": "Silakan kumpulkan PR sebelum pulang.",
+      "form": "出して",
+      "ruby": "<ruby>宿題<rt>しゅくだい</rt></ruby>を<ruby>出<rt>だ</rt></ruby>してから<ruby>帰<rt>かえ</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "さっきメールを出した。",
+      "id": "Tadi saya sudah mengirim email.",
+      "form": "出した",
+      "ruby": "さっきメールを<ruby>出<rt>だ</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "今日はごみを出さない。",
+      "id": "Hari ini saya tidak membuang sampah.",
+      "form": "出さない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>はごみを<ruby>出<rt>だ</rt></ruby>さない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "入浴する",
+      "にゅうよくする"
+    ],
+    "arti": [
+      "id",
+      "mandi"
+    ],
+    "kamus": {
+      "jp": "毎晩寝る前に入浴する。",
+      "id": "Saya mandi setiap malam sebelum tidur.",
+      "form": "入浴する",
+      "ruby": "<ruby>毎晩<rt>まいばん</rt></ruby><ruby>寝<rt>ね</rt></ruby>る<ruby>前<rt>まえ</rt></ruby>に<ruby>入浴<rt>にゅうよく</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "ホテルでは夜に入浴します。",
+      "id": "Saya mandi pada malam hari di hotel.",
+      "form": "入浴します",
+      "ruby": "ホテルでは<ruby>夜<rt>よる</rt></ruby>に<ruby>入浴<rt>にゅうよく</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "入浴してから寝ます。",
+      "id": "Saya tidur setelah mandi.",
+      "form": "入浴して",
+      "ruby": "<ruby>入浴<rt>にゅうよく</rt></ruby>してから<ruby>寝<rt>ね</rt></ruby>ます。"
+    },
+    "た": {
+      "jp": "昨日はゆっくり入浴した。",
+      "id": "Kemarin saya mandi dengan santai.",
+      "form": "入浴した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>はゆっくり<ruby>入浴<rt>にゅうよく</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "時間がないので入浴しない。",
+      "id": "Karena tidak ada waktu, saya tidak mandi.",
+      "form": "入浴しない",
+      "ruby": "<ruby>時間<rt>じかん</rt></ruby>がないので<ruby>入浴<rt>にゅうよく</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "寝る",
+      "ねる"
+    ],
+    "arti": [
+      "id",
+      "tidur"
+    ],
+    "kamus": {
+      "jp": "毎日十一時に寝る。",
+      "id": "Saya tidur setiap hari pukul sebelas.",
+      "form": "寝る",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>十一時<rt>じゅういちじ</rt></ruby>に<ruby>寝<rt>ね</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "疲れた日は早く寝ます。",
+      "id": "Pada hari yang melelahkan saya tidur lebih awal.",
+      "form": "寝ます",
+      "ruby": "<ruby>疲<rt>つか</rt></ruby>れた<ruby>日<rt>ひ</rt></ruby>は<ruby>早<rt>はや</rt></ruby>く<ruby>寝<rt>ね</rt></ruby>ます。"
+    },
+    "て": {
+      "jp": "少し寝て、元気になった。",
+      "id": "Saya tidur sebentar lalu menjadi segar.",
+      "form": "寝て",
+      "ruby": "<ruby>少<rt>すこ</rt></ruby>し<ruby>寝<rt>ね</rt></ruby>て、<ruby>元気<rt>げんき</rt></ruby>になった。"
+    },
+    "た": {
+      "jp": "昨日は八時間寝た。",
+      "id": "Kemarin saya tidur delapan jam.",
+      "form": "寝た",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>は<ruby>八時間<rt>はちじかん</rt></ruby><ruby>寝<rt>ね</rt></ruby>た。"
+    },
+    "ない": {
+      "jp": "コーヒーを飲むと寝ない。",
+      "id": "Jika minum kopi, saya tidak bisa tidur.",
+      "form": "寝ない",
+      "ruby": "コーヒーを<ruby>飲<rt>の</rt></ruby>むと<ruby>寝<rt>ね</rt></ruby>ない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "起きる",
+      "おきる"
+    ],
+    "arti": [
+      "id",
+      "bangun"
+    ],
+    "kamus": {
+      "jp": "明日は早く起きる。",
+      "id": "Besok saya akan bangun lebih awal.",
+      "form": "起きる",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>は<ruby>早<rt>はや</rt></ruby>く<ruby>起<rt>お</rt></ruby>きる。"
+    },
+    "ます": {
+      "jp": "毎朝六時に起きます。",
+      "id": "Saya bangun setiap pagi pukul enam.",
+      "form": "起きます",
+      "ruby": "<ruby>毎朝<rt>まいあさ</rt></ruby><ruby>六時<rt>ろくじ</rt></ruby>に<ruby>起<rt>お</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "起きてすぐ顔を洗います。",
+      "id": "Setelah bangun saya langsung mencuci muka.",
+      "form": "起きて",
+      "ruby": "<ruby>起<rt>お</rt></ruby>きてすぐ<ruby>顔<rt>かお</rt></ruby>を<ruby>洗<rt>あら</rt></ruby>います。"
+    },
+    "た": {
+      "jp": "今朝は五時に起きた。",
+      "id": "Tadi pagi saya bangun pukul lima.",
+      "form": "起きた",
+      "ruby": "<ruby>今朝<rt>けさ</rt></ruby>は<ruby>五時<rt>ごじ</rt></ruby>に<ruby>起<rt>お</rt></ruby>きた。"
+    },
+    "ない": {
+      "jp": "休みの日は早く起きない。",
+      "id": "Pada hari libur saya tidak bangun pagi.",
+      "form": "起きない",
+      "ruby": "<ruby>休<rt>やす</rt></ruby>みの<ruby>日<rt>ひ</rt></ruby>は<ruby>早<rt>はや</rt></ruby>く<ruby>起<rt>お</rt></ruby>きない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "働く",
+      "はたらく"
+    ],
+    "arti": [
+      "id",
+      "bekerja"
+    ],
+    "kamus": {
+      "jp": "将来、日本で働く。",
+      "id": "Saya ingin bekerja di Jepang pada masa depan.",
+      "form": "働く",
+      "ruby": "<ruby>将来<rt>しょうらい</rt></ruby>、<ruby>日本<rt>にほん</rt></ruby>で<ruby>働<rt>はたら</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "父は病院で働きます。",
+      "id": "Ayah bekerja di rumah sakit.",
+      "form": "働きます",
+      "ruby": "<ruby>父<rt>ちち</rt></ruby>は<ruby>病院<rt>びょういん</rt></ruby>で<ruby>働<rt>はたら</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "毎日働いて、お金をためています。",
+      "id": "Saya bekerja setiap hari and menabung uang.",
+      "form": "働いて",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>働<rt>はたら</rt></ruby>いて、お<ruby>金<rt>かね</rt></ruby>をためています。"
+    },
+    "た": {
+      "jp": "昨日は十時間働いた。",
+      "id": "Kemarin saya bekerja selama tiga jam.",
+      "form": "働いた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>は<ruby>十時間<rt>じゅうじかん</rt></ruby><ruby>働<rt>はたら</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "日曜日は働かない。",
+      "id": "Saya tidak bekerja pada hari Minggu.",
+      "form": "働かない",
+      "ruby": "<ruby>日曜日<rt>にちようび</rt></ruby>は<ruby>働<rt>はたら</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "休む",
+      "やすむ"
+    ],
+    "arti": [
+      "id",
+      "beristirahat / libur"
+    ],
+    "kamus": {
+      "jp": "疲れたら少し休む。",
+      "id": "Jika lelah saya akan beristirahat.",
+      "form": "休む",
+      "ruby": "<ruby>疲<rt>つか</rt></ruby>れたら<ruby>少<rt>すこ</rt></ruby>し<ruby>休<rt>やす</rt></ruby>む。"
+    },
+    "ます": {
+      "jp": "明日は仕事を休みます。",
+      "id": "Besok saya libur kerja.",
+      "form": "休みます",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>は<ruby>仕事<rt>しごと</rt></ruby>を<ruby>休<rt>やす</rt></ruby>みます。"
+    },
+    "て": {
+      "jp": "無理をしないで、休んでください。",
+      "id": "Jangan memaksakan diri, silakan beristirahat.",
+      "form": "休んで",
+      "ruby": "<ruby>無理<rt>むり</rt></ruby>をしないで、<ruby>休<rt>やす</rt></ruby>んでください。"
+    },
+    "た": {
+      "jp": "昨日は一日休んだ。",
+      "id": "Kemarin saya beristirahat seharian.",
+      "form": "休んだ",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>は<ruby>一日<rt>ついたち</rt></ruby><ruby>休<rt>やす</rt></ruby>んだ。"
+    },
+    "ない": {
+      "jp": "忙しいので休まない。",
+      "id": "Karena sibuk saya tidak beristirahat.",
+      "form": "休まない",
+      "ruby": "<ruby>忙<rt>いそが</rt></ruby>しいので<ruby>休<rt>やす</rt></ruby>まない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "勉強する",
+      "べんきょうする"
+    ],
+    "arti": [
+      "id",
+      "belajar"
+    ],
+    "kamus": {
+      "jp": "毎日日本語を勉強する。",
+      "id": "Saya belajar bahasa Jepang setiap hari.",
+      "form": "勉強する",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>日本語<rt>にほんご</rt></ruby>を<ruby>勉強<rt>べんきょう</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "夜、図書館で勉強します。",
+      "id": "Saya belajar di perpustakaan pada malam hari.",
+      "form": "勉強します",
+      "ruby": "<ruby>夜<rt>よる</rt></ruby>、<ruby>図書館<rt>としょかん</rt></ruby>で<ruby>勉強<rt>べんきょう</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "毎日勉強して、日本語が上手になりました。",
+      "id": "Saya belajar setiap hari sehingga bahasa Jepang saya menjadi lebih baik.",
+      "form": "勉強して",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>勉強<rt>べんきょう</rt></ruby>して、<ruby>日本語<rt>にほんご</rt></ruby>が<ruby>上手<rt>じょうず</rt></ruby>になりました。"
+    },
+    "た": {
+      "jp": "昨日は三時間勉強した。",
+      "id": "Kemarin saya belajar selama tiga jam.",
+      "form": "勉強した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>は<ruby>三時間<rt>さんじかん</rt></ruby><ruby>勉強<rt>べんきょう</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "試験が終わったので今日は勉強しない。",
+      "id": "Karena ujian sudah selesai, hari ini saya tidak belajar.",
+      "form": "勉強しない",
+      "ruby": "<ruby>試験<rt>しけん</rt></ruby>が<ruby>事<rt>お</rt></ruby>わったので<ruby>今日<rt>きょう</rt></ruby>は<ruby>勉強<rt>べんきょう</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "教える",
+      "おしえる"
+    ],
+    "arti": [
+      "id",
+      "mengajar / memberi tahu"
+    ],
+    "kamus": {
+      "jp": "日本語を教える仕事がしたい。",
+      "id": "Saya ingin bekerja sebagai pengajar bahasa Jepang.",
+      "form": "教える",
+      "ruby": "<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>教<rt>おし</rt></ruby>える<ruby>仕事<rt>しごと</rt></ruby>がしたい。"
+    },
+    "ます": {
+      "jp": "先生は漢字を教えます。",
+      "id": "Guru mengajarkan kanji.",
+      "form": "教えます",
+      "ruby": "<ruby>先生<rt>せんせい</rt></ruby>は<ruby>漢字<rt>かんじ</rt></ruby>を<ruby>教<rt>おし</rt></ruby>えます。"
+    },
+    "て": {
+      "jp": "この言葉の意味を教えてください。",
+      "id": "Tolong beri tahu arti kata ini.",
+      "form": "教えて",
+      "ruby": "この<ruby>言葉<rt>ことば</rt></ruby>の<ruby>意味<rt>いみ</rt></ruby>を<ruby>教<rt>おし</rt></ruby>えてください。"
+    },
+    "た": {
+      "jp": "友達に道を教えた。",
+      "id": "Saya memberi tahu jalan kepada teman.",
+      "form": "教えた",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>に<ruby>道<rt>みち</rt></ruby>を<ruby>教<rt>おし</rt></ruby>えた。"
+    },
+    "ない": {
+      "jp": "答えはまだ教えない。",
+      "id": "Jawabannya belum saya beri tahu.",
+      "form": "教えない",
+      "ruby": "<ruby>答<rt>こた</rt></ruby>えはまだ<ruby>教<rt>おし</rt></ruby>えない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "覚える",
+      "おぼえる"
+    ],
+    "arti": [
+      "id",
+      "mengingat / menghafal"
+    ],
+    "kamus": {
+      "jp": "新しい言葉をたくさん覚える。",
+      "id": "Saya menghafal banyak kosakata baru.",
+      "form": "覚える",
+      "ruby": "<ruby>新<rt>あたら</rt></ruby>しい<ruby>言葉<rt>ことば</rt></ruby>をたくさん<ruby>覚<rt>おぼ</rt></ruby>える。"
+    },
+    "ます": {
+      "jp": "毎日五つの漢字を覚えます。",
+      "id": "Saya menghafal lima kanji setiap hari.",
+      "form": "覚えます",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>五つ<rt>いつつ</rt></ruby>の<ruby>漢字<rt>かんじ</rt></ruby>を<ruby>覚<rt>おぼ</rt></ruby>えます。"
+    },
+    "て": {
+      "jp": "この文を覚えてください。",
+      "id": "Tolong hafalkan kalimat ini.",
+      "form": "覚えて",
+      "ruby": "この<ruby>文<rt>ぶん</rt></ruby>を<ruby>覚<rt>おぼ</rt></ruby>えてください。"
+    },
+    "た": {
+      "jp": "やっとひらがなを全部覚えた。",
+      "id": "Akhirnya saya sudah menghafal semua huruf hiragana.",
+      "form": "覚えた",
+      "ruby": "やっとひらがなを<ruby>全部<rt>ぜんぶ</rt></ruby><ruby>覚<rt>おぼ</rt></ruby>えた。"
+    },
+    "ない": {
+      "jp": "使わない言葉はなかなか覚えない。",
+      "id": "Kata-kata yang tidak digunakan sulit diingat.",
+      "form": "覚えない",
+      "ruby": "<ruby>使<rt>つか</rt></ruby>わない<ruby>言葉<rt>ことば</rt></ruby>はなかなか<ruby>覚<rt>おぼ</rt></ruby>えない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "忘れる",
+      "わすれる"
+    ],
+    "arti": [
+      "id",
+      "lupa"
+    ],
+    "kamus": {
+      "jp": "大切な約束を忘れることはよくない。",
+      "id": "Tidak baik melupakan janji yang penting.",
+      "form": "忘れる",
+      "ruby": "<ruby>大切<rt>たいせつ</rt></ruby>な<ruby>約束<rt>やくそく</rt></ruby>を<ruby>忘<rt>わす</rt></ruby>れることはよくない。"
+    },
+    "ます": {
+      "jp": "ときどき傘を忘れます。",
+      "id": "Saya kadang-kadang lupa membawa payung.",
+      "form": "忘れます",
+      "ruby": "ときどき<ruby>傘<rt>かさ</rt></ruby>を<ruby>忘<rt>わす</rt></ruby>れます。"
+    },
+    "て": {
+      "jp": "財布を忘れてしまいました。",
+      "id": "Saya tidak sengaja lupa membawa dompet.",
+      "form": "忘れて",
+      "ruby": "<ruby>財布<rt>さいふ</rt></ruby>を<ruby>忘<rt>わす</rt></ruby>れてしまいました。"
+    },
+    "た": {
+      "jp": "宿題を忘れた。",
+      "id": "Saya lupa mengerjakan/membawa PR.",
+      "form": "忘れた",
+      "ruby": "<ruby>宿題<rt>しゅくだい</rt></ruby>を<ruby>忘<rt>わす</rt></ruby>れた。"
+    },
+    "ない": {
+      "jp": "明日は忘れないようにします。",
+      "id": "Besok saya akan berusaha agar tidak lupa.",
+      "form": "忘れない",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>は<ruby>忘<rt>わす</rt></ruby>れないようにします。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "習う",
+      "ならう"
+    ],
+    "arti": [
+      "id",
+      "belajar dari seseorang"
+    ],
+    "kamus": {
+      "jp": "日本語を先生から習う。",
+      "id": "Saya belajar bahasa Jepang dari guru.",
+      "form": "習う",
+      "ruby": "<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>先生<rt>せんせい</rt></ruby>から<ruby>習<rt>なら</rt></ruby>う。"
+    },
+    "ます": {
+      "jp": "毎週ピアノを習います。",
+      "id": "Saya belajar piano setiap minggu.",
+      "form": "習います",
+      "ruby": "<ruby>毎週<rt>まいしゅう</rt></ruby>ピアノを<ruby>習<rt>なら</rt></ruby>います。"
+    },
+    "て": {
+      "jp": "友達に料理を習って、家でも作りました。",
+      "id": "Saya belajar memasak dari teman lalu mencobanya di rumah.",
+      "form": "習って",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>に<ruby>料理<rt>りょうり</rt></ruby>を<ruby>習<rt>なら</rt></ruby>って、<ruby>家<rt>うち</rt></ruby>でも<ruby>作<rt>つく</rt></ruby>りました。"
+    },
+    "た": {
+      "jp": "学校で敬語を習った。",
+      "id": "Saya belajar bahasa hormat di sekolah.",
+      "form": "習った",
+      "ruby": "<ruby>学校<rt>がっこう</rt></ruby>で<ruby>敬語<rt>けいご</rt></ruby>を<ruby>習<rt>なら</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "今は車の運転を習わない。",
+      "id": "Agora saya tidak belajar mengemudi.",
+      "form": "習わない",
+      "ruby": "<ruby>今<rt>いま</rt></ruby>は<ruby>車<rt>くるま</rt></ruby>の<ruby>運転<rt>うんてん</rt></ruby>を<ruby>習<rt>なら</rt></ruby>わない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "練習する",
+      "れんしゅうする"
+    ],
+    "arti": [
+      "id",
+      "berlatih"
+    ],
+    "kamus": {
+      "jp": "毎日会話を練習する。",
+      "id": "Saya berlatih percakapan setiap hari.",
+      "form": "練習する",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>会話<rt>かいわ</rt></ruby>を<ruby>練習<rt>れんしゅう</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "試合の前によく練習します。",
+      "id": "Saya banyak berlatih sebelum pertandingan.",
+      "form": "練習します",
+      "ruby": "<ruby>試合<rt>しあい</rt></ruby>の<ruby>前<rt>まえ</rt></ruby>によく<ruby>練習<rt>れんしゅう</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "毎日練習して、上手になりました。",
+      "id": "Saya berlatih setiap hari sehingga menjadi lebih mahir.",
+      "form": "練習して",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>練習<rt>れんしゅう</rt></ruby>して、<ruby>上手<rt>じょうず</rt></ruby>になりました。"
+    },
+    "た": {
+      "jp": "昨日は一時間練習した。",
+      "id": "Kemarin saya berlatih selama satu jam.",
+      "form": "練習した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>は<ruby>一時間<rt>いちじかん</rt></ruby><ruby>練習<rt>れんしゅう</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "練習しないと上手になりません。",
+      "id": "Kalau tidak berlatih, tidak akan menjadi mahir.",
+      "form": "練習しない",
+      "ruby": "<ruby>練習<rt>れんしゅう</rt></ruby>しないと<ruby>上手<rt>じょうず</rt></ruby>になりません。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "運転する",
+      "うんてんする"
+    ],
+    "arti": [
+      "id",
+      "mengemudi"
+    ],
+    "kamus": {
+      "jp": "将来、日本で車を運転する。",
+      "id": "Suatu hari saya ingin mengemudi mobil di Jepang.",
+      "form": "運転する",
+      "ruby": "<ruby>将来<rt>しょうらい</rt></ruby>、<ruby>日本<rt>にほん</rt></ruby>で<ruby>車<rt>くるま</rt></ruby>を<ruby>運転<rt>うんてん</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "父は毎日車を運転します。",
+      "id": "Ayah mengemudi mobil setiap hari.",
+      "form": "運転します",
+      "ruby": "<ruby>父<rt>ちち</rt></ruby>は<ruby>毎日<rt>まいにち</rt></ruby><ruby>車<rt>くるま</rt></ruby>を<ruby>運転<rt>うんてん</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "安全運転して帰ってください。",
+      "id": "Tolong pulang dengan mengemudi secara aman.",
+      "form": "運転して",
+      "ruby": "<ruby>安全運転<rt>あんぜんうんてん</rt></ruby>して<ruby>帰<rt>かえ</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "昨日、三時間運転した。",
+      "id": "Kemarin saya mengemudi selama tiga jam.",
+      "form": "運転した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>三時間<rt>さんじかん</rt></ruby><ruby>運転<rt>うんてん</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "お酒を飲んだので運転しない。",
+      "id": "Karena minum alkohol, saya tidak mengemudi.",
+      "form": "運転しない",
+      "ruby": "お<ruby>酒<rt>さけ</rt></ruby>を<ruby>飲<rt>の</rt></ruby>んだので<ruby>運転<rt>うんてん</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "掃除する",
+      "そうじする"
+    ],
+    "arti": [
+      "id",
+      "membersihkan"
+    ],
+    "kamus": {
+      "jp": "部屋をきれいに掃除する。",
+      "id": "Saya membersihkan kamar hingga bersih.",
+      "form": "掃除する",
+      "ruby": "<ruby>部屋<rt>へや</rt></ruby>をきれいに<ruby>掃除<rt>そうじ</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "毎週日曜日に掃除します。",
+      "id": "Saya bersih-bersih setiap hari Minggu.",
+      "form": "掃除します",
+      "ruby": "<ruby>毎週日曜日<rt>まいしゅうにちようび</rt></ruby>に<ruby>掃除<rt>そうじ</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "部屋を掃除してから出かけます。",
+      "id": "Saya pergi setelah membersihkan kamar.",
+      "form": "掃除して",
+      "ruby": "<ruby>部屋<rt>へや</rt></ruby>を<ruby>掃除<rt>そうじ</rt></ruby>してから<ruby>出<rt>で</rt></ruby>かけます。"
+    },
+    "た": {
+      "jp": "朝、部屋を掃除した。",
+      "id": "Pagi tadi saya membersihkan kamar.",
+      "form": "掃除した",
+      "ruby": "<ruby>朝<rt>あさ</rt></ruby>、<ruby>部屋<rt>へや</rt></ruby>を<ruby>掃除<rt>そうじ</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "忙しい日は掃除しない。",
+      "id": "Pada hari yang sibuk saya tidak membersihkan rumah.",
+      "form": "掃除しない",
+      "ruby": "<ruby>忙<rt>いそが</rt></ruby>しい<ruby>日<rt>ひ</rt></ruby>は<ruby>掃除<rt>そうじ</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "洗う",
+      "あらう"
+    ],
+    "arti": [
+      "id",
+      "mencuci"
+    ],
+    "kamus": {
+      "jp": "食事の前に手を洗う。",
+      "id": "Saya mencuci tangan sebelum makan.",
+      "form": "洗う",
+      "ruby": "<ruby>食事<rt>しょくじ</rt></ruby>の<ruby>前<rt>まえ</rt></ruby>に<ruby>手<rt>て</rt></ruby>を<ruby>洗<rt>あら</rt></ruby>う。"
+    },
+    "ます": {
+      "jp": "毎日シャツを洗います。",
+      "id": "Saya mencuci kemeja setiap hari.",
+      "form": "洗います",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby>シャツを<ruby>洗<rt>あら</rt></ruby>います。"
+    },
+    "て": {
+      "jp": "手を洗ってから食べましょう。",
+      "id": "Mari makan setelah mencuci tangan.",
+      "form": "洗って",
+      "ruby": "<ruby>手<rt>て</rt></ruby>を<ruby>洗<rt>あら</rt></ruby>ってから<ruby>食<rt>た</rt></ruby>べましょう。"
+    },
+    "た": {
+      "jp": "車をきれいに洗った。",
+      "id": "Saya mencuci mobil hingga bersih.",
+      "form": "洗った",
+      "ruby": "<ruby>車<rt>くるま</rt></ruby>をきれいに<ruby>洗<rt>あら</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "野菜を洗わないで食べてはいけません。",
+      "id": "Jangan makan sayuran tanpa mencucinya.",
+      "form": "洗わない",
+      "ruby": "<ruby>野菜<rt>やさい</rt></ruby>を<ruby>洗<rt>あら</rt></ruby>わないで<ruby>食<rt>た</rt></ruby>べてはいけません。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "料理する",
+      "りょうりする"
+    ],
+    "arti": [
+      "id",
+      "memasak"
+    ],
+    "kamus": {
+      "jp": "休日は家で料理する。",
+      "id": "Pada hari libur saya memasak di rumah.",
+      "form": "料理する",
+      "ruby": "<ruby>休日<rt>きゅうじつ</rt></ruby>は<ruby>家<rt>うち</rt></ruby>で<ruby>料理<rt>りょうり</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "毎晩家族のために料理します。",
+      "id": "Saya memasak untuk keluarga setiap malam.",
+      "form": "料理します",
+      "ruby": "<ruby>毎晩<rt>まいばん</rt></ruby><ruby>家族<rt>かぞく</rt></ruby>のために<ruby>料理<rt>りょうり</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "一緒に料理して食べましょう。",
+      "id": "Mari memasak dan makan bersama.",
+      "form": "料理して",
+      "ruby": "<ruby>一緒<rt>いっしょ</rt></ruby>に<ruby>料理<rt>りょうり</rt></ruby>して<ruby>食<rt>た</rt></ruby>べましょう。"
+    },
+    "た": {
+      "jp": "初めてカレーを料理した。",
+      "id": "Saya memasak kari untuk pertama kalinya.",
+      "form": "料理した",
+      "ruby": "<ruby>初<rt>はじ</rt></ruby>めてカレーを<ruby>料理<rt>りょうり</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "疲れている日は料理しない。",
+      "id": "Pada hari saat lelah saya tidak memasak.",
+      "form": "料理しない",
+      "ruby": "<ruby>疲<rt>つか</rt></ruby>れている<ruby>日<rt>ひ</rt></ruby>は<ruby>料理<rt>りょうり</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "歩く",
+      "あるく"
+    ],
+    "arti": [
+      "id",
+      "berjalan"
+    ],
+    "kamus": {
+      "jp": "健康のために毎日歩く。",
+      "id": "Saya berjalan setiap hari demi kesehatan.",
+      "form": "歩く",
+      "ruby": "<ruby>健康<rt>けんこう</rt></ruby>のために<ruby>毎日<rt>まいにち</rt></ruby><ruby>歩<rt>ある</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "駅まで歩きます。",
+      "id": "Saya berjalan kaki sampai stasiun.",
+      "form": "歩きます",
+      "ruby": "<ruby>駅<rt>えき</rt></ruby>まで<ruby>歩<rt>ある</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "歩いて学校へ行きます。",
+      "id": "Saya pergi to sekolah dengan berjalan kaki.",
+      "form": "歩いて",
+      "ruby": "<ruby>歩<rt>ある</rt></ruby>いて<ruby>学校<rt>がっこう</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きます。"
+    },
+    "た": {
+      "jp": "昨日は一時間歩いた。",
+      "id": "Kemarin saya berjalan selama satu jam.",
+      "form": "歩いた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>は<ruby>一時間<rt>いちじかん</rt></ruby><ruby>歩<rt>ある</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "雨の日はあまり歩かない。",
+      "id": "Saat hari hujan saya jarang berjalan kaki.",
+      "form": "歩かない",
+      "ruby": "<ruby>雨<rt>あめ</rt></ruby>の<ruby>日<rt>ひ</rt></ruby>はあまり<ruby>歩<rt>ある</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "走る",
+      "はしる"
+    ],
+    "arti": [
+      "id",
+      "berlari"
+    ],
+    "kamus": {
+      "jp": "毎朝公園で走る。",
+      "id": "Saya berlari di taman setiap pagi.",
+      "form": "走る",
+      "ruby": "<ruby>毎朝<rt>まいあさ</rt></ruby><ruby>公園<rt>こうえん</rt></ruby>で<ruby>走<rt>はし</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "遅れそうなので走ります。",
+      "id": "Karena sepertinya akan terlambat, saya berlari.",
+      "form": "走ります",
+      "ruby": "<ruby>遅<rt>おく</rt></ruby>れそうなので<ruby>走<rt>はし</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "急いで走って駅へ向かった。",
+      "id": "Saya berlari dengan cepat menuju stasiun.",
+      "form": "走って",
+      "ruby": "<ruby>急<rt>いそ</rt></ruby>いで<ruby>走<rt>はし</rt></ruby>って<ruby>駅<rt>えき</rt></ruby>へ<ruby>向<rt>む</rt></ruby>かった。"
+    },
+    "た": {
+      "jp": "マラソンで五キロ走った。",
+      "id": "Saya berlari lima kilometer dalam maraton.",
+      "form": "走った",
+      "ruby": "マラソンで<ruby>五<rt>ご</rt></ruby>キロ<ruby>走<rt>はし</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "足が痛いので今日は走らない。",
+      "id": "Karena kaki saya sakit, hari ini saya tidak berlari.",
+      "form": "走らない",
+      "ruby": "<ruby>足<rt>あし</rt></ruby>が<ruby>痛<rt>いた</rt></ruby>いので<ruby>今日<rt>きょう</rt></ruby>は<ruby>走<rt>はし</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "乗る",
+      "のる"
+    ],
+    "arti": [
+      "id",
+      "naik"
+    ],
+    "kamus": {
+      "jp": "毎日電車に乗る。",
+      "id": "Saya naik kereta setiap hari.",
+      "form": "乗る",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>電車<rt>でんしゃ</rt></ruby>に<ruby>乗<rt>の</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "次のバスに乗ります。",
+      "id": "Saya akan naik bus berikutnya.",
+      "form": "乗ります",
+      "ruby": "<ruby>次<rt>つぎ</rt></ruby>のバスに<ruby>乗<rt>の</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "電車に乗って会社へ行きます。",
+      "id": "Saya pergi ke kantor dengan naik kereta.",
+      "form": "乗って",
+      "ruby": "<ruby>電車<rt>でんしゃ</rt></ruby>に<ruby>乗<rt>の</rt></ruby>って<ruby>会社<rt>かいしゃ</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きます。"
+    },
+    "た": {
+      "jp": "初めて新幹線に乗った。",
+      "id": "Saya pertama kali naik shinkansen.",
+      "form": "乗った",
+      "ruby": "<ruby>初<rt>はじ</rt></ruby>めて<ruby>新幹線<rt>しんかんせん</rt></ruby>に<ruby>乗<rt>の</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "今日はタクシーに乗らない。",
+      "id": "Hari ini saya tidak naik taksi.",
+      "form": "乗らない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>はタクシーに<ruby>乗<rt>の</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "降りる",
+      "おりる"
+    ],
+    "arti": [
+      "id",
+      "turun"
+    ],
+    "kamus": {
+      "jp": "次の駅で降りる。",
+      "id": "Saya turun di stasiun berikutnya.",
+      "form": "降りる",
+      "ruby": "<ruby>次<rt>つぎ</rt></ruby>の<ruby>駅<rt>えき</rt></ruby>で<ruby>降<rt>お</rt></ruby>りる。"
+    },
+    "ます": {
+      "jp": "このバスは病院の前で降ります。",
+      "id": "Saya turun bus ini di depan rumah sakit.",
+      "form": "降ります",
+      "ruby": "このバスは<ruby>病院<rt>びょういん</rt></ruby>の<ruby>前<rt>まえ</rt></ruby>で<ruby>降<rt>お</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "電車を降りて、まっすぐ歩いてください。",
+      "id": "Turun dari kereta lalu berjalanlah lurus.",
+      "form": "降りて",
+      "ruby": "<ruby>電車<rt>でんしゃ</rt></ruby>を<ruby>降<rt>お</rt></ruby>りて、まっすぐ<ruby>歩<rt>ある</rt></ruby>いてください。"
+    },
+    "た": {
+      "jp": "一つ前の駅で降りた。",
+      "id": "Saya turun di stasiun sebelumnya.",
+      "form": "降りた",
+      "ruby": "<ruby>一<rt>ひと</rt></ruby>つ<ruby>前<rt>まえ</rt></ruby>の<ruby>駅<rt>えき</rt></ruby>で<ruby>降<rt>お</rt></ruby>りた。"
+    },
+    "ない": {
+      "jp": "まだ降りないでください。",
+      "id": "Tolong jangan turun dulu.",
+      "form": "降りない",
+      "ruby": "まだ<ruby>降<rt>お</rt></ruby>りないでください。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "写真を撮る",
+      "しゃしんをとる"
+    ],
+    "arti": [
+      "id",
+      "memotret"
+    ],
+    "kamus": {
+      "jp": "旅行ではたくさん写真を撮る。",
+      "id": "Saat bepergian saya mengambil banyak foto.",
+      "form": "写真を撮る",
+      "ruby": "<ruby>旅行<rt>りょこう</rt></ruby>ではたくさん<ruby>写真<rt>しゃしん</rt></ruby>を<ruby>撮<rt>と</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "家族と写真を撮ります。",
+      "id": "Saya berfoto bersama keluarga.",
+      "form": "写真を撮ります",
+      "ruby": "<ruby>家族<rt>かぞく</rt></ruby>と<ruby>写真<rt>しゃしん</rt></ruby>を<ruby>撮<rt>と</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "ここで写真を撮ってもいいですか。",
+      "id": "Bolehkah saya mengambil foto di sini?",
+      "form": "写真を撮って",
+      "ruby": "ここで<ruby>写真<rt>しゃしん</rt></ruby>を<ruby>撮<rt>と</rt></ruby>ってもいいですか。"
+    },
+    "た": {
+      "jp": "桜の写真をたくさん撮った。",
+      "id": "Saya mengambil banyak foto bunga sakura.",
+      "form": "写真を撮った",
+      "ruby": "<ruby>桜<rt>さくら</rt></ruby>の<ruby>写真<rt>しゃしん</rt></ruby>をたくさん<ruby>撮<rt>と</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "美術館では写真を撮らない。",
+      "id": "Saya tidak mengambil foto di museum.",
+      "form": "写真を撮らない",
+      "ruby": "<ruby>美術館<rt>びじゅつかん</rt></ruby>では<ruby>写真<rt>しゃしん</rt></ruby>を<ruby>撮<rt>と</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "電話する",
+      "でんわする"
+    ],
+    "arti": [
+      "id",
+      "menelepon"
+    ],
+    "kamus": {
+      "jp": "家族に電話する。",
+      "id": "Saya menelepon keluarga.",
+      "form": "電話する",
+      "ruby": "<ruby>家族<rt>かぞく</rt></ruby>に<ruby>電話<rt>でんわ</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "後で会社に電話します。",
+      "id": "Nanti saya akan menelepon kantor.",
+      "form": "電話します",
+      "ruby": "<ruby>後<rt>あと</rt></ruby>で<ruby>会社<rt>かいしゃ</rt></ruby>に<ruby>電話<rt>でんわ</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "家に着いたら電話してください。",
+      "id": "Tolong telepon setelah sampai di rumah.",
+      "form": "電話して",
+      "ruby": "<ruby>家<rt>うち</rt></ruby>に<ruby>着<rt>つ</rt></ruby>いたら<ruby>電話<rt>でんわ</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "さっき友達に電話した。",
+      "id": "Tadi saya menelepon teman.",
+      "form": "電話した",
+      "ruby": "さっき<ruby>友達<rt>ともだち</rt></ruby>に<ruby>電話<rt>でんわ</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "夜遅くは電話しない。",
+      "id": "Saya tidak menelepon larut malam.",
+      "form": "電話しない",
+      "ruby": "<ruby>夜遅<rt>よるおそ</rt></ruby>くは<ruby>電話<rt>でんわ</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "手伝う",
+      "てつだう"
+    ],
+    "arti": [
+      "id",
+      "membantu"
+    ],
+    "kamus": {
+      "jp": "時間があれば家事を手伝う。",
+      "id": "Jika ada waktu, saya membantu pekerjaan rumah.",
+      "form": "手伝う",
+      "ruby": "<ruby>時間<rt>じかん</rt></ruby>があれば<ruby>家事<rt>かじ</rt></ruby>を<ruby>手伝<rt>てつだ</rt></ruby>う。"
+    },
+    "ます": {
+      "jp": "困っている人を手伝います。",
+      "id": "Saya membantu orang yang sedang kesulitan.",
+      "form": "手伝います",
+      "ruby": "<ruby>困<rt>こま</rt></ruby>っている<ruby>人<rt>ひと</rt></ruby>を<ruby>手伝<rt>てつだ</rt></ruby>います。"
+    },
+    "て": {
+      "jp": "忙しいので、少し手伝ってください。",
+      "id": "Karena saya sibuk, tolong bantu saya sebentar.",
+      "form": "手伝って",
+      "ruby": "<ruby>忙<rt>いそが</rt></ruby>しいので、<ruby>少<rt>すこ</rt></ruby>し<ruby>手伝<rt>てつだ</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "昨日、引っ越しを手伝った。",
+      "id": "Kemarin saya membantu proses pindahan.",
+      "form": "手伝った",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>引<rt>ひ</rt></ruby>っ<ruby>越<rt>こ</rt></ruby>しを<ruby>手伝<rt>てつだ</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "頼まれなかったので手伝わなかった。",
+      "id": "Karena tidak diminta, saya tidak membantu.",
+      "form": "手伝わない",
+      "ruby": "<ruby>頼<rt>たの</rt></ruby>まれなかったので<ruby>手伝<rt>てつだ</rt></ruby>わなかった。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "起こす",
+      "おこす"
+    ],
+    "arti": [
+      "id",
+      "membangunkan"
+    ],
+    "kamus": {
+      "jp": "毎朝、子供を起こす。",
+      "id": "Setiap pagi, saya membangunkan anak.",
+      "form": "起こす",
+      "ruby": "<ruby>毎朝<rt>まいあさ</rt></ruby>、<ruby>子供<rt>こども</rt></ruby>を<ruby>起<rt>お</rt></ruby>こす。"
+    },
+    "ます": {
+      "jp": "明日、６時に起こします。",
+      "id": "Besok, saya akan membangunkan Anda jam 6.",
+      "form": "起こします",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>、<ruby>６時<rt>ろくじ</rt></ruby>に<ruby>起<rt>お</rt></ruby>こします。"
+    },
+    "て": {
+      "jp": "遅刻するので早く起こしてください。",
+      "id": "Karena akan terlambat, tolong bangunkan dengan cepat.",
+      "form": "起こして",
+      "ruby": "<ruby>遅刻<rt>ちこく</rt></ruby>するので<ruby>早<rt>はや</rt></ruby>く<ruby>起<rt>お</rt></ruby>こしてください。"
+    },
+    "た": {
+      "jp": "今朝、早く弟を起こした。",
+      "id": "Pagi ini, saya membangunkan adik laki-laki saya lebih awal.",
+      "form": "起こした",
+      "ruby": "<ruby>今朝<rt>けさ</rt></ruby>、<ruby>早<rt>はや</rt></ruby>く<ruby>弟<rt>おとうと</rt></ruby>を<ruby>起<rt>お</rt></ruby>こした。"
+    },
+    "ない": {
+      "jp": "休日は子供を起こさない。",
+      "id": "Pada hari libur, saya tidak membangunkan anak.",
+      "form": "起こさない",
+      "ruby": "<ruby>休日<rt>きゅうじつ</rt></ruby>は<ruby>子供<rt>こども</rt></ruby>を<ruby>起<rt>お</rt></ruby>こさない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "浴びる",
+      "あびる"
+    ],
+    "arti": [
+      "id",
+      "mandi / mandi dengan gayung/shower"
+    ],
+    "kamus": {
+      "jp": "朝起きて、シャワーを浴びる。",
+      "id": "Bangun pagi lalu mandi shower.",
+      "form": "浴びる",
+      "ruby": "<ruby>朝<rt>あさ</rt></ruby><ruby>起<rt>お</rt></ruby>きて、シャワーを<ruby>浴<rt>あ</rt></ruby>びる。"
+    },
+    "ます": {
+      "jp": "毎日、冷たい水を浴びます。",
+      "id": "Setiap hari, saya mandi dengan air dingin.",
+      "form": "浴びます",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby>、<ruby>冷<rt>つめ</rt></ruby>たい<ruby>水<rt>みず</rt></ruby>を<ruby>浴<rt>あ</rt></ruby>びます。"
+    },
+    "て": {
+      "jp": "シャワーを浴びてから寝ます。",
+      "id": "Saya tidur setelah mandi shower.",
+      "form": "浴びて",
+      "ruby": "シャワーを<ruby>浴<rt>あ</rt></ruby>びてから<ruby>寝<rt>ね</rt></ruby>ます。"
+    },
+    "た": {
+      "jp": "さっきシャワーを浴びた。",
+      "id": "Tadi saya baru saja mandi shower.",
+      "form": "浴びた",
+      "ruby": "さっきシャワーを<ruby>浴<rt>あ</rt></ruby>びた。"
+    },
+    "ない": {
+      "jp": "今日は疲れたので、シャワーを浴びない。",
+      "id": "Karena hari ini lelah, saya tidak mandi shower.",
+      "form": "浴びない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>疲<rt>つか</rt></ruby>れたので、シャワーを<ruby>浴<rt>あ</rt></ruby>びない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "着る",
+      "きる"
+    ],
+    "arti": [
+      "id",
+      "memakai (pakaian atas/seluruh badan)"
+    ],
+    "kamus": {
+      "jp": "冬は厚いコートを着る。",
+      "id": "Di musim dingin saya memakai mantel tebal.",
+      "form": "着る",
+      "ruby": "<ruby>冬<rt>ふゆ</rt></ruby>は<ruby>厚<rt>あつ</rt></ruby>いコートを<ruby>着<rt>き</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "パーティーでドレスを着ます。",
+      "id": "Saya memakai gaun di pesta.",
+      "form": "着ます",
+      "ruby": "パーティーでドレスを<ruby>着<rt>き</rt></ruby>ます。"
+    },
+    "て": {
+      "jp": "シャツを着て出かけます。",
+      "id": "Saya pergi keluar dengan memakai kemeja.",
+      "form": "着て",
+      "ruby": "シャツを<ruby>着<rt>き</rt></ruby>て<ruby>出<rt>で</rt></ruby>かけます。"
+    },
+    "た": {
+      "jp": "昨日買った服を着た。",
+      "id": "Saya memakai baju yang dibeli kemarin.",
+      "form": "着た",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby><ruby>買<rt>か</rt></ruby>った<ruby>服<rt>ふく</rt></ruby>を<ruby>着<rt>き</rt></ruby>た。"
+    },
+    "ない": {
+      "jp": "暑いので、ジャケットは着ない。",
+      "id": "Karena panas, saya tidak memakai jaket.",
+      "form": "着ない",
+      "ruby": "<ruby>暑<rt>あつ</rt></ruby>いので、ジャケットは<ruby>着<rt>き</rt></ruby>ない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "脱ぐ",
+      "ぬぐ"
+    ],
+    "arti": [
+      "id",
+      "melepas (pakaian/sepatu)"
+    ],
+    "kamus": {
+      "jp": "部屋に入る前に靴を脱ぐ。",
+      "id": "Melepas sepatu sebelum masuk ke ruangan.",
+      "form": "脱ぐ",
+      "ruby": "<ruby>部屋<rt>へや</rt></ruby>に<ruby>入<rt>はい</rt></ruby>る<ruby>前<rt>まえ</rt></ruby>に<ruby>靴<rt>くつ</rt></ruby>を<ruby>脱<rt>ぬ</rt></ruby>ぐ。"
+    },
+    "ます": {
+      "jp": "暑いのでここでコートを脱ぎます。",
+      "id": "Karena panas, saya melepas mantel di sini.",
+      "form": "脱ぎます",
+      "ruby": "<ruby>暑<rt>あつ</rt></ruby>いのでここでコートを<ruby>脱<rt>ぬ</rt></ruby>ぎます。"
+    },
+    "て": {
+      "jp": "靴を脱いで上がってください。",
+      "id": "Tolong lepas sepatu Anda dan masuklah.",
+      "form": "脱いで",
+      "ruby": "<ruby>靴<rt>くつ</rt></ruby>を<ruby>脱<rt>ぬ</rt></ruby>いで<ruby>上<rt>あ</rt></ruby>がってください。"
+    },
+    "た": {
+      "jp": "雨に濡れた服をすぐに脱いだ。",
+      "id": "Saya segera melepas pakaian yang basah karena hujan.",
+      "form": "脱いだ",
+      "ruby": "<ruby>雨<rt>あめ</rt></ruby>に<ruby>濡<rt>ぬ</rt></ruby>れた<ruby>服<rt>ふく</rt></ruby>をすぐに<ruby>脱<rt>ぬ</rt></ruby>いだ。"
+    },
+    "ない": {
+      "jp": "まだ寒いので、上着を脱がない。",
+      "id": "Karena masih dingin, saya tidak melepas jaket.",
+      "form": "脱がない",
+      "ruby": "まだ<ruby>寒<rt>さむ</rt></ruby>いので、<ruby>上着<rt>うわぎ</rt></ruby>を<ruby>脱<rt>ぬ</rt></ruby>がない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "履く",
+      "はく"
+    ],
+    "arti": [
+      "id",
+      "memakai (sepatu/celana/bawah)"
+    ],
+    "kamus": {
+      "jp": "歩きやすい靴を履く。",
+      "id": "Saya memakai sepatu yang nyaman untuk berjalan.",
+      "form": "履く",
+      "ruby": "<ruby>歩<rt>ある</rt></ruby>きやすい<ruby>靴<rt>くつ</rt></ruby>を<ruby>履<rt>は</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "学校へ行く時はスニーカーを履きます。",
+      "id": "Saat pergi ke sekolah, saya memakai sepatu kets.",
+      "form": "履きます",
+      "ruby": "<ruby>学校<rt>がっこう</rt></ruby>へ<ruby>行<rt>い</rt></ruby>く<ruby>時<rt>とき</rt></ruby>はスニーカーを<ruby>履<rt>は</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "新しい靴を履いて出かける。",
+      "id": "Saya pergi keluar dengan memakai sepatu baru.",
+      "form": "履いて",
+      "ruby": "<ruby>新<rt>あたら</rt></ruby>しい<ruby>靴<rt>くつ</rt></ruby>を<ruby>履<rt>は</rt></ruby>いて<ruby>出<rt>で</rt></ruby>かける。"
+    },
+    "た": {
+      "jp": "昨日はスカートを履いた。",
+      "id": "Kemarin saya memakai rok.",
+      "form": "履いた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>はスカートを<ruby>履<rt>は</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "家の中では靴下を履かない。",
+      "id": "Di dalam rumah, saya tidak memakai kaus kaki.",
+      "form": "履かない",
+      "ruby": "<ruby>家<rt>うち</rt></ruby>の<ruby>中<rt>なか</rt></ruby>では<ruby>靴下<rt>くつした</rt></ruby>を<ruby>履<rt>は</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "被る",
+      "かぶる"
+    ],
+    "arti": [
+      "id",
+      "memakai (di atas kepala/topi)"
+    ],
+    "kamus": {
+      "jp": "日差しが強いので帽子を被る。",
+      "id": "Karena sinar matahari terik, saya memakai topi.",
+      "form": "被る",
+      "ruby": "<ruby>日差<rt>ひざ</rt></ruby>しが<ruby>強<rt>つよ</rt></ruby>いので<ruby>帽子<rt>ぼうし</rt></ruby>を<ruby>被<rt>かぶ</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "外出する時は帽子を被ります。",
+      "id": "Saat pergi keluar, saya memakai topi.",
+      "form": "被ります",
+      "ruby": "<ruby>外出<rt>がいしゅつ</rt></ruby>する<ruby>時<rt>とき</rt></ruby>は<ruby>帽子<rt>ぼうし</rt></ruby>を<ruby>被<rt>かぶ</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "ヘルメットを被って自転車に乗る。",
+      "id": "Saya naik sepeda dengan memakai helm.",
+      "form": "被って",
+      "ruby": "ヘルメットを<ruby>被<rt>かぶ</rt></ruby>って<ruby>自転車<rt>じてんしゃ</rt></ruby>に<ruby>乗<rt>の</rt></ruby>る。"
+    },
+    "た": {
+      "jp": "お気に入りの帽子を被った。",
+      "id": "Saya memakai topi favorit saya.",
+      "form": "被った",
+      "ruby": "お<ruby>気<rt>き</rt></ruby>に<ruby>入<rt>い</rt></ruby>りの<ruby>帽子<rt>ぼうし</rt></ruby>を<ruby>被<rt>かぶ</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "室内では帽子を被らない。",
+      "id": "Di dalam ruangan, saya tidak memakai topi.",
+      "form": "被らない",
+      "ruby": "<ruby>室内<rt>しつない</rt></ruby>では<ruby>帽子<rt>ぼうし</rt></ruby>を<ruby>被<rt>かぶ</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "つける",
+      "つける"
+    ],
+    "arti": [
+      "id",
+      "menyalakan / memasang"
+    ],
+    "kamus": {
+      "jp": "暗くなったら電気をつける。",
+      "id": "Jika menjadi gelap, saya menyalakan lampu.",
+      "form": "つける",
+      "ruby": "<ruby>暗<rt>くら</rt></ruby>くなったら<ruby>電気<rt>でんき</rt></ruby>をつける。"
+    },
+    "ます": {
+      "jp": "暑いのでエアコンをつけます。",
+      "id": "Karena panas, saya menyalakan AC.",
+      "form": "つけます",
+      "ruby": "<ruby>暑<rt>あつ</rt></ruby>いのでエアコンをつけます。"
+    },
+    "て": {
+      "jp": "ニュースを見たいのでテレビをつけてください。",
+      "id": "Tolong nyalakan TV karena saya ingin menonton berita.",
+      "form": "つけて",
+      "ruby": "ニュースを<ruby>見<rt>み</rt></ruby>たいのでテレビをつけてください。"
+    },
+    "た": {
+      "jp": "部屋の電気をつけた。",
+      "id": "Saya telah menyalakan lampu kamar.",
+      "form": "つけた",
+      "ruby": "<ruby>部屋<rt>へや</rt></ruby>の<ruby>電気<rt>でんき</rt></ruby>をつけた。"
+    },
+    "ない": {
+      "jp": "涼しいのでエアコンをつけない。",
+      "id": "Karena sejuk, saya tidak menyalakan AC.",
+      "form": "つけない",
+      "ruby": "<ruby>涼<rt>すず</rt></ruby>しいのでエアコンをつけない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "消す",
+      "けす"
+    ],
+    "arti": [
+      "id",
+      "mematikan / menghapus"
+    ],
+    "kamus": {
+      "jp": "寝る前にテレビを消す。",
+      "id": "Sebelum tidur, saya mematikan TV.",
+      "form": "消す",
+      "ruby": "<ruby>寝<rt>ね</rt></ruby>る<ruby>前<rt>まえ</rt></ruby>にテレビを<ruby>消<rt>け</rt></ruby>す。"
+    },
+    "ます": {
+      "jp": "黒板の字を消します。",
+      "id": "Saya menghapus tulisan di papan tulis.",
+      "form": "消します",
+      "ruby": "<ruby>黒板<rt>こくばん</rt></ruby>の<ruby>字<rt>じ</rt></ruby>を<ruby>消<rt>け</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "電気を消して寝てください。",
+      "id": "Tolong matikan lampu lalu tidur.",
+      "form": "消して",
+      "ruby": "<ruby>電気<rt>でんき</rt></ruby>を<ruby>消<rt>け</rt></ruby>して<ruby>寝<rt>ね</rt></ruby>てください。"
+    },
+    "た": {
+      "jp": "ストーブの火を消した。",
+      "id": "Saya telah mematikan api kompor.",
+      "form": "消した",
+      "ruby": "ストーブの<ruby>火<rt>ひ</rt></ruby>を<ruby>消<rt>け</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "まだ見ているので、テレビを消さない。",
+      "id": "Karena masih menonton, saya tidak mematikan TV.",
+      "form": "消さない",
+      "ruby": "まだ<ruby>見<rt>み</rt></ruby>ているので、テレビを<ruby>消<rt>け</rt></ruby>さない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "開く",
+      "あく"
+    ],
+    "arti": [
+      "id",
+      "terbuka"
+    ],
+    "kamus": {
+      "jp": "風でドアが開く。",
+      "id": "Pintu terbuka karena angin.",
+      "form": "開く",
+      "ruby": "<ruby>風<rt>かぜ</rt></ruby>で<ruby>窓<rt>まど</rt></ruby>が<ruby>開<rt>あ</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "朝９時に店が開きます。",
+      "id": "Toko akan buka pada jam 9 pagi.",
+      "form": "開きます",
+      "ruby": "デパートは<ruby>１０時<rt>じゅうじ</rt></ruby>に<ruby>開<rt>あ</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "ドアが開いて、猫が入ってきた。",
+      "id": "Pintu terbuka, dan kucing masuk.",
+      "form": "開いて",
+      "ruby": "ドアが<ruby>開<rt>あ</rt></ruby>いて、<ruby>人<rt>ひと</rt></ruby>が<ruby>入<rt>はい</rt></ruby>ってきた。"
+    },
+    "た": {
+      "jp": "突然、窓が開いた。",
+      "id": "Tiba-tiba, jendela terbuka.",
+      "form": "開いた",
+      "ruby": "<ruby>自動<rt>じどう</rt></ruby>ドアが<ruby>開<rt>あ</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "鍵がかかっていて、ドアが開かない。",
+      "id": "Pintunya terkunci sehingga tidak bisa terbuka.",
+      "form": "開かない",
+      "ruby": "<ruby>鍵<rt>かぎ</rt></ruby>がかかっていて<ruby>開<rt>あ</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "閉まる",
+      "しまる"
+    ],
+    "arti": [
+      "id",
+      "tertutup / tutup"
+    ],
+    "kamus": {
+      "jp": "自動ドアが閉まる。",
+      "id": "Pintu otomatis tertutup.",
+      "form": "閉まる",
+      "ruby": "<ruby>夜遅<rt>よるおそ</rt></ruby>くに<ruby>店<rt>みせ</rt></ruby>が<ruby>閉<rt>しま</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "この店は午後８時に閉まります。",
+      "id": "Toko ini tutup pada jam 8 malam.",
+      "form": "閉まります",
+      "ruby": "<ruby>銀行<rt>ぎんこう</rt></ruby>は<ruby>４時<rt>よじ</rt></ruby>に<ruby>閉<rt>しま</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "ドアが閉まって、電車が動いた。",
+      "id": "Pintu tertutup, dan kereta bergerak.",
+      "form": "閉まって",
+      "ruby": "ドアが<ruby>閉<rt>しま</rt></ruby>って、<ruby>出発<rt>しゅっぱつ</rt></ruby>した。"
+    },
+    "た": {
+      "jp": "強風で窓がバンと閉まった。",
+      "id": "Jendela tertutup dengan keras karena angin kencang.",
+      "form": "閉まった",
+      "ruby": "お<ruby>店<rt>みせ</rt></ruby>はもう<ruby>閉<rt>しま</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "荷物が挟まって、ドアが閉まらない。",
+      "id": "Karena ada barang yang terjepit, pintu tidak mau tertutup.",
+      "form": "閉まらない",
+      "ruby": "<ruby>壊<rt>こわ</rt></ruby>れていてドアが<ruby>閉<rt>しま</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "洗濯する",
+      "せんたくする"
+    ],
+    "arti": [
+      "id",
+      "mencuci (pakaian)"
+    ],
+    "kamus": {
+      "jp": "週末に服を洗濯する。",
+      "id": "Di akhir pekan, saya mencuci baju.",
+      "form": "洗濯する",
+      "ruby": "<ruby>週末<rt>しゅうまつ</rt></ruby>に<ruby>服<rt>ふく</rt></ruby>を<ruby>洗濯<rt>せんたく</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "毎日、タオルを洗濯します。",
+      "id": "Setiap hari, saya mencuci handuk.",
+      "form": "洗濯します",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby>、タオルを<ruby>洗濯<rt>せんたく</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "服を洗濯して、外に干します。",
+      "id": "Saya mencuci baju, lalu menjemurnya di luar.",
+      "form": "洗濯して",
+      "ruby": "<ruby>服<rt>ふく</rt></ruby>を<ruby>洗濯<rt>せんたく</rt></ruby>して、<ruby>外<rt>そと</rt></ruby>に<ruby>干<rt>ほ</rt></ruby>します。"
+    },
+    "た": {
+      "jp": "今朝、シーツを洗濯した。",
+      "id": "Pagi ini, saya telah mencuci seprai.",
+      "form": "洗濯した",
+      "ruby": "<ruby>今朝<rt>けさ</rt></ruby>、シーツを<ruby>洗濯<rt>せんたく</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "雨の日は洗濯しない。",
+      "id": "Pada hari hujan, saya tidak mencuci baju.",
+      "form": "洗濯しない",
+      "ruby": "<ruby>雨<rt>あめ</rt></ruby>の<ruby>日<rt>ひ</rt></ruby>は<ruby>洗濯<rt>せんたく</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "片付ける",
+      "かたづける"
+    ],
+    "arti": [
+      "id",
+      "membereskan / merapikan"
+    ],
+    "kamus": {
+      "jp": "部屋を綺麗に片付ける。",
+      "id": "Merapikan kamar dengan bersih.",
+      "form": "片付ける",
+      "ruby": "<ruby>部屋<rt>へや</rt></ruby>を<ruby>綺麗<rt>きれい</rt></ruby>に<ruby>片付<rt>かたづ</rt></ruby>ける。"
+    },
+    "ます": {
+      "jp": "食事の後、お皿を片付けます。",
+      "id": "Setelah makan, saya membereskan piring.",
+      "form": "片付けます",
+      "ruby": "<ruby>食事<rt>しょくじ</rt></ruby>の<ruby>後<rt>あと</rt></ruby>、お<ruby>皿<rt>さら</rt></ruby>を<ruby>片付<rt>かたづ</rt></ruby>けます。"
+    },
+    "て": {
+      "jp": "遊んだ後は、おもちゃを片付けてください。",
+      "id": "Setelah bermain, tolong bereskan mainannya.",
+      "form": "片付けて",
+      "ruby": "<ruby>遊<rt>あそ</rt></ruby>んだ<ruby>後<rt>あと</rt></ruby>は、おもちゃを<ruby>片付<rt>かたづ</rt></ruby>けてください。"
+    },
+    "た": {
+      "jp": "昨日、机の上を片付けた。",
+      "id": "Kemarin, saya membereskan atas meja.",
+      "form": "片付けた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>机<rt>つくえ</rt></ruby>の<ruby>上<rt>うえ</rt></ruby>を<ruby>片付<rt>かたづ</rt></ruby>けた。"
+    },
+    "ない": {
+      "jp": "疲れたので、今日は片付けない。",
+      "id": "Karena lelah, hari ini saya tidak beres-beres.",
+      "form": "片付けない",
+      "ruby": "<ruby>疲<rt>つか</rt></ruby>れたので、<ruby>今日<rt>きょう</rt></ruby>は<ruby>片付<rt>かたづ</rt></ruby>けない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "捨てる",
+      "すてる"
+    ],
+    "arti": [
+      "id",
+      "membuang"
+    ],
+    "kamus": {
+      "jp": "ゴミ箱にゴミを捨てる。",
+      "id": "Membuang sampah ke tempat sampah.",
+      "form": "捨てる",
+      "ruby": "ゴミ<ruby>箱<rt>ばこ</rt></ruby>にゴミを<ruby>捨<rt>す</rt></ruby>てる。"
+    },
+    "ます": {
+      "jp": "古い雑誌を捨てます。",
+      "id": "Saya akan membuang majalah lama.",
+      "form": "捨てます",
+      "ruby": "<ruby>古<rt>ふる</rt></ruby>い<ruby>雑誌<rt>ざっし</rt></ruby>を<ruby>捨<rt>す</rt></ruby>てます。"
+    },
+    "て": {
+      "jp": "この紙は捨ててください。",
+      "id": "Tolong buang kertas ini.",
+      "form": "捨てて",
+      "ruby": "この<ruby>紙<rt>かみ</rt></ruby>は<ruby>捨<rt>す</rt></ruby>ててください。"
+    },
+    "た": {
+      "jp": "壊れた時計を捨てた。",
+      "id": "Saya telah membuang jam yang rusak.",
+      "form": "捨てた",
+      "ruby": "<ruby>壊<rt>こわ</rt></ruby>れた<ruby>時計<rt>とけい</rt></ruby>を<ruby>捨<rt>す</rt></ruby>てた。"
+    },
+    "ない": {
+      "jp": "まだ使えるので捨てない。",
+      "id": "Karena masih bisa dipakai, saya tidak membuangnya.",
+      "form": "捨てない",
+      "ruby": "まだ<ruby>使<rt>つか</rt></ruby>えるので<ruby>捨<rt>す</rt></ruby>てない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "並べる",
+      "ならべる"
+    ],
+    "arti": [
+      "id",
+      "menata (berjajar) / membariskan"
+    ],
+    "kamus": {
+      "jp": "本棚に本を並べる。",
+      "id": "Menata buku di rak buku.",
+      "form": "並べる",
+      "ruby": "<ruby>本棚<rt>ほんだな</rt></ruby>に<ruby>本<rt>ほん</rt></ruby>を<ruby>並<rt>なら</rt></ruby>べる。"
+    },
+    "ます": {
+      "jp": "テーブルにお皿を並べます。",
+      "id": "Saya menata piring di atas meja.",
+      "form": "並べます",
+      "ruby": "テーブルにお<ruby>皿<rt>さら</rt></ruby>を<ruby>並<rt>なら</rt></ruby>べます。"
+    },
+    "て": {
+      "jp": "ここに椅子を並べてください。",
+      "id": "Tolong jajarkan kursi di sini.",
+      "form": "並べて",
+      "ruby": "ここに<ruby>椅子<rt>いす</rt></ruby>を<ruby>並<rt>なら</rt></ruby>べてください。"
+    },
+    "た": {
+      "jp": "店の前に商品を並べた。",
+      "id": "Saya telah menata produk di depan toko.",
+      "form": "並べた",
+      "ruby": "<ruby>店<rt>みせ</rt></ruby>の<ruby>前<rt>まえ</rt></ruby>に<ruby>商品<rt>しょうひん</rt></ruby>を<ruby>並<rt>なら</rt></ruby>べた。"
+    },
+    "ない": {
+      "jp": "邪魔になるので、ここには自転車を並べない。",
+      "id": "Karena menghalangi, saya tidak menjejerkan sepeda di sini.",
+      "form": "並べない",
+      "ruby": "<ruby>邪魔<rt>じゃま</rt></ruby>になるので、ここには<ruby>自転車<rt>じてんしゃ</rt></ruby>を<ruby>並<rt>なら</rt></ruby>べない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "置く",
+      "おく"
+    ],
+    "arti": [
+      "id",
+      "meletakkan / menaruh"
+    ],
+    "kamus": {
+      "jp": "机の上にカバンを置く。",
+      "id": "Meletakkan tas di atas meja.",
+      "form": "置く",
+      "ruby": "<ruby>机<rt>つくえ</rt></ruby>の<ruby>上<rt>うえ</rt></ruby>にカバンを<ruby>置<rt>お</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "荷物はここに置きます。",
+      "id": "Saya meletakkan barang bawaan di sini.",
+      "form": "置きます",
+      "ruby": "<ruby>荷物<rt>にもつ</rt></ruby>はここに<ruby>置<rt>お</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "鍵はそこら辺に置いてください。",
+      "id": "Tolong letakkan kunci di sekitar sana.",
+      "form": "置いて",
+      "ruby": "<ruby>鍵<rt>かぎ</rt></ruby>はそこら<ruby>辺<rt>へん</rt></ruby>に<ruby>置<rt>お</rt></ruby>いてください。"
+    },
+    "た": {
+      "jp": "さっき、ここにスマホを置いた。",
+      "id": "Tadi, saya meletakkan ponsel di sini.",
+      "form": "置いた",
+      "ruby": "さっき、ここにスマホを<ruby>置<rt>お</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "大切なものはここに置かない。",
+      "id": "Saya tidak meletakkan barang berharga di sini.",
+      "form": "置かない",
+      "ruby": "<ruby>大切<rt>たいせつ</rt></ruby>なものはここに<ruby>置<rt>お</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "取る",
+      "とる"
+    ],
+    "arti": [
+      "id",
+      "mengambil"
+    ],
+    "kamus": {
+      "jp": "棚から本を取る。",
+      "id": "Mengambil buku dari rak.",
+      "form": "取る",
+      "ruby": "<ruby>棚<rt>たな</rt></ruby>から<ruby>本<rt>ほん</rt></ruby>を<ruby>取<rt>と</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "会議中にメモを取ります。",
+      "id": "Saya mengambil catatan (mencatat) selama rapat.",
+      "form": "取ります",
+      "ruby": "<ruby>会議中<rt>かいぎちゅう</rt></ruby>にメモを<ruby>取<rt>と</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "すみません、その塩を取ってください。",
+      "id": "Permisi, tolong ambilkan garam itu.",
+      "form": "取って",
+      "ruby": "すみません、その<ruby>塩<rt>しお</rt></ruby>を<ruby>取<rt>と</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "ポケットから財布を取った。",
+      "id": "Saya mengambil dompet dari saku.",
+      "form": "取った",
+      "ruby": "ポケットから<ruby>財布<rt>さいふ</rt></ruby>を<ruby>取<rt>と</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "人の物は取らない。",
+      "id": "Saya tidak mengambil barang milik orang lain.",
+      "form": "取らない",
+      "ruby": "<ruby>人<rt>ひと</rt></ruby>の<ruby>物<rt>もの</rt></ruby>は<ruby>取<rt>と</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "持って行く",
+      "もっていく"
+    ],
+    "arti": [
+      "id",
+      "membawa pergi"
+    ],
+    "kamus": {
+      "jp": "学校へお弁当を持って行く。",
+      "id": "Membawa bekal pergi ke sekolah.",
+      "form": "持って行く",
+      "ruby": "<ruby>学校<rt>がっこう</rt></ruby>へお<ruby>弁当<rt>べんとう</rt></ruby>を<ruby>持<rt>も</rt></ruby>って<ruby>行<rt>い</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "明日、カメラを持って行きます。",
+      "id": "Besok, saya akan membawa kamera.",
+      "form": "持って行きます",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>、カメラを<ruby>持<rt>も</rt></ruby>って<ruby>行<rt>い</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "雨が降るかもしれないので、傘を持って行ってください。",
+      "id": "Karena mungkin akan hujan, tolong bawa payung.",
+      "form": "持って行って",
+      "ruby": "<ruby>雨<rt>あめ</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>るかもしれないので、<ruby>傘<rt>かさ</rt></ruby>を<ruby>持<rt>も</rt></ruby>って<ruby>行<rt>い</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "パーティーにケーキを持って行った。",
+      "id": "Saya telah membawa kue ke pesta.",
+      "form": "持って行った",
+      "ruby": "パーティーにケーキを<ruby>持<rt>も</rt></ruby>って<ruby>行<rt>い</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "重いので、教科書は持って行かない。",
+      "id": "Karena berat, saya tidak membawa buku pelajaran.",
+      "form": "持って行かない",
+      "ruby": "<ruby>重<rt>おも</rt></ruby>いので、<ruby>教科書<rt>きょうかしょ</rt></ruby>は<ruby>持<rt>も</rt></ruby>って<ruby>行<rt>い</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "持って来る",
+      "もってくる"
+    ],
+    "arti": [
+      "id",
+      "membawa datang"
+    ],
+    "kamus": {
+      "jp": "友達がうちにゲームを持って来る。",
+      "id": "Teman membawa game datang ke rumah saya.",
+      "form": "持って来る",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>がうちにゲームを<ruby>持<rt>も</rt></ruby>って<ruby>来<rt>く</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "明日の授業に辞書を持って来ます。",
+      "id": "Saya akan membawa kamus ke pelajaran besok.",
+      "form": "持って来ます",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>の<ruby>授業<rt>じゅぎょう</rt></ruby>に<ruby>辞書<rt>じしょ</rt></ruby>を<ruby>持<rt>も</rt></ruby>って<ruby>来<rt>き</rt></ruby>ます。"
+    },
+    "て": {
+      "jp": "パーティーに飲み物を持って来てください。",
+      "id": "Tolong bawa minuman ke pesta.",
+      "form": "持って来て",
+      "ruby": "パーティーに<ruby>飲<rt>の</rt></ruby>み<ruby>物<rt>もの</rt></ruby>を<ruby>持<rt>も</rt></ruby>って<ruby>来<rt>き</rt></ruby>てください。"
+    },
+    "た": {
+      "jp": "昨日、彼がお土産を持って来た。",
+      "id": "Kemarin, dia membawa oleh-oleh ke sini.",
+      "form": "持って来た",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>彼<rt>かれ</rt></ruby>がお<ruby>土産<rt>みやげ</rt></ruby>を<ruby>持<rt>も</rt></ruby>って<ruby>来<rt>き</rt></ruby>た。"
+    },
+    "ない": {
+      "jp": "今日は傘を持って来ない。",
+      "id": "Hari ini, saya tidak membawa payung ke sini.",
+      "form": "持って来ない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>傘<rt>かさ</rt></ruby>を<ruby>持<rt>も</rt></ruby>って<ruby>来<rt>こ</rt></ruby>ない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "答える",
+      "こたえる"
+    ],
+    "arti": [
+      "id",
+      "menjawab"
+    ],
+    "kamus": {
+      "jp": "先生の質問に答える。",
+      "id": "Menjawab pertanyaan guru.",
+      "form": "答える",
+      "ruby": "<ruby>先生<rt>せんせい</rt></ruby>の<ruby>質問<rt>しつもん</rt></ruby>に<ruby>答<rt>こた</rt></ruby>える。"
+    },
+    "ます": {
+      "jp": "今からあなたの質問に答えます。",
+      "id": "Mulai sekarang saya akan menjawab pertanyaan Anda.",
+      "form": "答えます",
+      "ruby": "<ruby>今<rt>いま</rt></ruby>からあなたの<ruby>質問<rt>しつもん</rt></ruby>に<ruby>答<rt>こた</rt></ruby>えます。"
+    },
+    "て": {
+      "jp": "大きな声で答えてください。",
+      "id": "Tolong jawab dengan suara keras.",
+      "form": "答えて",
+      "ruby": "<ruby>大<rt>おお</rt></ruby>きな<ruby>声<rt>こえ</rt></ruby>で<ruby>答<rt>こた</rt></ruby>えてください。"
+    },
+    "た": {
+      "jp": "インタビューに正直に答えた。",
+      "id": "Saya telah menjawab wawancara dengan jujur.",
+      "form": "答えた",
+      "ruby": "インタビューに<ruby>正直<rt>しょうじき</rt></ruby>に<ruby>答<rt>こた</rt></ruby>えた。"
+    },
+    "ない": {
+      "jp": "わからないので何も答えない。",
+      "id": "Karena tidak tahu, saya tidak menjawab apa-apa.",
+      "form": "答えない",
+      "ruby": "わからないので<ruby>何<rt>なに</rt></ruby>も<ruby>答<rt>こた</rt></ruby>えない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "質問する",
+      "しつもんする"
+    ],
+    "arti": [
+      "id",
+      "bertanya / mengajukan pertanyaan"
+    ],
+    "kamus": {
+      "jp": "わからないことを先生に質問する。",
+      "id": "Menanyakan hal yang tidak dimengerti kepada guru.",
+      "form": "質問する",
+      "ruby": "わからないことを<ruby>先生<rt>せんせい</rt></ruby>に<ruby>質問<rt>しつもん</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "会議の最後に質問します。",
+      "id": "Saya akan bertanya di akhir rapat.",
+      "form": "質問します",
+      "ruby": "<ruby>会議<rt>かいぎ</rt></ruby>の<ruby>最後<rt>さいご</rt></ruby>に<ruby>質問<rt>しつもん</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "疑問があれば、すぐに質問してください。",
+      "id": "Jika ada keraguan, tolong segera bertanyalah.",
+      "form": "質問して",
+      "ruby": "<ruby>疑問<rt>ぎもん</rt></ruby>があれば、すぐに<ruby>質問<rt>しつもん</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "昨日、先輩に仕事について質問した。",
+      "id": "Kemarin, saya bertanya kepada senior tentang pekerjaan.",
+      "form": "質問した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>先輩<rt>せんぱい</rt></ruby>に<ruby>仕事<rt>しごと</rt></ruby>について<ruby>質問<rt>しつもん</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "恥ずかしいので、あまり質問しない。",
+      "id": "Karena malu, saya tidak terlalu banyak bertanya.",
+      "form": "質問しない",
+      "ruby": "<ruby>恥<rt>はず</rt></ruby>かしいので、あまり<ruby>質問<rt>しつもん</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "説明する",
+      "せつめいする"
+    ],
+    "arti": [
+      "id",
+      "menjelaskan"
+    ],
+    "kamus": {
+      "jp": "新しいパソコンの使い方を説明する。",
+      "id": "Menjelaskan cara menggunakan komputer baru.",
+      "form": "説明する",
+      "ruby": "<ruby>新<rt>あたら</rt></ruby>しいパソコンの<ruby>使<rt>つか</rt></ruby>い<ruby>方<rt>かた</rt></ruby>を<ruby>説明<rt>せつめい</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "今からルールの変更について説明します。",
+      "id": "Mulai sekarang saya akan menjelaskan tentang perubahan aturan.",
+      "form": "説明します",
+      "ruby": "<ruby>今<rt>いま</rt></ruby>からルールの<ruby>変更<rt>へんこう</rt></ruby>について<ruby>説明<rt>せつめい</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "遅刻した理由を説明してください。",
+      "id": "Tolong jelaskan alasan terlambat.",
+      "form": "説明して",
+      "ruby": "<ruby>遅刻<rt>ちこく</rt></ruby>した<ruby>理由<rt>りゆう</rt></ruby>を<ruby>説明<rt>せつめい</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "昨日、お客様に商品を説明した。",
+      "id": "Kemarin, saya telah menjelaskan produk kepada pelanggan.",
+      "form": "説明した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、お<ruby>客<rt>きゃく</rt></ruby>さまに<ruby>商品<rt>しょうひん</rt></ruby>を<ruby>説明<rt>せつめい</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "時間がありませんから、今は説明しない。",
+      "id": "Karena tidak ada waktu, sekarang saya tidak akan menjelaskan.",
+      "form": "説明しない",
+      "ruby": "<ruby>時間<rt>じかん</rt></ruby>がありませんから、<ruby>今<rt>いま</rt></ruby>は<ruby>説明<rt>せつめい</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "理解する",
+      "りかいする"
+    ],
+    "arti": [
+      "id",
+      "memahami / mengerti"
+    ],
+    "kamus": {
+      "jp": "相手の気持ちを理解する。",
+      "id": "Memahami perasaan lawan bicara.",
+      "form": "理解する",
+      "ruby": "<ruby>相手<rt>あいて</rt></ruby>の<ruby>気持<rt>きも</rt></ruby>ちを<ruby>理解<rt>りかい</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "彼の言っていることを理解します。",
+      "id": "Saya memahami apa yang dia katakan.",
+      "form": "理解します",
+      "ruby": "<ruby>彼<rt>かれ</rt></ruby>の<ruby>言<rt>い</rt></ruby>っていることを<ruby>理解<rt>りかい</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "現在の状況を理解してください。",
+      "id": "Tolong pahami situasi saat ini.",
+      "form": "理解して",
+      "ruby": "<ruby>現在<rt>げんざい</rt></ruby>の<ruby>状況<rt>じょうきょう</rt></ruby>を<ruby>理解<rt>りかい</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "説明を読んで、内容を深く理解した。",
+      "id": "Setelah membaca penjelasan, saya memahami isinya dengan mendalam.",
+      "form": "理解した",
+      "ruby": "<ruby>説明<rt>せつめい</rt></ruby>を<ruby>読<rt>よ</rt></ruby>んで、<ruby>内容<rt>ないよう</rt></ruby>を<ruby>深<rt>ふか</rt></ruby>く<ruby>理解<rt>りかい</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "なぜ彼が怒っているのか理解しない。",
+      "id": "Saya tidak mengerti mengapa dia marah.",
+      "form": "理解しない",
+      "ruby": "なぜ<ruby>彼<rt>かれ</rt></ruby>が<ruby>怒<rt>おこ</rt></ruby>っているのか<ruby>理解<rt>りかい</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "使える",
+      "つかえる"
+    ],
+    "arti": [
+      "id",
+      "bisa menggunakan / dapat dipakai"
+    ],
+    "kamus": {
+      "jp": "このアプリはとても便利で使える。",
+      "id": "Aplikasi ini sangat praktis dan bisa digunakan.",
+      "form": "使える",
+      "ruby": "このアプリはとても<ruby>便利<rt>べんり</rt></ruby>で<ruby>使<rt>つか</rt></ruby>える。"
+    },
+    "ます": {
+      "jp": "このカードは海外でも使えます。",
+      "id": "Kartu ini bisa digunakan di luar negeri juga.",
+      "form": "使えます",
+      "ruby": "このカードは<ruby>海外<rt>かいがい</rt></ruby>でも<ruby>使<rt>つか</rt></ruby>えます。"
+    },
+    "て": {
+      "jp": "古いパソコンがまだ使えて嬉しい。",
+      "id": "Saya senang komputer lama masih bisa digunakan.",
+      "form": "使えて",
+      "ruby": "<ruby>古<rt>ふる</rt></ruby>いパソコンがまだ<ruby>使<rt>つか</rt></ruby>えて<ruby>嬉<rt>うれ</rt></ruby>しい。"
+    },
+    "た": {
+      "jp": "Wi-Fiが繋がって、インターネットが使えた。",
+      "id": "Wi-Fi terhubung, dan internet bisa digunakan.",
+      "form": "使えた",
+      "ruby": "Wi-Fiが<ruby>繋<rt>つな</rt></ruby>がって、インターネットが<ruby>使<rt>つか</rt></ruby>えた。"
+    },
+    "ない": {
+      "jp": "パスワードを忘れて、パソコンが使えない。",
+      "id": "Karena lupa kata sandi, komputer tidak bisa digunakan.",
+      "form": "使えない",
+      "ruby": "パスワードを<ruby>忘<rt>わす</rt></ruby>れて、パソコンが<ruby>使<rt>つか</rt></ruby>えない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "できる",
+      "できる"
+    ],
+    "arti": [
+      "id",
+      "bisa / dapat / mampu"
+    ],
+    "kamus": {
+      "jp": "日本語を少し話すことができる。",
+      "id": "Bisa berbicara bahasa Jepang sedikit.",
+      "form": "できる",
+      "ruby": "<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>少<rt>すこ</rt></ruby>し<ruby>話<rt>はな</rt></ruby>すことができる。"
+    },
+    "ます": {
+      "jp": "明日のパーティーに参加できます。",
+      "id": "Saya bisa berpartisipasi dalam pesta besok.",
+      "form": "できます",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>のパーティーに<ruby>参加<rt>さんか</rt></ruby>できます。"
+    },
+    "て": {
+      "jp": "仕事が早くできて、とても助かった。",
+      "id": "Pekerjaannya bisa selesai cepat, saya sangat tertolong.",
+      "form": "できて",
+      "ruby": "<ruby>仕事<rt>しごと</rt></ruby>が<ruby>早<rt>はや</rt></ruby>くできて、とても<ruby>助<rt>たす</rt></ruby>かった。"
+    },
+    "た": {
+      "jp": "今日のテストはよくできた。",
+      "id": "Ujian hari ini bisa dikerjakan dengan baik.",
+      "form": "できた",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>のテストはよくできた。"
+    },
+    "ない": {
+      "jp": "忙しくて、今日はゲームができない。",
+      "id": "Karena sibuk, hari ini saya tidak bisa bermain game.",
+      "form": "できない",
+      "ruby": "<ruby>忙<rt>いそが</rt></ruby>しくて、<ruby>今日<rt>きょう</rt></ruby>はゲームができない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "始める",
+      "はじめる"
+    ],
+    "arti": [
+      "id",
+      "memulai (objek + を)"
+    ],
+    "kamus": {
+      "jp": "新しい仕事を始める。",
+      "id": "Memulai pekerjaan baru.",
+      "form": "始める",
+      "ruby": "<ruby>新<rt>あたら</rt></ruby>しい<ruby>仕事<rt>しごと</rt></ruby>を<ruby>始<rt>はじ</rt></ruby>める。"
+    },
+    "ます": {
+      "jp": "明日からダイエットを始めます。",
+      "id": "Mulai besok saya akan memulai diet.",
+      "form": "始めます",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>からダイエットを<ruby>始<rt>はじ</rt></ruby>めます。"
+    },
+    "て": {
+      "jp": "準備ができたら、テストを始めてください。",
+      "id": "Jika persiapannya sudah selesai, tolong mulai ujiannya.",
+      "form": "始めて",
+      "ruby": "<ruby>準備<rt>じゅんび</rt></ruby>ができたら、テストを<ruby>始<rt>はじ</rt></ruby>めてください。"
+    },
+    "た": {
+      "jp": "先月、ピアノを習い始めた。",
+      "id": "Bulan lalu, saya mulai belajar piano.",
+      "form": "始めた",
+      "ruby": "<ruby>先月<rt>せんげつ</rt></ruby>、ピアノを<ruby>習<rt>なら</rt></ruby>い<ruby>始<rt>はじ</rt></ruby>めた。"
+    },
+    "ない": {
+      "jp": "全員集まるまで会議を始めない。",
+      "id": "Sampai semua orang berkumpul, saya tidak akan memulai rapat.",
+      "form": "始めない",
+      "ruby": "<ruby>全員<rt>ぜんいん</rt></ruby><ruby>集<rt>あつ</rt></ruby>まるまで<ruby>会議<rt>かいぎ</rt></ruby>を<ruby>始<rt>はじ</rt></ruby>めない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "始まる",
+      "はじまる"
+    ],
+    "arti": [
+      "id",
+      "dimulai (subjek + が)"
+    ],
+    "kamus": {
+      "jp": "もうすぐ映画が始まる。",
+      "id": "Sebentar lagi filmnya akan dimulai.",
+      "form": "始まる",
+      "ruby": "もうすぐ<ruby>授業<rt>じゅぎょう</rt></ruby>が<ruby>始<rt>はじ</rt></ruby>まる。"
+    },
+    "ます": {
+      "jp": "日本語の授業は９時に始まります。",
+      "id": "Pelajaran bahasa Jepang akan dimulai pada jam 9.",
+      "form": "始まります",
+      "ruby": "<ruby>会議<rt>かいぎ</rt></ruby>は<ruby>１０時<rt>じゅうじ</rt></ruby>に<ruby>始<rt>はじ</rt></ruby>まります。"
+    },
+    "て": {
+      "jp": "コンサートが始まって、音楽が聞こえた。",
+      "id": "Konser dimulai, dan musik terdengar.",
+      "form": "始まって",
+      "ruby": "<ruby>映画<rt>えいが</rt></ruby>が<ruby>始<rt>はじ</rt></ruby>まって、<ruby>静<rt>しず</rt></ruby>かになった。"
+    },
+    "た": {
+      "jp": "予定より早く試合が始まった。",
+      "id": "Pertandingan dimulai lebih cepat dari jadwal.",
+      "form": "始まった",
+      "ruby": "<ruby>雨<rt>あめ</rt></ruby>が<ruby>急<rt>きゅう</rt></ruby>に<ruby>降<rt>ふ</rt></ruby>り<ruby>始<rt>はじ</rt></ruby>まった（<ruby>始<rt>はじ</rt></ruby>まった）。"
+    },
+    "ない": {
+      "jp": "先生が来ないので、授業がなかなか始まらない。",
+      "id": "Karena guru tidak datang, pelajaran tidak kunjung dimulai.",
+      "form": "始まらない",
+      "ruby": "<ruby>時間<rt>じかん</rt></ruby>になっても<ruby>始<rt>はじ</rt></ruby>まらない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "終わる",
+      "おわる"
+    ],
+    "arti": [
+      "id",
+      "selesai / berakhir (subjek + が)"
+    ],
+    "kamus": {
+      "jp": "午後５時に仕事が終わる。",
+      "id": "Pekerjaan selesai pada jam 5 sore.",
+      "form": "終わる",
+      "ruby": "<ruby>午後<rt>ごご</rt></ruby><ruby>５時<rt>ごじ</rt></ruby>に<ruby>仕事<rt>しごと</rt></ruby>が<ruby>終<rt>お</rt></ruby>わる。"
+    },
+    "ます": {
+      "jp": "この番組は１０時に終わります。",
+      "id": "Acara ini akan selesai pada jam 10.",
+      "form": "終わります",
+      "ruby": "テストは<ruby>３時<rt>さんじ</rt></ruby>に<ruby>終<rt>お</rt></ruby>わります。"
+    },
+    "て": {
+      "jp": "早く仕事が終わって、家に帰った。",
+      "id": "Pekerjaan cepat selesai, dan saya pulang ke rumah.",
+      "form": "終わって",
+      "ruby": "<ruby>授業<rt>じゅぎょう</rt></ruby>が<ruby>終<rt>お</rt></ruby>わってから<ruby>遊<rt>あそ</rt></ruby>ぶ。"
+    },
+    "た": {
+      "jp": "楽しい夏休みが昨日終わった。",
+      "id": "Liburan musim panas yang menyenangkan telah berakhir kemarin.",
+      "form": "終わった",
+      "ruby": "<ruby>夏休<rt>なつやす</rt></ruby>みが<ruby>昨日<rt>きのう</rt></ruby><ruby>終<rt>お</rt></ruby>わった。"
+    },
+    "ない": {
+      "jp": "宿題が多くて、なかなか終わらない。",
+      "id": "Karena PR-nya banyak, sulit untuk cepat selesai.",
+      "form": "終わらない",
+      "ruby": "<ruby>宿題<rt>しゅくだい</rt></ruby>がまだ<ruby>終<rt>お</rt></ruby>わらない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "終える",
+      "おえる"
+    ],
+    "arti": [
+      "id",
+      "menyelesaikan / mengakhiri (objek + を)"
+    ],
+    "kamus": {
+      "jp": "今日の仕事を終える。",
+      "id": "Menyelesaikan pekerjaan hari ini.",
+      "form": "終える",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>の<ruby>仕事<rt>しごと</rt></ruby>を<ruby>終<rt>お</rt></ruby>える。"
+    },
+    "ます": {
+      "jp": "３時までにすべての宿題を終えます。",
+      "id": "Saya akan menyelesaikan semua PR sebelum jam 3.",
+      "form": "終えます",
+      "ruby": "<ruby>３時<rt>さんじ</rt></ruby>までにすべての<ruby>宿題<rt>しゅくだい</rt></ruby>を<ruby>終<rt>お</rt></ruby>えます。"
+    },
+    "て": {
+      "jp": "早く食事を終えて、出かけましょう。",
+      "id": "Mari kita cepat selesaikan makan dan pergi keluar.",
+      "form": "終えて",
+      "ruby": "<ruby>早<rt>はや</rt></ruby>く<ruby>食事<rt>しょくじ</rt></ruby>を<ruby>終<rt>お</rt></ruby>えて、<ruby>出<rt>で</rt></ruby>かけましょう。"
+    },
+    "た": {
+      "jp": "大学のすべての授業を終えた。",
+      "id": "Saya telah menyelesaikan semua kelas di universitas.",
+      "form": "終えた",
+      "ruby": "<ruby>大学<rt>だいがく</rt></ruby>のすべての<ruby>授業<rt>じゅぎょう</rt></ruby>を<ruby>終<rt>お</rt></ruby>えた。"
+    },
+    "ない": {
+      "jp": "まだ準備を終えないまま、出発した。",
+      "id": "Saya berangkat tanpa menyelesaikan persiapan.",
+      "form": "終えない",
+      "ruby": "まだ<ruby>準備<rt>じゅんび</rt></ruby>を<ruby>終<rt>お</rt></ruby>えないまま、<ruby>出発<rt>しゅっぱつ</rt></ruby>した。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "曲がる",
+      "まがる"
+    ],
+    "arti": [
+      "id",
+      "berbelok / bengkok (subjek + が / objek + を + 曲がる)"
+    ],
+    "kamus": {
+      "jp": "次の角を右に曲がる。",
+      "id": "Berbelok ke kanan di tikungan berikutnya.",
+      "form": "曲がる",
+      "ruby": "<ruby>次<rt>つぎ</rt></ruby>の<ruby>角<rt>かど</rt></ruby>を<ruby>右<rt>みぎ</rt></ruby>に<ruby>曲<rt>ま</rt></ruby>がる。"
+    },
+    "ます": {
+      "jp": "あの交差点を左に曲がります。",
+      "id": "Saya akan berbelok ke kiri di perempatan itu.",
+      "form": "曲がります",
+      "ruby": "あの<ruby>交差点<rt>こうさてん</rt></ruby>を<ruby>左<rt>ひだり</rt></ruby>に<ruby>曲<rt>ま</rt></ruby>がります。"
+    },
+    "て": {
+      "jp": "まっすぐ行って、右に曲がってください。",
+      "id": "Jalan lurus, lalu tolong berbelok ke kanan.",
+      "form": "曲がって",
+      "ruby": "まっすぐ<ruby>行<rt>い</rt></ruby>って、<ruby>右<rt>みぎ</rt></ruby>に<ruby>曲<rt>ま</rt></ruby>がってください。"
+    },
+    "た": {
+      "jp": "道を間違えて、左に曲がった。",
+      "id": "Saya salah jalan dan berbelok ke kiri.",
+      "form": "曲がった",
+      "ruby": "<ruby>道<rt>みち</rt></ruby>を<ruby>間違<rt>まちが</rt></ruby>えて、<ruby>左<rt>ひだり</rt></ruby>に<ruby>曲<rt>ま</rt></ruby>がった。"
+    },
+    "ない": {
+      "jp": "この道はまっすぐで曲がらない。",
+      "id": "Jalan ini lurus dan tidak berbelok.",
+      "form": "曲がらない",
+      "ruby": "この<ruby>道<rt>みち</rt></ruby>はまっすぐで<ruby>曲<rt>ま</rt></ruby>がらない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "渡る",
+      "わたる"
+    ],
+    "arti": [
+      "id",
+      "menyeberang"
+    ],
+    "kamus": {
+      "jp": "歩道橋を渡る。",
+      "id": "Menyeberangi jembatan penyeberangan.",
+      "form": "渡る",
+      "ruby": "<ruby>歩道橋<rt>ほどうきょう</rt></ruby>を<ruby>渡<rt>わた</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "青信号になったら道を渡ります。",
+      "id": "Kalau lampu hijau, saya akan menyeberang jalan.",
+      "form": "渡ります",
+      "ruby": "<ruby>青信号<rt>あおしんごう</rt></ruby>になったら<ruby>道<rt>みち</rt></ruby>を<ruby>渡<rt>わた</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "その橋を渡って、まっすぐ行ってください。",
+      "id": "Tolong seberangi jembatan itu dan jalan lurus.",
+      "form": "渡って",
+      "ruby": "その<ruby>橋<rt>はし</rt></ruby>を<ruby>渡<rt>わた</rt></ruby>って、まっすぐ<ruby>行<rt>い</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "危ない道を急いで渡った。",
+      "id": "Saya buru-buru menyeberangi jalan yang berbahaya.",
+      "form": "渡った",
+      "ruby": "<ruby>危<rt>あぶ</rt></ruby>ない<ruby>道<rt>みち</rt></ruby>を<ruby>急<rt>いそ</rt></ruby>いで<ruby>渡<rt>わた</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "赤信号の時は道を渡らない。",
+      "id": "Saat lampu merah, saya tidak menyeberang jalan.",
+      "form": "渡らない",
+      "ruby": "<ruby>赤信号<rt>あかしんごう</rt></ruby>の<ruby>時<rt>とき</rt></ruby>は<ruby>道<rt>みち</rt></ruby>を<ruby>渡<rt>わた</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "曲げる",
+      "まげる"
+    ],
+    "arti": [
+      "id",
+      "membengkokkan / menekuk (objek + を)"
+    ],
+    "kamus": {
+      "jp": "体操で膝を曲げる。",
+      "id": "Menekuk lutut saat senam.",
+      "form": "曲げる",
+      "ruby": "<ruby>体操<rt>たいそう</rt></ruby>で<ruby>膝<rt>ひざ</rt></ruby>を<ruby>曲<rt>ま</rt></ruby>げる。"
+    },
+    "ます": {
+      "jp": "体を前に曲げます。",
+      "id": "Saya menekuk tubuh ke depan.",
+      "form": "曲げます",
+      "ruby": "<ruby>体<rt>からだ</rt></ruby>を<ruby>前<rt>まえ</rt></ruby>に<ruby>曲<rt>ま</rt></ruby>げます。"
+    },
+    "て": {
+      "jp": "痛くないところまで腕を曲げてください。",
+      "id": "Tolong tekuk lengan Anda sampai batas yang tidak sakit.",
+      "form": "曲げて",
+      "ruby": "<ruby>痛<rt>いた</rt></ruby>くないところまで<ruby>腕<rt>うで</rt></ruby>を<ruby>曲<rt>ま</rt></ruby>げてください。"
+    },
+    "た": {
+      "jp": "工作で針金を曲げた。",
+      "id": "Saya membengkokkan kawat untuk prakarya.",
+      "form": "曲げた",
+      "ruby": "<ruby>工作<rt>こうさく</rt></ruby>で<ruby>針金<rt>はりがね</rt></ruby>を<ruby>曲<rt>ま</rt></ruby>げた。"
+    },
+    "ない": {
+      "jp": "怪我をしているので、足を曲げない。",
+      "id": "Karena terluka, saya tidak menekuk kaki.",
+      "form": "曲げない",
+      "ruby": "<ruby>怪我<rt>けが</rt></ruby>をしているので、<ruby>足<rt>あし</rt></ruby>を<ruby>曲<rt>ま</rt></ruby>げない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "止まる",
+      "とまる"
+    ],
+    "arti": [
+      "id",
+      "berhenti (subjek + が)"
+    ],
+    "kamus": {
+      "jp": "駅に電車が止まる。",
+      "id": "Kereta berhenti di stasiun.",
+      "form": "止まる",
+      "ruby": "<ruby>駅<rt>えき</rt></ruby>に<ruby>電車<rt>でんしゃ</rt></ruby>が<ruby>止<rt>と</rt></ruby>まる。"
+    },
+    "ます": {
+      "jp": "このバスは病院の前に止まります。",
+      "id": "Bus ini akan berhenti di depan rumah sakit.",
+      "form": "止まります",
+      "ruby": "このバスは<ruby>病院<rt>びょういん</rt></ruby>の<ruby>前<rt>まえ</rt></ruby>に<ruby>止<rt>と</rt></ruby>まります。"
+    },
+    "て": {
+      "jp": "車が止まってから、降りてください。",
+      "id": "Tolong turun setelah mobil berhenti.",
+      "form": "止まって",
+      "ruby": "<ruby>車<rt>くるま</rt></ruby>が<ruby>止<rt>と</rt></ruby>まってから、<ruby>降<rt>お</rt></ruby>りてください。"
+    },
+    "た": {
+      "jp": "突然、時計が止まった。",
+      "id": "Tiba-tiba, jam tangan berhenti.",
+      "form": "止まった",
+      "ruby": "<ruby>突然<rt>とつぜん</rt></ruby>、<ruby>時計<rt>とけい</rt></ruby>が<ruby>止<rt>と</rt></ruby>まった。"
+    },
+    "ない": {
+      "jp": "咳がなかなか止まらない。",
+      "id": "Batuknya tidak kunjung berhenti.",
+      "form": "止まらない",
+      "ruby": "<ruby>咳<rt>せき</rt></ruby>がなかなか<ruby>止<rt>と</rt></ruby>まらない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "止める",
+      "とめる"
+    ],
+    "arti": [
+      "id",
+      "menghentikan / memberhentikan (objek + を)"
+    ],
+    "kamus": {
+      "jp": "駐車場に車を止める。",
+      "id": "Memarkir/menghentikan mobil di tempat parkir.",
+      "form": "止める",
+      "ruby": "<ruby>駐車場<rt>ちゅうしゃじょう</rt></ruby>に<ruby>車<rt>くるま</rt></ruby>を<ruby>止<rt>と</rt></ruby>める。"
+    },
+    "ます": {
+      "jp": "ここでタクシーを止めます。",
+      "id": "Saya akan menghentikan taksi di sini.",
+      "form": "止めます",
+      "ruby": "ここでタクシーを<ruby>止<rt>と</rt></ruby>めます。"
+    },
+    "て": {
+      "jp": "危ないから、機械を止めてください。",
+      "id": "Karena berbahaya, tolong hentikan mesinnya.",
+      "form": "止めて",
+      "ruby": "<ruby>危<rt>あぶ</rt></ruby>ないから、<ruby>機械<rt>きかい</rt></ruby>を<ruby>止<rt>と</rt></ruby>めてください。"
+    },
+    "た": {
+      "jp": "門の前に自転車を止めた。",
+      "id": "Saya memarkir/menghentikan sepeda di depan gerbang.",
+      "form": "止めた",
+      "ruby": "<ruby>門<rt>もん</rt></ruby>の<ruby>前<rt>まえ</rt></ruby>に<ruby>自転車<rt>じてんしゃ</rt></ruby>を<ruby>止<rt>と</rt></ruby>めた。"
+    },
+    "ない": {
+      "jp": "邪魔になるので、ここに車を止めない。",
+      "id": "Karena menghalangi, saya tidak memarkir mobil di sini.",
+      "form": "止めない",
+      "ruby": "<ruby>邪魔<rt>じゃま</rt></ruby>になるので、ここに<ruby>車<rt>くるま</rt></ruby>を<ruby>止<rt>と</rt></ruby>めない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "急ぐ",
+      "いそぐ"
+    ],
+    "arti": [
+      "id",
+      "bergegas / buru-buru"
+    ],
+    "kamus": {
+      "jp": "遅刻しそうなので急ぐ。",
+      "id": "Karena sepertinya akan terlambat, saya bergegas.",
+      "form": "急ぐ",
+      "ruby": "<ruby>遅刻<rt>ちこく</rt></ruby>しそうなので<ruby>急<rt>いそ</rt></ruby>ぐ。"
+    },
+    "ます": {
+      "jp": "時間がないので急ぎます。",
+      "id": "Karena tidak ada waktu, saya akan bergegas.",
+      "form": "急ぎます",
+      "ruby": "<ruby>時間<rt>じかん</rt></ruby>がないので<ruby>急<rt>いそ</rt></ruby>ぎます。"
+    },
+    "て": {
+      "jp": "急いで駅に向かってください。",
+      "id": "Tolong bergegas menuju stasiun.",
+      "form": "急いで",
+      "ruby": "<ruby>急<rt>いそ</rt></ruby>いで<ruby>駅<rt>えき</rt></ruby>に<ruby>向<rt>む</rt></ruby>かってください。"
+    },
+    "た": {
+      "jp": "約束の時間に遅れないように急いだ。",
+      "id": "Saya bergegas agar tidak terlambat dari waktu janjian.",
+      "form": "急いだ",
+      "ruby": "<ruby>約束<rt>やくそく</rt></ruby>の<ruby>時間<rt>じかん</rt></ruby>に<ruby>遅<rt>おく</rt></ruby>れないように<ruby>急<rt>いそ</rt></ruby>いだ。"
+    },
+    "ない": {
+      "jp": "まだ時間があるので、急がない。",
+      "id": "Karena masih ada waktu, saya tidak buru-buru.",
+      "form": "急がない",
+      "ruby": "まだ<ruby>時間<rt>じかん</rt></ruby>があるので、<ruby>急<rt>いそ</rt></ruby>がない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "遅れる",
+      "おくれる"
+    ],
+    "arti": [
+      "id",
+      "terlambat"
+    ],
+    "kamus": {
+      "jp": "明日の会議に遅れる。",
+      "id": "Terlambat untuk rapat besok.",
+      "form": "遅れる",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>の<ruby>会議<rt>かいぎ</rt></ruby>に<ruby>遅<rt>おく</rt></ruby>れる。"
+    },
+    "ます": {
+      "jp": "事故で電車が遅れます。",
+      "id": "Kereta akan terlambat karena kecelakaan.",
+      "form": "遅れます",
+      "ruby": "<ruby>事故<rt>じこ</rt></ruby>で<ruby>電車<rt>でんしゃ</rt></ruby>が<ruby>遅<rt>おく</rt></ruby>れます。"
+    },
+    "て": {
+      "jp": "授業に遅れて、すみません。",
+      "id": "Maaf, saya terlambat ke kelas.",
+      "form": "遅れて",
+      "ruby": "<ruby>授業<rt>じゅぎょう</rt></ruby>に<ruby>遅<rt>おく</rt></ruby>れて、すみません。"
+    },
+    "た": {
+      "jp": "寝坊して学校に遅れた。",
+      "id": "Saya bangun kesiangan dan terlambat ke sekolah.",
+      "form": "遅れた",
+      "ruby": "<ruby>寝坊<rt>ねぼう</rt></ruby>して<ruby>学校<rt>がっこう</rt></ruby>に<ruby>遅<rt>おく</rt></ruby>れた。"
+    },
+    "ない": {
+      "jp": "明日の約束には絶対に遅れない。",
+      "id": "Saya pasti tidak akan terlambat pada janji besok.",
+      "form": "遅れない",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>の<ruby>約束<rt>やくそく</rt></ruby>には<ruby>絶対<rt>ぜったい</rt></ruby>に<ruby>遅<rt>おく</rt></ruby>れない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "働き始める",
+      "はたらきはじめる"
+    ],
+    "arti": [
+      "id",
+      "mulai bekerja"
+    ],
+    "kamus": {
+      "jp": "来月から新しい会社で働き始める。",
+      "id": "Mulai bekerja di perusahaan baru dari bulan depan.",
+      "form": "働き始める",
+      "ruby": "<ruby>来月<rt>らいげつ</rt></ruby>から<ruby>新<rt>あたら</rt></ruby>しい<ruby>会社<rt>かいしゃ</rt></ruby>で<ruby>働<rt>はたら</rt></ruby>き<ruby>始<rt>はじ</rt></ruby>める。"
+    },
+    "ます": {
+      "jp": "私は９時から働き始めます。",
+      "id": "Saya mulai bekerja dari jam 9.",
+      "form": "働き始めます",
+      "ruby": "<ruby>私<rt>わたし</rt></ruby>は<ruby>９時<rt>くじ</rt></ruby>から<ruby>働<rt>はたら</rt></ruby>き<ruby>始<rt>はじ</rt></ruby>めます。"
+    },
+    "て": {
+      "jp": "すぐに働き始めてください。",
+      "id": "Tolong segera mulai bekerja.",
+      "form": "働き始めて",
+      "ruby": "すぐに<ruby>働<rt>はたら</rt></ruby>き<ruby>始<rt>はじ</rt></ruby>めてください。"
+    },
+    "た": {
+      "jp": "去年から日本で働き始めた。",
+      "id": "Saya mulai bekerja di Jepang sejak tahun lalu.",
+      "form": "働き始めた",
+      "ruby": "<ruby>去年<rt>きょねん</rt></ruby>から<ruby>日本<rt>にほん</rt></ruby>で<ruby>働<rt>はたら</rt></ruby>き<ruby>始<rt>はじ</rt></ruby>めた。"
+    },
+    "ない": {
+      "jp": "まだ準備ができていないので働き始めない。",
+      "id": "Karena belum siap, saya belum mulai bekerja.",
+      "form": "働き始めない",
+      "ruby": "まだ<ruby>準備<rt>じゅんび</rt></ruby>ができていないので<ruby>働<rt>はたら</rt></ruby>き<ruby>始<rt>はじ</rt></ruby>めない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "残業する",
+      "ざんぎょうする"
+    ],
+    "arti": [
+      "id",
+      "kerja lembur"
+    ],
+    "kamus": {
+      "jp": "今日は仕事が多いので残業する。",
+      "id": "Karena hari ini banyak pekerjaan, saya kerja lembur.",
+      "form": "残業する",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>仕事<rt>しごと</rt></ruby>が<ruby>多<rt>おお</rt></ruby>いので<ruby>残業<rt>ざんぎょう</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "毎日、夜の８時まで残業します。",
+      "id": "Setiap hari, saya kerja lembur sampai jam 8 malam.",
+      "form": "残業します",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby>、<ruby>夜<rt>よる</rt></ruby>の<ruby>８時<rt>はちじ</rt></ruby>まで<ruby>残業<rt>ざんぎょう</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "残業して、このレポートを終わらせます。",
+      "id": "Saya akan kerja lembur dan menyelesaikan laporan ini.",
+      "form": "残業して",
+      "ruby": "<ruby>残業<rt>ざんぎょう</rt></ruby>して、このレポートを<ruby>終<rt>お</rt></ruby>わらせます。"
+    },
+    "た": {
+      "jp": "昨日は遅くまで残業した。",
+      "id": "Kemarin saya kerja lembur sampai larut.",
+      "form": "残業した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>は<ruby>遅<rt>おそ</rt></ruby>くまで<ruby>残業<rt>ざんぎょう</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "今日は疲れたので残業しない。",
+      "id": "Karena hari ini lelah, saya tidak kerja lembur.",
+      "form": "残業しない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>疲<rt>つか</rt></ruby>れたので<ruby>残業<rt>ざんぎょう</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "休憩する",
+      "きゅうけいする"
+    ],
+    "arti": [
+      "id",
+      "beristirahat"
+    ],
+    "kamus": {
+      "jp": "疲れたら、少し休憩する。",
+      "id": "Jika lelah, saya beristirahat sebentar.",
+      "form": "休憩する",
+      "ruby": "<ruby>疲<rt>つか</rt></ruby>れたら、<ruby>少<rt>すこ</rt></ruby>し<ruby>休憩<rt>きゅうけい</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "１２時から１時間休憩します。",
+      "id": "Saya beristirahat selama 1 jam dari jam 12.",
+      "form": "休憩します",
+      "ruby": "<ruby>１２時<rt>じゅうにじ</rt></ruby>から<ruby>１時間<rt>いちじかん</rt></ruby><ruby>休憩<rt>きゅうけい</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "喫茶店で休憩して、コーヒーを飲みましょう。",
+      "id": "Mari beristirahat di kafe dan minum kopi.",
+      "form": "休憩して",
+      "ruby": "<ruby>喫茶店<rt>きっさてん</rt></ruby>で<ruby>休憩<rt>きゅうけい</rt></ruby>して、コーヒーを<ruby>飲<rt>の</rt></ruby>みましょう。"
+    },
+    "た": {
+      "jp": "公園のベンチで休憩した。",
+      "id": "Saya beristirahat di bangku taman.",
+      "form": "休憩した",
+      "ruby": "<ruby>公園<rt>こうえん</rt></ruby>のベンチで<ruby>休憩<rt>きゅうけい</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "忙しいので、今日は休憩しない。",
+      "id": "Karena sibuk, hari ini saya tidak beristirahat.",
+      "form": "休憩しない",
+      "ruby": "<ruby>忙<rt>いそが</rt></ruby>しいので、<ruby>今日<rt>きょう</rt></ruby>は<ruby>休憩<rt>きゅうけい</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "連絡する",
+      "れんらくする"
+    ],
+    "arti": [
+      "id",
+      "menghubungi"
+    ],
+    "kamus": {
+      "jp": "後で彼に連絡する。",
+      "id": "Nanti saya akan menghubunginya.",
+      "form": "連絡する",
+      "ruby": "<ruby>後<rt>あと</rt></ruby>で<ruby>彼<rt>かれ</rt></ruby>に<ruby>連絡<rt>れんらく</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "明日、また連絡します。",
+      "id": "Besok, saya akan menghubungi lagi.",
+      "form": "連絡します",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>、また<ruby>連絡<rt>れんらく</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "着いたら、私に連絡してください。",
+      "id": "Jika sudah tiba, tolong hubungi saya.",
+      "form": "連絡して",
+      "ruby": "<ruby>着<rt>つ</rt></ruby>いたら、<ruby>私<rt>わたし</rt></ruby>に<ruby>連絡<rt>れんらく</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "昨日、家族に連絡した。",
+      "id": "Kemarin saya menghubungi keluarga.",
+      "form": "連絡した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>家族<rt>かぞく</rt></ruby>に<ruby>連絡<rt>れんらく</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "用事がないので、彼には連絡しない。",
+      "id": "Karena tidak ada urusan, saya tidak menghubunginya.",
+      "form": "連絡しない",
+      "ruby": "<ruby>用事<rt>ようじ</rt></ruby>がないので、<ruby>彼<rt>かれ</rt></ruby>には<ruby>連絡<rt>れんらく</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "確認する",
+      "かくにんする"
+    ],
+    "arti": [
+      "id",
+      "memastikan / mengecek / mengonfirmasi"
+    ],
+    "kamus": {
+      "jp": "出発する前に荷物を確認する。",
+      "id": "Mengecek barang bawaan sebelum berangkat.",
+      "form": "確認する",
+      "ruby": "<ruby>出発<rt>しゅっぱつ</rt></ruby>する<ruby>前<rt>まえ</rt></ruby>に<ruby>荷物<rt>にもつ</rt></ruby>を<ruby>確認<rt>かくにん</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "今からスケジュールを確認します。",
+      "id": "Mulai sekarang saya akan mengecek jadwal.",
+      "form": "確認します",
+      "ruby": "<ruby>今<rt>いま</rt></ruby>からスケジュールを<ruby>確認<rt>かくにん</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "この書類の内容を確認してください。",
+      "id": "Tolong cek isi dokumen ini.",
+      "form": "確認して",
+      "ruby": "この<ruby>書類<rt>しょるい</rt></ruby>の<ruby>内容<rt>ないよう</rt></ruby>を<ruby>確認<rt>かくにん</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "会議の時間を確認した。",
+      "id": "Saya telah memastikan waktu rapat.",
+      "form": "確認した",
+      "ruby": "<ruby>会議<rt>かいぎ</rt></ruby>の<ruby>時間<rt>じかん</rt></ruby>を<ruby>確認<rt>かくにん</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "時間がないので、今は確認しない。",
+      "id": "Karena tidak ada waktu, saya tidak mengeceknya sekarang.",
+      "form": "確認しない",
+      "ruby": "<ruby>時間<rt>じかん</rt></ruby>がないので、<ruby>今<rt>いま</rt></ruby>は<ruby>確認<rt>かくにん</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "予約する",
+      "よやくする"
+    ],
+    "arti": [
+      "id",
+      "memesan / reservasi"
+    ],
+    "kamus": {
+      "jp": "インターネットでホテルを予約する。",
+      "id": "Memesan hotel melalui internet.",
+      "form": "予約する",
+      "ruby": "インターネットでホテルを<ruby>予約<rt>よやく</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "明日のレストランを予約します。",
+      "id": "Saya akan memesan restoran untuk besok.",
+      "form": "予約します",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>のレストランを<ruby>予約<rt>よやく</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "早めに飛行機のチケットを予約してください。",
+      "id": "Tolong pesan tiket pesawat lebih awal.",
+      "form": "予約して",
+      "ruby": "<ruby>早<rt>はや</rt></ruby>めに<ruby>飛行機<rt>ひこうき</rt></ruby>のチケットを<ruby>予約<rt>よやく</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "来月の旅行のためにホテルを予約した。",
+      "id": "Saya telah memesan hotel untuk liburan bulan depan.",
+      "form": "予約した",
+      "ruby": "<ruby>来月<rt>らいげつ</rt></ruby>の<ruby>旅行<rt>りょこう</rt></ruby>のためにホテルを<ruby>予約<rt>よやく</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "まだ予定がわからないので予約しない。",
+      "id": "Karena jadwalnya belum pasti, saya tidak memesan.",
+      "form": "予約しない",
+      "ruby": "まだ<ruby>予定<rt>よてい</rt></ruby>がわからないので<ruby>予約<rt>よやく</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "案内する",
+      "あんないする"
+    ],
+    "arti": [
+      "id",
+      "memandu / mengantar (guide)"
+    ],
+    "kamus": {
+      "jp": "友達に町を案内する。",
+      "id": "Memandu teman berkeliling kota.",
+      "form": "案内する",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>に<ruby>町<rt>まち</rt></ruby>を<ruby>案内<rt>あんない</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "私が工場の中を案内します。",
+      "id": "Saya akan memandu di dalam pabrik.",
+      "form": "案内します",
+      "ruby": "<ruby>私<rt>わたし</rt></ruby>が<ruby>工場<rt>こうじょう</rt></ruby>の<ruby>中<rt>なか</rt></ruby>を<ruby>案内<rt>あんない</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "お客様を席へ案内してください。",
+      "id": "Tolong antar tamu ke tempat duduknya.",
+      "form": "案内して",
+      "ruby": "お<ruby>客<rt>きゃく</rt></ruby>さまを<ruby>席<rt>せき</rt></ruby>へ<ruby>案内<rt>あんない</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "昨日、観光客を京都に案内した。",
+      "id": "Kemarin, saya memandu turis ke Kyoto.",
+      "form": "案内した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>観光客<rt>かんこうきゃく</rt></ruby>を<ruby>京都<rt>きょうと</rt></ruby>に<ruby>案内<rt>あんない</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "道がよくわからないので、案内しない。",
+      "id": "Karena kurang tahu jalannya, saya tidak memandu.",
+      "form": "案内しない",
+      "ruby": "<ruby>道<rt>みち</rt></ruby>がよくわからないので、<ruby>案内<rt>あんない</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "言う",
+      "いう"
+    ],
+    "arti": [
+      "id",
+      "berkata / mengatakan"
+    ],
+    "kamus": {
+      "jp": "自分の意見を言う。",
+      "id": "Mengatakan pendapat sendiri.",
+      "form": "言う",
+      "ruby": "<ruby>自分<rt>じぶん</rt></ruby>の<ruby>意見<rt>いけん</rt></ruby>を<ruby>言<rt>い</rt></ruby>う。"
+    },
+    "ます": {
+      "jp": "本当のことを言います。",
+      "id": "Saya mengatakan hal yang sebenarnya.",
+      "form": "言います",
+      "ruby": "<ruby>本当<rt>ほんとう</rt></ruby>のことを<ruby>言<rt>い</rt></ruby>います。"
+    },
+    "て": {
+      "jp": "もう一度言ってください。",
+      "id": "Tolong katakan sekali lagi.",
+      "form": "言って",
+      "ruby": "もう<ruby>一度<rt>いちど</rt></ruby><ruby>言<rt>い</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "昨日、彼に本当のことを言った。",
+      "id": "Kemarin saya mengatakan hal sebenarnya kepadanya.",
+      "form": "言った",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>彼<rt>かれ</rt></ruby>に<ruby>本当<rt>ほんとう</rt></ruby>のことを<ruby>言<rt>い</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "嘘は言わない。",
+      "id": "Saya tidak mengatakan kebohongan.",
+      "form": "言わない",
+      "ruby": "<ruby>嘘<rt>うそ</rt></ruby>は<ruby>言<rt>い</rt></ruby>わない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "答える",
+      "こたえる"
+    ],
+    "arti": [
+      "id",
+      "menjawab"
+    ],
+    "kamus": {
+      "jp": "先生の質問に答える。",
+      "id": "Menjawab pertanyaan guru.",
+      "form": "答える",
+      "ruby": "<ruby>先生<rt>せんせい</rt></ruby>の<ruby>質問<rt>しつもん</rt></ruby>に<ruby>答<rt>こた</rt></ruby>える。"
+    },
+    "ます": {
+      "jp": "今からあなたの質問に答えます。",
+      "id": "Mulai sekarang saya akan menjawab pertanyaan Anda.",
+      "form": "答えます",
+      "ruby": "<ruby>今<rt>いま</rt></ruby>からあなたの<ruby>質問<rt>しつもん</rt></ruby>に<ruby>答<rt>こた</rt></ruby>えます。"
+    },
+    "て": {
+      "jp": "大きな声で答えてください。",
+      "id": "Tolong jawab dengan suara keras.",
+      "form": "答えて",
+      "ruby": "<ruby>大<rt>おお</rt></ruby>きな<ruby>声<rt>こえ</rt></ruby>で<ruby>答<rt>こた</rt></ruby>えてください。"
+    },
+    "た": {
+      "jp": "インタビューに正直に答えた。",
+      "id": "Saya telah menjawab wawancara dengan jujur.",
+      "form": "答えた",
+      "ruby": "インタビューに<ruby>正直<rt>しょうじき</rt></ruby>に<ruby>答<rt>こた</rt></ruby>えた。"
+    },
+    "ない": {
+      "jp": "わからないので何も答えない。",
+      "id": "Karena tidak tahu, saya tidak menjawab apa-apa.",
+      "form": "答えない",
+      "ruby": "わからないので<ruby>何<rt>なに</rt></ruby>も<ruby>答<rt>こた</rt></ruby>えない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "呼ぶ",
+      "よぶ"
+    ],
+    "arti": [
+      "id",
+      "memanggil"
+    ],
+    "kamus": {
+      "jp": "タクシーを呼ぶ。",
+      "id": "Memanggil taksi.",
+      "form": "呼ぶ",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>を<ruby>家<rt>うち</rt></ruby>に<ruby>呼<rt>よ</rt></ruby>ぶ。"
+    },
+    "ます": {
+      "jp": "友達を家に呼びます。",
+      "id": "Saya memanggil/mengundang teman ke rumah.",
+      "form": "呼びます",
+      "ruby": "タクシーを<ruby>呼<rt>よ</rt></ruby>びます。"
+    },
+    "て": {
+      "jp": "医者を呼んでください。",
+      "id": "Tolong panggil dokter.",
+      "form": "呼んで",
+      "ruby": "<ruby>大<rt>おお</rt></ruby>きな<ruby>声<rt>こえ</rt></ruby>で<ruby>呼<rt>よ</rt></ruby>んでください。"
+    },
+    "た": {
+      "jp": "遠くから友達を呼んだ。",
+      "id": "Saya memanggil teman dari kejauhan.",
+      "form": "呼んだ",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>医者<rt>いしゃ</rt></ruby>を<ruby>呼<rt>よ</rt></ruby>んだ。"
+    },
+    "ない": {
+      "jp": "誰も呼具つもりはない。",
+      "id": "Saya tidak berniat memanggil siapa pun.",
+      "form": "呼ばない",
+      "ruby": "<ruby>誰<rt>だれ</rt></ruby>も<ruby>呼<rt>よ</rt></ruby>ばない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "呼ばれる",
+      "よばれる"
+    ],
+    "arti": [
+      "id",
+      "dipanggil"
+    ],
+    "kamus": {
+      "jp": "名前を呼ばれる。",
+      "id": "Nama saya dipanggil.",
+      "form": "呼ばれる",
+      "ruby": "<ruby>名前<rt>なまえ</rt></ruby>を<ruby>呼<rt>よ</rt></ruby>ばれる。"
+    },
+    "ます": {
+      "jp": "病院で名前を呼ばれます。",
+      "id": "Nama saya dipanggil di rumah sakit.",
+      "form": "呼ばれます",
+      "ruby": "<ruby>病院<rt>びょういん</rt></ruby>で<ruby>名前<rt>なまえ</rt></ruby>を<ruby>呼<rt>よ</rt></ruby>ばれます。"
+    },
+    "て": {
+      "jp": "先生に呼ばれて、職員室に行った。",
+      "id": "Dipanggil oleh guru, saya pergi ke ruang guru.",
+      "form": "呼ばれて",
+      "ruby": "<ruby>先生<rt>せんせい</rt></ruby>に<ruby>呼<rt>よ</rt></ruby>ばれて、<ruby>職員室<rt>しょくいんしつ</rt></ruby>に<ruby>行<rt>い</rt></ruby>った。"
+    },
+    "た": {
+      "jp": "昨日、社長に呼ばれた。",
+      "id": "Kemarin, saya dipanggil oleh direktur.",
+      "form": "呼ばれた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>社長<rt>しゃちょう</rt></ruby>に<ruby>呼<rt>よ</rt></ruby>ばれた。"
+    },
+    "ない": {
+      "jp": "今日は誰にも呼ばれない。",
+      "id": "Hari ini saya tidak dipanggil oleh siapa pun.",
+      "form": "呼ばれない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>誰<rt>だれ</rt></ruby>にも<ruby>呼<rt>よ</rt></ruby>ばれない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "伝える",
+      "つたえる"
+    ],
+    "arti": [
+      "id",
+      "menyampaikan"
+    ],
+    "kamus": {
+      "jp": "感謝の気持ちを伝える。",
+      "id": "Menyampaikan rasa terima kasih.",
+      "form": "伝える",
+      "ruby": "<ruby>感謝<rt>かんしゃ</rt></ruby>の<ruby>気持<rt>きも</rt></ruby>ちを<ruby>伝<rt>つた</rt></ruby>える。"
+    },
+    "ます": {
+      "jp": "後で彼にメッセージを伝えます。",
+      "id": "Nanti saya akan menyampaikan pesan kepadanya.",
+      "form": "伝えます",
+      "ruby": "<ruby>後<rt>あと</rt></ruby>で<ruby>彼<rt>かれ</rt></ruby>にメッセージを<ruby>伝<rt>つた</rt></ruby>えます。"
+    },
+    "て": {
+      "jp": "田中さんに「よろしく」と伝えてください。",
+      "id": "Tolong sampaikan salam saya kepada Tanaka-san.",
+      "form": "伝えて",
+      "ruby": "<ruby>田中<rt>たなか</rt></ruby>さんに「よろしく」と<ruby>伝<rt>つた</rt></ruby>えてください。"
+    },
+    "た": {
+      "jp": "大事な連絡をみんなに伝えた。",
+      "id": "Saya telah menyampaikan informasi penting kepada semua orang.",
+      "form": "伝えた",
+      "ruby": "<ruby>大事<rt>だいじ</rt></ruby>な<ruby>連絡<rt>れんらく</rt></ruby>をみんなに<ruby>伝<rt>つた</rt></ruby>えた。"
+    },
+    "ない": {
+      "jp": "まだ誰にもこの秘密を伝えない。",
+      "id": "Saya belum menyampaikan rahasia ini kepada siapa pun.",
+      "form": "伝えない",
+      "ruby": "まだ<ruby>誰<rt>だれ</rt></ruby>にもこの<ruby>秘密<rt>ひみつ</rt></ruby>を<ruby>伝<rt>つた</rt></ruby>えない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "相談する",
+      "そうだんする"
+    ],
+    "arti": [
+      "id",
+      "berkonsultasi / berdiskusi"
+    ],
+    "kamus": {
+      "jp": "悩みを友達に相談する。",
+      "id": "Membicarakan/berkonsultasi tentang masalah kepada teman.",
+      "form": "相談する",
+      "ruby": "<ruby>悩<rt>なや</rt></ruby>みを<ruby>友達<rt>ともだち</rt></ruby>に<ruby>相談<rt>そうだん</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "明日、先生に相談します。",
+      "id": "Besok saya akan berkonsultasi dengan guru.",
+      "form": "相談します",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>、<ruby>先生<rt>せんせい</rt></ruby>に<ruby>相談<rt>そうだん</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "一人で悩まないで、私に相談してください。",
+      "id": "Jangan dipikirkan sendiri, tolong berkonsultasilah dengan saya.",
+      "form": "相談して",
+      "ruby": "<ruby>一人<rt>ひとり</rt></ruby>で<ruby>悩<rt>なや</rt></ruby>まないで、<ruby>私<rt>わたし</rt></ruby>に<ruby>相談<rt>そうだん</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "進路について親と相談した。",
+      "id": "Saya berkonsultasi dengan orang tua mengenai masa depan.",
+      "form": "相談した",
+      "ruby": "<ruby>進路<rt>しんろ</rt></ruby>について<ruby>親<rt>おや</rt></ruby>と<ruby>相談<rt>そうだん</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "誰にも相談しない。",
+      "id": "Saya tidak berkonsultasi dengan siapa pun.",
+      "form": "相談しない",
+      "ruby": "<ruby>誰<rt>だれ</rt></ruby>にも<ruby>相談<rt>そうだん</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "頼む",
+      "たのむ"
+    ],
+    "arti": [
+      "id",
+      "meminta / memohon / memesan"
+    ],
+    "kamus": {
+      "jp": "友達に助けを頼む。",
+      "id": "Meminta bantuan kepada teman.",
+      "form": "頼む",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>に<ruby>助<rt>たす</rt></ruby>けを<ruby>頼<rt>たの</rt></ruby>む。"
+    },
+    "ます": {
+      "jp": "レストランでコーヒーを頼みます。",
+      "id": "Saya memesan kopi di restoran.",
+      "form": "頼みます",
+      "ruby": "レストランでコーヒーを<ruby>頼<rt>たの</rt></ruby>みます。"
+    },
+    "て": {
+      "jp": "この仕事を彼に頼んでください。",
+      "id": "Tolong minta dia untuk mengerjakan tugas ini.",
+      "form": "頼んで",
+      "ruby": "この<ruby>仕事<rt>しごと</rt></ruby>を<ruby>彼<rt>かれ</rt></ruby>に<ruby>頼<rt>たの</rt></ruby>んでください。"
+    },
+    "た": {
+      "jp": "昨日、彼に買い物をお願いした（頼んだ）。",
+      "id": "Kemarin, saya meminta tolong belanja kepadanya.",
+      "form": "頼んだ",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>彼<rt>かれ</rt></ruby>に<ruby>買<rt>か</rt></ruby>い<ruby>物<rt>もの</rt></ruby>をお<ruby>願<rt>ねが</rt></ruby>いした（<ruby>頼<rt>たの</rt></ruby>んだ）。"
+    },
+    "ない": {
+      "jp": "自分でできるので、誰にも頼まない。",
+      "id": "Karena bisa sendiri, saya tidak meminta tolong ke siapa pun.",
+      "form": "頼まない",
+      "ruby": "<ruby>自分<rt>じぶん</rt></ruby>でできるので、<ruby>誰<rt>だれ</rt></ruby>にも<ruby>頼<rt>たの</rt></ruby>まない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "手伝ってもらう",
+      "てつだってもらう"
+    ],
+    "arti": [
+      "id",
+      "dibantu / mendapat bantuan (dari orang lain)"
+    ],
+    "kamus": {
+      "jp": "引っ越しを友達に手伝ってもらう。",
+      "id": "Mendapat bantuan pindahan dari teman.",
+      "form": "手伝ってもらう",
+      "ruby": "<ruby>引<rt>ひ</rt></ruby>っ<ruby>越<rt>こ</rt></ruby>しを<ruby>友達<rt>ともだち</rt></ruby>に<ruby>手伝<rt>てつだ</rt></ruby>ってもらう。"
+    },
+    "ます": {
+      "jp": "宿題を兄に手伝ってもらいます。",
+      "id": "Saya dibantu kakak laki-laki mengerjakan PR.",
+      "form": "手伝ってもらいます",
+      "ruby": "<ruby>宿題<rt>しゅくだい</rt></ruby>を<ruby>兄<rt>あに</rt></ruby>に<ruby>手伝<rt>てつだ</rt></ruby>ってもらいます。"
+    },
+    "て": {
+      "jp": "友達に手伝ってもらって、荷物を運んだ。",
+      "id": "Dibantu oleh teman, saya membawa barang bawaan.",
+      "form": "手伝ってもらって",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>に<ruby>手伝<rt>てつだ</rt></ruby>ってもらって、<ruby>荷物<rt>にもつ</rt></ruby>を<ruby>運<rt>はこ</rt></ruby>んだ。"
+    },
+    "た": {
+      "jp": "昨日、彼に仕事を手伝ってもらった。",
+      "id": "Kemarin, saya dibantu olehnya dalam pekerjaan.",
+      "form": "手伝ってもらった",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>彼<rt>かれ</rt></ruby>に<ruby>仕事<rt>しごと</rt></ruby>を<ruby>手伝<rt>てつだ</rt></ruby>ってもらった。"
+    },
+    "ない": {
+      "jp": "今日は誰も手伝ってもらわない。",
+      "id": "Hari ini saya tidak meminta bantuan dari siapa pun.",
+      "form": "手伝ってもらわない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>誰<rt>だれ</rt></ruby>も<ruby>手伝<rt>てつだ</rt></ruby>ってもらわない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "ある",
+      "ある"
+    ],
+    "arti": [
+      "id",
+      "ada (benda mati / tidak bernyawa)"
+    ],
+    "kamus": {
+      "jp": "机の上に megane（眼鏡）がある。",
+      "id": "Ada kacamata di atas meja.",
+      "form": "ある",
+      "ruby": "<ruby>机<rt>つくえ</rt></ruby>の<ruby>上<rt>うえ</rt></ruby>に<ruby>眼鏡<rt>めがね</rt></ruby>がある。"
+    },
+    "ます": {
+      "jp": "明日、試験があります。",
+      "id": "Besok ada ujian.",
+      "form": "あります",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>、<ruby>試験<rt>しけん</rt></ruby>があります。"
+    },
+    "て": {
+      "jp": "時間があって、よかったです。",
+      "id": "Baguslah/syukurlah karena ada waktu.",
+      "form": "あって",
+      "ruby": "<ruby>時間<rt>じかん</rt></ruby>があって、よかったです。"
+    },
+    "た": {
+      "jp": "昨日、大切な約束があった。",
+      "id": "Kemarin ada janji penting.",
+      "form": "あった",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>大切<rt>たいせつ</rt></ruby>な<ruby>約束<rt>やくそく</rt></ruby>があった。"
+    },
+    "ない": {
+      "jp": "今日は何も予定がない。",
+      "id": "Hari ini tidak ada rencana apa pun.",
+      "form": "ない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>何<rt>なに</rt></ruby>も<ruby>予定<rt>よてい</rt></ruby>がない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "いる",
+      "いる"
+    ],
+    "arti": [
+      "id",
+      "ada (benda hidup / bernyawa)"
+    ],
+    "kamus": {
+      "jp": "部屋に猫がいる。",
+      "id": "Ada kucing di dalam kamar.",
+      "form": "いる",
+      "ruby": "<ruby>部屋<rt>へや</rt></ruby>に<ruby>猫<rt>ねこ</rt></ruby>がいる。"
+    },
+    "ます": {
+      "jp": "あそこに田中さんがいます。",
+      "id": "Di sana ada Tanaka-san.",
+      "form": "います",
+      "ruby": "あそこに<ruby>田中<rt>たなか</rt></ruby>さんがいます。"
+    },
+    "て": {
+      "jp": "友達が家にいて、賑やかだ。",
+      "id": "Ada teman di rumah, jadi ramai.",
+      "form": "いて",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>が<ruby>家<rt>うち</rt></ruby>にいて、<ruby>賑<rt>にぎ</rt></ruby>やかだ。"
+    },
+    "た": {
+      "jp": "公園に子供がたくさんいた。",
+      "id": "Dulu/tadi ada banyak anak-anak di taman.",
+      "form": "いた",
+      "ruby": "<ruby>公園<rt>こうえん</rt></ruby>に<ruby>子供<rt>こども</rt></ruby>がたくさんいた。"
+    },
+    "ない": {
+      "jp": "今、事務所には誰もいない。",
+      "id": "Sekarang tidak ada siapa-siapa di kantor.",
+      "form": "いない",
+      "ruby": "<ruby>今<rt>いま</rt></ruby>、<ruby>事務所<rt>じむしょ</rt></ruby>には<ruby>誰<rt>だれ</rt></ruby>もいない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "要る",
+      "いる"
+    ],
+    "arti": [
+      "id",
+      "memerlukan / membutuhkan"
+    ],
+    "kamus": {
+      "jp": "ビザを取るのにパスポートが要る。",
+      "id": "Membutuhkan paspor untuk membuat visa.",
+      "form": "要る",
+      "ruby": "ビザを<ruby>取<rt>と</rt></ruby>るのにパスポートが<ruby>要<rt>い</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "旅行に行くのにお金が要ります。",
+      "id": "Membutuhkan uang untuk pergi berlibur.",
+      "form": "要ります",
+      "ruby": "<ruby>旅行<rt>りょこう</rt></ruby>に<ruby>行<rt>い</rt></ruby>くのにお<ruby>金<rt>かね</rt></ruby>が<ruby>要<rt>い</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "ハサミが要って、友達に借りた。",
+      "id": "Membutuhkan gunting, jadi saya meminjam dari teman.",
+      "form": "要って",
+      "ruby": "ハサミが<ruby>要<rt>い</rt></ruby>って、<ruby>友達<rt>ともだち</rt></ruby>に<ruby>借<rt>か</rt></ruby>りた。"
+    },
+    "た": {
+      "jp": "手続きにハンコが要った。",
+      "id": "Kemarin/tadi membutuhkan stempel untuk prosedur tersebut.",
+      "form": "要った",
+      "ruby": "<ruby>手続<rt>てつづ</rt></ruby>きにハンコが<ruby>要<rt>い</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "この書類はもう要らない。",
+      "id": "Dokumen ini sudah tidak diperlukan lagi.",
+      "form": "要らない",
+      "ruby": "この<ruby>書類<rt>しょるい</rt></ruby>はもう<ruby>要<rt>い</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "困る",
+      "こまる"
+    ],
+    "arti": [
+      "id",
+      "kesusahan / bingung / mengalami kesulitan"
+    ],
+    "kamus": {
+      "jp": "財布を忘れて困る。",
+      "id": "Kesusahan karena lupa membawa dompet.",
+      "form": "困る",
+      "ruby": "<ruby>財布<rt>さいふ</rt></ruby>を<ruby>忘<rt>わす</rt></ruby>れて<ruby>困<rt>こま</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "言葉が通じなくて困ります。",
+      "id": "Saya kesusahan karena tidak bisa saling berkomunikasi.",
+      "form": "困ります",
+      "ruby": "<ruby>言葉<rt>ことば</rt></ruby>が<ruby>通<rt>つう</rt></ruby>じなくて<ruby>困<rt>こま</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "道に迷って困っている。",
+      "id": "Saya sedang kesusahan/bingung karena tersesat.",
+      "form": "困って",
+      "ruby": "<ruby>道<rt>みち</rt></ruby>に<ruby>迷<rt>まよ</rt></ruby>って<ruby>困<rt>こま</rt></ruby>っている。"
+    },
+    "た": {
+      "jp": "雨に降られて困った。",
+      "id": "Kemarin/tadi saya kesusahan karena kehujanan.",
+      "form": "困った",
+      "ruby": "<ruby>雨<rt>あめ</rt></ruby>に<ruby>降<rt>ふ</rt></ruby>られて<ruby>困<rt>こま</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "お金があるので、何も困らない。",
+      "id": "Karena ada uang, saya tidak mengalami kesulitan apa pun.",
+      "form": "困らない",
+      "ruby": "お<ruby>金<rt>かね</rt></ruby>があるので、<ruby>何<rt>なに</rt></ruby>も<ruby>困<rt>こま</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "心配する",
+      "しんぱいする"
+    ],
+    "arti": [
+      "id",
+      "khawatir / mencemaskan"
+    ],
+    "kamus": {
+      "jp": "子供の将来を心配する。",
+      "id": "Khawatir akan masa depan anak.",
+      "form": "心配する",
+      "ruby": "<ruby>子供<rt>こども</rt></ruby>の<ruby>将来<rt>しょうらい</rt></ruby>を<ruby>心配<rt>しんぱい</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "テストの結果を心配します。",
+      "id": "Saya khawatir dengan hasil ujian.",
+      "form": "心配します",
+      "ruby": "テストの<ruby>結果<rt>けっか</rt></ruby>を<ruby>心配<rt>しんぱい</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "そんなに心配しないでください。",
+      "id": "Tolong jangan sekhawatir itu.",
+      "form": "心配して",
+      "ruby": "そんなに<ruby>心配<rt>しんぱい</rt></ruby>しないでください。"
+    },
+    "た": {
+      "jp": "連絡がなくて、とても心配した。",
+      "id": "Karena tidak ada kabar, saya sangat khawatir.",
+      "form": "心配した",
+      "ruby": "<ruby>連絡<rt>れんらく</rt></ruby>がなくて、とても<ruby>心配<rt>しんぱい</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "彼は大丈夫だから、心配しない。",
+      "id": "Karena dia tidak apa-apa, saya tidak khawatir.",
+      "form": "心配しない",
+      "ruby": "<ruby>彼<rt>かれ</rt></ruby>は<ruby>大丈夫<rt>だいじょうぶ</rt></ruby>だから、<ruby>心配<rt>しんぱい</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "安心する",
+      "あんしんする"
+    ],
+    "arti": [
+      "id",
+      "lega / merasa tenang"
+    ],
+    "kamus": {
+      "jp": "無事に着いて安心する。",
+      "id": "Merasa lega karena tiba dengan selamat.",
+      "form": "安心する",
+      "ruby": "<ruby>無事<rt>ぶじ</rt></ruby>に<ruby>着<rt>つ</rt></ruby>いて<ruby>安心<rt>あんしん</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "合格して安心しました。",
+      "id": "Saya merasa lega karena lulus.",
+      "form": "安心します",
+      "ruby": "<ruby>合格<rt>ごうかく</rt></ruby>して<ruby>安心<rt>あんしん</rt></ruby>しました。"
+    },
+    "て": {
+      "jp": "声を聞いて安心してください。",
+      "id": "Tolong merasa tenanglah setelah mendengar suaranya.",
+      "form": "安心て",
+      "ruby": "<ruby>声<rt>こえ</rt></ruby>を<ruby>聞<rt>き</rt></ruby>いて<ruby>安心<rt>あんしん</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "手術が成功して安心した。",
+      "id": "Saya merasa lega karena operasinya berhasil.",
+      "form": "安心した",
+      "ruby": "<ruby>手術<rt>しゅじゅつ</rt></ruby>が<ruby>成功<rt>せいこう</rt></ruby>して<ruby>安心<rt>あんしん</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "まだ結果がわからないので安心しない。",
+      "id": "Karena belum tahu hasilnya, saya tidak bisa tenang.",
+      "form": "安心しない",
+      "ruby": "まだ<ruby>結果<rt>けっか</rt></ruby>がわからないので<ruby>安心<rt>あんしん</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "疲れる",
+      "つかれる"
+    ],
+    "arti": [
+      "id",
+      "lelah / capek"
+    ],
+    "kamus": {
+      "jp": "長時間歩くと疲れる。",
+      "id": "Jika berjalan waktu lama, terasa lelah.",
+      "form": "疲れる",
+      "ruby": "<ruby>長時間<rt>ちょうじかん</rt></ruby><ruby>歩<rt>ある</rt></ruby>くと<ruby>疲<rt>つか</rt></ruby>れる。"
+    },
+    "ます": {
+      "jp": "今日はたくさん働いて疲れました。",
+      "id": "Hari ini saya lelah karena bekerja banyak.",
+      "form": "疲れます",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>はたくさん<ruby>働<rt>はたら</rt></ruby>いて<ruby>疲<rt>つか</rt></ruby>れました。"
+    },
+    "て": {
+      "jp": "疲れて、すぐに寝てしまった。",
+      "id": "Karena lelah, saya langsung tertidur.",
+      "form": "疲れて",
+      "ruby": "<ruby>疲<rt>つか</rt></ruby>れて、すぐに<ruby>寝<rt>ね</rt></ruby>てしまった。"
+    },
+    "た": {
+      "jp": "昨日の運動で体が疲れた。",
+      "id": "Badan merasa lelah karena olahraga kemarin.",
+      "form": "疲れた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>の<ruby>運動<rt>うんどう</rt></ruby>で<ruby>体<rt>からだ</rt></ruby>が<ruby>疲<rt>つか</rt></ruby>れた。"
+    },
+    "ない": {
+      "jp": "少ししか歩いていないので疲れない。",
+      "id": "Karena baru berjalan sedikit, saya tidak lelah.",
+      "form": "疲れない",
+      "ruby": "<ruby>少<rt>すこ</rt></ruby>ししか<ruby>歩<rt>ある</rt></ruby>いていないので<ruby>疲<rt>つか</rt></ruby>れない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "痛む",
+      "いたむ"
+    ],
+    "arti": [
+      "id",
+      "sakit / nyeri"
+    ],
+    "kamus": {
+      "jp": "虫歯で歯が痛む。",
+      "id": "Gigi terasa sakit/nyeri karena berlubang.",
+      "form": "痛む",
+      "ruby": "<ruby>虫歯<rt>むしば</rt></ruby>で<ruby>歯<rt>は</rt></ruby>が<ruby>痛<rt>いた</rt></ruby>む。"
+    },
+    "ます": {
+      "jp": "頭が強く痛みます。",
+      "id": "Kepala saya terasa sangat sakit.",
+      "form": "痛みます",
+      "ruby": "<ruby>頭<rt>あたま</rt></ruby>が<ruby>強<rt>つよ</rt></ruby>く<ruby>痛<rt>いた</rt></ruby>みます。"
+    },
+    "て": {
+      "jp": "お腹が痛んで、動けない。",
+      "id": "Perut terasa sakit sehingga tidak bisa bergerak.",
+      "form": "痛んで",
+      "ruby": "お<ruby>腹<rt>なか</rt></ruby>が<ruby>痛<rt>いた</rt></ruby>んで、<ruby>動<rt>うご</rt></ruby>けない。"
+    },
+    "た": {
+      "jp": "昨日から足が痛んだ。",
+      "id": "Sejak kemarin kaki terasa sakit.",
+      "form": "痛んだ",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>から<ruby>足<rt>あし</rt></ruby>が<ruby>痛<rt>いた</rt></ruby>んだ。"
+    },
+    "ない": {
+      "jp": "薬を飲んだので、もう痛まない。",
+      "id": "Karena sudah minum obat, sekarang tidak sakit lagi.",
+      "form": "痛まない",
+      "ruby": "<ruby>薬<rt>くすり</rt></ruby>を<ruby>飲<rt>の</rt></ruby>んだので、もう<ruby>痛<rt>いた</rt></ruby>まない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "なる",
+      "なる"
+    ],
+    "arti": [
+      "id",
+      "menjadi"
+    ],
+    "kamus": {
+      "jp": "将来、医者になる。",
+      "id": "Di masa depan, saya ingin menjadi dokter.",
+      "form": "なる",
+      "ruby": "<ruby>将来<rt>しょうらい</rt></ruby>、<ruby>医者<rt>いしゃ</rt></ruby>になる。"
+    },
+    "ます": {
+      "jp": "来月、２０歳になります。",
+      "id": "Bulan depan, saya akan menjadi (berumur) 20 tahun.",
+      "form": "なります",
+      "ruby": "<ruby>来月<rt>らいげつ</rt></ruby>、<ruby>２０歳<rt>はたち</rt></ruby>になります。"
+    },
+    "て": {
+      "jp": "暗くなって、何も見えない。",
+      "id": "Menjadi gelap, sehingga tidak kelihatan apa-apa.",
+      "form": "なって",
+      "ruby": "<ruby>暗<rt>くら</rt></ruby>くなって、<ruby>何<rt>なに</rt></ruby>も<ruby>見<rt>み</rt></ruby>えない。"
+    },
+    "た": {
+      "jp": "天気は急に寒くなった。",
+      "id": "Cuaca tiba-tiba menjadi dingin.",
+      "form": "なった",
+      "ruby": "<ruby>天気<rt>てんき</rt></ruby>は<ruby>急<rt>きゅう</rt></ruby>に<ruby>寒<rt>さむ</rt></ruby>くなった。"
+    },
+    "ない": {
+      "jp": "どれだけ練習しても上手にならない。",
+      "id": "Sebanyak apa pun berlatih, saya tidak kunjung menjadi mahir.",
+      "form": "ならない",
+      "ruby": "どれだけ<ruby>練習<rt>れんしゅう</rt></ruby>しても<ruby>上手<rt>じょうず</rt></ruby>にならない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "変わる",
+      "かわる"
+    ],
+    "arti": [
+      "id",
+      "berubah (subjek + が)"
+    ],
+    "kamus": {
+      "jp": "季節が変わる。",
+      "id": "Musim berubah.",
+      "form": "変わる",
+      "ruby": "<ruby>季節<rt>きせつ</rt></ruby>が<ruby>変<rt>か</rt></ruby>わる。"
+    },
+    "ます": {
+      "jp": "信号の色が赤に変わります。",
+      "id": "Warna lampu lalu lintas berubah menjadi merah.",
+      "form": "変わります",
+      "ruby": "<ruby>信号<rt>しんごう</rt></ruby>の<ruby>色<rt>いろ</rt></ruby>が<ruby>赤<rt>あか</rt></ruby>に<ruby>変<rt>か</rt></ruby>わります。"
+    },
+    "て": {
+      "jp": "時代が変わって、生活が便利になった。",
+      "id": "Zaman berubah, dan kehidupan menjadi praktis.",
+      "form": "変わって",
+      "ruby": "<ruby>時代<rt>じだい</rt></ruby>が<ruby>変<rt>か</rt></ruby>わって、<ruby>生活<rt>せいかつ</rt></ruby>が<ruby>便利<rt>べんり</rt></ruby>になった。"
+    },
+    "た": {
+      "jp": "彼の意見が急に変わった。",
+      "id": "Pendapatnya tiba-tiba berubah.",
+      "form": "変わった",
+      "ruby": "<ruby>彼<rt>かれ</rt></ruby>の<ruby>意見<rt>いけん</rt></ruby>が<ruby>急<rt>きゅう</rt></ruby>に<ruby>変<rt>か</rt></ruby>わった。"
+    },
+    "ない": {
+      "jp": "昔から何も変わらない。",
+      "id": "Dari dulu tidak ada yang berubah.",
+      "form": "変わらない",
+      "ruby": "<ruby>昔<rt>むかし</rt></ruby>から<ruby>何<rt>なに</rt></ruby>も<ruby>変<rt>か</rt></ruby>わらない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "変える",
+      "かえる"
+    ],
+    "arti": [
+      "id",
+      "mengubah (objek + を)"
+    ],
+    "kamus": {
+      "jp": "髪型を変える。",
+      "id": "Mengubah gaya rambut.",
+      "form": "変える",
+      "ruby": "<ruby>髪型<rt>かみがた</rt></ruby>を<ruby>変<rt>か</rt></ruby>える。"
+    },
+    "ます": {
+      "jp": "パスワードを定期的変えます。",
+      "id": "Saya mengubah kata sandi secara berkala.",
+      "form": "変えます",
+      "ruby": "パスワードを<ruby>定期的に<rt>ていきてきに</rt></ruby><ruby>変<rt>か</rt></ruby>えます。"
+    },
+    "て": {
+      "jp": "予定を変更して（変えて）、旅行に行く。",
+      "id": "Mengubah jadwal lalu pergi berlibur.",
+      "form": "変えて",
+      "ruby": "<ruby>予定<rt>よてい</rt></ruby>を<ruby>変更<rt>へんこう</rt></ruby>して（<ruby>変<rt>か</rt></ruby>えて）、<ruby>旅行<rt>りょこう</rt></ruby>に<ruby>行<rt>い</rt></ruby>く。"
+    },
+    "た": {
+      "jp": "昨日、スマホのカバーを変えた。",
+      "id": "Kemarin, saya mengubah casing ponsel.",
+      "form": "変えた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、スマホのカバーを<ruby>変<rt>か</rt></ruby>えた。"
+    },
+    "ない": {
+      "jp": "自分の考えを変えない。",
+      "id": "Saya tidak akan mengubah pemikiran saya.",
+      "form": "変えない",
+      "ruby": "<ruby>自分<rt>じぶん</rt></ruby>の<ruby>考<rt>かんが</rt></ruby>えを<ruby>変<rt>か</rt></ruby>えない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "増える",
+      "ふえる"
+    ],
+    "arti": [
+      "id",
+      "bertambah / meningkat (subjek + が)"
+    ],
+    "kamus": {
+      "jp": "人口が増える。",
+      "id": "Jumlah penduduk bertambah.",
+      "form": "増える",
+      "ruby": "<ruby>人口<rt>じんこう</rt></ruby>が<ruby>増<rt>ふ</rt></ruby>える。"
+    },
+    "ます": {
+      "jp": "最近、日本語を勉強する人が増えます。",
+      "id": "Belakangan ini, orang yang belajar bahasa Jepang bertambah.",
+      "form": "増えます",
+      "ruby": "<ruby>最近<rt>さいきん</rt></ruby>、<ruby>日本語<rt>にほんご</rt></ruby>を<ruby>勉強<rt>べんきょう</rt></ruby>する<ruby>人<rt>ひと</rt></ruby>が<ruby>増<rt>ふ</rt></ruby>えます。"
+    },
+    "て": {
+      "jp": "体重が増えて、服が入らなくなった。",
+      "id": "Berat badan bertambah, sehingga baju tidak muat lagi.",
+      "form": "増えて",
+      "ruby": "<ruby>体重<rt>たいじゅう</rt></ruby>が<ruby>増<rt>ふ</rt></ruby>えて、<ruby>服<rt>ふく</rt></ruby>が<ruby>入<rt>はい</rt></ruby>らなくなった。"
+    },
+    "た": {
+      "jp": "この街は外国人が増えた。",
+      "id": "Kota ini telah bertambah jumlah orang asingnya.",
+      "form": "増えた",
+      "ruby": "この<ruby>街<rt>まち</rt></ruby>は<ruby>外国人<rt>がいこくじん</rt></ruby>が<ruby>増<rt>ふ</rt></ruby>えた。"
+    },
+    "ない": {
+      "jp": "給料が全然増えない。",
+      "id": "Gaji tidak bertambah sama sekali.",
+      "form": "増えない",
+      "ruby": "<ruby>給料<rt>きゅうりょう</rt></ruby>が<ruby>全然<rt>ぜんぜん</rt></ruby><ruby>増<rt>ふ</rt></ruby>えない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "増やす",
+      "ふやす"
+    ],
+    "arti": [
+      "id",
+      "menambah / meningkatkan (objek + を)"
+    ],
+    "kamus": {
+      "jp": "貯金を増やす。",
+      "id": "Menambah tabungan.",
+      "form": "増やす",
+      "ruby": "<ruby>貯金<rt>ちょきん</rt></ruby>を<ruby>増<rt>ふ</rt></ruby>やす。"
+    },
+    "ます": {
+      "jp": "運動して筋肉を増やします。",
+      "id": "Saya berolahraga dan menambah otot.",
+      "form": "増やします",
+      "ruby": "<ruby>運動<rt>うんどう</rt></ruby>して<ruby>筋肉<rt>きんにく</rt></ruby>を<ruby>増<rt>ふ</rt></ruby>やします。"
+    },
+    "て": {
+      "jp": "本を読んで、語彙を増やしてください。",
+      "id": "Tolong baca buku dan tambahlah kosakata Anda.",
+      "form": "増やして",
+      "ruby": "<ruby>本<rt>ほん</rt></ruby>を<ruby>読<rt>よ</rt></ruby>んで、<ruby>語彙<rt>ごい</rt></ruby>を<ruby>増<rt>ふ</rt></ruby>やしてください。"
+    },
+    "た": {
+      "jp": "アルバイトの時間を増やした。",
+      "id": "Saya telah menambah jam kerja paruh waktu.",
+      "form": "増やした",
+      "ruby": "アルバイトの<ruby>時間<rt>じかん</rt></ruby>を<ruby>増<rt>ふ</rt></ruby>やした。"
+    },
+    "ない": {
+      "jp": "これ以上、無駄な出費を増やさない。",
+      "id": "Saya tidak akan menambah pengeluaran tak berguna lebih dari ini.",
+      "form": "増やさない",
+      "ruby": "これ<ruby>以上<rt>いじょう</rt></ruby>、<ruby>無駄<rt>むだ</rt></ruby>な<ruby>出費<rt>しゅっぴ</rt></ruby>を<ruby>増<rt>ふ</rt></ruby>やさない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "減る",
+      "へる"
+    ],
+    "arti": [
+      "id",
+      "berkurang (subjek + が)"
+    ],
+    "kamus": {
+      "jp": "お腹が減る。",
+      "id": "Perut menjadi lapar (berkurang isinya).",
+      "form": "減る",
+      "ruby": "お<ruby>腹<rt>なか</rt></ruby>が<ruby>減<rt>へ</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "冬は貯金が減ります。",
+      "id": "Di musim dingin, tabungan berkurang.",
+      "form": "減ります",
+      "ruby": "<ruby>冬<rt>ふゆ</rt></ruby>は<ruby>貯金<rt>ちょきん</rt></ruby>が<ruby>減<rt>へ</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "体重が減って、体が軽くなった。",
+      "id": "Berat badan berkurang, dan tubuh menjadi ringan.",
+      "form": "減って",
+      "ruby": "<ruby>体重<rt>たいじゅう</rt></ruby>が<ruby>減<rt>へ</rt></ruby>って、<ruby>体<rt>からだ</rt></ruby>が<ruby>軽<rt>かる</rt></ruby>くなった。"
+    },
+    "た": {
+      "jp": "事故の数が前より減った。",
+      "id": "Jumlah kecelakaan berkurang dari sebelumnya.",
+      "form": "減った",
+      "ruby": "<ruby>事故<rt>じこ</rt></ruby>の<ruby>数<rt>かず</rt></ruby>が<ruby>前<rt>まえ</rt></ruby>より<ruby>減<rt>へ</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "いくら使ってもお金が減らない。",
+      "id": "Sebanyak apa pun dipakai, uangnya tidak berkurang.",
+      "form": "減らない",
+      "ruby": "いくら<ruby>使<rt>つか</rt></ruby>ってもお<ruby>金<rt>かね</rt></ruby>が<ruby>減<rt>へ</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "減らす",
+      "へらす"
+    ],
+    "arti": [
+      "id",
+      "mengurangi (objek + を)"
+    ],
+    "kamus": {
+      "jp": "体重を減らすために運動する。",
+      "id": "Berolahraga untuk mengurangi berat badan.",
+      "form": "減らす",
+      "ruby": "<ruby>体重<rt>たいじゅう</rt></ruby>を<ruby>減<rt>へ</rt></ruby>らすために<ruby>運動<rt>うんどう</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "砂糖の量を減らします。",
+      "id": "Saya mengurangi takaran gula.",
+      "form": "減らします",
+      "ruby": "<ruby>砂糖<rt>さとう</rt></ruby>の<ruby>量<rt>りょう</rt></ruby>を<ruby>減<rt>へ</rt></ruby>らします。"
+    },
+    "て": {
+      "jp": "塩分を減らして、健康に気をつけましょう。",
+      "id": "Mari kurangi kadar garam dan menjaga kesehatan.",
+      "form": "減らして",
+      "ruby": "<ruby>塩分<rt>えんぶん</rt></ruby>を<ruby>減<rt>へ</rt></ruby>らして、<ruby>健康<rt>けんこう</rt></ruby>に<ruby>気<rt>き</rt></ruby>をつけましょう。"
+    },
+    "た": {
+      "jp": "無駄な買い物を減らした。",
+      "id": "Saya telah mengurangi belanjaan yang tidak berguna.",
+      "form": "減らした",
+      "ruby": "<ruby>無駄<rt>むだ</rt></ruby>な<ruby>買<rt>か</rt></ruby>い<ruby>物<rt>もの</rt></ruby>を<ruby>減<rt>へ</rt></ruby>らした。"
+    },
+    "ない": {
+      "jp": "睡眠時間は減らさないほうがいい。",
+      "id": "Sebaiknya tidak mengurangi waktu tidur.",
+      "form": "減らさない",
+      "ruby": "<ruby>睡眠<rt>すいみん</rt></ruby><ruby>時間<rt>じかん</rt></ruby>は<ruby>減<rt>へ</rt></ruby>らさないほうがいい。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "あげる",
+      "あげる"
+    ],
+    "arti": [
+      "id",
+      "memberi (kepada orang lain)"
+    ],
+    "kamus": {
+      "jp": "友達にプレゼントをあげる。",
+      "id": "Memberi hadiah kepada teman.",
+      "form": "あげる",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>にプレゼントをあげる。"
+    },
+    "ます": {
+      "jp": "母の日に花をあげます。",
+      "id": "Saya akan memberi bunga pada Hari Ibu.",
+      "form": "あげます",
+      "ruby": "<ruby>母<rt>はは</rt></ruby>の<ruby>日<rt>ひ</rt></ruby>に<ruby>花<rt>はな</rt></ruby>をあげます。"
+    },
+    "て": {
+      "jp": "お菓子をみんなにあげてください。",
+      "id": "Tolong berikan kue ke semua orang.",
+      "form": "あげて",
+      "ruby": "お<ruby>菓子<rt>かし</rt></ruby>をみんなにあげてくだい。"
+    },
+    "た": {
+      "jp": "昨日、弟におもちゃをあげた。",
+      "id": "Kemarin saya memberi mainan kepada adik laki-laki.",
+      "form": "あげた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>弟<rt>おとうと</rt></ruby>におもちゃをあげた。"
+    },
+    "ない": {
+      "jp": "もう誰も何もあげない。",
+      "id": "Saya tidak akan memberi apa pun lagi kepada siapa pun.",
+      "form": "あげない",
+      "ruby": "もう<ruby>誰<rt>だれ</rt></ruby>も<ruby>何<rt>なに</rt></ruby>もあげない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "もらう",
+      "もらう"
+    ],
+    "arti": [
+      "id",
+      "menerima / mendapat"
+    ],
+    "kamus": {
+      "jp": "誕生日プレゼントをもらう。",
+      "id": "Menerima hadiah ulang tahun.",
+      "form": "もらう",
+      "ruby": "<ruby>誕生日<rt>たんじょうび</rt></ruby>プレゼントをもらう。"
+    },
+    "ます": {
+      "jp": "給料をもらいます。",
+      "id": "Saya menerima gaji.",
+      "form": "もらいます",
+      "ruby": "<ruby>給料<rt>きゅうりょう</rt></ruby>をもらいます。"
+    },
+    "て": {
+      "jp": "許可をもらってから出かける。",
+      "id": "Saya pergi keluar setelah mendapat izin.",
+      "form": "もらって",
+      "ruby": "<ruby>許可<rt>きょか</rt></ruby>をもらってから<ruby>出<rt>で</rt></ruby>かける。"
+    },
+    "た": {
+      "jp": "友達に素敵なお土産をもらった。",
+      "id": "Saya mendapat oleh-oleh bagus dari teman.",
+      "form": "もらった",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>に<ruby>素敵<rt>すてき</rt></ruby>なお<ruby>土産<rt>みやげ</rt></ruby>をもらった。"
+    },
+    "ない": {
+      "jp": "彼からは何ももらわない。",
+      "id": "Saya tidak menerima apa pun darinya.",
+      "form": "もらわない",
+      "ruby": "<ruby>彼<rt>かれ</rt></ruby>からは<ruby>何<rt>なに</rt></ruby>ももらわない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "くれる",
+      "くれる"
+    ],
+    "arti": [
+      "id",
+      "memberi (orang lain memberi kepada saya/keluarga saya)"
+    ],
+    "kamus": {
+      "jp": "友達が本をくれる。",
+      "id": "Teman memberi saya buku.",
+      "form": "くれる",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>が<ruby>本<rt>ほん</rt></ruby>をくれる。"
+    },
+    "ます": {
+      "jp": "先生がアドバイスをくれます。",
+      "id": "Guru memberi saya nasihat.",
+      "form": "くれます",
+      "ruby": "<ruby>先生<rt>せんせい</rt></ruby>がアドバイスをくれます。"
+    },
+    "て": {
+      "jp": "親切にしてくれてありがとう。",
+      "id": "Terima kasih telah baik kepada saya.",
+      "form": "くれて",
+      "ruby": "<ruby>親切<rt>しんせつ</rt></ruby>にしてくれてありがとう。"
+    },
+    "た": {
+      "jp": "昨日、彼がお菓子をくれた。",
+      "id": "Kemarin dia memberi saya kue.",
+      "form": "くれた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>彼<rt>かれ</rt></ruby>がお<ruby>菓子<rt>かし</rt></ruby>をくれた。"
+    },
+    "ない": {
+      "jp": "彼は何もくれない。",
+      "id": "Dia tidak memberi saya apa pun.",
+      "form": "くれない",
+      "ruby": "<ruby>彼<rt>かれ</rt></ruby>は<ruby>何<rt>なに</rt></ruby>もくれない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "返す",
+      "かえす"
+    ],
+    "arti": [
+      "id",
+      "mengembalikan"
+    ],
+    "kamus": {
+      "jp": "図書館に本を返す。",
+      "id": "Mengembalikan buku ke perpustakaan.",
+      "form": "返す",
+      "ruby": "<ruby>図書館<rt>としょかん</rt></ruby>に<ruby>本<rt>ほん</rt></ruby>を<ruby>返<rt>かえ</rt></ruby>す。"
+    },
+    "ます": {
+      "jp": "明日、借りたお金を返します。",
+      "id": "Besok saya akan mengembalikan uang yang dipinjam.",
+      "form": "返します",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>、<ruby>借<rt>か</rt></ruby>りたお<ruby>金<rt>かね</rt></ruby>を<ruby>返<rt>かえ</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "使ったら元の場所へ返してください。",
+      "id": "Setelah dipakai, tolong kembalikan ke tempat semula.",
+      "form": "返して",
+      "ruby": "<ruby>使<rt>つか</rt></ruby>ったら<ruby>元<rt>もと</rt></ruby>の<ruby>場所<rt>ばしょ</rt></ruby>へ<ruby>返<rt>かえ</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "先週借りたDVDを返した。",
+      "id": "Saya telah mengembalikan DVD yang dipinjam minggu lalu.",
+      "form": "返した",
+      "ruby": "<ruby>先週<rt>せんしゅう</rt></ruby><ruby>借<rt>か</rt></ruby>りたDVDを<ruby>返<rt>かえ</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "約束の日にまだ返さない。",
+      "id": "Saya belum mengembalikannya pada hari yang dijanjikan.",
+      "form": "返さない",
+      "ruby": "<ruby>約束<rt>やくそく</rt></ruby>の<ruby>日<rt>ひ</rt></ruby>にまだ<ruby>返<rt>かえ</rt></ruby>さない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "借りる",
+      "かりる"
+    ],
+    "arti": [
+      "id",
+      "meminjam"
+    ],
+    "kamus": {
+      "jp": "図書館で本を借りる。",
+      "id": "Meminjam buku di perpustakaan.",
+      "form": "借りる",
+      "ruby": "<ruby>図書館<rt>としょかん</rt></ruby>で<ruby>本<rt>ほん</rt></ruby>を<ruby>借<rt>か</rt></ruby>りる。"
+    },
+    "ます": {
+      "jp": "友達から自転車を借ります。",
+      "id": "Saya meminjam sepeda dari teman.",
+      "form": "借ります",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>から<ruby>自転車<rt>じてんしゃ</rt></ruby>を<ruby>借<rt>か</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "傘を借りて帰った。",
+      "id": "Saya meminjam payung lalu pulang.",
+      "form": "借りて",
+      "ruby": "<ruby>傘<rt>かさ</rt></ruby>を<ruby>借<rt>か</rt></ruby>りて<ruby>帰<rt>かえ</rt></ruby>った。"
+    },
+    "た": {
+      "jp": "昨日、銀行でお金を借りた。",
+      "id": "Kemarin saya meminjam uang di bank.",
+      "form": "借りた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>銀行<rt>ぎんこう</rt></ruby>でお<ruby>金<rt>かね</rt></ruby>を<ruby>借<rt>か</rt></ruby>りた。"
+    },
+    "ない": {
+      "jp": "人からはお金を借りない。",
+      "id": "Saya tidak meminjam uang dari orang lain.",
+      "form": "借りない",
+      "ruby": "<ruby>人<rt>ひと</rt></ruby>からはお<ruby>金<rt>かね</rt></ruby>を<ruby>借<rt>か</rt></ruby>りない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "貸す",
+      "かす"
+    ],
+    "arti": [
+      "id",
+      "meminjamkan"
+    ],
+    "kamus": {
+      "jp": "友達に消しゴムを貸す。",
+      "id": "Meminjamkan penghapus kepada teman.",
+      "form": "貸す",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>に<ruby>消<rt>け</rt></ruby>しゴムを<ruby>貸<rt>か</rt></ruby>す。"
+    },
+    "ます": {
+      "jp": "私のペンを貸します。",
+      "id": "Saya akan meminjamkan pulpen saya.",
+      "form": "貸します",
+      "ruby": "<ruby>私<rt>わたし</rt></ruby>のペンを<ruby>貸<rt>か</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "ちょっと辞書を貸してください。",
+      "id": "Tolong pinjamkan kamusnya sebentar.",
+      "form": "貸して",
+      "ruby": "ちょっと<ruby>辞書<rt>じしょ</rt></ruby>を<ruby>貸<rt>か</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "彼に車を貸した。",
+      "id": "Saya telah meminjamkan mobil kepadanya.",
+      "form": "貸した",
+      "ruby": "<ruby>彼<rt>かれ</rt></ruby>に<ruby>車<rt>くるま</rt></ruby>を<ruby>貸<rt>か</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "大切な物だから誰にも貸さない。",
+      "id": "Karena barang berharga, saya tidak meminjamkannya kepada siapa pun.",
+      "form": "貸さない",
+      "ruby": "<ruby>大切<rt>たいせつ</rt></ruby>な<ruby>物<rt>もの</rt></ruby>だから<ruby>誰<rt>だれ</rt></ruby>にも<ruby>貸<rt>か</rt></ruby>さない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "払う",
+      "はらう"
+    ],
+    "arti": [
+      "id",
+      "membayar"
+    ],
+    "kamus": {
+      "jp": "現金で代金を払う。",
+      "id": "Membayar biaya dengan uang tunai.",
+      "form": "払う",
+      "ruby": "<ruby>現金<rt>げんきん</rt></ruby>で<ruby>代金<rt>だいきん</rt></ruby>を<ruby>払<rt>はら</rt></ruby>う。"
+    },
+    "ます": {
+      "jp": "クレジットカードで払います。",
+      "id": "Saya akan membayar dengan kartu kredit.",
+      "form": "払います",
+      "ruby": "クレジットカードで<ruby>払<rt>はら</rt></ruby>います。"
+    },
+    "て": {
+      "jp": "レジでお金を払ってください。",
+      "id": "Tolong bayar uangnya di kasir.",
+      "form": "払って",
+      "ruby": "レジでお<ruby>金<rt>かね</rt></ruby>を<ruby>払<rt>はら</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "昨日、家賃を払った。",
+      "id": "Kemarin saya telah membayar uang sewa rumah.",
+      "form": "払った",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>家賃<rt>やちん</rt></ruby>を<ruby>払<rt>はら</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "お金がないので、まだ払わない。",
+      "id": "Karena tidak ada uang, saya belum membayar.",
+      "form": "払わない",
+      "ruby": "お<ruby>金<rt>かね</rt></ruby>がないので、まだ<ruby>払<rt>はら</rt></ruby>わない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "選ぶ",
+      "えらぶ"
+    ],
+    "arti": [
+      "id",
+      "memilih"
+    ],
+    "kamus": {
+      "jp": "プレゼントを選ぶ。",
+      "id": "Memilih hadiah.",
+      "form": "選ぶ",
+      "ruby": "プレゼントを<ruby>選<rt>えら</rt></ruby>ぶ。"
+    },
+    "ます": {
+      "jp": "メニューから好きな料理を選びます。",
+      "id": "Saya memilih masakan yang disukai dari menu.",
+      "form": "選びます",
+      "ruby": "メニューから<ruby>好<rt>す</rt></ruby>きな<ruby>料理<rt>りょうり</rt></ruby>を<ruby>選<rt>えら</rt></ruby>びます。"
+    },
+    "て": {
+      "jp": "一番いいものを選んでください。",
+      "id": "Tolong pilih yang paling bagus.",
+      "form": "選んで",
+      "ruby": "<ruby>一番<rt>いちばん</rt></ruby>いいものを<ruby>選<rt>えら</rt></ruby>んでください。"
+    },
+    "た": {
+      "jp": "新しい服を選んだ。",
+      "id": "Saya telah memilih baju baru.",
+      "form": "選んだ",
+      "ruby": "<ruby>新<rt>あたら</rt></ruby>しい<ruby>服<rt>ふく</rt></ruby>を<ruby>選<rt>えら</rt></ruby>んだ。"
+    },
+    "ない": {
+      "jp": "迷っていて、まだ選ばない。",
+      "id": "Because bingung, saya belum memilih.",
+      "form": "選ばない",
+      "ruby": "<ruby>迷<rt>まよ</rt></ruby>っていて、まだ<ruby>選<rt>えら</rt></ruby>ばない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "届ける",
+      "とどける"
+    ],
+    "arti": [
+      "id",
+      "mengirimkan / menyampaikan / mengantarkan"
+    ],
+    "kamus": {
+      "jp": "荷物を家に届ける。",
+      "id": "Mengantarkan barang ke rumah.",
+      "form": "届ける",
+      "ruby": "<ruby>荷物<rt>にもつ</rt></ruby>を<ruby>家<rt>うち</rt></ruby>に<ruby>届<rt>とど</rt></ruby>ける。"
+    },
+    "ます": {
+      "jp": "明日、書類をオフィスに届けます。",
+      "id": "Besok saya akan mengantarkan dokumen ke kantor.",
+      "form": "届けます",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>、<ruby>書類<rt>しょるい</rt></ruby>をオフィスに<ruby>届<rt>とど</rt></ruby>けます。"
+    },
+    "て": {
+      "jp": "警察に落とし物を届けてください。",
+      "id": "Tolong laporkan/serahkan barang hilang ke polisi.",
+      "form": "届けて",
+      "ruby": "<ruby>警察<rt>けいさつ</rt></ruby>に<ruby>落<rt>お</rt></ruby>とし<ruby>物<rt>もの</rt></ruby>を<ruby>届<rt>とど</rt></ruby>けてください。"
+    },
+    "た": {
+      "jp": "手紙を届けてくれた。",
+      "id": "Dia telah mengantarkan surat.",
+      "form": "届けた",
+      "ruby": "<ruby>手紙<rt>てがみ</rt></ruby>を<ruby>届<rt>とど</rt></ruby>けてくれた。"
+    },
+    "ない": {
+      "jp": "今日は荷物を届けない。",
+      "id": "Hari ini saya tidak mengantarkan barang.",
+      "form": "届けない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>荷物<rt>にもつ</rt></ruby>を<ruby>届<rt>とど</rt></ruby>けない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "届く",
+      "とどく"
+    ],
+    "arti": [
+      "id",
+      "sampai / tiba (barang/surat, subjek + が)"
+    ],
+    "kamus": {
+      "jp": "注文した荷物が届く。",
+      "id": "Barang yang dipesan sampai.",
+      "form": "届く",
+      "ruby": "<ruby>注文<rt>ちゅうもん</rt></ruby>した<ruby>荷物<rt>にもつ</rt></ruby>が<ruby>届<rt>とど</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "明日、手紙が届きます。",
+      "id": "Besok suratnya akan sampai.",
+      "form": "届きます",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>、<ruby>手紙<rt>てがみ</rt></ruby>が<ruby>届<rt>とど</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "荷物が届いて、安心した。",
+      "id": "Barangnya sampai, saya merasa lega.",
+      "form": "届いて",
+      "ruby": "<ruby>荷物<rt>にもつ</rt></ruby>が<ruby>届<rt>とど</rt></ruby>いて、<ruby>安心<rt>あんしん</rt></ruby>した。"
+    },
+    "た": {
+      "jp": "今朝、荷物が届いた。",
+      "id": "Pagi ini barangnya sudah sampai.",
+      "form": "届いた",
+      "ruby": "<ruby>今朝<rt>けさ</rt></ruby>、<ruby>荷物<rt>にもつ</rt></ruby>が<ruby>届<rt>とど</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "まだ荷物が届かない。",
+      "id": "Barangnya belum juga sampai.",
+      "form": "届かない",
+      "ruby": "まだ<ruby>荷物<rt>にもつ</rt></ruby>が<ruby>届<rt>とど</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "送る",
+      "おくる"
+    ],
+    "arti": [
+      "id",
+      "mengirim / mengantar (orang)"
+    ],
+    "kamus": {
+      "jp": "友達にメールを送る。",
+      "id": "Mengirim email kepada teman.",
+      "form": "送る",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>にメールを<ruby>送<rt>おく</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "車で駅まで送ります。",
+      "id": "Saya akan mengantar ke stasiun dengan mobil.",
+      "form": "送ります",
+      "ruby": "<ruby>車<rt>くるま</rt></ruby>で<ruby>駅<rt>えき</rt></ruby>まで<ruby>送<rt>おく</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "写真をメールで送ってください。",
+      "id": "Tolong kirim foto lewat email.",
+      "form": "送って",
+      "ruby": "<ruby>写真<rt>しゃしん</rt></ruby>をメールで<ruby>送<rt>おく</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "昨日、両親に荷物を送った。",
+      "id": "Kemarin saya mengirim barang ke orang tua.",
+      "form": "送った",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>両親<rt>りょうしん</rt></ruby>に<ruby>荷物<rt>にもつ</rt></ruby>を<ruby>送<rt>おく</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "今日は何も送らない。",
+      "id": "Hari ini saya tidak mengirim apa-apa.",
+      "form": "送らない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>何<rt>なに</rt></ruby>も<ruby>送<rt>おく</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "切る",
+      "きる"
+    ],
+    "arti": [
+      "id",
+      "memotong / mematikan (telepon/listrik)"
+    ],
+    "kamus": {
+      "jp": "ハサミで紙を切る。",
+      "id": "Memotong kertas dengan gunting.",
+      "form": "切る",
+      "ruby": "ハサミで<ruby>紙<rt>かみ</rt></ruby>を<ruby>切<rt>き</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "包丁で野菜を切ります。",
+      "id": "Saya memotong sayuran dengan pisau dapur.",
+      "form": "切ります",
+      "ruby": "<ruby>包丁<rt>ほうちょう</rt></ruby>で<ruby>野菜<rt>やさい</rt></ruby>を<ruby>切<rt>き</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "電話を切って、もう一度かけてください。",
+      "id": "Tolong tutup/matikan teleponnya lalu telepon sekali lagi.",
+      "form": "切って",
+      "ruby": "<ruby>電話<rt>でんわ</rt></ruby>を<ruby>切<rt>き</rt></ruby>って、もう<ruby>一度<rt>いちど</rt></ruby>かけてください。"
+    },
+    "た": {
+      "jp": "昨日、髪を切った。",
+      "id": "Kemarin saya memotong rambut.",
+      "form": "切った",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>髪<rt>かみ</rt></ruby>を<ruby>切<rt>き</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "爪を切らない。",
+      "id": "Saya tidak memotong kuku.",
+      "form": "切らない",
+      "ruby": "<ruby>爪<rt>つめ</rt></ruby>を<ruby>切<rt>き</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "押す",
+      "おす"
+    ],
+    "arti": [
+      "id",
+      "menekan / mendorong"
+    ],
+    "kamus": {
+      "jp": "エレベーターのボタンを押す。",
+      "id": "Menekan tombol lift.",
+      "form": "押す",
+      "ruby": "エレベーターのボタンを<ruby>押<rt>お</rt></ruby>す。"
+    },
+    "ます": {
+      "jp": "ここにハンコを押します。",
+      "id": "Saya membubuhkan/menekan stempel di sini.",
+      "form": "押します",
+      "ruby": "ここにハンコを<ruby>押<rt>お</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "ドアを強く押してください。",
+      "id": "Tolong dorong pintunya dengan kuat.",
+      "form": "押して",
+      "ruby": "ドアを<ruby>強<rt>つよ</rt></ruby>く<ruby>押<rt>お</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "スイッチを押した。",
+      "id": "Saya telah menekan sakelar/tombol.",
+      "form": "押した",
+      "ruby": "スイッチを<ruby>押<rt>お</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "無理に押さない。",
+      "id": "Saya tidak mendorong secara paksa.",
+      "form": "押さない",
+      "ruby": "<ruby>無理<rt>むり</rt></ruby>に<ruby>押<rt>お</rt></ruby>さない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "引く",
+      "ひく"
+    ],
+    "arti": [
+      "id",
+      "menarik / mengurang"
+    ],
+    "kamus": {
+      "jp": "ドアを引く。",
+      "id": "Menarik pintu.",
+      "form": "引く",
+      "ruby": "ドアを<ruby>引<rt>ひ</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "辞書を引きます。",
+      "id": "Saya membuka/mencari di kamus.",
+      "form": "引きます",
+      "ruby": "<ruby>辞書<rt>じしょ</rt></ruby>を<ruby>引<rt>ひ</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "綱を引いて、遊ぶ。",
+      "id": "Menarik tali lalu bermain.",
+      "form": "引いて",
+      "ruby": "<ruby>綱<rt>つな</rt></ruby>を<ruby>引<rt>ひ</rt></ruby>いて、<ruby>遊<rt>あそ</rt></ruby>ぶ。"
+    },
+    "た": {
+      "jp": "風邪を引いた。",
+      "id": "Saya kena flu/masuk angin.",
+      "form": "引いた",
+      "ruby": "<ruby>風邪<rt>かぜ</rt></ruby>を<ruby>引<rt>ひ</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "線を引かない。",
+      "id": "Saya tidak menarik/membuat garis.",
+      "form": "引かない",
+      "ruby": "<ruby>線<rt>せん</rt></ruby>を<ruby>引<rt>ひ</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "並ぶ",
+      "ならぶ"
+    ],
+    "arti": [
+      "id",
+      "mengantre / berbaris"
+    ],
+    "kamus": {
+      "jp": "店の前に並ぶ。",
+      "id": "Mengantre di depan toko.",
+      "form": "並ぶ",
+      "ruby": "<ruby>店<rt>みせ</rt></ruby>の<ruby>前<rt>まえ</rt></ruby>に<ruby>並<rt>なら</rt></ruby>ぶ。"
+    },
+    "ます": {
+      "jp": "列に並びます。",
+      "id": "Saya berbaris dalam antrean.",
+      "form": "並びます",
+      "ruby": "<ruby>列<rt>れつ</rt></ruby>に<ruby>並<rt>なら</rt></ruby>びます。"
+    },
+    "て": {
+      "jp": "順番に並んで待ってください。",
+      "id": "Tolong berbaris secara teratur dan tunggu.",
+      "form": "並んで",
+      "ruby": "<ruby>順番<rt>じゅんばん</rt></ruby>に<ruby>並<rt>なら</rt></ruby>んで<ruby>待<rt>ま</rt></ruby>ってください。"
+    },
+    "た": {
+      "jp": "チケットを買うために一時間並んだ。",
+      "id": "Saya mengantre selama satu jam untuk membeli tiket.",
+      "form": "並んだ",
+      "ruby": "チケットを<ruby>買<rt>か</rt></ruby>うために<ruby>一時間<rt>いちじかん</rt></ruby><ruby>並<rt>なら</rt></ruby>んだ。"
+    },
+    "ない": {
+      "jp": "混んでいるので並ばない。",
+      "id": "Karena ramai, saya tidak mengantre.",
+      "form": "並ばない",
+      "ruby": "<ruby>混<rt>こ</rt></ruby>んでいるので<ruby>並<rt>なら</rt></ruby>ばない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "集める",
+      "あつめる"
+    ],
+    "arti": [
+      "id",
+      "mengumpulkan"
+    ],
+    "kamus": {
+      "jp": "趣味で切手を集める。",
+      "id": "Mengumpulkan perangko sebagai hobi.",
+      "form": "集める",
+      "ruby": "<ruby>趣味<rt>しゅみ</rt></ruby>で<ruby>切手<rt>きって</rt></ruby>を<ruby>集<rt>あつ</rt></ruby>める。"
+    },
+    "ます": {
+      "jp": "情報を集めます。",
+      "id": "Saya mengumpulkan informasi.",
+      "form": "集めます",
+      "ruby": "<ruby>情報<rt>じょうほう</rt></ruby>を<ruby>集<rt>あつ</rt></ruby>めます。"
+    },
+    "て": {
+      "jp": "書類を集めて、提出してください。",
+      "id": "Tolong kumpulkan dokumen dan kumpulkan/serahkan.",
+      "form": "集めて",
+      "ruby": "<ruby>書類<rt>しょるい</rt></ruby>を<ruby>集<rt>あつ</rt></ruby>めて、<ruby>提出<rt>ていしゅつ</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "寄付金をたくさん集めた。",
+      "id": "Saya telah mengumpulkan banyak uang donasi.",
+      "form": "集めた",
+      "ruby": "<ruby>寄付金<rt>きふきん</rt></ruby>をたくさん<ruby>集<rt>あつ</rt></ruby>めた。"
+    },
+    "ない": {
+      "jp": "古いものは集めない。",
+      "id": "Saya tidak mengumpulkan barang-barang lama.",
+      "form": "集めない",
+      "ruby": "<ruby>古<rt>ふる</rt></ruby>いものは<ruby>集<rt>あつ</rt></ruby>めない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "調べる",
+      "しらべる"
+    ],
+    "arti": [
+      "id",
+      "memeriksa / menyelidiki / mencari tahu"
+    ],
+    "kamus": {
+      "jp": "辞書で言葉の意味を調べる。",
+      "id": "Mencari arti kata di kamus.",
+      "form": "調べる",
+      "ruby": "<ruby>辞書<rt>じしょ</rt></ruby>で<ruby>言葉<rt>ことば</rt></ruby>の<ruby>意味<rt>いみ</rt></ruby>を<ruby>調<rt>しら</rt></ruby>べる。"
+    },
+    "ます": {
+      "jp": "インターネットで電車の時間を調べます。",
+      "id": "Saya mencari tahu jadwal kereta di internet.",
+      "form": "調べます",
+      "ruby": "インターネットで<ruby>電車<rt>でんしゃ</rt></ruby>の<ruby>時間<rt>じかん</rt></ruby>を<ruby>調<rt>しら</rt></ruby>べます。"
+    },
+    "て": {
+      "jp": "詳しく調べてみてください。",
+      "id": "Tolong coba periksa/cari tahu secara terperinci.",
+      "form": "調べて",
+      "ruby": "<ruby>詳<rt>くわ</rt></ruby>しく<ruby>調<rt>しら</rt></ruby>べてみてください。"
+    },
+    "た": {
+      "jp": "昨日、ホテルの予約方法を調べた。",
+      "id": "Kemarin, saya mencari tahu cara reservasi hotel.",
+      "form": "調べた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、ホテルの<ruby>予約<rt>よやく</rt></ruby><ruby>方法<rt>ほうほう</rt></ruby>を<ruby>調<rt>しら</rt></ruby>べた。"
+    },
+    "ない": {
+      "jp": "興味がないので調べない。",
+      "id": "Karena tidak tertarik, saya tidak mencari tahu.",
+      "form": "調べない",
+      "ruby": "<ruby>興味<rt>きょうみ</rt></ruby>がないので<ruby>調<rt>しら</rt></ruby>べない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "考える",
+      "かんがえる"
+    ],
+    "arti": [
+      "id",
+      "memikirkan / memikirkan solusi"
+    ],
+    "kamus": {
+      "jp": "将来について考える。",
+      "id": "Memikirkan tentang masa depan.",
+      "form": "考える",
+      "ruby": "<ruby>将来<rt>しょうらい</rt></ruby>について<ruby>考<rt>かんが</rt></ruby>える。"
+    },
+    "ます": {
+      "jp": "問題の解決策を考えます。",
+      "id": "Saya akan memikirkan jalan keluar dari masalah ini.",
+      "form": "考えます",
+      "ruby": "<ruby>問題<rt>もんだい</rt></ruby>の<ruby>解決策<rt>かいけつさく</rt></ruby>を<ruby>考<rt>かんが</rt></ruby>えます。"
+    },
+    "て": {
+      "jp": "よく考えてから答えてください。",
+      "id": "Tolong jawab setelah memikirkannya baik-baik.",
+      "form": "考えて",
+      "ruby": "よく<ruby>考<rt>かんが</rt></ruby>えてから<ruby>答<rt>こた</rt></ruby>えてください。"
+    },
+    "た": {
+      "jp": "いいアイデアを考えた。",
+      "id": "Saya telah memikirkan ide yang bagus.",
+      "form": "考えた",
+      "ruby": "いいアイデアを<ruby>考<rt>かんが</rt></ruby>えた。"
+    },
+    "ない": {
+      "jp": "何も考えないで寝る。",
+      "id": "Tidur tanpa memikirkan apa pun.",
+      "form": "考えない",
+      "ruby": "<ruby>何<rt>なに</rt></ruby>も<ruby>考<rt>かんが</rt></ruby>えないで<ruby>寝<rt>ね</rt></ruby>る。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "続ける",
+      "つづける"
+    ],
+    "arti": [
+      "id",
+      "melanjutkan / meneruskan"
+    ],
+    "kamus": {
+      "jp": "毎日勉強を続ける。",
+      "id": "Melanjutkan belajar setiap hari.",
+      "form": "続ける",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>勉強<rt>べんきょう</rt></ruby>を<ruby>続<rt>つづ</rt></ruby>ける。"
+    },
+    "ます": {
+      "jp": "これからも仕事を続けます。",
+      "id": "Saya akan terus melanjutkan pekerjaan ini ke depannya.",
+      "form": "続けます",
+      "ruby": "これからも<ruby>仕事<rt>しごと</rt></ruby>を<ruby>続<rt>つづ</rt></ruby>けます。"
+    },
+    "て": {
+      "jp": "あきらめないで、仕事を続けてください。",
+      "id": "Jangan menyerah, tolong lanjutkan pekerjaannya.",
+      "form": "続けて",
+      "ruby": "あきらめないで、<ruby>仕事<rt>しごと</rt></ruby>を<ruby>続<rt>つづ</rt></ruby>けてください。"
+    },
+    "た": {
+      "jp": "三年間、サッカーを続けた。",
+      "id": "Saya telah melanjutkan/bermain sepak bola selama tiga tahun.",
+      "form": "続けた",
+      "ruby": "<ruby>三年間<rt>さんねんかん</rt></ruby>、サッカーを<ruby>続<rt>つづ</rt></ruby>けた。"
+    },
+    "ない": {
+      "jp": "無理なら続けないほうがいい。",
+      "id": "Jika mustahil, sebaiknya tidak dilanjutkan.",
+      "form": "続けない",
+      "ruby": "<ruby>無理<rt>むり</rt></ruby>なら<ruby>続<rt>つづ</rt></ruby>けないほうがいい。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "決める",
+      "きめる"
+    ],
+    "arti": [
+      "id",
+      "menentukan / memutuskan"
+    ],
+    "kamus": {
+      "jp": "旅行の行き先を決める。",
+      "id": "Menentukan tujuan wisata.",
+      "form": "決める",
+      "ruby": "<ruby>旅行<rt>りょこう</rt></ruby>の<ruby>行<rt>い</rt></ruby>き<ruby>先<rt>さき</rt></ruby>を<ruby>決<rt>き</rt></ruby>める。"
+    },
+    "ます": {
+      "jp": "明日、メニューを決めます。",
+      "id": "Besok saya akan memutuskan menunya.",
+      "form": "決めます",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>、メニューを<ruby>決<rt>き</rt></ruby>めます。"
+    },
+    "て": {
+      "jp": "自分で考えて決めてください。",
+      "id": "Tolong pikirkan dan putuskan sendiri.",
+      "form": "決めて",
+      "ruby": "<ruby>自分<rt>じぶん</rt></ruby>で<ruby>考<rt>かんが</rt></ruby>えて<ruby>決<rt>き</rt></ruby>めてください。"
+    },
+    "た": {
+      "jp": "進路を自分で決めた。",
+      "id": "Saya memutuskan jalan masa depan saya sendiri.",
+      "form": "決めた",
+      "ruby": "<ruby>進路<rt>しんろ</rt></ruby>を<ruby>自分<rt>じぶん</rt></ruby>で<ruby>決<rt>き</rt></ruby>めた。"
+    },
+    "ない": {
+      "jp": "まだ何も決めない。",
+      "id": "Saya belum memutuskan apa pun.",
+      "form": "決めない",
+      "ruby": "まだ<ruby>何<rt>なに</rt></ruby>も<ruby>決<rt>き</rt></ruby>めない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "着く",
+      "つく"
+    ],
+    "arti": [
+      "id",
+      "tiba / sampai"
+    ],
+    "kamus": {
+      "jp": "もうすぐ駅に着く。",
+      "id": "Sebentar lagi sampai di stasiun.",
+      "form": "着く",
+      "ruby": "もうすぐ<ruby>駅<rt>えき</rt></ruby>に<ruby>着<rt>つ</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "９時に会社に着きます。",
+      "id": "Saya akan tiba di kantor pada jam 9.",
+      "form": "着きます",
+      "ruby": "<ruby>９時<rt>くじ</rt></ruby>に<ruby>会社<rt>かいしゃ</rt></ruby>に<ruby>着<rt>つ</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "着いてから、連絡してください。",
+      "id": "Tolong hubungi saya setelah sampai.",
+      "form": "着いて",
+      "ruby": "<ruby>着<rt>つ</rt></ruby>いてから、<ruby>連絡<rt>れんらく</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "無事にホテルに着いた。",
+      "id": "Saya telah tiba di hotel dengan selamat.",
+      "form": "着いた",
+      "ruby": "<ruby>無事<rt>ぶじ</rt></ruby>にホテルに<ruby>着<rt>つ</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "バスが遅れて、なかなか着かない。",
+      "id": "Busnya terlambat sehingga tidak kunjung sampai.",
+      "form": "着かない",
+      "ruby": "バスが<ruby>遅<rt>おく</rt></ruby>れて、なかなか<ruby>着<rt>つ</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "乗り換える",
+      "のりかえる"
+    ],
+    "arti": [
+      "id",
+      "transit / berganti kendaraan"
+    ],
+    "kamus": {
+      "jp": "新宿駅で電車を乗り換える。",
+      "id": "Berganti kereta di Stasiun Shinjuku.",
+      "form": "乗り換える",
+      "ruby": "<ruby>新宿駅<rt>しんじゅくえき</rt></ruby>で<ruby>電車<rt>でんしゃ</rt></ruby>を<ruby>乗<rt>の</rt></ruby>り<ruby>換<rt>か</rt></ruby>える。"
+    },
+    "ます": {
+      "jp": "次の駅でバスに乗り換えます。",
+      "id": "Saya akan berganti ke bus di stasiun berikutnya.",
+      "form": "乗り換えます",
+      "ruby": "<ruby>次<rt>つぎ</rt></ruby>の<ruby>駅<rt>えき</rt></ruby>でバスに<ruby>乗<rt>の</rt></ruby>り<ruby>換<rt>か</rt></ruby>えます。"
+    },
+    "て": {
+      "jp": "地下鉄に乗り換えて行きます。",
+      "id": "Saya pergi dengan berganti ke kereta bawah tanah.",
+      "form": "乗り換えて",
+      "ruby": "<ruby>地下鉄<rt>ちかてつ</rt></ruby>に<ruby>乗<rt>の</rt></ruby>り<ruby>換<rt>か</rt></ruby>えて<ruby>行<rt>い</rt></ruby>きます。"
+    },
+    "た": {
+      "jp": "途中で新幹線に乗り換えた。",
+      "id": "Di tengah perjalanan saya berganti ke Shinkansen.",
+      "form": "乗り換えた",
+      "ruby": "<ruby>途中<rt>とちゅう</rt></ruby>で<ruby>新幹線<rt>しんかんせん</rt></ruby>に<ruby>乗<rt>の</rt></ruby>り<ruby>換<rt>か</rt></ruby>えた。"
+    },
+    "ない": {
+      "jp": "直通だから乗り換えない。",
+      "id": "Karena langsung, saya tidak berganti kendaraan.",
+      "form": "乗り換えない",
+      "ruby": "<ruby>直通<rt>ちょくつう</rt></ruby>だから<ruby>乗<rt>の</rt></ruby>り<ruby>換<rt>か</rt></ruby>えない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "呼ぶ",
+      "よぶ"
+    ],
+    "arti": [
+      "id",
+      "memanggil / mengundang"
+    ],
+    "kamus": {
+      "jp": "友達を家に呼ぶ。",
+      "id": "Memanggil/mengundang teman ke rumah.",
+      "form": "呼ぶ",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>を<ruby>家<rt>うち</rt></ruby>に<ruby>呼<rt>よ</rt></ruby>ぶ。"
+    },
+    "ます": {
+      "jp": "タクシーを呼びます。",
+      "id": "Saya akan memanggil taksi.",
+      "form": "呼びます",
+      "ruby": "タクシーを<ruby>呼<rt>よ</rt></ruby>びます。"
+    },
+    "て": {
+      "jp": "大きな声で呼んでください。",
+      "id": "Tolong panggil dengan suara keras.",
+      "form": "呼んで",
+      "ruby": "<ruby>大<rt>おお</rt></ruby>きな<ruby>声<rt>こえ</rt></ruby>で<ruby>呼<rt>よ</rt></ruby>んでください。"
+    },
+    "た": {
+      "jp": "昨日、医者を呼んだ。",
+      "id": "Kemarin saya memanggil dokter.",
+      "form": "呼んだ",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>医者<rt>いしゃ</rt></ruby>を<ruby>呼<rt>よ</rt></ruby>んだ。"
+    },
+    "ない": {
+      "jp": "誰も呼ばない。",
+      "id": "Saya tidak memanggil siapa pun.",
+      "form": "呼ばない",
+      "ruby": "<ruby>誰<rt>だれ</rt></ruby>も<ruby>呼<rt>よ</rt></ruby>ばない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "伝わる",
+      "つたわる"
+    ],
+    "arti": [
+      "id",
+      "tersampaikan / tersiar"
+    ],
+    "kamus": {
+      "jp": "気持ちが相手に伝わる。",
+      "id": "Perasaan tersampaikan kepada lawan bicara.",
+      "form": "伝わる",
+      "ruby": "<ruby>気持<rt>きも</rt></ruby>ちが<ruby>相手<rt>あいて</rt></ruby>に<ruby>伝<rt>つた</rt></ruby>わる。"
+    },
+    "ます": {
+      "jp": "熱意が皆に伝わります。",
+      "id": "Antusiasme akan tersampaikan kepada semua orang.",
+      "form": "伝わります",
+      "ruby": "<ruby>熱意<rt>ねつい</rt></ruby>が<ruby>皆<rt>みな</rt></ruby>に<ruby>伝<rt>つた</rt></ruby>わります。"
+    },
+    "て": {
+      "jp": "想いが伝わって、嬉しい。",
+      "id": "Saya senang karena perasaan saya tersampaikan.",
+      "form": "伝わって",
+      "ruby": "<ruby>想<rt>おも</rt></ruby>いが<ruby>伝<rt>つた</rt></ruby>わって、<ruby>嬉<rt>うれ</rt></ruby>しい。"
+    },
+    "た": {
+      "jp": "ニュースがすぐに伝わった。",
+      "id": "Berita itu segera tersiar/tersampaikan.",
+      "form": "伝わった",
+      "ruby": "ニュースがすぐに<ruby>伝<rt>つた</rt></ruby>わった。"
+    },
+    "ない": {
+      "jp": "言葉が違って、意味が伝わらない。",
+      "id": "Karena bahasanya berbeda, maknanya tidak tersampaikan.",
+      "form": "伝わらない",
+      "ruby": "<ruby>言葉<rt>ことば</rt></ruby>が<ruby>違<rt>ちが</rt></ruby>って、<ruby>意味<rt>いみ</rt></ruby>が<ruby>伝<rt>つた</rt></ruby>わらない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "知らせる",
+      "しらせる"
+    ],
+    "arti": [
+      "id",
+      "memberitahukan / mengabarkan"
+    ],
+    "kamus": {
+      "jp": "結果をメールで知らせる。",
+      "id": "Memberitahukan hasil melalui email.",
+      "form": "知らせる",
+      "ruby": "<ruby>結果<rt>けっか</rt></ruby>をメールで<ruby>知<rt>し</rt></ruby>らせる。"
+    },
+    "ます": {
+      "jp": "予定が決まったら知らせます。",
+      "id": "Saya akan memberitahu jika jadwal sudah diputuskan.",
+      "form": "知らせます",
+      "ruby": "<ruby>予定<rt>よてい</rt></ruby>が<ruby>決<rt>き</rt></ruby>まったら<ruby>知<rt>し</rt></ruby>らせます。"
+    },
+    "て": {
+      "jp": "時間を私に知らせてください。",
+      "id": "Tolong beritahukan waktunya kepada saya.",
+      "form": "知らせて",
+      "ruby": "<ruby>時間<rt>じかん</rt></ruby>を<ruby>私<rt>わたし</rt></ruby>に<ruby>知<rt>し</rt></ruby>らせてください。"
+    },
+    "た": {
+      "jp": "昨日、変更をみんなに知らせた。",
+      "id": "Kemarin saya telah memberitahukan perubahannya kepada semua orang.",
+      "form": "知らせた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>変更<rt>へんこう</rt></ruby>をみんなに<ruby>知<rt>し</rt></ruby>らせた。"
+    },
+    "ない": {
+      "jp": "まだ確定していないので知らせない。",
+      "id": "Karena belum pasti, saya tidak memberitahukannya.",
+      "form": "知らせない",
+      "ruby": "まだ<ruby>確定<rt>かくてい</rt></ruby>していないので<ruby>知<rt>し</rt></ruby>らせない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "住む",
+      "すむ"
+    ],
+    "arti": [
+      "id",
+      "tinggal / bermukim"
+    ],
+    "kamus": {
+      "jp": "東京に住む。",
+      "id": "Tinggal di Tokyo.",
+      "form": "住む",
+      "ruby": "<ruby>東京<rt>とうきょう</rt></ruby>に<ruby>住<rt>す</rt></ruby>む。"
+    },
+    "ます": {
+      "jp": "静かな町に住みます。",
+      "id": "Saya tinggal di kota yang tenang.",
+      "form": "住みます",
+      "ruby": "<ruby>静<rt>しず</rt></ruby>かな<ruby>町<rt>まち</rt></ruby>に<ruby>住<rt>す</rt></ruby>みます。"
+    },
+    "て": {
+      "jp": "日本に住んで、３年になる。",
+      "id": "Sudah 3 tahun saya tinggal di Jepang.",
+      "form": "住んで",
+      "ruby": "<ruby>日本<rt>にほん</rt></ruby>に<ruby>住<rt>す</rt></ruby>んで、<ruby>３年<rt>さんねん</rt></ruby>になる。"
+    },
+    "た": {
+      "jp": "昔、大阪に住んでいた（住んだ）。",
+      "id": "Dulu saya pernah tinggal di Osaka.",
+      "form": "住んだ",
+      "ruby": "<ruby>昔<rt>むかし</rt></ruby>、<ruby>大阪<rt>おおさか</rt></ruby>に<ruby>住<rt>す</rt></ruby>んでいた（<ruby>住<rt>す</rt></ruby>んだ）。"
+    },
+    "ない": {
+      "jp": "都会には住まない。",
+      "id": "Saya tidak tinggal di kota besar.",
+      "form": "住まない",
+      "ruby": "<ruby>都会<rt>とかい</rt></ruby>には<ruby>住<rt>す</rt></ruby>まない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "生きる",
+      "いきる"
+    ],
+    "arti": [
+      "id",
+      "hidup"
+    ],
+    "kamus": {
+      "jp": "自由に生きる。",
+      "id": "Hidup dengan bebas.",
+      "form": "生きる",
+      "ruby": "<ruby>自由<rt>じゆう</rt></ruby>に<ruby>生<rt>い</rt></ruby>きる。"
+    },
+    "ます": {
+      "jp": "力強く生きます。",
+      "id": "Saya akan hidup dengan kuat.",
+      "form": "生きます",
+      "ruby": "<ruby>力強<rt>ちからづよ</rt></ruby>く<ruby>生<rt>い</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "懸命に生きて、夢を叶える。",
+      "id": "Hidup bersungguh-sungguh dan mewujudkan impian.",
+      "form": "生きて",
+      "ruby": "<ruby>懸命<rt>けんめい</rt></ruby>に<ruby>生<rt>い</rt></ruby>きて、<ruby>夢<rt>ゆめ</rt></ruby>を<ruby>叶<rt>かな</rt></ruby>える。"
+    },
+    "た": {
+      "jp": "彼は100歳まで生きた。",
+      "id": "Dia telah hidup sampai usia 100 tahun.",
+      "form": "生きた",
+      "ruby": "<ruby>彼<rt>かれ</rt></ruby>は<ruby>100歳<rt>ひゃくさい</rt></ruby>まで<ruby>生<rt>い</rt></ruby>きた。"
+    },
+    "ない": {
+      "jp": "目標がないと、面白く生きられない（生きない）。",
+      "id": "Tanpa tujuan, hidup terasa tidak menyenangkan.",
+      "form": "生きない",
+      "ruby": "<ruby>目標<rt>もくひょう</rt></ruby>がないと、<ruby>面白<rt>おもしろ</rt></ruby>く<ruby>生<rt>い</rt></ruby>きられない（<ruby>生<rt>い</rt></ruby>きない）。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "死ぬ",
+      "しぬ"
+    ],
+    "arti": [
+      "id",
+      "mati / meninggal"
+    ],
+    "kamus": {
+      "jp": "人は誰でもいつか死ぬ。",
+      "id": "Semua orang suatu saat akan mati.",
+      "form": "死ぬ",
+      "ruby": "<ruby>人<rt>ひと</rt></ruby>は<ruby>誰<rt>だれ</rt></ruby>でもいつか<ruby>死<rt>し</rt></ruby>ぬ。"
+    },
+    "ます": {
+      "jp": "植物が水不足で死にます（枯れます）。",
+      "id": "Tanaman mati karena kekurangan air.",
+      "form": "死にます",
+      "ruby": "<ruby>植物<rt>しょくぶつ</rt></ruby>が<ruby>水不足<rt>みずぶそく</rt></ruby>で<ruby>死<rt>し</rt></ruby>みます（<ruby>枯<rt>かれ</rt></ruby>れます）。"
+    },
+    "て": {
+      "jp": "金魚が死んで、悲しい。",
+      "id": "Saya sedih karena ikan koki mati.",
+      "form": "死んで",
+      "ruby": "<ruby>金魚<rt>きんぎょ</rt></ruby>が<ruby>死<rt>し</rt></ruby>んで、<ruby>悲<rt>かな</rt></ruby>しい。"
+    },
+    "た": {
+      "jp": "去年、飼っていた犬が死んだ。",
+      "id": "Tahun lalu, anjing peliharaan saya mati.",
+      "form": "死んだ",
+      "ruby": "<ruby>去年<rt>きょねん</rt></ruby>、<ruby>飼<rt>か</rt></ruby>っていた<ruby>犬<rt>いぬ</rt></ruby>が<ruby>死<rt>し</rt></ruby>んだ。"
+    },
+    "ない": {
+      "jp": "この虫は簡単には死なない。",
+      "id": "Serangga ini tidak mudah mati.",
+      "form": "死なない",
+      "ruby": "この<ruby>虫<rt>むし</rt></ruby>は<ruby>簡単<rt>かんたん</rt></ruby>には<ruby>死<rt>し</rt></ruby>なない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "間に合う",
+      "まにあう"
+    ],
+    "arti": [
+      "id",
+      "keburu / tepat waktu"
+    ],
+    "kamus": {
+      "jp": "電車の時間に間に合う。",
+      "id": "Tepat waktu untuk jadwal kereta.",
+      "form": "間に合う",
+      "ruby": "<ruby>電車<rt>でんしゃ</rt></ruby>の<ruby>時間<rt>じかん</rt></ruby>に<ruby>間<rt>ま</rt></ruby>に<ruby>合<rt>あ</rt></ruby>う。"
+    },
+    "ます": {
+      "jp": "走れば９時に間に合います。",
+      "id": "Kalau berlari, akan keburu jam 9.",
+      "form": "間に合います",
+      "ruby": "<ruby>走<rt>はし</rt></ruby>れば<ruby>９時<rt>くじ</rt></ruby>に<ruby>間<rt>ま</rt></ruby>に<ruby>合<rt>あ</rt></ruby>います。"
+    },
+    "て": {
+      "jp": "間に合って、よかった。",
+      "id": "Baguslah karena bisa keburu/tepat waktu.",
+      "form": "間に合って",
+      "ruby": "<ruby>間<rt>ま</rt></ruby>に<ruby>合<rt>あ</rt></ruby>って、よかったです。"
+    },
+    "た": {
+      "jp": "急いだので会議に間に合った。",
+      "id": "Karena bergegas, saya tepat waktu menghadiri rapat.",
+      "form": "間に合った",
+      "ruby": "<ruby>急<rt>いそ</rt></ruby>いだので<ruby>会議<rt>かいぎ</rt></ruby>に<ruby>間<rt>ま</rt></ruby>に<ruby>合<rt>あ</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "渋滞でバスが間に合わない。",
+      "id": "Bus tidak keburu/terlambat karena kemacetan.",
+      "form": "間に合わない",
+      "ruby": "<ruby>渋滞<rt>じゅうたい</rt></ruby>でバスが<ruby>間<rt>ま</rt></ruby>に<ruby>合<rt>あ</rt></ruby>わない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "遅刻する",
+      "ちこくする"
+    ],
+    "arti": [
+      "id",
+      "terlambat"
+    ],
+    "kamus": {
+      "jp": "学校に遅刻する。",
+      "id": "Terlambat datang ke sekolah.",
+      "form": "遅刻する",
+      "ruby": "<ruby>学校<rt>がっこう</rt></ruby>に<ruby>遅刻<rt>ちこく</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "寝坊すると遅刻します。",
+      "id": "Kalau bangun kesiangan akan terlambat.",
+      "form": "遅刻します",
+      "ruby": "<ruby>寝坊<rt>ねぼう</rt></ruby>すると<ruby>遅刻<rt>ちこく</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "遅刻して、先生に怒られた。",
+      "id": "Saya terlambat dan dimarahi guru.",
+      "form": "遅刻して",
+      "ruby": "<ruby>遅刻<rt>ちこく</rt></ruby>して、<ruby>先生<rt>せんせい</rt></ruby>に<ruby>怒<rt>おこ</rt></ruby>られた。"
+    },
+    "た": {
+      "jp": "昨日、電車が遅れて遅刻した。",
+      "id": "Kemarin kereta terlambat sehingga saya datang terlambat.",
+      "form": "遅刻した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>電車<rt>でんしゃ</rt></ruby>が<ruby>遅<rt>おく</rt></ruby>れて<ruby>遅刻<rt>ちこく</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "明日は絶対に遅刻しない。",
+      "id": "Besok saya pasti tidak akan terlambat.",
+      "form": "遅刻しない",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>は<ruby>絶対<rt>ぜったい</rt></ruby>に<ruby>遅刻<rt>ちこく</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "思う",
+      "おもう"
+    ],
+    "arti": [
+      "id",
+      "berpikir / menganggap / merasa"
+    ],
+    "kamus": {
+      "jp": "正しいと思う。",
+      "id": "Saya berpikir itu benar.",
+      "form": "思う",
+      "ruby": "<ruby>正<rt>ただ</rt></ruby>しいと<ruby>思<rt>おも</rt></ruby>う。"
+    },
+    "ます": {
+      "jp": "そう思います。",
+      "id": "Saya berpikir demikian.",
+      "form": "思います",
+      "ruby": "そう<ruby>思<rt>おも</rt></ruby>います。"
+    },
+    "て": {
+      "jp": "ずっとあなたのことを思っている。",
+      "id": "Saya selalu memikirkanmu.",
+      "form": "思って",
+      "ruby": "ずっとあなたのことを<ruby>思<rt>おも</rt></ruby>っている。"
+    },
+    "た": {
+      "jp": "無理だと思った。",
+      "id": "Saya tadinya berpikir itu tidak mungkin.",
+      "form": "思った",
+      "ruby": "<ruby>無理<rt>むり</rt></ruby>だと<ruby>思<rt>おも</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "そうは思わない。",
+      "id": "Saya tidak berpikir begitu.",
+      "form": "思わない",
+      "ruby": "そうは<ruby>思<rt>おも</rt></ruby>わない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "感じる",
+      "かんじる"
+    ],
+    "arti": [
+      "id",
+      "merasakan"
+    ],
+    "kamus": {
+      "jp": "春の訪れを感じる。",
+      "id": "Merasakan kedatangan musim semi.",
+      "form": "感じる",
+      "ruby": "<ruby>春<rt>はる</rt></ruby>の<ruby>訪<rt>おとず</rt></ruby>れを<ruby>感<rt>かん</rt></ruby>じる。"
+    },
+    "ます": {
+      "jp": "少し痛みを感じます。",
+      "id": "Saya merasa sedikit sakit.",
+      "form": "感じます",
+      "ruby": "<ruby>少<rt>すこ</rt></ruby>し<ruby>痛<rt>いた</rt></ruby>みを<ruby>感<rt>かん</rt></ruby>じます。"
+    },
+    "て": {
+      "jp": "不安を感じて、眠れない。",
+      "id": "Saya merasa cemas dan tidak bisa tidur.",
+      "form": "感じて",
+      "ruby": "<ruby>不安<rt>ふあん</rt></ruby>を<ruby>感<rt>かん</rt></ruby>じて、<ruby>眠<rt>ねむ</rt></ruby>れない。"
+    },
+    "た": {
+      "jp": "彼の優しさを感じた。",
+      "id": "Saya merasakan kebaikannya.",
+      "form": "感じた",
+      "ruby": "<ruby>彼<rt>かれ</rt></ruby>の<ruby>優<rt>やさ</rt></ruby>しさを<ruby>感<rt>かん</rt></ruby>じた。"
+    },
+    "ない": {
+      "jp": "特に危険を感じない。",
+      "id": "Saya tidak merasa bahaya secara khusus.",
+      "form": "感じない",
+      "ruby": "<ruby>特<rt>とく</rt></ruby>に<ruby>危険<rt>きけん</rt></ruby>を<ruby>感<rt>かん</rt></ruby>じない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "笑う",
+      "わらう"
+    ],
+    "arti": [
+      "id",
+      "tertawa / tersenyum"
+    ],
+    "kamus": {
+      "jp": "面白い話を聞いて笑う。",
+      "id": "Tertawa mendengar cerita lucu.",
+      "form": "笑う",
+      "ruby": "<ruby>面白<rt>おもしろ</rt></ruby>い<ruby>話<rt>はなし</rt></ruby>を<ruby>聞<rt>き</rt></ruby>いて<ruby>笑<rt>わら</rt></ruby>う。"
+    },
+    "ます": {
+      "jp": "彼女はいつも明るく笑います。",
+      "id": "Dia selalu tertawa dengan ceria.",
+      "form": "笑います",
+      "ruby": "<ruby>彼女<rt>かのじょ</rt></ruby>はいつも<ruby>明<rt>あか</rt></ruby>るく<ruby>笑<rt>わら</rt></ruby>います。"
+    },
+    "て": {
+      "jp": "そんなに笑わないでください。",
+      "id": "Tolong jangan tertawa seperti itu.",
+      "form": "笑って",
+      "ruby": "そんなに<ruby>笑<rt>わら</rt></ruby>わないでください。"
+    },
+    "た": {
+      "jp": "テレビを見て大声で笑った。",
+      "id": "Saya tertawa keras melihat TV.",
+      "form": "笑った",
+      "ruby": "テレビを<ruby>見<rt>み</rt></ruby>て<ruby>大声<rt>おおごえ</rt></ruby>で<ruby>笑<rt>わら</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "今日は一度も笑わない。",
+      "id": "Hari ini saya tidak tertawa sekali pun.",
+      "form": "笑わない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>一度<rt>いちど</rt></ruby>も<ruby>笑<rt>わら</rt></ruby>わない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "泣く",
+      "なく"
+    ],
+    "arti": [
+      "id",
+      "menangis"
+    ],
+    "kamus": {
+      "jp": "悲しい映画を見て泣く。",
+      "id": "Menangis menonton film sedih.",
+      "form": "泣く",
+      "ruby": "<ruby>悲<rt>かな</rt></ruby>しい<ruby>映画<rt>えいが</rt></ruby>を<ruby>見<rt>み</rt></ruby>て<ruby>泣<rt>な</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "赤ちゃんがよく泣きます。",
+      "id": "Bayi sering menangis.",
+      "form": "泣きます",
+      "ruby": "<ruby>赤ちゃん<rt>あかちゃん</rt></ruby>がよく<ruby>泣<rt>な</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "泣かないで、話してください。",
+      "id": "Jangan menangis, tolong bicaralah.",
+      "form": "泣いて",
+      "ruby": "<ruby>泣<rt>な</rt></ruby>かないで、<ruby>話<rt>はな</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "悔しくて泣いた。",
+      "id": "Saya menangis karena kesal/kecewa.",
+      "form": "泣いた",
+      "ruby": "<ruby>悔<rt>くや</rt></ruby>しくて<ruby>泣<rt>な</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "どんなに辛くても泣かない。",
+      "id": "Secapa apa pun, saya tidak akan menangis.",
+      "form": "泣かない",
+      "ruby": "どんなに<ruby>辛<rt>つら</rt></ruby>くても<ruby>泣<rt>な</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "怒る",
+      "おこる"
+    ],
+    "arti": [
+      "id",
+      "marah"
+    ],
+    "kamus": {
+      "jp": "嘘をつかれて怒る。",
+      "id": "Marah karena dibohongi.",
+      "form": "怒る",
+      "ruby": "<ruby>嘘<rt>うそ</rt></ruby>をつかれて<ruby>怒<rt>おこ</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "父はめったに怒りません。",
+      "id": "Ayah saya jarang sekali marah.",
+      "form": "怒ります",
+      "ruby": "<ruby>父<rt>ちち</rt></ruby>はめったに<ruby>怒<rt>おこ</rt></ruby>りません。"
+    },
+    "て": {
+      "jp": "そんなに怒らないでください。",
+      "id": "Tolong jangan marah seperti itu.",
+      "form": "怒って",
+      "ruby": "そんなに<ruby>怒<rt>おこ</rt></ruby>らないでください。"
+    },
+    "た": {
+      "jp": "宿題を忘れて先生に怒られた（怒った）。",
+      "id": "Saya dimarahi guru (atau: guru marah) karena lupa PR.",
+      "form": "怒った",
+      "ruby": "<ruby>宿題<rt>しゅくだい</rt></ruby>を<ruby>忘<rt>わす</rt></ruby>れて<ruby>先生<rt>せんせい</rt></ruby>に<ruby>怒<rt>おこ</rt></ruby>られた（<ruby>怒<rt>おこ</rt></ruby>った）。"
+    },
+    "ない": {
+      "jp": "彼は優しくて全然怒らない。",
+      "id": "Dia baik hati dan tidak pernah marah sama sekali.",
+      "form": "怒らない",
+      "ruby": "<ruby>彼<rt>かれ</rt></ruby>は<ruby>優<rt>やさ</rt></ruby>しくて<ruby>全然<rt>ぜんぜん</rt></ruby><ruby>怒<rt>おこ</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "始まる",
+      "はじまる"
+    ],
+    "arti": [
+      "id",
+      "dimulai (subjek + が)"
+    ],
+    "kamus": {
+      "jp": "もうすぐ授業が始まる。",
+      "id": "Sebentar lagi pelajaran akan dimulai.",
+      "form": "始まる",
+      "ruby": "もうすぐ<ruby>授業<rt>じゅぎょう</rt></ruby>が<ruby>始<rt>はじ</rt></ruby>まる。"
+    },
+    "ます": {
+      "jp": "会議は１０時に始まります。",
+      "id": "Rapat dimulai jam 10.",
+      "form": "始まります",
+      "ruby": "<ruby>会議<rt>かいぎ</rt></ruby>は<ruby>１０時<rt>じゅうじ</rt></ruby>に<ruby>始<rt>はじ</rt></ruby>まります。"
+    },
+    "て": {
+      "jp": "映画が始まって、静かになった。",
+      "id": "Film dimulai, dan menjadi hening.",
+      "form": "始まって",
+      "ruby": "<ruby>映画<rt>えいが</rt></ruby>が<ruby>始<rt>はじ</rt></ruby>まって、<ruby>静<rt>しず</rt></ruby>かになった。"
+    },
+    "た": {
+      "jp": "雨が急に降り始まった（始まった）。",
+      "id": "Acara/kegiatan telah dimulai.",
+      "form": "始まった",
+      "ruby": "<ruby>雨<rt>あめ</rt></ruby>が<ruby>急<rt>きゅう</rt></ruby>に<ruby>降<rt>ふ</rt></ruby>り<ruby>始<rt>はじ</rt></ruby>まった（<ruby>始<rt>はじ</rt></ruby>まった）。"
+    },
+    "ない": {
+      "jp": "時間になっても始まらない。",
+      "id": "Meskipun sudah waktunya, belum kunjung dimulai.",
+      "form": "始まらない",
+      "ruby": "<ruby>時間<rt>じかん</rt></ruby>になっても<ruby>始<rt>はじ</rt></ruby>まらない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "終わる",
+      "おわる"
+    ],
+    "arti": [
+      "id",
+      "selesai / berakhir (subjek + が)"
+    ],
+    "kamus": {
+      "jp": "午後５時に仕事が終わる。",
+      "id": "Pekerjaan selesai jam 5 sore.",
+      "form": "終わる",
+      "ruby": "<ruby>午後<rt>ごご</rt></ruby><ruby>５時<rt>ごじ</rt></ruby>に<ruby>仕事<rt>しごと</rt></ruby>が<ruby>終<rt>お</rt></ruby>わる。"
+    },
+    "ます": {
+      "jp": "テストは３時に終わります。",
+      "id": "Ujian akan selesai jam 3.",
+      "form": "終わります",
+      "ruby": "テストは<ruby>３時<rt>さんじ</rt></ruby>に<ruby>終<rt>お</rt></ruby>わります。"
+    },
+    "て": {
+      "jp": "授業が終わってから遊ぶ。",
+      "id": "Bermain setelah pelajaran selesai.",
+      "form": "終わって",
+      "ruby": "<ruby>授業<rt>じゅぎょう</rt></ruby>が<ruby>終<rt>お</rt></ruby>わってから<ruby>遊<rt>あそ</rt></ruby>ぶ。"
+    },
+    "た": {
+      "jp": "夏休みが昨日終わった。",
+      "id": "Liburan musim panas telah berakhir kemarin.",
+      "form": "終わった",
+      "ruby": "<ruby>夏休<rt>なつやす</rt></ruby>みが<ruby>昨日<rt>きのう</rt></ruby><ruby>終<rt>お</rt></ruby>わった。"
+    },
+    "ない": {
+      "jp": "宿題がまだ終わらない。",
+      "id": "PR-nya belum selesai juga.",
+      "form": "終わらない",
+      "ruby": "<ruby>宿題<rt>しゅくだい</rt></ruby>がまだ<ruby>終<rt>お</rt></ruby>わらない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "開く",
+      "あく"
+    ],
+    "arti": [
+      "id",
+      "terbuka"
+    ],
+    "kamus": {
+      "jp": "風で窓が開く。",
+      "id": "Jendela terbuka karena angin.",
+      "form": "開く",
+      "ruby": "<ruby>風<rt>かぜ</rt></ruby>で<ruby>窓<rt>まど</rt></ruby>が<ruby>開<rt>あ</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "デパートは１０時に開きます。",
+      "id": "Department store buka jam 10.",
+      "form": "開きます",
+      "ruby": "デパートは<ruby>１０時<rt>じゅうじ</rt></ruby>に<ruby>開<rt>あ</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "ドアが開いて、人が入ってきた。",
+      "id": "Pintu terbuka dan orang masuk.",
+      "form": "開いて",
+      "ruby": "ドアが<ruby>開<rt>あ</rt></ruby>いて、<ruby>人<rt>ひと</rt></ruby>が<ruby>入<rt>はい</rt></ruby>ってきた。"
+    },
+    "た": {
+      "jp": "自動ドアが開いた。",
+      "id": "Pintu otomatis terbuka.",
+      "form": "開いた",
+      "ruby": "<ruby>自動<rt>じどう</rt></ruby>ドアが<ruby>開<rt>あ</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "鍵がかかっていて開かない。",
+      "id": "Terkunci sehingga tidak bisa terbuka.",
+      "form": "開かない",
+      "ruby": "<ruby>鍵<rt>かぎ</rt></ruby>がかかっていて<ruby>開<rt>あ</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "閉まる",
+      "しまる"
+    ],
+    "arti": [
+      "id",
+      "tertutup / tutup"
+    ],
+    "kamus": {
+      "jp": "夜遅くに店が閉まる。",
+      "id": "Toko tutup pada larut malam.",
+      "form": "閉まる",
+      "ruby": "<ruby>夜遅<rt>よるおそ</rt></ruby>くに<ruby>店<rt>みせ</rt></ruby>が<ruby>閉<rt>しま</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "銀行は４時に閉まります。",
+      "id": "Bank tutup pada jam 4.",
+      "form": "閉まります",
+      "ruby": "<ruby>銀行<rt>ぎんこう</rt></ruby>は<ruby>４時<rt>よじ</rt></ruby>に<ruby>閉<rt>しま</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "ドアが閉まって、出発した。",
+      "id": "Pintu tertutup lalu berangkat.",
+      "form": "閉まって",
+      "ruby": "ドアが<ruby>閉<rt>しま</rt></ruby>って、<ruby>出発<rt>しゅっぱつ</rt></ruby>した。"
+    },
+    "た": {
+      "jp": "お店はもう閉まった。",
+      "id": "Tokonya sudah tutup.",
+      "form": "閉まった",
+      "ruby": "お<ruby>店<rt>みせ</rt></ruby>はもう<ruby>閉<rt>しま</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "壊れていてドアが閉まらない。",
+      "id": "Karena rusak, pintunya tidak mau tertutup.",
+      "form": "閉まらない",
+      "ruby": "<ruby>壊<rt>こわ</rt></ruby>れていてドアが<ruby>閉<rt>しま</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "治る",
+      "なおる"
+    ],
+    "arti": [
+      "id",
+      "sembuh / pulih (penyakit/luka)"
+    ],
+    "kamus": {
+      "jp": "薬を飲めば風邪が治る。",
+      "id": "Jika minum obat, flu akan sembuh.",
+      "form": "治る",
+      "ruby": "<ruby>薬<rt>くすり</rt></ruby>を<ruby>飲<rt>の</rt></ruby>めば<ruby>風邪<rt>かぜ</rt></ruby>が<ruby>治<rt>なお</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "すぐに病気が治ります。",
+      "id": "Penyakitnya akan segera sembuh.",
+      "form": "治ります",
+      "ruby": "すぐに<ruby>病気<rt>びょうき</rt></ruby>が<ruby>治<rt>なお</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "怪我が治って、安心した。",
+      "id": "Luka sudah sembuh, saya merasa lega.",
+      "form": "治って",
+      "ruby": "<ruby>怪我<rt>けが</rt></ruby>が<ruby>治<rt>なお</rt></ruby>って、<ruby>安心<rt>あんしん</rt></ruby>した。"
+    },
+    "た": {
+      "jp": "おかげさまで病気が治った。",
+      "id": "Berkat doa/bantuan Anda, penyakitnya sudah sembuh.",
+      "form": "治った",
+      "ruby": "おかげさまで<ruby>病気<rt>びょうき</rt></ruby>が<ruby>治<rt>なお</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "なかなか風邪が治らない。",
+      "id": "Flunya tak kunjung sembuh.",
+      "form": "治らない",
+      "ruby": "なかなかの<ruby>風邪<rt>かぜ</rt></ruby>が<ruby>治<rt>なお</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "治す",
+      "なおす"
+    ],
+    "arti": [
+      "id",
+      "menyembuhkan / mengobati"
+    ],
+    "kamus": {
+      "jp": "医者が病気を治す。",
+      "id": "Dokter menyembuhkan penyakit.",
+      "form": "治す",
+      "ruby": "<ruby>医者<rt>いしゃ</rt></ruby>が<ruby>病気<rt>びょうき</rt></ruby>を<ruby>治<rt>なお</rt></ruby>す。"
+    },
+    "ます": {
+      "jp": "虫歯を治します。",
+      "id": "Saya mengobati/menyembuhkan gigi berlubang.",
+      "form": "治します",
+      "ruby": "<ruby>虫歯<rt>むしば</rt></ruby>を<ruby>治<rt>なお</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "しっかりと風邪を治してください。",
+      "id": "Tolong sembuhkan flumu dengan benar.",
+      "form": "治して",
+      "ruby": "しっかりと<ruby>風邪<rt>かぜ</rt></ruby>を<ruby>治<rt>なお</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "休養して体を治した。",
+      "id": "Saya beristirahat dan memulihkan/menyembuhkan tubuh.",
+      "form": "治した",
+      "ruby": "<ruby>休養<rt>きゅうよう</rt></ruby>して<ruby>体<rt>からだ</rt></ruby>を<ruby>治<rt>なお</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "自分で病気を治せない（治さない）。",
+      "id": "Tidak mengobati penyakit secara mandiri.",
+      "form": "治さない",
+      "ruby": "<ruby>自分<rt>じぶん</rt></ruby>で<ruby>病気<rt>びょうき</rt></ruby>を<ruby>治<rt>なお</rt></ruby>せない（<ruby>治<rt>なお</rt></ruby>さない）。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "する",
+      "する"
+    ],
+    "arti": [
+      "id",
+      "melakukan / mengerjakan"
+    ],
+    "kamus": {
+      "jp": "毎日運動をする。",
+      "id": "Melakukan olahraga setiap hari.",
+      "form": "する",
+      "ruby": "<ruby>毎日<rt>まいにち</rt></ruby><ruby>運動<rt>うんどう</rt></ruby>をする。"
+    },
+    "ます": {
+      "jp": "これから宿題をします。",
+      "id": "Mulai sekarang saya akan mengerjakan PR.",
+      "form": "します",
+      "ruby": "これから<ruby>宿題<rt>しゅくだい</rt></ruby>をします。"
+    },
+    "て": {
+      "jp": "準備をして、出かけます。",
+      "id": "Saya melakukan persiapan lalu pergi keluar.",
+      "form": "して",
+      "ruby": "<ruby>準備<rt>じゅんび</rt></ruby>をして、<ruby>出<rt>で</rt></ruby>かけます。"
+    },
+    "た": {
+      "jp": "昨日、サッカーをした。",
+      "id": "Kemarin saya bermain/melakukan sepak bola.",
+      "form": "した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、サッカーをした。"
+    },
+    "ない": {
+      "jp": "今日は何も勉強しない。",
+      "id": "Hari ini saya tidak melakukan pelajaran/belajar apa pun.",
+      "form": "しない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>何<rt>なに</rt></ruby>も<ruby>勉強<rt>べんきょう</rt></ruby>しない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "始まっている",
+      "はじまっている"
+    ],
+    "arti": [
+      "id",
+      "sudah dimulai / sedang berlangsung"
+    ],
+    "kamus": {
+      "jp": "会場に着いた時、既に映画が始まっている。",
+      "id": "Saat tiba di lokasi, filmnya sudah dimulai.",
+      "form": "始まっている",
+      "ruby": "<ruby>会場<rt>かいじょう</rt></ruby>に<ruby>着<rt>つ</rt></ruby>いた<ruby>時<rt>とき</rt></ruby>、<ruby>既<rt>すで</rt></ruby>に<ruby>映画<rt>えいが</rt></ruby>が<ruby>始<rt>はじ</rt></ruby>まっている。"
+    },
+    "ます": {
+      "jp": "会議はもう始まっています。",
+      "id": "Rapatnya sudah dimulai.",
+      "form": "始まっています",
+      "ruby": "<ruby>会議<rt>かいぎ</rt></ruby>はもう<ruby>始<rt>はじ</rt></ruby>まっています。"
+    },
+    "て": {
+      "jp": "授業が始まっているので、静かにしてください。",
+      "id": "Karena pelajaran sudah dimulai, tolong tenang.",
+      "form": "始まっていて",
+      "ruby": "<ruby>授業<rt>じゅぎょう</rt></ruby>が<ruby>始<rt>はじ</rt></ruby>まっているので、<ruby>静<rt>しず</rt></ruby>かにしてください。"
+    },
+    "た": {
+      "jp": "その時、イベントはもう始まっていた。",
+      "id": "Pada saat itu, acaranya sudah dimulai.",
+      "form": "始まっていた",
+      "ruby": "その<ruby>時<rt>とき</rt></ruby>、イベントはもう<ruby>始<rt>はじ</rt></ruby>まっていた。"
+    },
+    "ない": {
+      "jp": "まだ試合は始まっていない。",
+      "id": "Pertandingannya belum dimulai.",
+      "form": "始まっていない",
+      "ruby": "まだ<ruby>試合<rt>しあい</rt></ruby>は<ruby>始<rt>はじ</rt></ruby>まっていない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "終わっている",
+      "おわっている"
+    ],
+    "arti": [
+      "id",
+      "sudah selesai"
+    ],
+    "kamus": {
+      "jp": "家に着く頃には、番組が終っている。",
+      "id": "Saat sampai rumah, acara televisinya sudah selesai.",
+      "form": "終わっている",
+      "ruby": "<ruby>家<rt>うち</rt></ruby>に<ruby>着<rt>つ</rt></ruby>く<ruby>頃<rt>ころ</rt></ruby>には、<ruby>番組<rt>ばんぐみ</rt></ruby>が<ruby>終<rt>お</rt></ruby>わっている。"
+    },
+    "ます": {
+      "jp": "テストはもう終わっています。",
+      "id": "Ujiannya sudah selesai.",
+      "form": "終わっています",
+      "ruby": "テストはもう<ruby>終<rt>お</rt></ruby>わっています。"
+    },
+    "て": {
+      "jp": "仕事が we終わり（終わって）いるので、帰ってもいいです。",
+      "id": "Karena pekerjaan sudah selesai, Anda boleh pulang.",
+      "form": "終わっていて",
+      "ruby": "<ruby>仕事<rt>しごと</rt></ruby>が<ruby>終<rt>お</rt></ruby>わっているので、<ruby>帰<rt>かえ</rt></ruby>ってもいいです。"
+    },
+    "た": {
+      "jp": "受付時間は既に終わっていた。",
+      "id": "Waktu pendaftaran sudah selesai pada saat itu.",
+      "form": "終わっていた",
+      "ruby": "<ruby>受付時間<rt>うけつけじかん</rt></ruby>は<ruby>既<rt>すで</rt></ruby>に<ruby>終<rt>お</rt></ruby>わっていた。"
+    },
+    "ない": {
+      "jp": "まだ宿題は終わっていない。",
+      "id": "PR-nya belum selesai.",
+      "form": "終わっていない",
+      "ruby": "まだ<ruby>宿題<rt>しゅくだい</rt></ruby>は<ruby>終<rt>お</rt></ruby>わっていない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "亡くなる",
+      "なくなる"
+    ],
+    "arti": [
+      "id",
+      "meninggal dunia (bentuk halus dari 死ぬ)"
+    ],
+    "kamus": {
+      "jp": "人はいつか亡くなる。",
+      "id": "Manusia suatu saat akan meninggal dunia.",
+      "form": "亡くなる",
+      "ruby": "<ruby>人<rt>ひと</rt></ruby>はいつか<ruby>亡<rt>な</rt></ruby>くなる。"
+    },
+    "ます": {
+      "jp": "先月、祖父が亡くなりました。",
+      "id": "Bulan lalu, kakek saya meninggal dunia.",
+      "form": "亡くなりました",
+      "ruby": "<ruby>先月<rt>せんげつ</rt></ruby>、<ruby>祖父<rt>そふ</rt></ruby>が<ruby>亡<rt>な</rt></ruby>くなりました。"
+    },
+    "て": {
+      "jp": "有名人が亡くなって、とても悲しい。",
+      "id": "Tokoh terkenal meninggal dunia, saya sangat sedih.",
+      "form": "亡くなって",
+      "ruby": "<ruby>有名人<rt>ゆうめいじん</rt></ruby>が<ruby>亡<rt>な</rt></ruby>くなって、とても<ruby>悲<rt>かな</rt></ruby>しい。"
+    },
+    "た": {
+      "jp": "昨年、愛犬が亡くなった。",
+      "id": "Tahun lalu, anjing kesayangan saya meninggal dunia.",
+      "form": "亡くなった",
+      "ruby": "<ruby>昨年<rt>さくねん</rt></ruby>、<ruby>愛犬<rt>あいけん</rt></ruby>が<ruby>亡<rt>な</rt></ruby>くなった。"
+    },
+    "ない": {
+      "jp": "幸い、事故での死者は亡くなっていない（出ていない）。",
+      "id": "Beruntung, tidak ada korban yang meninggal dalam kecelakaan.",
+      "form": "亡くならない",
+      "ruby": "<ruby>幸<rt>さいわ</rt></ruby>い、<ruby>事故<rt>じこ</rt></ruby>での<ruby>死者<rt>ししゃ</rt></ruby>は<ruby>亡<rt>な</rt></ruby>くなっていない（<ruby>出<rt>で</rt></ruby>ていない）。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "育てる",
+      "そだてる"
+    ],
+    "arti": [
+      "id",
+      "merawat / membesarkan / mendidik"
+    ],
+    "kamus": {
+      "jp": "愛情を持って子供を育てる。",
+      "id": "Membesarkan anak dengan kasih sayang.",
+      "form": "育てる",
+      "ruby": "<ruby>愛情<rt>あいじょう</rt></ruby>を<ruby>持<rt>も</rt></ruby>って<ruby>子供<rt>こども</rt></ruby>を<ruby>育<rt>そだ</rt></ruby>てる。"
+    },
+    "ます": {
+      "jp": "庭で野菜や花を育てます。",
+      "id": "Saya merawat/menanam sayur dan bunga di halaman.",
+      "form": "育てます",
+      "ruby": "<ruby>庭<rt>にわ</rt></ruby>で<ruby>野菜<rt>やさい</rt></ruby>や<ruby>花<rt>はな</rt></ruby>を<ruby>育<rt>そだ</rt></ruby>てます。"
+    },
+    "て": {
+      "jp": "大切に植物を育ててください。",
+      "id": "Tolong rawat tanaman ini dengan baik.",
+      "form": "育てて",
+      "ruby": "<ruby>大切<rt>たいせつ</rt></ruby>に<ruby>植物<rt>しょくぶつ</rt></ruby>を<ruby>育<rt>そだ</rt></ruby>ててください。"
+    },
+    "た": {
+      "jp": "両親が私を立派に育てた。",
+      "id": "Orang tua telah membesarkan saya dengan baik.",
+      "form": "育てた",
+      "ruby": "<ruby>両親<rt>りょうしん</rt></ruby>が<ruby>私<rt>わたし</rt></ruby>を<ruby>立派<rt>りっぱ</rt></ruby>に<ruby>育<rt>そだ</rt></ruby>てた。"
+    },
+    "ない": {
+      "jp": "ペットを育てる余裕がない。",
+      "id": "Saya tidak memiliki kelonggaran untuk merawat hewan peliharaan.",
+      "form": "育てない",
+      "ruby": "ペットを<ruby>育<rt>そだ</rt></ruby>てる<ruby>余裕<rt>よゆう</rt></ruby>がない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "育つ",
+      "そだつ"
+    ],
+    "arti": [
+      "id",
+      "tumbuh / berkembang / dibesarkan"
+    ],
+    "kamus": {
+      "jp": "豊かな自然の中で育つ。",
+      "id": "Tumbuh di tengah alam yang asri.",
+      "form": "育つ",
+      "ruby": "<ruby>豊<rt>ゆた</rt></ruby>かな<ruby>自然<rt>しぜん</rt></ruby>の<ruby>中<rt>なか</rt></ruby>で<ruby>育<rt>そだ</rt></ruby>つ。"
+    },
+    "ます": {
+      "jp": "子供は元気に育ちます。",
+      "id": "Anak-anak tumbuh dengan sehat.",
+      "form": "育ちます",
+      "ruby": "<ruby>子供<rt>こども</rt></ruby>は<ruby>元気<rt>げんき</rt></ruby>に<ruby>育<rt>そだ</rt></ruby>ちます。"
+    },
+    "て": {
+      "jp": "順調に育っていて、うれしい。",
+      "id": "Saya senang karena tumbuh dengan lancar.",
+      "form": "育って",
+      "ruby": "<ruby>順調<rt>じゅんちょう</rt></ruby>に<ruby>育<rt>そだ</rt></ruby>っていて、うれしい。"
+    },
+    "た": {
+      "jp": "私は田舎で育った。",
+      "id": "Saya dibesarkan di desa.",
+      "form": "育った",
+      "ruby": "<ruby>私<rt>わたし</rt></ruby>は<ruby>田舎<rt>いなか</rt></ruby>で<ruby>育<rt>そだ</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "日当たりが悪いと植物がうまく育たない。",
+      "id": "Jika kurang pencahayaan matahari, tanaman tidak akan tumbuh dengan baik.",
+      "form": "育たない",
+      "ruby": "<ruby>日当<rt>ひあ</rt></ruby>たりが<ruby>悪<rt>わる</rt></ruby>いと<ruby>植物<rt>しょくぶつ</rt></ruby>がうまく<ruby>育<rt>そだ</rt></ruby>たない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "見せる",
+      "みせる"
+    ],
+    "arti": [
+      "id",
+      "memperlihatkan / menunjukkan"
+    ],
+    "kamus": {
+      "jp": "友達に写真を見せる。",
+      "id": "Memperlihatkan foto kepada teman.",
+      "form": "見せる",
+      "ruby": "<ruby>友達<rt>ともだち</rt></ruby>に<ruby>写真<rt>しゃしん</rt></ruby>を<ruby>見<rt>み</rt></ruby>せる。"
+    },
+    "ます": {
+      "jp": "パスポートを見せます。",
+      "id": "Saya menunjukkan paspor.",
+      "form": "見せます",
+      "ruby": "パスポートを<ruby>見<rt>み</rt></ruby>せます。"
+    },
+    "て": {
+      "jp": "切符を見せてください。",
+      "id": "Tolong perlihatkan tiketnya.",
+      "form": "見せて",
+      "ruby": "<ruby>切符<rt>きっぷ</rt></ruby>を<ruby>見<rt>み</rt></ruby>せてください。"
+    },
+    "た": {
+      "jp": "昨日、彼に新しい服を見せた。",
+      "id": "Kemarin saya memperlihatkan baju baru kepadanya.",
+      "form": "見せた",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>彼<rt>かれ</rt></ruby>に<ruby>新<rt>あたら</rt></ruby>しい<ruby>服<rt>ふく</rt></ruby>を<ruby>見<rt>み</rt></ruby>せた。"
+    },
+    "ない": {
+      "jp": "秘密だから誰にも見せない。",
+      "id": "Karena rahasia, saya tidak memperlihatkannya kepada siapa pun.",
+      "form": "見せない",
+      "ruby": "<ruby>秘密<rt>ひみつ</rt></ruby>だから<ruby>誰<rt>だれ</rt></ruby>にも<ruby>見<rt>み</rt></ruby>せない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "見つける",
+      "みつける"
+    ],
+    "arti": [
+      "id",
+      "menemukan (mengejar/mencari, subjek sengaja)"
+    ],
+    "kamus": {
+      "jp": "無くした鍵を見つける。",
+      "id": "Menemukan kunci yang hilang.",
+      "form": "見つける",
+      "ruby": "<ruby>無<rt>な</rt></ruby>くした<ruby>鍵<rt>かぎ</rt></ruby>を<ruby>見<rt>み</rt></ruby>つける。"
+    },
+    "ます": {
+      "jp": "いい仕事を見つけます。",
+      "id": "Saya akan menemukan pekerjaan yang bagus.",
+      "form": "見つけます",
+      "ruby": "いい<ruby>仕事<rt>しごと</rt></ruby>を<ruby>見<rt>み</rt></ruby>つけます。"
+    },
+    "て": {
+      "jp": "間違いを見つけて、直してください。",
+      "id": "Tolong temukan kesalahannya dan perbaiki.",
+      "form": "見つけて",
+      "ruby": "<ruby>間違<rt>まちが</rt></ruby>いを<ruby>見<rt>み</rt></ruby>つけて、<ruby>直<rt>なお</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "図書館で面白い本を見つけた。",
+      "id": "Saya menemukan buku menarik di perpustakaan.",
+      "form": "見つけた",
+      "ruby": "<ruby>図書館<rt>としょかん</rt></ruby>で<ruby>面白<rt>おもしろ</rt></ruby>い<ruby>本<rt>ほん</rt></ruby>を<ruby>見<rt>み</rt></ruby>つけた。"
+    },
+    "ない": {
+      "jp": "いくら探しても見つからない（見つけない）。",
+      "id": "Berapa kali pun dicari, saya tidak menemukannya.",
+      "form": "見つけない",
+      "ruby": "いくら<ruby>探<rt>さが</rt></ruby>しても<ruby>見<rt>み</rt></ruby>つからない（<ruby>見<rt>み</rt></ruby>つけない）。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "見つかる",
+      "みつかる"
+    ],
+    "arti": [
+      "id",
+      "ditemukan / ketemu"
+    ],
+    "kamus": {
+      "jp": "無くした財布が見つかる。",
+      "id": "Dompet yang hilang ketemu.",
+      "form": "見つかる",
+      "ruby": "<ruby>無<rt>な</rt></ruby>くした<ruby>財布<rt>さいふ</rt></ruby>が<ruby>見<rt>み</rt></ruby>つかる。"
+    },
+    "ます": {
+      "jp": "すぐに犯人が見つかります。",
+      "id": "Pelakunya akan segera ditemukan.",
+      "form": "見つかります",
+      "ruby": "すぐに<ruby>犯人<rt>はんにん</rt></ruby>が<ruby>見<rt>み</rt></ruby>つかります。"
+    },
+    "て": {
+      "jp": "鍵が見つかって、よかった。",
+      "id": "Baguslah kuncinya sudah ketemu.",
+      "form": "見つかって",
+      "ruby": "<ruby>鍵<rt>かぎ</rt></ruby>が<ruby>見<rt>み</rt></ruby>つかって、よかった。"
+    },
+    "た": {
+      "jp": "昨日、消えた書類が見つかった。",
+      "id": "Kemarin dokumen yang hilang sudah ditemukan.",
+      "form": "見つかった",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>消<rt>き</rt></ruby>えた<ruby>書類<rt>しょるい</rt></ruby>が<ruby>見<rt>み</rt></ruby>つかった。"
+    },
+    "ない": {
+      "jp": "まだいい部屋が見つからない。",
+      "id": "Kamar yang bagus belum juga ketemu.",
+      "form": "見つからない",
+      "ruby": "まだいい<ruby>部屋<rt>へや</rt></ruby>が<ruby>見<rt>み</rt></ruby>つからない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "落とす",
+      "おとす"
+    ],
+    "arti": [
+      "id",
+      "menjatuhkan / menghilangkan (karena tidak sengaja)"
+    ],
+    "kamus": {
+      "jp": "ポケットから鍵を落とす。",
+      "id": "Menjatuhkan kunci dari saku.",
+      "form": "落とす",
+      "ruby": "ポケットから<ruby>鍵<rt>かぎ</rt></ruby>を<ruby>落<rt>お</rt></ruby>とす。"
+    },
+    "ます": {
+      "jp": "スピードを落とします。",
+      "id": "Saya menurunkan/mengurangi kecepatan.",
+      "form": "落とします",
+      "ruby": "スピードを<ruby>落<rt>お</rt></ruby>とします。"
+    },
+    "て": {
+      "jp": "コップを落として、割ってしまった。",
+      "id": "Saya menjatuhkan gelas dan memecahkannya.",
+      "form": "落として",
+      "ruby": "コップを<ruby>落<rt>お</rt></ruby>として、<ruby>割<rt>わ</rt></ruby>ってしまった。"
+    },
+    "た": {
+      "jp": "道でお金を落とした。",
+      "id": "Saya menjatuhkan/menghilangkan uang di jalan.",
+      "form": "落とした",
+      "ruby": "<ruby>道<rt>みち</rt></ruby>でお<ruby>金<rt>かね</rt></ruby>を<ruby>落<rt>お</rt></ruby>とした。"
+    },
+    "ない": {
+      "jp": "大切な物だから絶対に落とさない。",
+      "id": "Karena barang berharga, saya tidak akan menjatuhkannya.",
+      "form": "落とさない",
+      "ruby": "<ruby>大切<rt>たいせつ</rt></ruby>な<ruby>物<rt>もの</rt></ruby>だから<ruby>絶対<rt>ぜったい</rt></ruby>に<ruby>落<rt>お</rt></ruby>とさない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "落ちる",
+      "おちる"
+    ],
+    "arti": [
+      "id",
+      "jatuh / gugur"
+    ],
+    "kamus": {
+      "jp": "木から葉っぱが落ちる。",
+      "id": "Daun gugur/jatuh dari pohon.",
+      "form": "落ちる",
+      "ruby": "<ruby>木<rt>き</rt></ruby>から<ruby>葉<rt>は</rt></ruby>っぱが<ruby>落<rt>お</rt></ruby>ちる。"
+    },
+    "ます": {
+      "jp": "試験に落ちます。",
+      "id": "Gagal/jatuh dalam ujian.",
+      "form": "落ちます",
+      "ruby": "<ruby>試験<rt>しけん</rt></ruby>に<ruby>落<rt>お</rt></ruby>ちます。"
+    },
+    "て": {
+      "jp": "お皿が落ちて、割れた。",
+      "id": "Piringnya jatuh dan pecah.",
+      "form": "落ちて",
+      "ruby": "お<ruby>皿<rt>さら</rt></ruby>が<ruby>落<rt>お</rt></ruby>ちて、<ruby>割<rt>わ</rt></ruby>れた。"
+    },
+    "た": {
+      "jp": "階段から落ちた。",
+      "id": "Saya jatuh dari tangga.",
+      "form": "落ちた",
+      "ruby": "<ruby>階段<rt>かいだん</rt></ruby>から<ruby>落<rt>お</rt></ruby>ちた。"
+    },
+    "ない": {
+      "jp": "この汚れは洗っても落ちない。",
+      "id": "Noda ini tidak akan hilang/jatuh meskipun dicuci.",
+      "form": "落ちない",
+      "ruby": "この<ruby>汚<rt>よご</rt></ruby>れは<ruby>洗<rt>あら</rt></ruby>っても<ruby>落<rt>お</rt></ruby>ちない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "払い戻す",
+      "はらいもどす"
+    ],
+    "arti": [
+      "id",
+      "mengembalikan uang / refund"
+    ],
+    "kamus": {
+      "jp": "チケットの代金を払い戻す。",
+      "id": "Mengembalikan uang pembelian tiket.",
+      "form": "払い戻す",
+      "ruby": "チケットの<ruby>代金<rt>だいきん</rt></ruby>を<ruby>払<rt>はら</rt></ruby>い<ruby>戻<rt>もど</rt></ruby>す。"
+    },
+    "ます": {
+      "jp": "キャンセルした場合、全額払い戻します。",
+      "id": "Jika dibatalkan, kami akan mengembalikan uang secara penuh.",
+      "form": "払い戻します",
+      "ruby": "キャンセルした<ruby>場合<rt>ばあい</rt></ruby>、<ruby>全額<rt>ぜんがく</rt></ruby><ruby>払<rt>はら</rt></ruby>い<ruby>戻<rt>もど</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "窓口で手数料を払い戻してください。",
+      "id": "Tolong lakukan refund biaya di loket.",
+      "form": "払い戻して",
+      "ruby": "<ruby>窓口<rt>まどぐち</rt></ruby>で<ruby>手数料<rt>てすうりょう</rt></ruby>を<ruby>払<rt>はら</rt></ruby>い<ruby>戻<rt>もど</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "使わなかった切符を払い戻した。",
+      "id": "Saya telah melakukan refund tiket yang tidak terpakai.",
+      "form": "払い戻した",
+      "ruby": "<ruby>使<rt>つか</rt></ruby>わなかった<ruby>切符<rt>きっぷ</rt></ruby>を<ruby>払<rt>はら</rt></ruby>い<ruby>戻<rt>もど</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "購入後の返金は払い戻さない（行わない）。",
+      "id": "Kami tidak mengembalikan uang setelah pembelian.",
+      "form": "払い戻さない",
+      "ruby": "<ruby>購入後<rt>こうにゅうご</rt></ruby>の<ruby>返金<rt>へんきん</rt></ruby>は<ruby>払<rt>はら</rt></ruby>い<ruby>戻<rt>もど</rt></ruby>さない（<ruby>行<rt>おこな</rt></ruby>わない）。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "直す",
+      "なおす"
+    ],
+    "arti": [
+      "id",
+      "memperbaiki / mengoreksi"
+    ],
+    "kamus": {
+      "jp": "壊れた時計を直す。",
+      "id": "Memperbaiki jam yang rusak.",
+      "form": "直す",
+      "ruby": "<ruby>壊<rt>こわ</rt></ruby>れた<ruby>時計<rt>とけい</rt></ruby>を<ruby>直<rt>なお</rt></ruby>す。"
+    },
+    "ます": {
+      "jp": "文章の間違いを直します。",
+      "id": "Saya mengoreksi/memperbaiki kesalahan pada kalimat.",
+      "form": "直します",
+      "ruby": "<ruby>文章<rt>ぶんしょう</rt></ruby>の<ruby>間違<rt>まちが</rt></ruby>いを<ruby>直<rt>なお</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "発音を直してください。",
+      "id": "Tolong koreksi pelafalan saya.",
+      "form": "直して",
+      "ruby": "<ruby>発音<rt>はつおん</rt></ruby>を<ruby>直<rt>なお</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "自分で自転車を直した。",
+      "id": "Saya memperbaiki sepeda sendiri.",
+      "form": "直した",
+      "ruby": "<ruby>自分<rt>じぶん</rt></ruby>で<ruby>自転車<rt>じてんしゃ</rt></ruby>を<ruby>直<rt>なお</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "簡単には直せない（直さない）。",
+      "id": "Saya tidak memperbaikinya secara sembarangan.",
+      "form": "直さない",
+      "ruby": "<ruby>簡単<rt>かんたん</rt></ruby>には<ruby>直<rt>なお</rt></ruby>せない（<ruby>直<rt>なお</rt></ruby>さない）。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "降る",
+      "ふる"
+    ],
+    "arti": [
+      "id",
+      "turun (hujan/salju)"
+    ],
+    "kamus": {
+      "jp": "午後から雨が降る。",
+      "id": "Hujan akan turun mulai siang hari.",
+      "form": "降る",
+      "ruby": "<ruby>午後<rt>ごご</rt></ruby>から<ruby>雨<rt>あめ</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "冬には雪が降ります。",
+      "id": "Salju turun di musim dingin.",
+      "form": "降ります",
+      "ruby": "<ruby>冬<rt>ふゆ</rt></ruby>には<ruby>雪<rt>ゆき</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "雨が降っていて、出かけられない。",
+      "id": "Karena hujan sedang turun, saya tidak bisa pergi keluar.",
+      "form": "降っていて",
+      "ruby": "<ruby>雨<rt>あめ</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>っていて、<ruby>出<rt>で</rt></ruby>かけられない。"
+    },
+    "た": {
+      "jp": "昨日は一日中雨が降った。",
+      "id": "Kemarin hujan turun seharian.",
+      "form": "降った",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>は<ruby>一日中<rt>いちにちじゅう</rt></ruby><ruby>雨<rt>あめ</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "今日は雨が降らない。",
+      "id": "Hari ini hujan tidak turun.",
+      "form": "降らない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>雨<rt>あめ</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "咲く",
+      "さく"
+    ],
+    "arti": [
+      "id",
+      "mekar"
+    ],
+    "kamus": {
+      "jp": "春になると桜が咲く。",
+      "id": "Bunga sakura mekar ketika musim semi tiba.",
+      "form": "咲く",
+      "ruby": "<ruby>春<rt>はる</rt></ruby>になると<ruby>桜<rt>さくら</rt></ruby>が<ruby>咲<rt>さ</rt></ruby>く。"
+    },
+    "ます": {
+      "jp": "庭できれいな花が咲きます。",
+      "id": "Bunga yang indah mekar di halaman.",
+      "form": "咲きます",
+      "ruby": "<ruby>庭<rt>にわ</rt></ruby>できれいな<ruby>花<rt>はな</rt></ruby>が<ruby>咲<rt>さ</rt></ruby>きます。"
+    },
+    "て": {
+      "jp": "花が咲いて、とてもきれいです。",
+      "id": "Bunganya mekar dan sangat indah.",
+      "form": "咲いて",
+      "ruby": "<ruby>花<rt>はな</rt></ruby>が<ruby>咲<rt>さ</rt></ruby>いて、とてもきれいです。"
+    },
+    "た": {
+      "jp": "公園のチューリップが咲いた。",
+      "id": "Bunga tulip di taman telah mekar.",
+      "form": "咲いた",
+      "ruby": "<ruby>公園<rt>こうえん</rt></ruby>のチューリップが<ruby>咲<rt>さ</rt></ruby>いた。"
+    },
+    "ない": {
+      "jp": "まだこの花は咲かない。",
+      "id": "Bunga ini belum mekar.",
+      "form": "咲かない",
+      "ruby": "まだこの<ruby>花<rt>はな</rt></ruby>は<ruby>咲<rt>さ</rt></ruby>かない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "曇る",
+      "くもる"
+    ],
+    "arti": [
+      "id",
+      "berawan"
+    ],
+    "kamus": {
+      "jp": "午後から空が曇る。",
+      "id": "Langit akan berawan mulai siang hari.",
+      "form": "曇る",
+      "ruby": "<ruby>午後<rt>ごご</rt></ruby>から<ruby>空<rt>そら</rt></ruby>が<ruby>曇<rt>くも</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "明日は一日中曇ります。",
+      "id": "Besok akan berawan seharian.",
+      "form": "曇ります",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>は<ruby>一日中<rt>いちにちじゅう</rt></ruby><ruby>曇<rt>くも</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "空が曇っていて、今にも雨が降りそうだ。",
+      "id": "Langit sedang berawan dan sepertinya hujan akan segera turun.",
+      "form": "曇っていて",
+      "ruby": "<ruby>空<rt>そら</rt></ruby>が<ruby>曇<rt>くも</rt></ruby>っていて、<ruby>今<rt>いま</rt></ruby>にも<ruby>雨<rt>あめ</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>りそうだ。"
+    },
+    "た": {
+      "jp": "夕方から急に曇った。",
+      "id": "Mulai sore hari langit tiba-tiba berawan.",
+      "form": "曇った",
+      "ruby": "<ruby>夕方<rt>ゆうがた</rt></ruby>から<ruby>急<rt>きゅう</rt></ruby>に<ruby>曇<rt>くも</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "今日は少しも曇らない。",
+      "id": "Hari ini langit tidak berawan sedikit pun.",
+      "form": "曇らない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>少<rt>すこ</rt></ruby>しも<ruby>曇<rt>くも</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "晴れる",
+      "はれる"
+    ],
+    "arti": [
+      "id",
+      "cerah"
+    ],
+    "kamus": {
+      "jp": "明日は空が晴れる。",
+      "id": "Besok langit akan cerah.",
+      "form": "晴れる",
+      "ruby": "<ruby>明日<rt>あした</rt></ruby>は<ruby>空<rt>そら</rt></ruby>が<ruby>晴<rt>は</rt></ruby>れる。"
+    },
+    "ます": {
+      "jp": "午後はいい天気に晴れます。",
+      "id": "Siang hari cuaca akan menjadi cerah.",
+      "form": "晴れます",
+      "ruby": "<ruby>午後<rt>ごご</rt></ruby>はいい<ruby>天気<rt>てんき</rt></ruby>に<ruby>晴<rt>は</rt></ruby>れます。"
+    },
+    "て": {
+      "jp": "空が晴れて、気持ちがいい。",
+      "id": "Langit cerah dan rasanya menyenangkan.",
+      "form": "晴れて",
+      "ruby": "<ruby>空<rt>そら</rt></ruby>が<ruby>晴<rt>は</rt></ruby>れて、<ruby>気持<rt>きも</rt></ruby>ちがいい。"
+    },
+    "た": {
+      "jp": "雨が止んで、空が晴れた。",
+      "id": "Hujan berhenti dan langit menjadi cerah.",
+      "form": "晴れた",
+      "ruby": "<ruby>雨<rt>あめ</rt></ruby>が<ruby>止<rt>や</rt></ruby>んで、<ruby>空<rt>そら</rt></ruby>が<ruby>晴<rt>は</rt></ruby>れた。"
+    },
+    "ない": {
+      "jp": "今日は全然晴れない。",
+      "id": "Hari ini sama sekali tidak cerah.",
+      "form": "晴れない",
+      "ruby": "<ruby>今日<rt>きょう</rt></ruby>は<ruby>全然<rt>ぜんぜん</rt></ruby><ruby>晴<rt>は</rt></ruby>れない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "泳ぐ",
+      "およぐ"
+    ],
+    "arti": [
+      "id",
+      "berenang"
+    ],
+    "kamus": {
+      "jp": "夏に海で泳ぐ。",
+      "id": "Berenang di laut pada musim panas.",
+      "form": "泳ぐ",
+      "ruby": "<ruby>夏<rt>なつ</rt></ruby>に<ruby>海<rt>うみ</rt></ruby>で<ruby>泳<rt>およ</rt></ruby>ぐ。"
+    },
+    "ます": {
+      "jp": "毎週プールで泳ぎます。",
+      "id": "Saya berenang di kolam renang setiap minggu.",
+      "form": "泳ぎます",
+      "ruby": "<ruby>毎週<rt>まいしゅう</rt></ruby>プールで<ruby>泳<rt>およ</rt></ruby>ぎます。"
+    },
+    "て": {
+      "jp": "気持ちよく泳いでいる。",
+      "id": "Sedang berenang dengan nyaman.",
+      "form": "泳いで",
+      "ruby": "<ruby>気持<rt>きも</rt></ruby>ちよく<ruby>泳<rt>およ</rt></ruby>いでいる。"
+    },
+    "た": {
+      "jp": "昨日、友達と一緒に泳いだ。",
+      "id": "Kemarin saya berenang bersama teman.",
+      "form": "泳いだ",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>友達<rt>ともだち</rt></ruby>と<ruby>一緒<rt>いっしょ</rt></ruby>に<ruby>泳<rt>およ</rt></ruby>いだ。"
+    },
+    "ない": {
+      "jp": "私は泳げない（泳がない）。",
+      "id": "Saya tidak berenang.",
+      "form": "泳がない",
+      "ruby": "<ruby>私<rt>わたし</rt></ruby>は<ruby>泳<rt>およ</rt></ruby>げない（<ruby>泳<rt>およ</rt></ruby>がない）。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "登る",
+      "のぼる"
+    ],
+    "arti": [
+      "id",
+      "mendaki / naik"
+    ],
+    "kamus": {
+      "jp": "休日に山に登る。",
+      "id": "Mendaki gunung di hari libur.",
+      "form": "登る",
+      "ruby": "<ruby>休日<rt>きゅうじつ</rt></ruby>に<ruby>山<rt>やま</rt></ruby>に<ruby>登<rt>のぼ</rt></ruby>る。"
+    },
+    "ます": {
+      "jp": "富士山に登ります。",
+      "id": "Saya mendaki Gunung Fuji.",
+      "form": "登ります",
+      "ruby": "<ruby>富士山<rt>ふじさん</rt></ruby>に<ruby>登<rt>のぼ</rt></ruby>ります。"
+    },
+    "て": {
+      "jp": "階段を登って、上に行く。",
+      "id": "Naik tangga lalu pergi ke atas.",
+      "form": "登って",
+      "ruby": "<ruby>階段<rt>かいだん</rt></ruby>を<ruby>登<rt>のぼ</rt></ruby>って、<ruby>上<rt>うえ</rt></ruby>に<ruby>行<rt>い</rt></ruby>く。"
+    },
+    "た": {
+      "jp": "去年、高い山に登った。",
+      "id": "Tahun lalu saya mendaki gunung yang tinggi.",
+      "form": "登った",
+      "ruby": "<ruby>去年<rt>きょねん</rt></ruby>、<ruby>高<rt>たか</rt></ruby>い<ruby>山<rt>やま</rt></ruby>に<ruby>登<rt>のぼ</rt></ruby>った。"
+    },
+    "ない": {
+      "jp": "疲れているので登らない。",
+      "id": "Karena lelah, saya tidak mendaki.",
+      "form": "登らない",
+      "ruby": "<ruby>疲<rt>つか</rt></ruby>れているので<ruby>登<rt>のぼ</rt></ruby>らない。"
+    }
+  },
+  {
+    "kosakata": [
+      "jp",
+      "注文する",
+      "ちゅうもんする"
+    ],
+    "arti": [
+      "id",
+      "memesan / memesan barang atau makanan"
+    ],
+    "kamus": {
+      "jp": "レストランで料理を注文する。",
+      "id": "Memesan makanan di restoran.",
+      "form": "注文する",
+      "ruby": "レストランで<ruby>料理<rt>りょうり</rt></ruby>を<ruby>注文<rt>ちゅうもん</rt></ruby>する。"
+    },
+    "ます": {
+      "jp": "ネットで新しい本を注文します。",
+      "id": "Saya memesan buku baru secara online.",
+      "form": "注文します",
+      "ruby": "ネットで<ruby>新<rt>あたら</rt></ruby>しい<ruby>本<rt>ほん</rt></ruby>を<ruby>注文<rt>ちゅうもん</rt></ruby>します。"
+    },
+    "て": {
+      "jp": "メニューを見て、注文してください。",
+      "id": "Tolong lihat menu dan silakan memesan.",
+      "form": "注文して",
+      "ruby": "メニューを<ruby>見<rt>み</rt></ruby>て、<ruby>注文<rt>ちゅうもん</rt></ruby>してください。"
+    },
+    "た": {
+      "jp": "昨日、服をオンラインで注文した。",
+      "id": "Kemarin saya memesan pakaian secara online.",
+      "form": "注文した",
+      "ruby": "<ruby>昨日<rt>きのう</rt></ruby>、<ruby>服<rt>ふく</rt></ruby>をオンラインで<ruby>注文<rt>ちゅうもん</rt></ruby>した。"
+    },
+    "ない": {
+      "jp": "お腹が空いていないので注文しない。",
+      "id": "Karena tidak lapar, saya tidak memesan.",
+      "form": "注文しない",
+      "ruby": "お<ruby>腹<rt>なか</rt></ruby>が<ruby>空<rt>す</rt></ruby>いていないので<ruby>注文<rt>ちゅうもん</rt></ruby>しない。"
+    }
   }
 ]
 
