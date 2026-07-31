@@ -6,7 +6,7 @@ const dataKosakata = [
     "ます": {"jp": "毎朝七時に会社へ行きます。", "id": "Setiap pagi saya pergi ke kantor pukul tujuh.", "form": "行きます"},
     "て": {"jp": "郵便局へ行って、荷物を出しました。", "id": "Saya pergi ke kantor pos lalu mengirim paket.", "form": "行って"},
     "た": {"jp": "先週、友達と京都へ行った。", "id": "Minggu lalu saya pergi ke Kyoto bersama teman.", "form": "行った"},
-    "ない": {"jp": "雨だから今日は公園へ行かけない。", "id": "Karena hujan, hari ini saya tidak pergi ke taman.", "form": "行かない"}
+    "ない": {"jp": "雨だから今日は公園へ行かない。", "id": "Karena hujan, hari ini saya tidak pergi ke taman.", "form": "行かない"}
   },
   {
     "kosakata": ["jp", "来る","くる"],
