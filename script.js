@@ -464,6 +464,7 @@ function renderChecklist() {
     // Loop semua kosakata asli dari dataKosakata/activeData
     activeData.forEach((item, index) => {
         const kanji = item.kosakata[1]; // Teks Jepang (misal: 行く)
+        const hiragana = item.kosakata[2] // Teks hiragana ari kanji
         const arti = item.arti[1];      // Teks Arti (misal: pergi)
         const isChecked = savedProgress[kanji] || false; // Cek apakah sebelumnya dicentang
 
@@ -496,7 +497,7 @@ function renderChecklist() {
         // Buat label (teks)
         const label = document.createElement('label');
         label.htmlFor = `chk-vocab-${index}`;
-        label.textContent = `${kanji} - ${arti}`; // Menampilkan Kanji & Artinya agar mudah
+        label.textContent = `${kanji} (${hiragana}) - ${arti}`; // Menampilkan Kanji & Artinya agar mudah
 
         div.appendChild(checkbox);
         div.appendChild(label);
