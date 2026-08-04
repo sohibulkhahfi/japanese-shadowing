@@ -169,7 +169,7 @@ async function runPlayLoop() {
             let textID = '';
 
             if (currentPartIndex === 0) {
-                textJP = `${item.kosakata[1]}。${item.kosakata[2]}`;
+                textJP = item.kosakata[1];
                 textID = item.arti[1];
             } else {
                 const key = formKeys[currentPartIndex - 1];
@@ -181,7 +181,7 @@ async function runPlayLoop() {
 
             if (textJP) {
                 await speakAsync(textJP, 'ja-JP');
-                await new Promise(r => setTimeout(r, 300));
+                await new Promise(r => setTimeout(r, 500));
             }
 
             if (readID && textID && isPlaying && !isPaused) {
