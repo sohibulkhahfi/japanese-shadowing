@@ -378,3 +378,109 @@ input:checked + .slider:before {
 .hide-furigana rt {
     display: none !important;
 }
+
+/* Penataan Tombol Toggle Furigana di Quiz */
+.furigana-toggle-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-bottom: 10px;
+    transition: background 0.2s;
+}
+.furigana-toggle-btn.active {
+    background-color: #28a745;
+}
+
+/* Penataan Tombol Pilihan Jawaban Quiz */
+.quiz-opt-btn {
+    display: block;
+    width: 100%;
+    margin: 8px 0;
+    
+    /* Tambahkan padding atas & bawah yang cukup */
+    padding: 12px 16px 14px 16px !important; 
+    
+    font-size: 1.1em;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 1px solid #0056b3;
+    background-color: #007bff; /* Background biru */
+    color: #ffffff;            /* Warna teks utama putih */
+    
+    /* Beri jarak baris agar furigana dan kanji tidak berimpitan */
+    line-height: 1.6;
+}
+
+/* Warna Furigana (rt) di dalam tombol quiz */
+.quiz-opt-btn rt {
+    color: #ffffff !important;
+    font-size: 0.65em; /* Ukuran furigana proporsional */
+    padding-bottom: 3px;
+}
+
+/* Sembunyikan arti secara default */
+.hide-translation {
+    display: none !important;
+}
+
+/* Style untuk tombol toggle arti */
+.id-toggle-btn {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85em;
+    margin-bottom: 10px;
+    margin-left: 8px;
+    transition: background 0.2s;
+}
+.id-toggle-btn.active {
+    background-color: #138496;
+}
+
+/* Container Header Quiz */
+.quiz-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; /* Memberi jarak aman jika layar menyempit */
+    flex-wrap: wrap; /* Agar otomatis turun rapi di layar HP kecil */
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee; /* Garis pemisah tipis yang rapi */
+}
+
+/* Judul Progres Soal */
+.quiz-progress-title {
+    margin: 0;
+    color: #555;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+/* Container Group Tombol Toggle */
+.quiz-action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Jarak konsisten antar tombol */
+}
+
+/* Penyesuaian Responsif untuk Layar Kecil (Mobile) */
+@media (max-width: 480px) {
+    .quiz-header-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .quiz-action-buttons {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}

@@ -46,17 +46,36 @@ function setupDropdownKategori() {
     const select = document.getElementById('selectKategori');
     if (!select) return;
 
-    select.innerHTML = '<option value="all">Semua Kategori</option>';
+select.innerHTML = '<option value="all">Semua Kategori</option>';
 
-    // Mengambil kunci (nama kategori) dari pembagianKatakerja
+    // --- TAMBAHAN: Opsi Filter Hafalan ---
+    const optGroupHafalan = document.createElement('optgroup');
+    optGroupHafalan.label = "--- Status Hafalan ---";
+    
+    const optDihafal = document.createElement('option');
+    optDihafal.value = "hafalan_sudah";
+    optDihafal.textContent = "✅ Sudah Dihafal";
+    optGroupHafalan.appendChild(optDihafal);
+
+    const optBelumDihafal = document.createElement('option');
+    optBelumDihafal.value = "hafalan_belum";
+    optBelumDihafal.textContent = "❌ Belum Dihafal";
+    optGroupHafalan.appendChild(optBelumDihafal);
+
+    select.appendChild(optGroupHafalan);
+
+    // --- Kategori Kata Kerja Bawaan ---
+    const optGroupKategori = document.createElement('optgroup');
+    optGroupKategori.label = "--- Kategori Kata Kerja ---";
+
     Object.keys(pembagianKatakerja).forEach(cat => {
         const opt = document.createElement('option');
         opt.value = cat;
-        // Membuat huruf pertama kapital agar tampilan rapi
         opt.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
-        select.appendChild(opt);
+        optGroupKategori.appendChild(opt);
     });
 
+    select.appendChild(optGroupKategori);
     select.addEventListener('change', (e) => {
         kategoriAktif = e.target.value;
         stopAudio();
@@ -64,12 +83,41 @@ function setupDropdownKategori() {
     });
 }
 
+// Helper untuk mengambil data hafalan dari localStorage secara aman
+function getHafalanProgress() {
+    try {
+        const saved = localStorage.getItem('hafalanKosakataProgress');
+        return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+        console.error("Gagal membaca hafalanKosakataProgress dari localStorage:", e);
+        return {};
+    }
+}
+
 function getFilteredData() {
+    // 1. Jika pilih "Semua Kategori"
     if (kategoriAktif === 'all') return dataKosakata;
 
+    // 2. Jika pilih "Sudah Dihafal"
+    if (kategoriAktif === 'hafalan_sudah') {
+        const progress = getHafalanProgress();
+        return dataKosakata.filter(item => {
+            const kanji = item.kosakata && item.kosakata[1];
+            return progress[kanji] === true; // Hanya kata yang bernilai true
+        });
+    }
+
+    // 3. Jika pilih "Belum Dihafal"
+    if (kategoriAktif === 'hafalan_belum') {
+        const progress = getHafalanProgress();
+        return dataKosakata.filter(item => {
+            const kanji = item.kosakata && item.kosakata[1];
+            return !progress[kanji]; // Kata yang nilainya false atau belum ada di localStorage
+        });
+    }
+
+    // 4. Kategori Kata Kerja standar (pembagianKatakerja)
     const targetVerbs = pembagianKatakerja[kategoriAktif] || [];
-    
-    // Filter kosakata berdasarkan apakah Kanji (kosakata[1]) ada di daftar kategori
     return dataKosakata.filter(item => {
         const kanji = item.kosakata && item.kosakata[1];
         return targetVerbs.includes(kanji);
@@ -106,6 +154,7 @@ function renderData() {
             const partNum = pIndex + 1;
             const formObj = item[key];
             if (formObj) {
+        // formObj.form sekarang dirender langsung sebagai HTML (dukungan tag <ruby>)
                 htmlContent += `
                     <div class="sentence-row" id="item-${wIndex}-${partNum}" style="padding: 6px; margin-top: 4px; border-radius: 4px;">
                         <button class="play-btn" onclick="playFromHere(${wIndex}, ${partNum})" title="Mulai dari sini">🔊</button>
@@ -242,10 +291,83 @@ function updateUI() {
 }
 
 // ==========================================
-// 7. FITUR QUIZ
+// FITUR QUIZ
 // ==========================================
+// State untuk Arti Bahasa Indonesia di Quiz (Default: false / OFF)
+let isQuizIdOn = false;
+
+// Fungsi untuk Toggle Tampilan Arti
+window.toggleQuizTranslation = function() {
+    isQuizIdOn = !isQuizIdOn;
+    const btn = document.getElementById('btn-toggle-id');
+    const qId = document.getElementById('quiz-text-id');
+
+    if (isQuizIdOn) {
+        btn.textContent = "Arti: ON";
+        btn.classList.add('active');
+        qId?.classList.remove('hide-translation');
+    } else {
+        btn.textContent = "Arti: OFF";
+        btn.classList.remove('active');
+        qId?.classList.add('hide-translation');
+    }
+};
+
+// Pastikan fungsi reset state di panggil saat inisialisasi / modal quiz dibuka
+function initQuizIdState() {
+    isQuizIdOn = false;
+    const btn = document.getElementById('btn-toggle-id');
+    const qId = document.getElementById('quiz-text-id');
+
+    if (btn) {
+        btn.textContent = "Arti: OFF";
+        btn.classList.remove('active');
+    }
+    if (qId) {
+        qId.classList.add('hide-translation');
+    }
+}
+
+// State untuk Furigana di Quiz (Default: false / OFF)
+let isQuizFuriganaOn = false;
+
+// Helper: Membersihkan tag HTML/RT untuk mendapatkan teks polos (untuk TTS audio & pembanding)
+function stripRubyTags(htmlString) {
+    if (!htmlString) return '';
+    const temp = document.createElement('div');
+    temp.innerHTML = htmlString;
+    // Hapussemua tag <rt>
+    const rts = temp.querySelectorAll('rt');
+    rts.forEach(rt => rt.remove());
+    return temp.textContent || temp.innerText || '';
+}
+
+// Toggle status Furigana di Quiz
+window.toggleQuizFurigana = function() {
+    isQuizFuriganaOn = !isQuizFuriganaOn;
+    const btn = document.getElementById('btn-toggle-furigana');
+    const qJp = document.getElementById('quiz-text-jp');
+    const optionsContainer = document.getElementById('quiz-options-container');
+
+    if (isQuizFuriganaOn) {
+        btn.textContent = "Furigana: ON";
+        btn.classList.add('active');
+        qJp.classList.remove('hide-furigana');
+        document.body.classList.remove('hide-furigana');
+        optionsContainer.classList.remove('hide-furigana');
+    } else {
+        btn.textContent = "Furigana: OFF";
+        btn.classList.remove('active');
+        qJp.classList.add('hide-furigana');
+        document.body.classList.add('hide-furigana');
+        optionsContainer.classList.add('hide-furigana');
+    }
+};
+
+
 window.openQuiz = function() {
     stopAudio();
+    initQuizIdState()
     document.getElementById('quiz-modal').style.display = 'block';
     document.getElementById('quiz-setup').style.display = 'block';
     document.getElementById('quiz-active').style.display = 'none';
@@ -279,32 +401,34 @@ window.startQuiz = function(amount) {
         const item = shuffledData[i];
         const randomFormKey = formKeys[Math.floor(Math.random() * formKeys.length)];
         const formObj = item[randomFormKey] || item['kamus'];
-        console.log(formObj.form)
 
-        const correctAnswer = formObj.form;
+        const correctAnswerForm = formObj.form; // Berisi tag <ruby> jika ada
+        const plainAnswer = stripRubyTags(correctAnswerForm); // Teks polos (misal "行きます")
 
-        // menyimpan data ke localStorage
+        // Menyimpan data ke localStorage
         const kanji = item.kosakata[1];
-        saveQuizProgress(kanji, formObj.form);
+        saveQuizProgress(kanji, plainAnswer);
 
-        // 1. Mengubah kata kunci di dalam kalimat soal Jepang menjadi "......"
-        const maskedJpText = formObj.jp.replaceAll(correctAnswer, '......');
+        // Masking soal (mengganti kata kunci di kalimat ruby dengan "......")
+        // Digunakan regex agar kata yang cocok diganti tanpa merusak tag ruby lainnya
+        const rawRubySentence = formObj.ruby;
+        const maskedJpRuby = rawRubySentence.replace(correctAnswerForm, '<strong>......</strong>');
 
-        // Opsi pilihan jawaban lain (pilihan acak)
+        // Pool distractor (jawaban pengacau)
         const distractorPool = activeData
             .filter(d => d.kosakata[1] !== item.kosakata[1])
             .map(d => (d[randomFormKey] ? d[randomFormKey].form : d.kosakata[1]));
 
         const options = shuffleArray([
-            correctAnswer,
+            correctAnswerForm,
             ...shuffleArray(distractorPool).slice(0, 3)
         ]);
 
         quizQuestions.push({
-            jpText: maskedJpText,      // Teks yang ditampilkan (dengan ......)
-            rawJpText: formObj.jp,     // Kalimat asli utuh untuk dibaca audio saat tombol ditekan
+            jpTextRuby: maskedJpRuby,                   // Teks soal ber-ruby (dengan ......)
+            rawJpText: stripRubyTags(formObj.ruby),    // Teks polos untuk audio TTS
             idText: formObj.id,
-            correctAnswer: correctAnswer,
+            correctAnswer: correctAnswerForm,
             options: options
         });
     }
@@ -322,7 +446,9 @@ function renderQuestion() {
 
     const q = quizQuestions[currentQuizIndex];
     document.getElementById('quiz-progress').textContent = `Soal ${currentQuizIndex + 1} / ${quizQuestions.length}`;
-    document.getElementById('quiz-text-jp').textContent = q.jpText;
+    
+    // Gunakan innerHTML agar tag <ruby> dan <strong> ter-render
+    document.getElementById('quiz-text-jp').innerHTML = q.jpTextRuby;
     document.getElementById('quiz-text-id').textContent = q.idText;
 
     const nextBtn = document.getElementById('btn-next-question');
@@ -335,20 +461,21 @@ function renderQuestion() {
         const btn = document.createElement('button');
         btn.className = 'quiz-opt-btn';
         btn.style.cssText = "display: block; width: 100%; margin: 8px 0; padding: 10px; font-size: 1em; text-align: left; cursor: pointer; border-radius: 5px; border: 1px solid #ccc;";
-        btn.textContent = opt;
+        
+        // Gunakan innerHTML untuk tombol opsi agar tag <ruby> ter-render
+        btn.innerHTML = opt;
+        
+        // Simpan versi stringnya di dataset/closure untuk pengecekan
         btn.onclick = () => checkAnswer(opt, btn);
         container.appendChild(btn);
     });
-
-    // 2. Autoplay dihapus dari sini agar suara tidak langsung berbunyi
 }
 
 window.speakQuestion = function() {
     const q = quizQuestions[currentQuizIndex];
     if (q) {
         window.speechSynthesis.cancel();
-        // Membacakan kalimat utuh asli (rawJpText) saat tombol 🔊 ditekan
-        speakAsync(q.rawJpText || q.jpText, 'ja-JP');
+        speakAsync(q.rawJpText, 'ja-JP');
     }
 };
 
@@ -359,18 +486,21 @@ function checkAnswer(selectedOption, selectedBtn) {
 
     buttons.forEach(btn => btn.disabled = true);
 
+    // Ambil teks polos dari opsi yang dipilih untuk dibaca audio
+    const plainSelectedText = stripRubyTags(selectedOption);
+
     if (selectedOption === q.correctAnswer) {
-        speakAsync(selectedOption, 'ja-JP');
+        speakAsync(plainSelectedText, 'ja-JP');
         selectedBtn.style.backgroundColor = '#28a745';
         selectedBtn.style.color = '#fff';
         quizScore += 10;
     } else {
-        speakAsync(selectedOption, 'ja-JP');
+        speakAsync(plainSelectedText, 'ja-JP');
         selectedBtn.style.backgroundColor = '#dc3545';
         selectedBtn.style.color = '#fff';
 
         buttons.forEach(btn => {
-            if (btn.textContent === q.correctAnswer) {
+            if (btn.innerHTML === q.correctAnswer) {
                 btn.style.backgroundColor = '#28a745';
                 btn.style.color = '#fff';
             }
@@ -421,6 +551,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-open-quiz')?.addEventListener('click', openQuiz);
     document.getElementById('btn-open-checklist')?.addEventListener('click', openChecklist);
 });
+
+// Helper tambahan untuk memastikan UI Quiz siap dalam mode Furigana OFF secara default
+function initQuizFuriganaState() {
+    isQuizFuriganaOn = false;
+    const btn = document.getElementById('btn-toggle-furigana');
+    const qJp = document.getElementById('quiz-text-jp');
+    const optionsContainer = document.getElementById('quiz-options-container');
+
+    if (btn) {
+        btn.textContent = "Furigana: OFF";
+        btn.classList.remove('active');
+    }
+    if (qJp) qJp.classList.add('hide-furigana');
+    if (optionsContainer) optionsContainer.classList.add('hide-furigana');
+}
 
 
 // ==========================================

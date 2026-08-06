@@ -41,44 +41,51 @@
 
     <div id="list-container"></div>
 
-    <!-- Modal Quiz -->
-    <div id="quiz-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeQuiz()">&times;</span>
-            
-            <!-- Layar Setup Quiz -->
-            <div id="quiz-setup">
-                <h2>Pilih Jumlah Soal</h2>
-                <p>Silakan pilih berapa banyak soal yang ingin dikerjakan:</p>
-                <button onclick="startQuiz(10)">10 Soal</button>
-                <button onclick="startQuiz(20)">20 Soal</button>
-                <button onclick="startQuiz(30)">30 Soal</button>
-            </div>
+<!-- Modal Quiz -->
+<div id="quiz-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeQuiz()">&times;</span>
+        
+        <!-- Layar Setup Quiz -->
+        <div id="quiz-setup">
+            <h2>Pilih Jumlah Soal</h2>
+            <p>Silakan pilih berapa banyak soal yang ingin dikerjakan:</p>
+            <button onclick="startQuiz(10)">10 Soal</button>
+            <button onclick="startQuiz(20)">20 Soal</button>
+            <button onclick="startQuiz(30)">30 Soal</button>
+        </div>
 
-            <!-- Layar Aktif Quiz -->
-            <div id="quiz-active" style="display: none;">
-                <h3 id="quiz-progress" style="margin-top: 0; color: #666;">Soal 1 / 10</h3>
-                <div id="quiz-question-box">
-                    <div class="q-jp" id="quiz-text-jp"></div>
-                    <div class="q-id" id="quiz-text-id"></div>
-                    <!-- TAMBAHAN: Tombol Suara Soal -->
-                    <button onclick="speakQuestion()" style="background-color: #17a2b8; padding: 6px 12px; font-size: 1.1em; flex-shrink: 0;" title="Dengarkan Soal">🔊</button></div>
-                <div id="quiz-options-container"></div>
-                <div style="margin-top: 20px; text-align: right;">
-                    <button id="btn-next-question" style="display: none;" onclick="nextQuestion()">Selanjutnya ➔</button>
-                </div>
-            </div>
-
-            <!-- Layar Hasil Quiz -->
-            <div id="quiz-result" style="display: none; text-align: center;">
-                <h2>Quiz Selesai! 🎉</h2>
-                <h1 id="quiz-score" style="font-size: 3em; color: #28a745;"></h1>
-                <p id="quiz-feedback"></p>
-                <button onclick="closeQuiz()">Tutup</button>
-                <button onclick="document.getElementById('quiz-result').style.display='none'; document.getElementById('quiz-setup').style.display='block';">Main Lagi</button>
+        <!-- Layar Aktif Quiz -->
+        <div id="quiz-active" style="display: none;">
+            <div class="quiz-header-controls">
+                <h3 id="quiz-progress" class="quiz-progress-title">Soal 1 / 10</h3>
+                <div class="quiz-action-buttons">
+                <button id="btn-toggle-furigana" class="furigana-toggle-btn" onclick="toggleQuizFurigana()">Furigana: OFF</button>
+                <button id="btn-toggle-id" class="id-toggle-btn" onclick="toggleQuizTranslation()">Arti: OFF</button>
             </div>
         </div>
+
+            <div id="quiz-question-box" style="margin-top: 10px;">
+                <div class="q-jp hide-furigana" id="quiz-text-jp"></div>
+                <div class="q-id" id="quiz-text-id"></div>
+                <button onclick="speakQuestion()" style="background-color: #17a2b8; padding: 6px 12px; font-size: 1.1em; flex-shrink: 0;" title="Dengarkan Soal">🔊</button>
+            </div>
+            <div id="quiz-options-container" class="hide-furigana"></div>
+            <div style="margin-top: 20px; text-align: right;">
+                <button id="btn-next-question" style="display: none;" onclick="nextQuestion()">Selanjutnya ➔</button>
+            </div>
+        </div>
+
+        <!-- Layar Hasil Quiz -->
+        <div id="quiz-result" style="display: none; text-align: center;">
+            <h2>Quiz Selesai! 🎉</h2>
+            <h1 id="quiz-score" style="font-size: 3em; color: #28a745;"></h1>
+            <p id="quiz-feedback"></p>
+            <button onclick="closeQuiz()">Tutup</button>
+            <button onclick="document.getElementById('quiz-result').style.display='none'; document.getElementById('quiz-setup').style.display='block';">Main Lagi</button>
+        </div>
     </div>
+</div>
 
     <!-- Modal checklist hafalan -->
     <div id="checklist-modal" class="modal" style="display: none;">
