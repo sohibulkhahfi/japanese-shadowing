@@ -457,6 +457,7 @@ input:checked + .slider:before {
     border-bottom: 1px solid #eee; /* Garis pemisah tipis yang rapi */
 }
 
+
 /* Judul Progres Soal */
 .quiz-progress-title {
     margin: 0;
@@ -471,7 +472,6 @@ input:checked + .slider:before {
     align-items: center;
     gap: 8px; /* Jarak konsisten antar tombol */
 }
-
 /* Penyesuaian Responsif untuk Layar Kecil (Mobile) */
 @media (max-width: 480px) {
     .quiz-header-controls {

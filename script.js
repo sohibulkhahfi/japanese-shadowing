@@ -94,6 +94,7 @@ function getHafalanProgress() {
     }
 }
 
+
 function getFilteredData() {
     // 1. Jika pilih "Semua Kategori"
     if (kategoriAktif === 'all') return dataKosakata;
@@ -390,51 +391,87 @@ window.startQuiz = function(amount) {
         return;
     }
 
-    let limit = Math.min(amount, activeData.length);
-    let shuffledData = shuffleArray(activeData);
+    let possibleQuestionsPool = [];
+    activeData.forEach(item => {
+        formKeys.forEach(fKey => {
+            if (item[fKey]) {
+                possibleQuestionsPool.push({
+                    item: item,
+                    formKey: fKey
+                });
+            }
+        });
+    });
+
+    if (possibleQuestionsPool.length === 0) {
+        alert("Tidak ada bentuk kata kerja yang valid untuk dijadikan quiz!");
+        return;
+    }
+
+    let shuffledPool = shuffleArray(possibleQuestionsPool);
+    let limit = Math.min(amount, shuffledPool.length);
 
     quizQuestions = [];
     currentQuizIndex = 0;
     quizScore = 0;
 
     for (let i = 0; i < limit; i++) {
-        const item = shuffledData[i];
-        const randomFormKey = formKeys[Math.floor(Math.random() * formKeys.length)];
-        const formObj = item[randomFormKey] || item['kamus'];
+        const { item, formKey } = shuffledPool[i];
+        const formObj = item[formKey];
 
-        const correctAnswerForm = formObj.form; // Berisi tag <ruby> jika ada
-        const plainAnswer = stripRubyTags(correctAnswerForm); // Teks polos (misal "行きます")
+        const correctAnswerForm = formObj.form;
+        const plainAnswer = stripRubyTags(correctAnswerForm);
 
-        // Menyimpan data ke localStorage
-        const kanji = item.kosakata[1];
-        saveQuizProgress(kanji, plainAnswer);
+        if (item.kosakata && item.kosakata[1] && typeof saveQuizProgress === 'function') {
+            saveQuizProgress(item.kosakata[1], plainAnswer);
+        }
 
-        // Masking soal (mengganti kata kunci di kalimat ruby dengan "......")
-        // Digunakan regex agar kata yang cocok diganti tanpa merusak tag ruby lainnya
         const rawRubySentence = formObj.ruby;
         const maskedJpRuby = rawRubySentence.replace(correctAnswerForm, '<strong>......</strong>');
 
-        // Pool distractor (jawaban pengacau)
-        const distractorPool = activeData
-            .filter(d => d.kosakata[1] !== item.kosakata[1])
-            .map(d => (d[randomFormKey] ? d[randomFormKey].form : d.kosakata[1]));
+        // Jawaban Benar (disimpan sebagai Objek)
+        const correctObj = {
+            form: correctAnswerForm,
+            meaning: item.arti ? item.arti[1] : '' // Mengambil arti utama kosakata
+        };
 
+        // Pool distractor (mengambil objek bentuk & artinya)
+        const distractorPool = dataKosakata
+            .filter(d => d.kosakata && d.kosakata[1] !== item.kosakata[1])
+            .map(d => {
+                const meaning = d.arti ? d.arti[1] : '';
+                if (d[formKey] && d[formKey].form) {
+                    return { form: d[formKey].form, meaning: meaning };
+                }
+                if (d.kamus && d.kamus.form) {
+                    return { form: d.kamus.form, meaning: meaning };
+                }
+                return { form: d.kosakata ? d.kosakata[1] : '', meaning: meaning };
+            })
+            .filter(obj => obj.form !== '');
+
+        const selectedDistractors = shuffleArray(distractorPool).slice(0, 3);
+
+        // Gabungkan dan acak pilihan jawaban
         const options = shuffleArray([
-            correctAnswerForm,
-            ...shuffleArray(distractorPool).slice(0, 3)
+            correctObj,
+            ...selectedDistractors
         ]);
 
         quizQuestions.push({
-            jpTextRuby: maskedJpRuby,                   // Teks soal ber-ruby (dengan ......)
-            rawJpText: stripRubyTags(formObj.ruby),    // Teks polos untuk audio TTS
+            jpTextRuby: maskedJpRuby,
+            rawJpText: stripRubyTags(formObj.ruby),
             idText: formObj.id,
             correctAnswer: correctAnswerForm,
-            options: options
+            options: options // Sekarang berisi Array dari objek { form, meaning }
         });
     }
 
     document.getElementById('quiz-setup').style.display = 'none';
     document.getElementById('quiz-active').style.display = 'block';
+    
+    if (typeof initQuizIdState === 'function') initQuizIdState();
+
     renderQuestion();
 };
 
@@ -447,7 +484,6 @@ function renderQuestion() {
     const q = quizQuestions[currentQuizIndex];
     document.getElementById('quiz-progress').textContent = `Soal ${currentQuizIndex + 1} / ${quizQuestions.length}`;
     
-    // Gunakan innerHTML agar tag <ruby> dan <strong> ter-render
     document.getElementById('quiz-text-jp').innerHTML = q.jpTextRuby;
     document.getElementById('quiz-text-id').textContent = q.idText;
 
@@ -457,16 +493,21 @@ function renderQuestion() {
     const container = document.getElementById('quiz-options-container');
     container.innerHTML = '';
 
-    q.options.forEach(opt => {
+    q.options.forEach(optObj => {
         const btn = document.createElement('button');
         btn.className = 'quiz-opt-btn';
-        btn.style.cssText = "display: block; width: 100%; margin: 8px 0; padding: 10px; font-size: 1em; text-align: left; cursor: pointer; border-radius: 5px; border: 1px solid #ccc;";
         
-        // Gunakan innerHTML untuk tombol opsi agar tag <ruby> ter-render
-        btn.innerHTML = opt;
+        // Gunakan flexbox agar teks Jepang dan arti bahasa Indonesia berjajar di kiri-kanan
+        btn.style.cssText = "display: flex; justify-content: space-between; align-items: center; width: 100%; margin: 8px 0; padding: 12px 16px; font-size: 1em; text-align: left; cursor: pointer; border-radius: 5px; border: 1px solid #ccc;";
         
-        // Simpan versi stringnya di dataset/closure untuk pengecekan
-        btn.onclick = () => checkAnswer(opt, btn);
+        // Buat span khusus untuk teks Jepang agar posisinya tetap rapi
+        btn.innerHTML = `<span class="opt-jp-text">${optObj.form}</span>`;
+        
+        // Simpan data di dataset untuk diakses saat tombol diklik
+        btn.dataset.form = optObj.form;
+        btn.dataset.meaning = optObj.meaning;
+        
+        btn.onclick = () => checkAnswer(optObj.form, btn);
         container.appendChild(btn);
     });
 }
@@ -479,17 +520,30 @@ window.speakQuestion = function() {
     }
 };
 
-function checkAnswer(selectedOption, selectedBtn) {
+function checkAnswer(selectedOptionForm, selectedBtn) {
     const q = quizQuestions[currentQuizIndex];
     const container = document.getElementById('quiz-options-container');
-    const buttons = container.querySelectorAll('button');
+    const buttons = container.querySelectorAll('.quiz-opt-btn');
 
-    buttons.forEach(btn => btn.disabled = true);
+    // Matikan tombol & tampilkan arti di sebelah kanan semua opsi
+    buttons.forEach(btn => {
+        btn.disabled = true;
 
-    // Ambil teks polos dari opsi yang dipilih untuk dibaca audio
-    const plainSelectedText = stripRubyTags(selectedOption);
+        // Tampilkan arti di bagian kanan tombol
+        const meaningText = btn.dataset.meaning;
+        if (meaningText) {
+            const meaningSpan = document.createElement('span');
+            meaningSpan.className = 'opt-meaning-text';
+            meaningSpan.style.cssText = "font-size: 0.85em; margin-left: 10px; opacity: 0.9; font-weight: normal;";
+            meaningSpan.textContent = `(${meaningText})`;
+            btn.appendChild(meaningSpan);
+        }
+    });
 
-    if (selectedOption === q.correctAnswer) {
+    // Ambil teks polos untuk dibaca suara
+    const plainSelectedText = stripRubyTags(selectedOptionForm);
+
+    if (selectedOptionForm === q.correctAnswer) {
         speakAsync(plainSelectedText, 'ja-JP');
         selectedBtn.style.backgroundColor = '#28a745';
         selectedBtn.style.color = '#fff';
@@ -499,8 +553,9 @@ function checkAnswer(selectedOption, selectedBtn) {
         selectedBtn.style.backgroundColor = '#dc3545';
         selectedBtn.style.color = '#fff';
 
+        // Tandai tombol yang benar
         buttons.forEach(btn => {
-            if (btn.innerHTML === q.correctAnswer) {
+            if (btn.dataset.form === q.correctAnswer) {
                 btn.style.backgroundColor = '#28a745';
                 btn.style.color = '#fff';
             }
